@@ -2,6 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "@assets/*": ["src/assets/*"],
       "@dashboard/*": ["src/features/dashboard/*"],
       "@@@/*": ["*"],
       "@@/*": ["src/*"]
@@ -22,8 +23,10 @@
     "jsx": "react-native"
   },
   "include": ["**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules",
+  "exclude": [
+    "node_modules",
     "babel.config.js",
     "metro.config.js",
-    "jest.config.js"]
+    "jest.config.js"
+  ]
 }

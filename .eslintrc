@@ -5,6 +5,7 @@
   "rules": {
     "import/no-unresolved": "error"
   },
+  "parser": "@babel/eslint-parser",
   "settings": {
     "import/parsers": {
       "@typescript-eslint/parser": [".ts", ".tsx"]
