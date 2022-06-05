@@ -1,8 +1,23 @@
 {
   "root": true,
-  "extends": ["@react-native-community"],
+  "extends": [
+    "@react-native-community", 
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript"
+  ],
   "plugins": ["import"],
   "rules": {
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
     "import/no-unresolved": "error"
   },
   "parser": "@babel/eslint-parser",
@@ -14,6 +29,9 @@
       "typescript": {
         "alwaysTryTypes": true,
         "project": "."
+      },
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx", ".native.js"]
       }
     }
   }
