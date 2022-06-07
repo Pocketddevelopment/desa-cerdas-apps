@@ -1,13 +1,14 @@
-import React, { useRef, useState } from 'react'
+import { CommonActions, useNavigation } from '@react-navigation/native';
+import React, { useRef, useState } from 'react';
 import {
   Dimensions,
   Image,
   ImageBackground,
   StyleSheet,
   View,
-} from 'react-native'
-import Carousel, { Pagination } from 'react-native-snap-carousel'
-import { Button, Text } from 'react-native-paper'
+} from 'react-native';
+import { Button, Text } from 'react-native-paper';
+import Carousel, { Pagination } from 'react-native-snap-carousel';
 
 const data = [
   {
@@ -22,19 +23,28 @@ const data = [
     img: require('assets/onboarding-3.webp'),
     text: 'Cari tahu semua tentang desa Anda termasuk berita, statistik, wisata, dan lainnya',
   },
-]
+];
 
-export const SLIDER_WIDTH = Dimensions.get('window').width
+export const SLIDER_WIDTH = Dimensions.get('window').width;
 
 const OnboardingScreen: React.FC = () => {
-  const carouselRef = useRef<any>(null)
-  const [activeIndex, setActiveIndex] = useState<number>(0)
+  const navigation = useNavigation();
+  const carouselRef = useRef<any>(null);
+  const [activeIndex, setActiveIndex] = useState<number>(0);
 
   const onPressNextButton = () => {
     if (carouselRef) {
-      carouselRef.current?.snapToNext()
+      carouselRef.current?.snapToNext();
+      if (activeIndex === data.length - 1) {
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [{ name: 'Login' }],
+          })
+        );
+      }
     }
-  }
+  };
 
   const renderCarouselItem = ({ item, index }: any) => {
     return (
@@ -53,12 +63,12 @@ const OnboardingScreen: React.FC = () => {
           {activeIndex === data.length - 1 ? 'Mulai' : 'Lanjut'}
         </Button>
       </View>
-    )
-  }
+    );
+  };
 
   const onSnapItem = (index: number) => {
-    setActiveIndex(index)
-  }
+    setActiveIndex(index);
+  };
 
   return (
     <View style={styles.container}>
@@ -77,10 +87,10 @@ const OnboardingScreen: React.FC = () => {
         contentContainerCustomStyle={{ paddingTop: SLIDER_WIDTH / 5 }}
       />
     </View>
-  )
-}
+  );
+};
 
-export default OnboardingScreen
+export default OnboardingScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -116,4 +126,4 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200,
   },
-})
+});

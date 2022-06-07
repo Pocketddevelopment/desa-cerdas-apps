@@ -18,7 +18,9 @@
         "tsx": "never"
       }
     ],
-    "import/no-unresolved": "error"
+    "import/no-unresolved": "error",
+    "jsx-quotes": ["error", "prefer-single"],
+    "react-hooks/exhaustive-deps": "warn"
   },
   "parser": "@babel/eslint-parser",
   "settings": {
