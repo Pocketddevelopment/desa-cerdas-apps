@@ -2,11 +2,12 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "assets/*": ["src/assets/*"],
-      "dashboard/*": ["src/features/dashboard/*"],
-      "utils/*": ["src/utils/*"],
-      "@@@/*": ["*"],
-      "@@/*": ["src/*"]
+      "@assets/*": ["src/assets/*"],
+      "@components/*": ["src/components/*"],
+      "@dashboard/*": ["src/features/dashboard/*"],
+      "@utils/*": ["src/utils/*"],
+      "@rootSource": ["src/*"],
+      "@root": ["*"]
     },
     "target": "esnext",
     "lib": ["es2017"],
