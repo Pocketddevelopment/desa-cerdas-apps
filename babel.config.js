@@ -9,6 +9,7 @@ module.exports = {
           '@assets': './src/assets',
           '@components': './src/components',
           '@constants': './src/constants',
+          '@authentication': './src/features/authentication',
           '@dashboard': './src/features/dashboard',
           '@utils': './src/utils',
         },
