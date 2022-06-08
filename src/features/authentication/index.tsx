@@ -11,7 +11,7 @@ export default function AuthenticationStack() {
       screenOptions={{
         headerShown: false,
       }}
-      initialRouteName={'Onboarding'}>
+      initialRouteName={'Login'}>
       <Stack.Screen name='Onboarding' component={OnboardingScreen} />
       <Stack.Screen name='Login' component={LoginScreen} />
     </Stack.Navigator>

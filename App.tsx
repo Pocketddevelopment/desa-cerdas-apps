@@ -7,7 +7,7 @@
  */
 
 import { NavigationContainer } from '@react-navigation/native';
-import Storage from 'utils/async-storage';
+import Storage from '@utils/async-storage';
 import React, { createContext, useEffect, useMemo, useState } from 'react';
 import AuthenticationStack from './src/features/authentication';
 
