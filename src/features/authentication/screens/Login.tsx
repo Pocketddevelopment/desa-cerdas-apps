@@ -2,11 +2,16 @@ import Input from '@components/Input';
 import Row from '@components/Row';
 import SpaceBetween from '@components/SpaceBetween';
 import DeviceContants from '@constants/device';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import { Checkbox, Text } from 'react-native-paper';
+import { AuthenticationStackParamList } from '..';
 
 const LoginScreen: React.FC = () => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<AuthenticationStackParamList>>();
   return (
     <View style={styles.container}>
       <Image
@@ -21,7 +26,9 @@ const LoginScreen: React.FC = () => {
             <Checkbox status='unchecked' />
             <Text>aasdf</Text>
           </Row>
-          <Text>Lupa password?</Text>
+          <Text onPress={() => navigation.navigate('ForgetPassword')}>
+            Lupa password?
+          </Text>
         </SpaceBetween>
       </View>
       <View style={styles.footer}>
