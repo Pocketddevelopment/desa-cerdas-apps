@@ -12,15 +12,15 @@ import Carousel, { Pagination } from 'react-native-snap-carousel';
 
 const data = [
   {
-    img: require('assets/onboarding-1.webp'),
+    img: require('@assets/onboarding-1.webp'),
     text: 'Cari tahu semua tentang desa Anda termasuk berita, statistik, wisata, dan lainnya',
   },
   {
-    img: require('assets/onboarding-2.webp'),
+    img: require('@assets/onboarding-2.webp'),
     text: 'Cari tahu semua tentang desa Anda termasuk berita, statistik, wisata, dan lainnya',
   },
   {
-    img: require('assets/onboarding-3.webp'),
+    img: require('@assets/onboarding-3.webp'),
     text: 'Cari tahu semua tentang desa Anda termasuk berita, statistik, wisata, dan lainnya',
   },
 ];
@@ -72,7 +72,7 @@ const OnboardingScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <ImageBackground source={require('assets/onboarding-background.webp')} />
+      <ImageBackground source={require('@assets/onboarding-background.webp')} />
       <Carousel
         ref={carouselRef}
         layout='default'

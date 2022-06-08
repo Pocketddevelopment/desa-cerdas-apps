@@ -36,9 +36,7 @@
         "paths": "./tsconfig.json"
       },
       "node": {
-        "paths": ["src"],
-        "extensions": [".js", ".jsx", ".ts", ".tsx", ".native.js"],
-        "moduleDirectory": ["src", "node_modules"]
+        "extensions": [".js", ".jsx", ".ts", ".tsx", ".native.js"]
       }
     },
     "caseSensitive": false

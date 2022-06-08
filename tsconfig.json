@@ -8,8 +8,8 @@
       "@authentication/*": ["src/features/authentication/*"],
       "@dashboard/*": ["src/features/dashboard/*"],
       "@utils/*": ["src/utils/*"],
-      "@rootSource": ["src/*"],
-      "@root": ["*"]
+      "@@@/*": ["*"],
+      "@@/*": ["src/*"]
     },
     "target": "esnext",
     "lib": ["es2017"],

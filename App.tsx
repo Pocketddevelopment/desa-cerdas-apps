@@ -6,6 +6,7 @@
  * @flow strict-local
  */
 
+import DashboardStack from '@dashboard/index';
 import { NavigationContainer } from '@react-navigation/native';
 import Storage from '@utils/async-storage';
 import React, { createContext, useEffect, useMemo, useState } from 'react';
@@ -26,6 +27,7 @@ const App: React.FC = () => {
         // After getting token, we need to persist the token using `SecureStore`
         // In the example, we'll use a dummy token
         // dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
+        setLoggedIn(true);
       },
       logOut: () => {},
       register: async (_: any) => {
@@ -61,7 +63,7 @@ const App: React.FC = () => {
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
-        {isLoggedIn ? null : AuthenticationStack()}
+        {isLoggedIn ? DashboardStack() : AuthenticationStack()}
       </NavigationContainer>
     </AuthContext.Provider>
   );
