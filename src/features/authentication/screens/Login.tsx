@@ -36,7 +36,9 @@ const LoginScreen: React.FC = () => {
           source={require('assets/onboarding/biometric-icon.png')}
           style={styles.iconBiometric}
         />
-        <Text>Daftar akun baru</Text>
+        <Text onPress={() => navigation.navigate('Register')}>
+          Daftar akun baru
+        </Text>
       </View>
     </View>
   );
