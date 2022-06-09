@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from './screens/Home';
 import AccountScreen from './screens/Account';
+import NewsDetailScreen from '../news/screens/NewsDetail';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -26,13 +27,21 @@ export default function DashboardStack() {
         component={Dashboard}
         options={{ headerShown: false }}
       />
+      <Stack.Screen
+        name='NewsDetail'
+        component={NewsDetailScreen}
+        options={{
+          title: 'Berita',
+        }}
+      />
     </Stack.Navigator>
   );
 }
 
-export type AuthenticationStackParamList = {
+export type DashboardStackParamList = {
   Onboarding: undefined;
   Login: Object | undefined;
   Register: Object | undefined;
   ForgetPassword: Object | undefined;
+  NewsDetail: Object | undefined;
 };
