@@ -1,7 +1,11 @@
 import Row from '@components/Row';
+import Separator from '@components/Separator';
 import SpaceBetween from '@components/SpaceBetween';
+import DeviceContants from '@constants/device';
+import DistrictCard from '@dashboard/components/DistrictCard';
+import NewsItem from '@dashboard/components/NewsItem';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import { Avatar, IconButton, Text, Title } from 'react-native-paper';
 
 const HomeScreen: React.FC = () => {
@@ -9,7 +13,7 @@ const HomeScreen: React.FC = () => {
     <View style={styles.container}>
       <View style={styles.profileContainer}>
         <SpaceBetween>
-          <View>
+          <Row>
             <Avatar.Image
               size={48}
               source={{ uri: 'https://www.w3schools.com/howto/img_avatar.png' }}
@@ -18,15 +22,42 @@ const HomeScreen: React.FC = () => {
               <Text>Selamat Datang,</Text>
               <Title>Bambang Sudrajat</Title>
             </View>
-          </View>
+          </Row>
           <IconButton
-            icon='camera'
+            icon={'bell'}
             color={'white'}
             size={20}
             onPress={() => console.log('Pressed')}
           />
         </SpaceBetween>
       </View>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={styles.scrollBody}
+        showsVerticalScrollIndicator={false}>
+        <View style={styles.districtCardContainer}>
+          <View style={styles.upperAbsolute} />
+          <DistrictCard />
+        </View>
+        <View style={styles.body}>
+          <Title>Berita Terkini</Title>
+          <NewsItem />
+          <Separator />
+          <NewsItem />
+          <Separator />
+          <NewsItem />
+          <Separator />
+          <NewsItem />
+          <Separator />
+          <NewsItem />
+          <Separator />
+          <NewsItem />
+          <Separator />
+          <NewsItem />
+          <Separator />
+          <NewsItem />
+        </View>
+      </ScrollView>
     </View>
   );
 };
@@ -44,5 +75,20 @@ const styles = StyleSheet.create({
   },
   profileDetail: {
     marginLeft: 10,
+  },
+  scrollBody: {
+    flexGrow: 1,
+  },
+  body: {
+    paddingHorizontal: 10,
+  },
+  upperAbsolute: {
+    height: 40,
+    width: DeviceContants.screenWidth,
+    backgroundColor: 'red',
+  },
+  districtCardContainer: {
+    height: 200,
+    alignItems: 'center',
   },
 });

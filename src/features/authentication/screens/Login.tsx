@@ -32,7 +32,7 @@ const LoginScreen: React.FC = () => {
           <Input style={{ flex: 1 }} />
           <Button onPress={onPressLogin}>Masuk</Button>
         </SpaceBetween>
-        <SpaceBetween styles={{ marginTop: 10 }}>
+        <SpaceBetween style={{ marginTop: 10 }}>
           <Row>
             <Checkbox status='unchecked' />
             <Text>aasdf</Text>

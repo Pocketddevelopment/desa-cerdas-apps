@@ -3,14 +3,14 @@ import { StyleSheet, View, ViewStyle } from 'react-native';
 
 interface SpaceBetweenProps {
   children: JSX.Element[] | React.ReactNode;
-  styles: ViewStyle;
+  style: ViewStyle;
 }
 
 export default function SpaceBetween({
   children,
-  styles,
+  style,
 }: Partial<SpaceBetweenProps>) {
-  return <View style={[propStyle.row, styles]}>{children}</View>;
+  return <View style={[propStyle.row, style]}>{children}</View>;
 }
 
 const propStyle = StyleSheet.create({
