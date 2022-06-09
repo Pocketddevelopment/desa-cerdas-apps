@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, ViewStyle } from 'react-native';
 
 interface SeparatorProps {
-  style: ViewStyle;
+  style?: ViewStyle;
 }
 
 const Separator = ({ style }: SeparatorProps) => {
