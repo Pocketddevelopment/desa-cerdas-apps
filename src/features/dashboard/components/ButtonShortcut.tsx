@@ -1,15 +1,17 @@
+import onPressInterface from '@interfaces/Press.interface';
 import React from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Text } from 'react-native-paper';
 
 interface ButtonShortcutProps {
   uri: string;
   title: string;
+  onPress: onPressInterface;
 }
 
-const ButtonShortcut = ({ uri, title }: ButtonShortcutProps) => {
+const ButtonShortcut = ({ uri, title, onPress }: ButtonShortcutProps) => {
   return (
-    <View style={styles.btnContainer}>
+    <TouchableOpacity onPress={onPress} style={styles.btnContainer}>
       <View style={styles.btnCard}>
         <Image
           style={styles.iconImage}
@@ -19,7 +21,7 @@ const ButtonShortcut = ({ uri, title }: ButtonShortcutProps) => {
         />
       </View>
       <Text>{title}</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 

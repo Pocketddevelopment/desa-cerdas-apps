@@ -5,8 +5,18 @@ import { Caption, Text, Title } from 'react-native-paper';
 import DeviceContants from '@constants/device';
 import Separator from '@components/Separator';
 import ButtonShortcut from './ButtonShortcut';
+import { DashboardStackParamList } from '..';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 const DistrictCard = () => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<DashboardStackParamList>>();
+
+  function onPressShortcut(target: keyof DashboardStackParamList) {
+    navigation.navigate(target);
+  }
+
   return (
     <View style={styles.card}>
       <Caption>Kependudukan</Caption>
@@ -29,30 +39,35 @@ const DistrictCard = () => {
             'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/2048px-Instagram_icon.png'
           }
           title={'Profil'}
+          onPress={() => onPressShortcut('Report')}
         />
         <ButtonShortcut
           uri={
             'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/2048px-Instagram_icon.png'
           }
           title={'Wisata'}
+          onPress={() => onPressShortcut('Report')}
         />
         <ButtonShortcut
           uri={
             'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/2048px-Instagram_icon.png'
           }
           title={'UMKM'}
+          onPress={() => onPressShortcut('Report')}
         />
         <ButtonShortcut
           uri={
             'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/2048px-Instagram_icon.png'
           }
           title={'Laporan'}
+          onPress={() => onPressShortcut('Report')}
         />
         <ButtonShortcut
           uri={
             'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/2048px-Instagram_icon.png'
           }
           title={'Layanan'}
+          onPress={() => onPressShortcut('Report')}
         />
       </View>
     </View>

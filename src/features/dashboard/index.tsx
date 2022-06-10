@@ -7,6 +7,7 @@ import NewsDetailScreen from '../news/screens/NewsDetail';
 import NotificationListScreen from '../notification/screens/NotificationList';
 import UpdateAccountScreen from './screens/account/UpdateAccount';
 import UpdatePasswordScreen from './screens/account/UpdatePassword';
+import ReportListScreen from '../report/screens/ReportList';
 
 const Stack = createNativeStackNavigator<DashboardStackParamList>();
 const Tab = createBottomTabNavigator();
@@ -58,6 +59,13 @@ export default function DashboardStack() {
           title: 'Ganti Kata Sandi',
         }}
       />
+      <Stack.Screen
+        name='Report'
+        component={ReportListScreen}
+        options={{
+          title: 'Unduh Laporan',
+        }}
+      />
     </Stack.Navigator>
   );
 }
@@ -72,4 +80,5 @@ export type DashboardStackParamList = {
   NotificationList: Object | undefined;
   UpdateAccount: Object | undefined;
   UpdatePassword: Object | undefined;
+  Report: Object | undefined;
 };
