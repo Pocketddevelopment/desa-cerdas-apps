@@ -1,3 +1,4 @@
+import Button from '@components/Button';
 import { CommonActions, useNavigation } from '@react-navigation/native';
 import React, { useRef, useState } from 'react';
 import {
@@ -7,7 +8,7 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import { Button, Text } from 'react-native-paper';
+import { Text, useTheme } from 'react-native-paper';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 
 const data = [
@@ -28,6 +29,7 @@ const data = [
 export const SLIDER_WIDTH = Dimensions.get('window').width;
 
 const OnboardingScreen: React.FC = () => {
+  const theme = useTheme();
   const navigation = useNavigation();
   const carouselRef = useRef<any>(null);
   const [activeIndex, setActiveIndex] = useState<number>(0);
@@ -71,7 +73,7 @@ const OnboardingScreen: React.FC = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: theme.colors.primary }]}>
       <ImageBackground source={require('@assets/onboarding-background.webp')} />
       <Carousel
         ref={carouselRef}
@@ -121,6 +123,7 @@ const styles = StyleSheet.create({
   },
   btnNext: {
     marginTop: 30,
+    width: '40%',
   },
   image: {
     width: 200,
