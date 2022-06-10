@@ -37,6 +37,7 @@ export const CombinedDefaultTheme = {
     ...NavigationDefaultTheme.colors,
     primary: '#D0342C',
     accent: '#F28418',
+    background: '#FFFFFF',
   },
   myOwnProperty: true,
 };
