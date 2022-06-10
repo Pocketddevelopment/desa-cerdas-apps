@@ -13,7 +13,7 @@ export default Separator;
 
 const styles = StyleSheet.create({
   separator: {
-    height: 1,
+    height: 0.5,
     width: '100%',
     backgroundColor: 'red',
   },

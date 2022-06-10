@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from './screens/Home';
 import AccountScreen from './screens/Account';
 import NewsDetailScreen from '../news/screens/NewsDetail';
+import NotificationListScreen from '../notification/screens/NotificationList';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -34,6 +35,13 @@ export default function DashboardStack() {
           title: 'Berita',
         }}
       />
+      <Stack.Screen
+        name='NotificationList'
+        component={NotificationListScreen}
+        options={{
+          title: 'Notifikasi',
+        }}
+      />
     </Stack.Navigator>
   );
 }
@@ -44,4 +52,5 @@ export type DashboardStackParamList = {
   Register: Object | undefined;
   ForgetPassword: Object | undefined;
   NewsDetail: Object | undefined;
+  NotificationList: Object | undefined;
 };

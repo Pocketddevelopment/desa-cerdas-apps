@@ -4,11 +4,16 @@ import SpaceBetween from '@components/SpaceBetween';
 import DeviceContants from '@constants/device';
 import DistrictCard from '@dashboard/components/DistrictCard';
 import NewsItem from '@dashboard/components/NewsItem';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { Avatar, IconButton, Text, Title } from 'react-native-paper';
+import { DashboardStackParamList } from '..';
 
 const HomeScreen: React.FC = () => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<DashboardStackParamList>>();
   return (
     <View style={styles.container}>
       <View style={styles.profileContainer}>
@@ -27,7 +32,7 @@ const HomeScreen: React.FC = () => {
             icon={'bell'}
             color={'white'}
             size={20}
-            onPress={() => console.log('Pressed')}
+            onPress={() => navigation.navigate('NotificationList')}
           />
         </SpaceBetween>
       </View>

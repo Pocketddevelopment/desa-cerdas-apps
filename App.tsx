@@ -47,7 +47,6 @@ const App: React.FC = () => {
       setReady(true);
       const shouldOnboardLocal = await Storage.getItem('onboarding', true);
       if (shouldOnboardLocal) {
-        console.log(isLoggedIn);
         setOnboard(shouldOnboard);
         setReady(true);
       }
