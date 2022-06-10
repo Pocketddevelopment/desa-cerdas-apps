@@ -2,12 +2,21 @@ import Separator from '@components/Separator';
 import DeviceContants from '@constants/device';
 import AccountCard from '@dashboard/components/AccountCard';
 import ScrollItem from '@dashboard/components/ScrollItem';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { Text } from 'react-native-paper';
+import { DashboardStackParamList } from '..';
 
 const AccountScreen: React.FC = () => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<DashboardStackParamList>>();
+
+  function onPressItem(target: keyof DashboardStackParamList) {
+    navigation.navigate(target);
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.upperAbsolute} />
@@ -16,24 +25,35 @@ const AccountScreen: React.FC = () => {
         <ScrollView
           style={styles.body}
           contentContainerStyle={styles.bodyContainer}>
-          <ScrollItem icon='lock-open-outline' title='Ganti Password' />
+          <ScrollItem
+            icon='lock-open-outline'
+            title='Ganti Password'
+            onPress={() => onPressItem('UpdatePassword')}
+          />
           <Separator />
           <ScrollItem
             icon='file-document-outline'
             title='Syarat dan Ketentuan'
+            onPress={() => onPressItem('UpdatePassword')}
           />
           <Separator />
-          <ScrollItem icon='shield-check-outline' title='Kebijakan Privasi' />
+          <ScrollItem
+            icon='shield-check-outline'
+            title='Kebijakan Privasi'
+            onPress={() => onPressItem('UpdatePassword')}
+          />
           <Separator />
           <ScrollItem
             icon='comment-question-outline'
             title='Tentang Desa Cerdas'
+            onPress={() => onPressItem('UpdatePassword')}
           />
           <Separator />
           <ScrollItem
             icon='logout'
             title='Keluar dari Akun'
             textStyle={{ color: 'red' }}
+            onPress={() => onPressItem('UpdatePassword')}
           />
         </ScrollView>
       </View>

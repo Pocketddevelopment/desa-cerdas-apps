@@ -1,13 +1,23 @@
-import React from 'react';
+import Button from '@components/Button';
 import Row from '@components/Row';
-import { Image, StyleSheet, View } from 'react-native';
-import { Avatar, Button, Caption, Text, Title } from 'react-native-paper';
-import DeviceContants from '@constants/device';
 import Separator from '@components/Separator';
-import ButtonShortcut from './ButtonShortcut';
 import SpaceBetween from '@components/SpaceBetween';
+import DeviceContants from '@constants/device';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { Avatar, Text, Title } from 'react-native-paper';
+import { DashboardStackParamList } from '..';
 
 const AccountCard = () => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<DashboardStackParamList>>();
+
+  const onPressUpdate = () => {
+    navigation.navigate('UpdateAccount');
+  };
+
   return (
     <View style={styles.card}>
       <Row>
@@ -27,7 +37,9 @@ const AccountCard = () => {
           <Text>NIK: 100000000</Text>
           <Text>Tgl. Lahir: 100000000</Text>
         </View>
-        <Button mode='contained'>Perbarui</Button>
+        <Button style={styles.btnUpdate} onPress={onPressUpdate}>
+          Perbarui
+        </Button>
       </SpaceBetween>
     </View>
   );
@@ -58,4 +70,5 @@ const styles = StyleSheet.create({
     width: 50,
     marginRight: 10,
   },
+  btnUpdate: { flex: 1, marginLeft: 40 },
 });
