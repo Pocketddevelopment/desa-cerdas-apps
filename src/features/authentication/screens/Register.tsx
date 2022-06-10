@@ -1,8 +1,9 @@
+import Button from '@components/Button';
+import Container from '@components/Container';
 import Input from '@components/Input';
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Button } from 'react-native-paper';
 
 const RegisterScreen: React.FC = () => {
   const navigation = useNavigation();
@@ -16,26 +17,32 @@ const RegisterScreen: React.FC = () => {
   };
 
   return (
-    <View style={styles.container}>
-      {step === 0 && (
-        <View style={styles.form}>
-          <Input placeholder='NIK e-KTP' />
-          <Input placeholder='Nama lengkap sesuai e-KTP' />
-          <Input placeholder='Tanggal Lahir' />
-        </View>
-      )}
-      {step === 1 && (
-        <View style={styles.form}>
-          <Input placeholder='Email' />
-          <Input placeholder='Nomor Telepon' />
-          <Input placeholder='Password' />
-          <Input placeholder='Konfirmasi Password' />
-        </View>
-      )}
-      <Button mode='contained' onPress={onPressNext}>
-        {step === 1 ? 'Buat Akun' : 'Lanjut'}
-      </Button>
-    </View>
+    <Container>
+      <View style={styles.container}>
+        {step === 0 && (
+          <View style={styles.form}>
+            <Input placeholder='NIK e-KTP' />
+            <Input placeholder='Nama lengkap sesuai e-KTP' />
+            <Input
+              placeholder='Tanggal Lahir'
+              editable={false}
+              suffixIcon={'chevron-right'}
+            />
+          </View>
+        )}
+        {step === 1 && (
+          <View style={styles.form}>
+            <Input placeholder='Email' />
+            <Input placeholder='Nomor Telepon' />
+            <Input placeholder='Password' suffixIcon='eye' />
+            <Input placeholder='Konfirmasi Password' suffixIcon='eye' />
+          </View>
+        )}
+        <Button onPress={onPressNext}>
+          {step === 1 ? 'Buat Akun' : 'Lanjut'}
+        </Button>
+      </View>
+    </Container>
   );
 };
 
