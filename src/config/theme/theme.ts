@@ -36,6 +36,7 @@ export const CombinedDefaultTheme = {
     ...PaperDefaultTheme.colors,
     ...NavigationDefaultTheme.colors,
     primary: '#D0342C',
+    accent: '#F28418',
   },
   myOwnProperty: true,
 };
@@ -47,6 +48,7 @@ export const CombinedDarkTheme = {
     ...PaperDarkTheme.colors,
     ...NavigationDarkTheme.colors,
     primary: '#D0342C',
+    accent: '#F28418',
   },
   myOwnProperty: true,
 };
