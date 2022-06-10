@@ -1,16 +1,14 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import DashboardStack from '@dashboard/index';
 import { NavigationContainer } from '@react-navigation/native';
 import Storage from '@utils/async-storage';
 import React, { createContext, useEffect, useMemo, useState } from 'react';
 import AuthenticationStack from './src/features/authentication';
+import { Provider as PaperProvider } from 'react-native-paper';
+import {
+  CombinedDarkTheme,
+  CombinedDefaultTheme,
+  PreferencesContext,
+} from '@config/theme';
 
 export const AuthContext = createContext({});
 
@@ -18,6 +16,7 @@ const App: React.FC = () => {
   const [isReady, setReady] = useState<boolean>(false);
   const [shouldOnboard, setOnboard] = useState<boolean>(true);
   const [isLoggedIn, setLoggedIn] = useState<boolean>(false);
+  const [isThemeDark, setIsThemeDark] = React.useState(false);
 
   const authContext = useMemo(
     () => ({
@@ -59,12 +58,31 @@ const App: React.FC = () => {
     bootstrapAsync();
   }, []);
 
+  let theme = isThemeDark ? CombinedDarkTheme : CombinedDefaultTheme;
+
+  const toggleTheme = React.useCallback(() => {
+    return setIsThemeDark(!isThemeDark);
+  }, [isThemeDark]);
+
+  const preferences = React.useMemo(
+    () => ({
+      toggleTheme,
+      isThemeDark,
+    }),
+    [toggleTheme, isThemeDark]
+  );
+
+  //@ts-ignore
   return (
-    <AuthContext.Provider value={authContext}>
-      <NavigationContainer>
-        {isLoggedIn ? DashboardStack() : AuthenticationStack()}
-      </NavigationContainer>
-    </AuthContext.Provider>
+    <PreferencesContext.Provider value={preferences}>
+      <AuthContext.Provider value={authContext}>
+        <PaperProvider theme={theme}>
+          <NavigationContainer theme={theme}>
+            {isLoggedIn ? DashboardStack() : AuthenticationStack()}
+          </NavigationContainer>
+        </PaperProvider>
+      </AuthContext.Provider>
+    </PreferencesContext.Provider>
   );
 };
 

@@ -7,6 +7,9 @@
       "@constants/*": ["src/constants/*"],
       "@authentication/*": ["src/features/authentication/*"],
       "@dashboard/*": ["src/features/dashboard/*"],
+      "@interfaces/*": ["src/interfaces/*"],
+      "@enums/*": ["src/interfaces/enums/*"],
+      "@config/*": ["src/config/*"],
       "@utils/*": ["src/utils/*"],
       "@@@/*": ["*"],
       "@@/*": ["src/*"]
