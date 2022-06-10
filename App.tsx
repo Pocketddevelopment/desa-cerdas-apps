@@ -1,20 +1,17 @@
-import DashboardStack from '@dashboard/index';
-import { NavigationContainer } from '@react-navigation/native';
-import Storage from '@utils/async-storage';
-import React, { createContext, useEffect, useMemo, useState } from 'react';
-import AuthenticationStack from './src/features/authentication';
-import { Provider as PaperProvider } from 'react-native-paper';
 import {
   CombinedDarkTheme,
   CombinedDefaultTheme,
   PreferencesContext,
 } from '@config/theme';
+import DashboardStack from '@dashboard/index';
+import { NavigationContainer } from '@react-navigation/native';
+import React, { createContext, useMemo, useState } from 'react';
+import { Provider as PaperProvider } from 'react-native-paper';
+import AuthenticationStack from './src/features/authentication';
 
 export const AuthContext = createContext({});
 
 const App: React.FC = () => {
-  const [isReady, setReady] = useState<boolean>(false);
-  const [shouldOnboard, setOnboard] = useState<boolean>(true);
   const [isLoggedIn, setLoggedIn] = useState<boolean>(false);
   const [isThemeDark, setIsThemeDark] = React.useState(false);
 
@@ -39,24 +36,6 @@ const App: React.FC = () => {
     }),
     []
   );
-
-  useEffect(() => {
-    // Fetch the token from storage then navigate to our appropriate place
-    const bootstrapAsync = async () => {
-      setReady(true);
-      const shouldOnboardLocal = await Storage.getItem('onboarding', true);
-      if (shouldOnboardLocal) {
-        setOnboard(shouldOnboard);
-        setReady(true);
-      }
-      isReady;
-      shouldOnboard;
-      setLoggedIn;
-      // const userToken = await Storage.getItem('userToken');
-    };
-
-    bootstrapAsync();
-  }, []);
 
   let theme = isThemeDark ? CombinedDarkTheme : CombinedDefaultTheme;
 

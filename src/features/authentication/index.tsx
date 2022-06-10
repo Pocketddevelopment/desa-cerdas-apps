@@ -4,12 +4,20 @@ import LoginScreen from './screens/Login';
 import OnboardingScreen from './screens/Onboarding';
 import ForgetPasswordScreen from './screens/ForgetPassword';
 import RegisterScreen from './screens/Register';
+import Storage from '@utils/async-storage';
 
 const Stack = createNativeStackNavigator();
 
 export default function AuthenticationStack() {
+  function getInitialRouteName(): string {
+    const shouldOnboardLocal = Storage.getItem('onboarding', true);
+    if (shouldOnboardLocal) {
+      return 'Onboarding';
+    }
+    return 'Login';
+  }
   return (
-    <Stack.Navigator initialRouteName={'Login'}>
+    <Stack.Navigator initialRouteName={getInitialRouteName()}>
       <Stack.Screen
         name='Onboarding'
         component={OnboardingScreen}
