@@ -8,7 +8,7 @@ import React from 'react';
 import { Image, ScrollView, StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-paper';
 
-const ComplaintForm: React.FC = () => {
+const ComplaintFormScreen: React.FC = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<DashboardStackParamList>>();
 
@@ -61,7 +61,7 @@ const ComplaintForm: React.FC = () => {
   );
 };
 
-export default ComplaintForm;
+export default ComplaintFormScreen;
 
 const styles = StyleSheet.create({
   sectionTitle: {

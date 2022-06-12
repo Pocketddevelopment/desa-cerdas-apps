@@ -18,7 +18,7 @@ const Separator = ({ style, width, height, color }: SeparatorProps) => {
         style,
         {
           width: width ? width : '100%',
-          height: height ? height : 0.5,
+          height: height ? height : 1,
           backgroundColor: color ? color : theme.colors.primary,
         },
         {},
@@ -31,7 +31,7 @@ export default Separator;
 
 const styles = StyleSheet.create({
   separator: {
-    height: 0.5,
+    height: 1,
     width: '100%',
     alignSelf: 'center',
   },

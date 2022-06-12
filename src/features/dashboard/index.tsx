@@ -1,18 +1,19 @@
-import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeScreen from './screens/Home';
-import AccountScreen from './screens/Account';
-import NewsDetailScreen from '../news/screens/NewsDetail';
-import NotificationListScreen from '../notification/screens/NotificationList';
-import UpdateAccountScreen from './screens/account/UpdateAccount';
-import UpdatePasswordScreen from './screens/account/UpdatePassword';
-import ReportListScreen from '../report/screens/ReportList';
-import ServiceScreen from '../service/screens/ServiceHome';
-import DocumentFormScreen from '../service/screens/DocumentForm';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ComplaintScreen from '@service/screens/Complaint';
 import ComplaintDetail from '@service/screens/ComplaintDetail';
-import ComplaintForm from '@service/screens/ComplaintForm';
+import ComplaintFormScreen from '@service/screens/ComplaintForm';
+import DocumentHistoryScreen from '@service/screens/DocumentHistory';
+import React from 'react';
+import NewsDetailScreen from '../news/screens/NewsDetail';
+import NotificationListScreen from '../notification/screens/NotificationList';
+import ReportListScreen from '../report/screens/ReportList';
+import DocumentFormScreen from '../service/screens/DocumentForm';
+import ServiceScreen from '../service/screens/ServiceHome';
+import AccountScreen from './screens/Account';
+import UpdateAccountScreen from './screens/account/UpdateAccount';
+import UpdatePasswordScreen from './screens/account/UpdatePassword';
+import HomeScreen from './screens/Home';
 
 const Stack = createNativeStackNavigator<DashboardStackParamList>();
 const Tab = createBottomTabNavigator();
@@ -94,9 +95,16 @@ export default function DashboardStack() {
       />
       <Stack.Screen
         name='ComplaintForm'
-        component={ComplaintForm}
+        component={ComplaintFormScreen}
         options={{
           title: 'Buat Keluhan Baru',
+        }}
+      />
+      <Stack.Screen
+        name='DocumentHistory'
+        component={DocumentHistoryScreen}
+        options={{
+          title: 'Riwayat Surat / Dokumen',
         }}
       />
       <Stack.Screen name='ComplaintDetail' component={ComplaintDetail} />
@@ -117,6 +125,7 @@ export type DashboardStackParamList = {
   Report: Object | undefined;
   Service: Object | undefined;
   DocumentForm: Object | undefined;
+  DocumentHistory: Object | undefined;
   Complaint: Object | undefined;
   ComplaintForm: Object | undefined;
   ComplaintDetail: Object | undefined;
