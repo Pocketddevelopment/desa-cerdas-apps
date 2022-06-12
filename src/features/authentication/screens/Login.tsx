@@ -43,7 +43,11 @@ const LoginScreen: React.FC = () => {
       <View style={styles.formLogin}>
         <Input placeholder='Alamat surel / NIK' shadow={false} />
         <SpaceBetween>
-          <Input placeholder='Kata sandi' style={{ flex: 1 }} shadow={false} />
+          <Input
+            placeholder='Kata sandi'
+            containerStyle={{ flex: 1 }}
+            shadow={false}
+          />
           <Button style={styles.btnLogin} onPress={onPressLogin}>
             Masuk
           </Button>

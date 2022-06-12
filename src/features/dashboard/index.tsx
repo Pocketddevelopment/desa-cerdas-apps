@@ -12,6 +12,7 @@ import ServiceScreen from '../service/screens/ServiceHome';
 import DocumentFormScreen from '../service/screens/DocumentForm';
 import ComplaintScreen from '@service/screens/Complaint';
 import ComplaintDetail from '@service/screens/ComplaintDetail';
+import ComplaintForm from '@service/screens/ComplaintForm';
 
 const Stack = createNativeStackNavigator<DashboardStackParamList>();
 const Tab = createBottomTabNavigator();
@@ -89,6 +90,13 @@ export default function DashboardStack() {
         component={ComplaintScreen}
         options={{
           title: 'Permohonan Surat / Dokumen',
+        }}
+      />
+      <Stack.Screen
+        name='ComplaintForm'
+        component={ComplaintForm}
+        options={{
+          title: 'Buat Keluhan Baru',
         }}
       />
       <Stack.Screen name='ComplaintDetail' component={ComplaintDetail} />
