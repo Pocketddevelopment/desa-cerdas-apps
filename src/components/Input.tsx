@@ -1,19 +1,27 @@
-import React from 'react';
-import { StyleSheet } from 'react-native';
-import { TextInput as PaperTextInput, useTheme } from 'react-native-paper';
+import React, { useState } from 'react';
+import { StyleSheet, View, ViewStyle } from 'react-native';
+import {
+  HelperText,
+  TextInput as PaperTextInput,
+  useTheme,
+} from 'react-native-paper';
 import type { TextInputProps } from 'react-native-paper/lib/typescript/components/TextInput/TextInput';
 
 type AdditionalTextInputProps = {
   shadow: boolean;
   suffixIcon: string;
+  counter?: boolean;
+  containerStyle: ViewStyle;
 };
 
 export default function TextInput(
   props: Partial<TextInputProps & AdditionalTextInputProps>
 ) {
   const theme = useTheme();
+  const [text, setText] = useState<string>('');
+  const { counter, containerStyle, style } = props;
   const isShadowPresent = props.shadow === undefined ? true : props.shadow;
-  const newStyles = [styles.container, props.style];
+  const newStyles: ViewStyle[] = [styles.inputContainer];
   if (isShadowPresent) {
     newStyles.push(styles.shadow);
   }
@@ -21,18 +29,26 @@ export default function TextInput(
     <PaperTextInput.Icon icon={props.suffixIcon} color={theme.colors.primary} />
   ) : null;
   return (
-    <PaperTextInput
-      underlineColor='transparent'
-      underlineColorAndroid={'transparent'}
-      activeUnderlineColor={'transparent'}
-      selectionColor={theme.colors.primary}
-      dense
-      mode='flat'
-      editable={props.suffixIcon ? false : true}
-      {...props}
-      right={rightIcon}
-      style={newStyles}
-    />
+    <View style={[styles.container, containerStyle]}>
+      <PaperTextInput
+        underlineColor='transparent'
+        underlineColorAndroid={'transparent'}
+        activeUnderlineColor={'transparent'}
+        selectionColor={theme.colors.primary}
+        dense
+        mode='flat'
+        editable={props.suffixIcon ? false : true}
+        {...props}
+        right={rightIcon}
+        style={newStyles}
+        onChangeText={(value: string) => setText(value)}
+      />
+      {counter && (
+        <HelperText type='info' style={styles.counter}>
+          {text.length}/{props.maxLength}
+        </HelperText>
+      )}
+    </View>
   );
 }
 
@@ -40,12 +56,13 @@ const styles = StyleSheet.create({
   container: {
     marginVertical: 5,
     width: '100%',
-    paddingVertical: 2,
+  },
+  inputContainer: {
     borderRadius: 5,
     shadowOpacity: 0.5,
     shadowRadius: 5,
     backgroundColor: 'white',
-    height: 40,
+    paddingVertical: 2,
   },
   shadow: {
     elevation: 10,
@@ -53,5 +70,9 @@ const styles = StyleSheet.create({
       height: 5,
       width: 5,
     },
+  },
+  counter: {
+    alignSelf: 'flex-end',
+    paddingHorizontal: 0,
   },
 });
