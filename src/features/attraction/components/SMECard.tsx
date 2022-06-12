@@ -1,26 +1,41 @@
 import DeviceContants from '@constants/device';
+import onPressInterface from '@interfaces/Press.interface';
 import React from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Text, Title, useTheme } from 'react-native-paper';
 
-const SMECard = () => {
+type SMECardProps = {
+  thumbnailUri: string;
+  name: string;
+  phone: string;
+  seller: string;
+  onPress: onPressInterface;
+};
+
+const SMECard = ({
+  thumbnailUri,
+  name,
+  phone,
+  seller,
+  onPress,
+}: SMECardProps) => {
   const theme = useTheme();
   return (
-    <View style={styles.card}>
+    <TouchableOpacity style={styles.card} onPress={onPress}>
       <Image
         source={{
-          uri: 'https://img.freepik.com/free-photo/big-hamburger-with-double-beef-french-fries_252907-8.jpg?w=2000',
+          uri: thumbnailUri,
         }}
         style={styles.img}
       />
       <View style={styles.content}>
         <Title style={[styles.title, { color: theme.colors.primary }]}>
-          Kulit Lumpia Barokah
+          {name}
         </Title>
-        <Text>08123456789</Text>
-        <Text>H. SLamet Barokah</Text>
+        <Text>{phone}</Text>
+        <Text>{seller}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

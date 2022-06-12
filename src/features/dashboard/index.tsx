@@ -1,4 +1,5 @@
 import SMEScreen from '@attraction/screens/SME';
+import SMEDetailScreen from '@attraction/screens/SMEDetail';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ComplaintScreen from '@service/screens/Complaint';
@@ -116,6 +117,7 @@ export default function DashboardStack() {
           title: 'UMKM',
         }}
       />
+      <Stack.Screen name='SMEDetail' component={SMEDetailScreen} />
     </Stack.Navigator>
   );
 }
@@ -138,4 +140,5 @@ export type DashboardStackParamList = {
   ComplaintForm: Object | undefined;
   ComplaintDetail: Object | undefined;
   SME: Object | undefined;
+  SMEDetail: Object | undefined;
 };

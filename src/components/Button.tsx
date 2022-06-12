@@ -20,6 +20,8 @@ export default function Button(props: Partial<ButtonProps>) {
     if (mode === 'outlined') {
       if (primary) {
         color = theme.colors.primary;
+      } else {
+        color = theme.colors.accent;
       }
     }
     return {
