@@ -22,7 +22,7 @@ const Container = ({ children, color, style }: ContainerProps) => {
         },
         style,
       ]}>
-      {children}
+      <View style={styles.children}>{children}</View>
     </View>
   );
 };
@@ -32,7 +32,10 @@ export default Container;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
     padding: 20,
+  },
+  children: {
+    width: '100%',
+    alignItems: 'center',
   },
 });

@@ -21,8 +21,7 @@
     "import/no-unresolved": "error",
     "jsx-quotes": ["error", "prefer-single"],
     "react-hooks/exhaustive-deps": "warn",
-    "react-native/no-inline-styles": "off",
-    "@typescript-eslint/no-unused-vars": 0
+    "react-native/no-inline-styles": "off"
   },
   "parser": "@babel/eslint-parser",
   "settings": {

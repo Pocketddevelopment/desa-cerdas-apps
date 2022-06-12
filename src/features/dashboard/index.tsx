@@ -10,6 +10,8 @@ import UpdatePasswordScreen from './screens/account/UpdatePassword';
 import ReportListScreen from '../report/screens/ReportList';
 import ServiceScreen from '../service/screens/ServiceHome';
 import DocumentFormScreen from '../service/screens/DocumentForm';
+import ComplaintScreen from '@service/screens/Complaint';
+import ComplaintDetail from '@service/screens/ComplaintDetail';
 
 const Stack = createNativeStackNavigator<DashboardStackParamList>();
 const Tab = createBottomTabNavigator();
@@ -82,6 +84,14 @@ export default function DashboardStack() {
           title: 'Permohonan Surat / Dokumen',
         }}
       />
+      <Stack.Screen
+        name='Complaint'
+        component={ComplaintScreen}
+        options={{
+          title: 'Permohonan Surat / Dokumen',
+        }}
+      />
+      <Stack.Screen name='ComplaintDetail' component={ComplaintDetail} />
     </Stack.Navigator>
   );
 }
@@ -99,4 +109,7 @@ export type DashboardStackParamList = {
   Report: Object | undefined;
   Service: Object | undefined;
   DocumentForm: Object | undefined;
+  Complaint: Object | undefined;
+  ComplaintForm: Object | undefined;
+  ComplaintDetail: Object | undefined;
 };
