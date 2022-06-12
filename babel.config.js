@@ -10,6 +10,7 @@ module.exports = {
           '@components': './src/components',
           '@constants': './src/constants',
           '@service': './src/features/service',
+          '@attraction': './src/features/attraction',
           '@authentication': './src/features/authentication',
           '@dashboard': './src/features/dashboard',
           '@interfaces': './src/interfaces',

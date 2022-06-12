@@ -53,7 +53,7 @@ const DistrictCard = () => {
             'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/2048px-Instagram_icon.png'
           }
           title={'UMKM'}
-          onPress={() => onPressShortcut('Report')}
+          onPress={() => onPressShortcut('SME')}
         />
         <ButtonShortcut
           uri={

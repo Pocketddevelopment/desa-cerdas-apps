@@ -1,3 +1,4 @@
+import SMEScreen from '@attraction/screens/SME';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ComplaintScreen from '@service/screens/Complaint';
@@ -108,6 +109,13 @@ export default function DashboardStack() {
         }}
       />
       <Stack.Screen name='ComplaintDetail' component={ComplaintDetail} />
+      <Stack.Screen
+        name='SME'
+        component={SMEScreen}
+        options={{
+          title: 'UMKM',
+        }}
+      />
     </Stack.Navigator>
   );
 }
@@ -129,4 +137,5 @@ export type DashboardStackParamList = {
   Complaint: Object | undefined;
   ComplaintForm: Object | undefined;
   ComplaintDetail: Object | undefined;
+  SME: Object | undefined;
 };
