@@ -5,6 +5,7 @@ import Placeman from '../components/Placeman';
 import { Text, useTheme } from 'react-native-paper';
 import SpaceBetween from '@components/SpaceBetween';
 import DistrictHighlight from '../components/DistrictHighlight';
+import Population from '@profile/components/Population';
 
 const ProfileScreen: React.FC = () => {
   const theme = useTheme();
@@ -50,7 +51,7 @@ const ProfileScreen: React.FC = () => {
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Statistik Penduduk</Text>
         <View style={styles.sectionContent}>
-          <DistrictHighlight />
+          <Population />
         </View>
       </View>
     </ScrollView>

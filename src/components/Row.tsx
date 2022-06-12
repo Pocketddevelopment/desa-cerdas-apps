@@ -3,7 +3,7 @@ import { StyleSheet, View, ViewStyle } from 'react-native';
 
 interface RowProps {
   children: JSX.Element[] | React.ReactNode;
-  style: ViewStyle;
+  style: ViewStyle[] | ViewStyle;
 }
 
 export default function Row({ children, style }: Partial<RowProps>) {
