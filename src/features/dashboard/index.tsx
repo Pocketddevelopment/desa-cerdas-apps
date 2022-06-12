@@ -1,3 +1,5 @@
+import AttractionScreen from '@attraction/screens/Attraction';
+import AttractionDetailScreen from '@attraction/screens/AttractionDetail';
 import SMEScreen from '@attraction/screens/SME';
 import SMEDetailScreen from '@attraction/screens/SMEDetail';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -118,6 +120,17 @@ export default function DashboardStack() {
         }}
       />
       <Stack.Screen name='SMEDetail' component={SMEDetailScreen} />
+      <Stack.Screen
+        name='Attraction'
+        component={AttractionScreen}
+        options={{
+          title: 'Wisata Desa',
+        }}
+      />
+      <Stack.Screen
+        name='AttractionDetail'
+        component={AttractionDetailScreen}
+      />
     </Stack.Navigator>
   );
 }
@@ -141,4 +154,6 @@ export type DashboardStackParamList = {
   ComplaintDetail: Object | undefined;
   SME: Object | undefined;
   SMEDetail: Object | undefined;
+  Attraction: Object | undefined;
+  AttractionDetail: Object | undefined;
 };
