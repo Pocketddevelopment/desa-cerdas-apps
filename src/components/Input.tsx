@@ -28,6 +28,7 @@ export default function TextInput(
       selectionColor={theme.colors.primary}
       dense
       mode='flat'
+      editable={props.suffixIcon ? false : true}
       {...props}
       right={rightIcon}
       style={newStyles}

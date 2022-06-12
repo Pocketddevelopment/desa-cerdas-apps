@@ -8,6 +8,8 @@ import NotificationListScreen from '../notification/screens/NotificationList';
 import UpdateAccountScreen from './screens/account/UpdateAccount';
 import UpdatePasswordScreen from './screens/account/UpdatePassword';
 import ReportListScreen from '../report/screens/ReportList';
+import ServiceScreen from '../service/screens/ServiceHome';
+import DocumentFormScreen from '../service/screens/DocumentForm';
 
 const Stack = createNativeStackNavigator<DashboardStackParamList>();
 const Tab = createBottomTabNavigator();
@@ -66,6 +68,20 @@ export default function DashboardStack() {
           title: 'Unduh Laporan',
         }}
       />
+      <Stack.Screen
+        name='Service'
+        component={ServiceScreen}
+        options={{
+          title: 'Layanan',
+        }}
+      />
+      <Stack.Screen
+        name='DocumentForm'
+        component={DocumentFormScreen}
+        options={{
+          title: 'Permohonan Surat / Dokumen',
+        }}
+      />
     </Stack.Navigator>
   );
 }
@@ -81,4 +97,6 @@ export type DashboardStackParamList = {
   UpdateAccount: Object | undefined;
   UpdatePassword: Object | undefined;
   Report: Object | undefined;
+  Service: Object | undefined;
+  DocumentForm: Object | undefined;
 };
