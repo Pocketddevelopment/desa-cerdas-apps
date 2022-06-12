@@ -12,6 +12,7 @@ import DocumentHistoryScreen from '@service/screens/DocumentHistory';
 import React from 'react';
 import NewsDetailScreen from '../news/screens/NewsDetail';
 import NotificationListScreen from '../notification/screens/NotificationList';
+import ProfileScreen from '../profile/screens/Profile';
 import ReportListScreen from '../report/screens/ReportList';
 import DocumentFormScreen from '../service/screens/DocumentForm';
 import ServiceScreen from '../service/screens/ServiceHome';
@@ -133,6 +134,13 @@ export default function DashboardStack() {
         name='AttractionDetail'
         component={AttractionDetailScreen}
       />
+      <Stack.Screen
+        name='Profile'
+        component={ProfileScreen}
+        options={{
+          title: 'Profil Desa',
+        }}
+      />
     </Stack.Navigator>
   );
 }
@@ -159,4 +167,5 @@ export type DashboardStackParamList = {
   Attraction: Object | undefined;
   AttractionList: Object | undefined;
   AttractionDetail: Object | undefined;
+  Profile: Object | undefined;
 };

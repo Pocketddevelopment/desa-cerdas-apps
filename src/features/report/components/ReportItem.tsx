@@ -1,20 +1,22 @@
 import Row from '@components/Row';
+import { format } from 'prettier';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Caption, Title, useTheme } from 'react-native-paper';
 
 interface ReportItemProps {
+  format: string;
   date: string;
   title: string;
 }
 
-const ReportItem = ({ date, title }: ReportItemProps) => {
+const ReportItem = ({ format, date, title }: ReportItemProps) => {
   const theme = useTheme();
   return (
     <View style={styles.container}>
       <Row>
         <Title style={[styles.fileFormat, { color: theme.colors.primary }]}>
-          XLSX
+          {format && format.toUpperCase()}
         </Title>
         <View style={{ flex: 1 }}>
           <Caption>{date}</Caption>
@@ -36,6 +38,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 14,
+    lineHeight: undefined,
+    letterSpacing: 0,
   },
   fileFormat: {
     fontSize: 14,
