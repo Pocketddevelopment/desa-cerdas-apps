@@ -24,7 +24,9 @@ const AttractionScreen: React.FC = () => {
       <View style={styles.section}>
         <SpaceBetween>
           <Text style={styles.sectionTitle}>Destinasi Lokal</Text>
-          <Text style={{ color: theme.colors.primary }}>
+          <Text
+            style={{ color: theme.colors.primary }}
+            onPress={() => navigation.navigate('AttractionList')}>
             Lihat Selengkapnya
           </Text>
         </SpaceBetween>
@@ -55,7 +57,9 @@ const AttractionScreen: React.FC = () => {
       <View style={styles.section}>
         <SpaceBetween>
           <Text style={styles.sectionTitle}>Industri Kreatif</Text>
-          <Text style={{ color: theme.colors.primary }}>
+          <Text
+            style={{ color: theme.colors.primary }}
+            onPress={() => navigation.navigate('AttractionList')}>
             Lihat Selengkapnya
           </Text>
         </SpaceBetween>

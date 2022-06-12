@@ -1,5 +1,6 @@
 import AttractionScreen from '@attraction/screens/Attraction';
 import AttractionDetailScreen from '@attraction/screens/AttractionDetail';
+import AttractionListScreen from '@attraction/screens/AttractionList';
 import SMEScreen from '@attraction/screens/SME';
 import SMEDetailScreen from '@attraction/screens/SMEDetail';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -127,6 +128,7 @@ export default function DashboardStack() {
           title: 'Wisata Desa',
         }}
       />
+      <Stack.Screen name='AttractionList' component={AttractionListScreen} />
       <Stack.Screen
         name='AttractionDetail'
         component={AttractionDetailScreen}
@@ -155,5 +157,6 @@ export type DashboardStackParamList = {
   SME: Object | undefined;
   SMEDetail: Object | undefined;
   Attraction: Object | undefined;
+  AttractionList: Object | undefined;
   AttractionDetail: Object | undefined;
 };
