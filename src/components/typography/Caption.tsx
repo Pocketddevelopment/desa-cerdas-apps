@@ -32,7 +32,7 @@ const Caption = (props: Partial<TextProps>) => {
         styles.default,
         {
           color: color || theme.colors.caption,
-          fontSize: size || 12,
+          fontSize: size || 13,
           fontWeight: thickness || 'normal',
         },
         props.style,

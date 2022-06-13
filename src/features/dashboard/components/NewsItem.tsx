@@ -1,12 +1,14 @@
 import Row from '@components/Row';
+import { Caption, Title, Text } from '@components/typography';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
-import { Caption, Text, Title } from 'react-native-paper';
+import { useTheme } from 'react-native-paper';
 import { DashboardStackParamList } from '..';
 
 const NewsItem = () => {
+  const theme = useTheme();
   const navigation =
     useNavigation<NativeStackNavigationProp<DashboardStackParamList>>();
   return (
@@ -20,7 +22,9 @@ const NewsItem = () => {
         />
         <View style={{ flex: 1 }}>
           <Caption>Selasa, 12 Maret 2022</Caption>
-          <Title numberOfLines={1}>Himbauan vaksinasi booster dalam</Title>
+          <Title numberOfLines={1} color={theme.colors.primary}>
+            Himbauan vaksinasi booster dalam
+          </Title>
           <Text>Perjuangan pemutusan rantai penularan C...</Text>
         </View>
       </Row>
