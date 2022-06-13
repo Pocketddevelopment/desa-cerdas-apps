@@ -3,13 +3,21 @@ import AttractionDetailScreen from '@attraction/screens/AttractionDetail';
 import AttractionListScreen from '@attraction/screens/AttractionList';
 import SMEScreen from '@attraction/screens/SME';
 import SMEDetailScreen from '@attraction/screens/SMEDetail';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Text } from '@components/typography';
+import {
+  BottomTabBar,
+  BottomTabBarButtonProps,
+  createBottomTabNavigator,
+} from '@react-navigation/bottom-tabs';
+import { getTabBarHeight } from '@react-navigation/bottom-tabs/lib/typescript/src/views/BottomTabBar';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ComplaintScreen from '@service/screens/Complaint';
 import ComplaintDetail from '@service/screens/ComplaintDetail';
 import ComplaintFormScreen from '@service/screens/ComplaintForm';
 import DocumentHistoryScreen from '@service/screens/DocumentHistory';
-import React from 'react';
+import React, { useState } from 'react';
+import { Image, TouchableOpacity, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 import NewsDetailScreen from '../news/screens/NewsDetail';
 import NotificationListScreen from '../notification/screens/NotificationList';
 import ProfileScreen from '../profile/screens/Profile';
@@ -26,13 +34,57 @@ const Tab = createBottomTabNavigator();
 
 export default function DashboardStack() {
   function Dashboard() {
+    const theme = useTheme();
+    const [focused, setFocused] = useState<number>(0);
     return (
       <Tab.Navigator
         screenOptions={{
           headerShown: false,
         }}>
-        <Tab.Screen name='Beranda' component={HomeScreen} />
-        <Tab.Screen name='Akun' component={AccountScreen} />
+        <Tab.Screen
+          name='Beranda'
+          component={HomeScreen}
+          options={{
+            tabBarIcon: ({ focused, color }) => {
+              return (
+                <Image
+                  source={require('@assets/navigation/home-inactive.webp')}
+                  style={{
+                    width: 20,
+                    height: 20,
+                    tintColor: color,
+                    marginHorizontal: 10,
+                    alignSelf: 'center',
+                  }}
+                />
+              );
+            },
+            tabBarButton: (props) => <TouchableOpacity {...props} />,
+            tabBarLabelPosition: 'beside-icon',
+          }}
+        />
+        <Tab.Screen
+          name='Akun'
+          component={AccountScreen}
+          options={{
+            tabBarIcon: ({ focused, color }) => {
+              return (
+                <Image
+                  source={require('@assets/navigation/account-inactive.webp')}
+                  style={{
+                    width: 20,
+                    height: 20,
+                    tintColor: color,
+                    marginHorizontal: 10,
+                    alignSelf: 'center',
+                  }}
+                />
+              );
+            },
+            tabBarButton: (props) => <TouchableOpacity {...props} />,
+            tabBarLabelPosition: 'beside-icon',
+          }}
+        />
       </Tab.Navigator>
     );
   }
