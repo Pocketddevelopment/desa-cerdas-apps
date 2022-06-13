@@ -27,13 +27,14 @@ const AccountCard = () => {
           style={styles.avatar}
         />
         <View>
-          <Title>Desa Pasir Ampo</Title>
-          <Text>Kresek, Tangerang</Text>
+          <Title style={{ fontWeight: 'bold' }}>Bambang Sudrajat</Title>
+          <Text>bambang.sudrajat@gmail.com</Text>
+          <Text>0812345678</Text>
         </View>
       </Row>
       <Separator style={{ marginVertical: 10 }} />
       <SpaceBetween>
-        <View>
+        <View style={{ flex: 1 }}>
           <Text>NIK: 100000000</Text>
           <Text>Tgl. Lahir: 100000000</Text>
         </View>
@@ -70,5 +71,5 @@ const styles = StyleSheet.create({
     width: 50,
     marginRight: 10,
   },
-  btnUpdate: { flex: 1, marginLeft: 40 },
+  btnUpdate: { width: 'auto', marginLeft: 40 },
 });

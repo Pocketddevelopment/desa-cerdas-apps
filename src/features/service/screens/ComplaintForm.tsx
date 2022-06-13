@@ -18,7 +18,7 @@ const ComplaintFormScreen: React.FC = () => {
 
   return (
     <Container>
-      <TextInput placeholder='Jenis Dokumen' maxLength={60} counter />
+      <TextInput placeholder='Jenis Dokumen' maxLength={30} counter />
       <TextInput
         placeholder='Deskripsi keluhan anda...'
         multiline={true}

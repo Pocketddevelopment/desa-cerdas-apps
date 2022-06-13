@@ -96,7 +96,7 @@ export default function DashboardStack() {
         name='Complaint'
         component={ComplaintScreen}
         options={{
-          title: 'Permohonan Surat / Dokumen',
+          title: 'Keluhan Warga',
         }}
       />
       <Stack.Screen
