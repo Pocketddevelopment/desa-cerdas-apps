@@ -10,7 +10,7 @@ import {
 declare global {
   namespace ReactNativePaper {
     interface ThemeColors {
-      // myOwnColor: string;
+      caption: string;
     }
 
     interface Theme {
@@ -38,6 +38,7 @@ export const CombinedDefaultTheme = {
     primary: '#D0342C',
     accent: '#F28418',
     background: '#FFFFFF',
+    caption: '#95989A',
   },
   myOwnProperty: true,
 };
@@ -50,6 +51,8 @@ export const CombinedDarkTheme = {
     ...NavigationDarkTheme.colors,
     primary: '#D0342C',
     accent: '#F28418',
+    background: '#000000',
+    caption: '#95989A',
   },
   myOwnProperty: true,
 };
