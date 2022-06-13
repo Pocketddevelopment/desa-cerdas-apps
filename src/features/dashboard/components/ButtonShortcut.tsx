@@ -1,24 +1,25 @@
 import onPressInterface from '@interfaces/Press.interface';
 import React from 'react';
-import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+import {
+  Image,
+  ImageSourcePropType,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { Text } from 'react-native-paper';
 
 interface ButtonShortcutProps {
-  uri: string;
+  icon: ImageSourcePropType;
   title: string;
   onPress: onPressInterface;
 }
 
-const ButtonShortcut = ({ uri, title, onPress }: ButtonShortcutProps) => {
+const ButtonShortcut = ({ icon, title, onPress }: ButtonShortcutProps) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.btnContainer}>
       <View style={styles.btnCard}>
-        <Image
-          style={styles.iconImage}
-          source={{
-            uri: uri,
-          }}
-        />
+        <Image style={styles.iconImage} source={icon} />
       </View>
       <Text>{title}</Text>
     </TouchableOpacity>
@@ -33,7 +34,7 @@ const styles = StyleSheet.create({
   },
   btnCard: {
     backgroundColor: 'white',
-    elevation: 10,
+    elevation: 5,
     shadowOffset: {
       height: 5,
       width: 5,
@@ -44,13 +45,13 @@ const styles = StyleSheet.create({
     padding: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    height: 40,
-    width: 40,
+    height: 45,
+    width: 45,
     marginBottom: 5,
   },
   iconImage: {
-    height: 30,
-    width: 30,
+    height: 20,
+    width: 20,
     resizeMode: 'contain',
   },
 });

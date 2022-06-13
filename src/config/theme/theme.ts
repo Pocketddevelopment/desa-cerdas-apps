@@ -11,6 +11,7 @@ declare global {
   namespace ReactNativePaper {
     interface ThemeColors {
       caption: string;
+      separator: string;
     }
 
     interface Theme {
@@ -39,6 +40,7 @@ export const CombinedDefaultTheme = {
     accent: '#F28418',
     background: '#FFFFFF',
     caption: '#95989A',
+    separator: '#E3E3E3',
   },
   myOwnProperty: true,
 };
@@ -53,6 +55,7 @@ export const CombinedDarkTheme = {
     accent: '#F28418',
     background: '#000000',
     caption: '#95989A',
+    separator: '#E3E3E3',
   },
   myOwnProperty: true,
 };

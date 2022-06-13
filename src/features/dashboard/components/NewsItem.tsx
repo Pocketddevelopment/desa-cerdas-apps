@@ -25,7 +25,9 @@ const NewsItem = () => {
           <Title numberOfLines={1} color={theme.colors.primary}>
             Himbauan vaksinasi booster dalam
           </Title>
-          <Text>Perjuangan pemutusan rantai penularan C...</Text>
+          <Text numberOfLines={1}>
+            Perjuangan pemutusan rantai penularan C...
+          </Text>
         </View>
       </Row>
     </TouchableOpacity>
@@ -36,12 +38,13 @@ export default NewsItem;
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 5,
     paddingVertical: 10,
   },
   image: {
     height: 70,
     width: 70,
+    borderRadius: 10,
+    resizeMode: 'contain',
     marginRight: 10,
   },
 });

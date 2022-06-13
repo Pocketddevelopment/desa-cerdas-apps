@@ -1,6 +1,8 @@
 import Row from '@components/Row';
 import Separator from '@components/Separator';
 import SpaceBetween from '@components/SpaceBetween';
+import { Text, Title } from '@components/typography';
+import SectionTitle from '@components/typography/SectionTitle';
 import DeviceContants from '@constants/device';
 import DistrictCard from '@dashboard/components/DistrictCard';
 import NewsItem from '@dashboard/components/NewsItem';
@@ -8,7 +10,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { Avatar, IconButton, Text, Title } from 'react-native-paper';
+import { Avatar, IconButton } from 'react-native-paper';
 import { DashboardStackParamList } from '..';
 
 const HomeScreen: React.FC = () => {
@@ -29,9 +31,9 @@ const HomeScreen: React.FC = () => {
             </View>
           </Row>
           <IconButton
-            icon={'bell'}
+            icon={require('@assets/notification/bell.webp')}
             color={'white'}
-            size={20}
+            size={30}
             onPress={() => navigation.navigate('NotificationList')}
           />
         </SpaceBetween>
@@ -45,21 +47,11 @@ const HomeScreen: React.FC = () => {
           <DistrictCard />
         </View>
         <View style={styles.body}>
-          <Title>Berita Terkini</Title>
+          <SectionTitle>Berita Terkini</SectionTitle>
           <NewsItem />
-          <Separator />
+          <Separator width={'90%'} />
           <NewsItem />
-          <Separator />
-          <NewsItem />
-          <Separator />
-          <NewsItem />
-          <Separator />
-          <NewsItem />
-          <Separator />
-          <NewsItem />
-          <Separator />
-          <NewsItem />
-          <Separator />
+          <Separator width={'90%'} />
           <NewsItem />
         </View>
       </ScrollView>
@@ -76,7 +68,8 @@ const styles = StyleSheet.create({
   profileContainer: {
     backgroundColor: 'red',
     padding: 20,
-    paddingHorizontal: 40,
+    paddingHorizontal: 30,
+    paddingRight: 20,
   },
   profileDetail: {
     marginLeft: 10,
@@ -85,7 +78,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   body: {
-    paddingHorizontal: 10,
+    paddingHorizontal: 25,
   },
   upperAbsolute: {
     height: 40,

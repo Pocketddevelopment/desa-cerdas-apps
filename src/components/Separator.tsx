@@ -19,7 +19,7 @@ const Separator = ({ style, width, height, color }: SeparatorProps) => {
         {
           width: width ? width : '100%',
           height: height ? height : 1,
-          backgroundColor: color ? color : theme.colors.primary,
+          backgroundColor: color ? color : theme.colors.separator,
         },
         {},
       ]}
