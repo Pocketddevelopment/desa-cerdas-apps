@@ -45,6 +45,8 @@ export default function AuthenticationStack() {
         options={{
           headerTransparent: true,
           headerTitle: undefined,
+          title: '',
+          headerTintColor: 'white',
         }}
       />
     </Stack.Navigator>
