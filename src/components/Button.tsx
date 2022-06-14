@@ -5,6 +5,7 @@ import Props from 'react-native-paper/lib/typescript/components/Button';
 
 type ButtonAdditionalProps = {
   primary: boolean;
+  btnStyle: ViewStyle;
 };
 
 type ButtonProps = React.ComponentProps<typeof Props> & ButtonAdditionalProps;
@@ -50,7 +51,8 @@ export default function Button(props: Partial<ButtonProps>) {
       color={theme.colors.accent}
       labelStyle={getLabelStyle}
       {...props}
-      style={[styles.container, getAdditionalStyle, props.style]}
+      style={props.btnStyle}
+      contentStyle={[styles.container, getAdditionalStyle, props.style]}
     />
   );
 }
