@@ -1,4 +1,6 @@
+import Dot from '@authentication/components/PaginationDot';
 import Button from '@components/Button';
+import { Text } from '@components/typography';
 import { CommonActions, useNavigation } from '@react-navigation/native';
 import React, { useRef, useState } from 'react';
 import {
@@ -8,21 +10,21 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import { Text, useTheme } from 'react-native-paper';
+import { useTheme } from 'react-native-paper';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 
 const data = [
   {
-    img: require('@assets/onboarding-1.webp'),
+    img: require('@assets/onboarding/slide-1.webp'),
     text: 'Cari tahu semua tentang desa Anda termasuk berita, statistik, wisata, dan lainnya',
   },
   {
-    img: require('@assets/onboarding-2.webp'),
-    text: 'Cari tahu semua tentang desa Anda termasuk berita, statistik, wisata, dan lainnya',
+    img: require('@assets/onboarding/slide-2.webp'),
+    text: 'Pantau perkembangan administrasi desa, progress laporan keluhan warga, serta UMKM di sekitar Anda',
   },
   {
-    img: require('@assets/onboarding-3.webp'),
-    text: 'Cari tahu semua tentang desa Anda termasuk berita, statistik, wisata, dan lainnya',
+    img: require('@assets/onboarding/slide-3.webp'),
+    text: 'Urus dokumen dan surat - menyurat cepat dan praktis, tanpa harus keluar dari rumah',
   },
 ];
 
@@ -56,12 +58,19 @@ const OnboardingScreen: React.FC = () => {
           activeDotIndex={activeIndex}
           dotsLength={data.length}
           containerStyle={styles.pagination}
-          dotStyle={styles.paginationDot}
+          dotStyle={{ margin: 0 }}
+          dotElement={<Dot isActive={index === activeIndex} />}
+          inactiveDotScale={1.5}
+          inactiveDotOpacity={1}
           dotColor={'transparent'}
           inactiveDotColor={'white'}
         />
-        <Text style={styles.onboadingDescription}>{item.text}</Text>
-        <Button onPress={onPressNextButton} style={styles.btnNext}>
+        <View style={styles.textContainer}>
+          <Text style={styles.onboardingDescription} size={18} color={'white'}>
+            {item.text}
+          </Text>
+        </View>
+        <Button onPress={onPressNextButton} btnStyle={styles.btnNext}>
           {activeIndex === data.length - 1 ? 'Mulai' : 'Lanjut'}
         </Button>
       </View>
@@ -74,7 +83,10 @@ const OnboardingScreen: React.FC = () => {
 
   return (
     <View style={[styles.container, { backgroundColor: theme.colors.primary }]}>
-      <ImageBackground source={require('@assets/onboarding-background.webp')} />
+      <ImageBackground
+        source={require('@assets/curve-background.svg')}
+        style={{ flex: 1, position: 'absolute' }}
+      />
       <Carousel
         ref={carouselRef}
         layout='default'
@@ -103,22 +115,27 @@ const styles = StyleSheet.create({
   itemContainer: {
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 30,
+    paddingHorizontal: 50,
   },
   pagination: {
     marginTop: 10,
   },
   paginationDot: {
-    borderColor: 'white',
-    borderWidth: 2,
-    borderRadius: 10,
-    opacity: 1,
     width: 20,
     height: 20,
+    borderRadius: 10,
+    marginHorizontal: 0,
+    borderColor: 'white',
   },
   paginationActiveDot: {
     backgroundColor: 'white',
   },
-  onboadingDescription: {
+  textContainer: {
+    height: 100,
+    alignItems: 'flex-start',
+  },
+  onboardingDescription: {
     textAlign: 'center',
   },
   btnNext: {
@@ -126,7 +143,7 @@ const styles = StyleSheet.create({
     width: '40%',
   },
   image: {
-    width: 200,
-    height: 200,
+    width: 250,
+    height: 250,
   },
 });

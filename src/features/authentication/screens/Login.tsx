@@ -1,16 +1,16 @@
+import { AuthContext } from '@@@/App';
+import Button from '@components/Button';
 import Input from '@components/Input';
 import Row from '@components/Row';
 import SpaceBetween from '@components/SpaceBetween';
 import DeviceContants from '@constants/device';
+import CheckBoxStatus from '@interfaces/enums/CheckBoxStatus.enum';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { AuthContext } from '@@@/App';
 import React, { useState } from 'react';
-import { Image, StyleSheet, View } from 'react-native';
-import { Checkbox, Text, ThemeProvider, useTheme } from 'react-native-paper';
+import { Image, ImageBackground, StyleSheet, View } from 'react-native';
+import { Checkbox, Text, useTheme } from 'react-native-paper';
 import { AuthenticationStackParamList } from '..';
-import CheckBoxStatus from '@interfaces/enums/CheckBoxStatus.enum';
-import Button from '@components/Button';
 
 const LoginScreen: React.FC = () => {
   const theme = useTheme();
@@ -36,50 +36,60 @@ const LoginScreen: React.FC = () => {
 
   return (
     <View style={[styles.container, { backgroundColor: theme.colors.primary }]}>
-      <Image
-        source={require('@assets/onboarding/biometric-icon.png')}
-        style={styles.logo}
-      />
-      <View style={styles.formLogin}>
-        <Input placeholder='Alamat surel / NIK' shadow={false} />
-        <SpaceBetween>
-          <Input
-            placeholder='Kata sandi'
-            containerStyle={{ flex: 1 }}
-            shadow={false}
-          />
-          <Button style={styles.btnLogin} onPress={onPressLogin}>
-            Masuk
-          </Button>
-        </SpaceBetween>
-        <SpaceBetween>
-          <Row>
-            <Checkbox
-              status={rememberMe}
-              color={theme.colors.background}
-              uncheckedColor={theme.colors.background}
-              onPress={onPressRemember}
+      <ImageBackground
+        style={styles.background}
+        resizeMode={'cover'}
+        source={require('@assets/onboarding/background-login.webp')}>
+        <Image
+          source={{
+            uri: 'http://majasari-cibogo.sideka.id/wp-content/uploads/sites/5085/2019/01/logo-desa-e1548663894269.png',
+          }}
+          style={styles.logo}
+        />
+        <View style={styles.formLogin}>
+          <Input placeholder='Email / NIK' shadow={false} />
+          <SpaceBetween>
+            <Input
+              placeholder='Password'
+              containerStyle={{ flex: 1 }}
+              shadow={false}
             />
-            <Text style={{ color: theme.colors.background }}>Ingat saya</Text>
-          </Row>
+            <Button
+              btnStyle={styles.btnLogin}
+              style={{ width: 'auto' }}
+              onPress={onPressLogin}>
+              Masuk
+            </Button>
+          </SpaceBetween>
+          <SpaceBetween>
+            <Row>
+              <Checkbox
+                status={rememberMe}
+                color={theme.colors.background}
+                uncheckedColor={theme.colors.background}
+                onPress={onPressRemember}
+              />
+              <Text style={{ color: theme.colors.background }}>Ingat saya</Text>
+            </Row>
+            <Text
+              style={[styles.forget, { color: theme.colors.background }]}
+              onPress={() => navigation.navigate('ForgetPassword')}>
+              Lupa password?
+            </Text>
+          </SpaceBetween>
+        </View>
+        <View style={styles.footer}>
+          <Image
+            source={require('@assets/onboarding/biometric-icon.png')}
+            style={styles.iconBiometric}
+          />
           <Text
             style={[styles.forget, { color: theme.colors.background }]}
-            onPress={() => navigation.navigate('ForgetPassword')}>
-            Lupa kata sandi?
+            onPress={() => navigation.navigate('Register')}>
+            Daftar akun baru
           </Text>
-        </SpaceBetween>
-      </View>
-      <View style={styles.footer}>
-        <Image
-          source={require('@assets/onboarding/biometric-icon.png')}
-          style={styles.iconBiometric}
-        />
-        <Text
-          style={{ color: theme.colors.background }}
-          onPress={() => navigation.navigate('Register')}>
-          Daftar akun baru
-        </Text>
-      </View>
+        </View>
+      </ImageBackground>
     </View>
   );
 };
@@ -89,8 +99,12 @@ export default LoginScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
+  },
+  background: {
+    flex: 1,
     justifyContent: 'center',
+    alignItems: 'center',
+    width: DeviceContants.screenWidth,
   },
   formLogin: {
     marginVertical: 40,
@@ -100,7 +114,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   logo: {
-    height: 150,
+    height: 200,
+    aspectRatio: 1,
     resizeMode: 'contain',
     marginBottom: 30,
   },
