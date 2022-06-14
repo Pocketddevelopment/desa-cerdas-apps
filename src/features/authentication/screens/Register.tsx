@@ -18,30 +18,28 @@ const RegisterScreen: React.FC = () => {
 
   return (
     <Container>
-      <View style={styles.container}>
-        {step === 0 && (
-          <View style={styles.form}>
-            <Input placeholder='NIK e-KTP' />
-            <Input placeholder='Nama lengkap sesuai e-KTP' />
-            <Input
-              placeholder='Tanggal Lahir'
-              editable={false}
-              suffixIcon={'chevron-right'}
-            />
-          </View>
-        )}
-        {step === 1 && (
-          <View style={styles.form}>
-            <Input placeholder='Email' />
-            <Input placeholder='Nomor Telepon' />
-            <Input placeholder='Password' suffixIcon='eye' />
-            <Input placeholder='Konfirmasi Password' suffixIcon='eye' />
-          </View>
-        )}
-        <Button onPress={onPressNext}>
-          {step === 1 ? 'Buat Akun' : 'Lanjut'}
-        </Button>
-      </View>
+      {step === 0 && (
+        <View style={styles.form}>
+          <Input placeholder='NIK e-KTP' />
+          <Input placeholder='Nama lengkap sesuai e-KTP' />
+          <Input
+            placeholder='Tanggal Lahir'
+            editable={false}
+            suffixIcon={'chevron-right'}
+          />
+        </View>
+      )}
+      {step === 1 && (
+        <View style={styles.form}>
+          <Input placeholder='Email' />
+          <Input placeholder='Nomor Telepon' />
+          <Input placeholder='Password' suffixIcon='eye' />
+          <Input placeholder='Konfirmasi Password' suffixIcon='eye' />
+        </View>
+      )}
+      <Button btnStyle={{ width: '100%' }} onPress={onPressNext}>
+        {step === 1 ? 'Buat Akun' : 'Lanjut'}
+      </Button>
     </Container>
   );
 };
@@ -49,10 +47,8 @@ const RegisterScreen: React.FC = () => {
 export default RegisterScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    margin: 20,
-  },
   form: {
+    width: '100%',
     marginBottom: 30,
   },
 });
