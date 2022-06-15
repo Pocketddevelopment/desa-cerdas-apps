@@ -19,20 +19,20 @@ const NotificationListScreen: React.FC = () => {
         title='Ada balasan atas keluhan Anda'
         read={false}
       />
-      <Separator />
+      <Separator width={'85%'} />
       <NotificationItem
         date='Selasa, 12 Maret 2022'
         description='Lorem ipsum dolor sit amet, consetetur sadipscing…Lorem ipsum dolor sit amet, consetetur sadipscing…'
         title='Ada balasan atas keluhan Anda'
         read={false}
       />
-      <Separator />
+      <Separator width={'85%'} />
       <NotificationItem
         date='Selasa, 12 Maret 2022'
         description='Lorem ipsum dolor sit amet, consetetur sadipscing…Lorem ipsum dolor sit amet, consetetur sadipscing…'
         title='Ada balasan atas keluhan Anda'
       />
-      <Separator />
+      <Separator width={'85%'} />
     </ScrollView>
   );
 };
