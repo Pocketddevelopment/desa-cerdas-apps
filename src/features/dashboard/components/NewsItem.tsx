@@ -22,7 +22,7 @@ const NewsItem = () => {
         />
         <View style={{ flex: 1 }}>
           <Caption>Selasa, 12 Maret 2022</Caption>
-          <Title numberOfLines={1} color={theme.colors.primary}>
+          <Title numberOfLines={1} size={16} color={theme.colors.primary}>
             Himbauan vaksinasi booster dalam
           </Title>
           <Text numberOfLines={1}>

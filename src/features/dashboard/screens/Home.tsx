@@ -10,15 +10,20 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { Avatar, IconButton } from 'react-native-paper';
+import { Avatar, IconButton, useTheme } from 'react-native-paper';
 import { DashboardStackParamList } from '..';
 
 const HomeScreen: React.FC = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<DashboardStackParamList>>();
+  const theme = useTheme();
   return (
     <View style={styles.container}>
-      <View style={styles.profileContainer}>
+      <View
+        style={[
+          styles.profileContainer,
+          { backgroundColor: theme.colors.primary },
+        ]}>
         <SpaceBetween>
           <Row>
             <Avatar.Image
@@ -26,8 +31,10 @@ const HomeScreen: React.FC = () => {
               source={{ uri: 'https://www.w3schools.com/howto/img_avatar.png' }}
             />
             <View style={styles.profileDetail}>
-              <Text>Selamat Datang,</Text>
-              <Title>Bambang Sudrajat</Title>
+              <Text color={theme.colors.background}>Selamat Datang,</Text>
+              <Title color={theme.colors.background} style={styles.name}>
+                Bambang Sudrajat
+              </Title>
             </View>
           </Row>
           <IconButton
@@ -66,7 +73,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   profileContainer: {
-    backgroundColor: 'red',
     padding: 20,
     paddingHorizontal: 30,
     paddingRight: 20,
@@ -78,6 +84,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   body: {
+    paddingTop: 10,
     paddingHorizontal: 25,
   },
   upperAbsolute: {
@@ -85,6 +92,7 @@ const styles = StyleSheet.create({
     width: DeviceContants.screenWidth,
     backgroundColor: 'red',
   },
+  name: { letterSpacing: 0.5 },
   districtCardContainer: {
     height: 200,
     alignItems: 'center',

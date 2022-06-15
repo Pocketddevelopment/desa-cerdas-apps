@@ -1,3 +1,4 @@
+import { Text } from '@components/typography';
 import onPressInterface from '@interfaces/Press.interface';
 import React from 'react';
 import {
@@ -7,7 +8,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { Text } from 'react-native-paper';
 
 interface ButtonShortcutProps {
   icon: ImageSourcePropType;
@@ -21,7 +21,7 @@ const ButtonShortcut = ({ icon, title, onPress }: ButtonShortcutProps) => {
       <View style={styles.btnCard}>
         <Image style={styles.iconImage} source={icon} />
       </View>
-      <Text>{title}</Text>
+      <Text size={11}>{title}</Text>
     </TouchableOpacity>
   );
 };

@@ -30,7 +30,7 @@ const DistrictCard = () => {
           style={styles.image}
         />
         <View>
-          <Title>Desa Pasir Ampo</Title>
+          <Title size={17}>Desa Pasir Ampo</Title>
           <Text>Kresek, Tangerang</Text>
         </View>
       </Row>
