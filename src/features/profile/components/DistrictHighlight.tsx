@@ -1,15 +1,15 @@
 import Separator from '@components/Separator';
+import { Caption } from '@components/typography';
 import NewsItem from '@dashboard/components/NewsItem';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Caption } from 'react-native-paper';
 import ReportItem from '../../report/components/ReportItem';
 
 const DistrictHighlight = () => {
   return (
     <View style={styles.card}>
       <View style={styles.section}>
-        <Caption style={{ lineHeight: undefined }}>Event Kegiatan</Caption>
+        <Caption size={11}>Event Kegiatan</Caption>
         <NewsItem />
         <Separator color='lightgrey' />
         <NewsItem />
@@ -17,9 +17,7 @@ const DistrictHighlight = () => {
         <NewsItem />
       </View>
       <View style={styles.section}>
-        <Caption style={{ lineHeight: undefined }}>
-          Laporan Perkembangan
-        </Caption>
+        <Caption size={11}>Laporan Perkembangan</Caption>
         <ReportItem
           format='xlsx'
           date='Senin, 11 Maret 2022'

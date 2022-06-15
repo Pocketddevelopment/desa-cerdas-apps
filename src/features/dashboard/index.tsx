@@ -3,20 +3,15 @@ import AttractionDetailScreen from '@attraction/screens/AttractionDetail';
 import AttractionListScreen from '@attraction/screens/AttractionList';
 import SMEScreen from '@attraction/screens/SME';
 import SMEDetailScreen from '@attraction/screens/SMEDetail';
-import { Text } from '@components/typography';
-import {
-  BottomTabBar,
-  BottomTabBarButtonProps,
-  createBottomTabNavigator,
-} from '@react-navigation/bottom-tabs';
-import { getTabBarHeight } from '@react-navigation/bottom-tabs/lib/typescript/src/views/BottomTabBar';
+import ImagePreviewModal from '@components/ImagePreview';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ComplaintScreen from '@service/screens/Complaint';
 import ComplaintDetail from '@service/screens/ComplaintDetail';
 import ComplaintFormScreen from '@service/screens/ComplaintForm';
 import DocumentHistoryScreen from '@service/screens/DocumentHistory';
 import React, { useState } from 'react';
-import { Image, TouchableOpacity, View } from 'react-native';
+import { Image, TouchableOpacity } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import NewsDetailScreen from '../news/screens/NewsDetail';
 import NotificationListScreen from '../notification/screens/NotificationList';
@@ -193,6 +188,20 @@ export default function DashboardStack() {
           title: 'Profil Desa',
         }}
       />
+      <Stack.Group
+        screenOptions={{
+          presentation: 'transparentModal',
+          headerShown: false,
+          contentStyle: {
+            backgroundColor: 'rgba(0,0,0,.6)',
+          },
+        }}>
+        <Stack.Screen
+          name='ImagePreview'
+          component={ImagePreviewModal}
+          options={{}}
+        />
+      </Stack.Group>
     </Stack.Navigator>
   );
 }
@@ -220,4 +229,6 @@ export type DashboardStackParamList = {
   AttractionList: Object | undefined;
   AttractionDetail: Object | undefined;
   Profile: Object | undefined;
+
+  ImagePreview: Object | undefined;
 };
