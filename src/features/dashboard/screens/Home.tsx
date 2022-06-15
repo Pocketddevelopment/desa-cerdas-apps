@@ -26,9 +26,12 @@ const HomeScreen: React.FC = () => {
         ]}>
         <SpaceBetween>
           <Row>
-            <Avatar.Image
+            <Avatar.Text
               size={48}
-              source={{ uri: 'https://www.w3schools.com/howto/img_avatar.png' }}
+              label='B'
+              color={theme.colors.text}
+              labelStyle={{ fontWeight: '700', fontSize: 20 }}
+              style={{ backgroundColor: '#FFEBEB' }}
             />
             <View style={styles.profileDetail}>
               <Text color={theme.colors.background}>Selamat Datang,</Text>
@@ -50,7 +53,12 @@ const HomeScreen: React.FC = () => {
         contentContainerStyle={styles.scrollBody}
         showsVerticalScrollIndicator={false}>
         <View style={styles.districtCardContainer}>
-          <View style={styles.upperAbsolute} />
+          <View
+            style={[
+              styles.upperAbsolute,
+              { backgroundColor: theme.colors.primary },
+            ]}
+          />
           <DistrictCard />
         </View>
         <View style={styles.body}>
@@ -90,7 +98,6 @@ const styles = StyleSheet.create({
   upperAbsolute: {
     height: 40,
     width: DeviceContants.screenWidth,
-    backgroundColor: 'red',
   },
   name: { letterSpacing: 0.5 },
   districtCardContainer: {
