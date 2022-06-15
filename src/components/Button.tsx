@@ -14,13 +14,14 @@ export default function Button(props: Partial<ButtonProps>) {
   const theme = useTheme();
 
   const { mode, primary } = props;
-  let color = theme.colors.background;
+  let mainColor = theme.colors.accent;
 
   const getLabelStyle = React.useMemo(() => {
     let color = theme.colors.background;
     if (mode === 'outlined') {
       if (primary) {
         color = theme.colors.primary;
+        mainColor = theme.colors.primary;
       } else {
         color = theme.colors.accent;
       }
@@ -48,7 +49,7 @@ export default function Button(props: Partial<ButtonProps>) {
     <PaperButton
       mode='contained'
       uppercase={false}
-      color={theme.colors.accent}
+      color={mainColor}
       labelStyle={getLabelStyle}
       {...props}
       style={props.btnStyle}
