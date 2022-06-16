@@ -26,31 +26,31 @@ const AccountScreen: React.FC = () => {
           style={styles.body}
           contentContainerStyle={styles.bodyContainer}>
           <ScrollItem
-            icon='lock-open-outline'
+            icon={require('@assets/account/password.webp')}
             title='Ganti Password'
             onPress={() => onPressItem('UpdatePassword')}
           />
           <Separator />
           <ScrollItem
-            icon='file-document-outline'
+            icon={require('@assets/account/tnc.webp')}
             title='Syarat dan Ketentuan'
             onPress={() => onPressItem('UpdatePassword')}
           />
           <Separator />
           <ScrollItem
-            icon='shield-check-outline'
+            icon={require('@assets/account/tnc.webp')}
             title='Kebijakan Privasi'
             onPress={() => onPressItem('UpdatePassword')}
           />
           <Separator />
           <ScrollItem
-            icon='comment-question-outline'
+            icon={require('@assets/account/tnc.webp')}
             title='Tentang Desa Cerdas'
             onPress={() => onPressItem('UpdatePassword')}
           />
           <Separator />
           <ScrollItem
-            icon='logout'
+            icon={require('@assets/account/tnc.webp')}
             title='Keluar dari Akun'
             textStyle={{ color: 'red' }}
             onPress={() => onPressItem('UpdatePassword')}

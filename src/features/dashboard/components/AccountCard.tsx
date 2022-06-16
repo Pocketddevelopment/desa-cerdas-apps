@@ -7,12 +7,13 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Avatar, Text, Title } from 'react-native-paper';
+import { Avatar, Text, Title, useTheme } from 'react-native-paper';
 import { DashboardStackParamList } from '..';
 
 const AccountCard = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<DashboardStackParamList>>();
+  const theme = useTheme();
 
   const onPressUpdate = () => {
     navigation.navigate('UpdateAccount');
@@ -20,11 +21,13 @@ const AccountCard = () => {
 
   return (
     <View style={styles.card}>
-      <Row>
-        <Avatar.Image
+      <Row style={{ alignItems: 'flex-start' }}>
+        <Avatar.Text
           size={48}
-          source={{ uri: 'https://www.w3schools.com/howto/img_avatar.png' }}
-          style={styles.avatar}
+          label='B'
+          color={theme.colors.text}
+          labelStyle={{ fontWeight: '700', fontSize: 20 }}
+          style={{ backgroundColor: '#FFEBEB', marginRight: 10, marginTop: 5 }}
         />
         <View>
           <Title style={{ fontWeight: 'bold' }}>Bambang Sudrajat</Title>
