@@ -6,7 +6,7 @@ import type Props from 'react-native-paper/lib/typescript/components/Typography/
 type TextProps = {
   color?: string;
   size?: number;
-  children: JSX.Element | JSX.Element[] | string;
+  children: JSX.Element | JSX.Element[] | string | any;
   thickness?:
     | 'normal'
     | 'bold'

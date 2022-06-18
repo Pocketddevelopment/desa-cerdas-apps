@@ -40,12 +40,14 @@ export default function TextInput(
         editable={props.suffixIcon ? false : true}
         {...props}
         right={rightIcon}
-        style={newStyles}
+        style={[newStyles, props.style]}
         onChangeText={(value: string) => setText(value)}
       />
-      {counter && (
-        <HelperText type='info' style={styles.counter}>
-          {text.length}/{props.maxLength}
+      {counter && props.maxLength && (
+        <HelperText
+          type={text.length > props.maxLength ? 'error' : 'info'}
+          style={styles.counter}>
+          {text.length} / {props.maxLength}
         </HelperText>
       )}
     </View>
@@ -65,7 +67,7 @@ const styles = StyleSheet.create({
     paddingVertical: 2,
   },
   shadow: {
-    elevation: 10,
+    elevation: 5,
     shadowOffset: {
       height: 5,
       width: 5,
