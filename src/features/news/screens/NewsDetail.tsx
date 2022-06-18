@@ -19,9 +19,10 @@ const NewsDetailScreen: React.FC = () => {
   const onSnapItem = (index: number) => {
     setActiveIndex(index);
   };
+
   const renderCarouselItem = ({ item, index }: any) => {
     return (
-      <>
+      <View style={styles.carouselContainer}>
         <Image source={{ uri: item }} style={styles.image} />
         <Pagination
           activeDotIndex={activeIndex}
@@ -37,7 +38,7 @@ const NewsDetailScreen: React.FC = () => {
           dotColor={'white'}
           inactiveDotColor={'white'}
         />
-      </>
+      </View>
     );
   };
   return (
@@ -46,9 +47,10 @@ const NewsDetailScreen: React.FC = () => {
       contentContainerStyle={styles.bodyContainer}>
       <Carousel
         layout='default'
+        initialScrollIndex={activeIndex}
         data={data}
+        onSnapToItem={onSnapItem}
         renderItem={renderCarouselItem}
-        layoutCardOffset={9}
         sliderWidth={DeviceContants.screenWidth}
         itemWidth={DeviceContants.screenWidth}
         snapToAlignment={'center'}
@@ -103,6 +105,9 @@ const styles = StyleSheet.create({
   pagination: {
     position: 'absolute',
     bottom: -15,
+  },
+  carouselContainer: {
+    height: 250,
   },
   image: {
     flex: 1,
