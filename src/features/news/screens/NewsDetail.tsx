@@ -1,21 +1,43 @@
+import Dot from '@components/pagination/PaginationDot';
+import { Caption, Text, Title } from '@components/typography';
 import DeviceContants from '@constants/device';
-import React from 'react';
+import React, { useState } from 'react';
 import { ScrollView, StyleSheet, View, Image } from 'react-native';
-import { Caption, Text, Title } from 'react-native-paper';
+import { useTheme } from 'react-native-paper';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 
 const data: string[] = [
-  'https://static.vecteezy.com/system/resources/previews/003/355/926/non_2x/business-banner-design-with-blue-wave-background-free-vector.jpg',
-  'https://static.vecteezy.com/system/resources/previews/003/355/926/non_2x/business-banner-design-with-blue-wave-background-free-vector.jpg',
-  'https://static.vecteezy.com/system/resources/previews/003/355/926/non_2x/business-banner-design-with-blue-wave-background-free-vector.jpg',
+  'https://img.freepik.com/free-photo/big-hamburger-with-double-beef-french-fries_252907-8.jpg?w=2000',
+  'https://img.freepik.com/free-photo/big-hamburger-with-double-beef-french-fries_252907-8.jpg?w=2000',
+  'https://img.freepik.com/free-photo/big-hamburger-with-double-beef-french-fries_252907-8.jpg?w=2000',
 ];
 
 const NewsDetailScreen: React.FC = () => {
+  const theme = useTheme();
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+
+  const onSnapItem = (index: number) => {
+    setActiveIndex(index);
+  };
   const renderCarouselItem = ({ item, index }: any) => {
     return (
-      <View key={index}>
+      <>
         <Image source={{ uri: item }} style={styles.image} />
-      </View>
+        <Pagination
+          activeDotIndex={activeIndex}
+          dotsLength={data.length}
+          dotStyle={{ margin: 0 }}
+          containerStyle={[
+            styles.pagination,
+            { left: DeviceContants.screenWidth / 2 - data.length * 16 },
+          ]}
+          dotElement={<Dot color={theme.colors.primary} />}
+          inactiveDotScale={1.5}
+          inactiveDotOpacity={1}
+          dotColor={'white'}
+          inactiveDotColor={'white'}
+        />
+      </>
     );
   };
   return (
@@ -33,7 +55,10 @@ const NewsDetailScreen: React.FC = () => {
       />
       <View style={styles.contentContainer}>
         <Caption>Selasa, 12 Maret 2022</Caption>
-        <Title style={{ marginBottom: 20 }}>
+        <Title
+          style={{ marginVertical: 10 }}
+          size={20}
+          color={theme.colors.primary}>
           Himbauan vaksinasi booster dalam rangka mempercepat ketahanan Covid19
           nasional
         </Title>
@@ -73,23 +98,18 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   contentContainer: {
-    paddingHorizontal: 20,
+    padding: 20,
   },
   pagination: {
-    marginTop: 10,
-  },
-  paginationDot: {
-    borderColor: 'white',
-    borderWidth: 2,
-    borderRadius: 10,
-    opacity: 1,
-    width: 20,
-    height: 20,
+    position: 'absolute',
+    bottom: -15,
   },
   image: {
     flex: 1,
-    aspectRatio: 1.5,
-    resizeMode: 'contain',
+    height: 250,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    resizeMode: 'cover',
   },
   itemContainer: {
     alignItems: 'center',
