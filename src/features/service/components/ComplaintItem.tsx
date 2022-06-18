@@ -3,9 +3,10 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
-import { Caption, Text, Title, useTheme } from 'react-native-paper';
+import { useTheme } from 'react-native-paper';
 import { DashboardStackParamList } from '@dashboard/index';
 import SpaceBetween from '@components/SpaceBetween';
+import { Caption, Text, Title } from '@components/typography';
 
 type ComplaintItemProps = {
   date: string;
@@ -35,11 +36,9 @@ const ComplaintItem = ({
           style={styles.image}
         />
         <View style={{ flex: 1 }}>
-          <SpaceBetween>
+          <SpaceBetween style={{ marginBottom: 3 }}>
             <Caption>{date}</Caption>
-            <Caption style={{ color: theme.colors.primary }}>
-              ({count} respon)
-            </Caption>
+            <Caption color={theme.colors.primary}>({count} respon)</Caption>
           </SpaceBetween>
           <Title
             numberOfLines={1}
@@ -57,7 +56,6 @@ export default ComplaintItem;
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 20,
     paddingVertical: 10,
   },
   title: {

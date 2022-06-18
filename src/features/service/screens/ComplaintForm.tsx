@@ -1,16 +1,18 @@
 import Button from '@components/Button';
 import Container from '@components/Container';
 import TextInput from '@components/Input';
+import SectionTitle from '@components/typography/SectionTitle';
 import { DashboardStackParamList } from '@dashboard/index';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 import { Image, ScrollView, StyleSheet, View } from 'react-native';
-import { Text } from 'react-native-paper';
+import { IconButton, useTheme } from 'react-native-paper';
 
 const ComplaintFormScreen: React.FC = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<DashboardStackParamList>>();
+  const theme = useTheme();
 
   const onPressCreate = () => {
     navigation.goBack();
@@ -18,45 +20,47 @@ const ComplaintFormScreen: React.FC = () => {
 
   return (
     <Container>
-      <TextInput placeholder='Jenis Dokumen' maxLength={30} counter />
+      <TextInput placeholder='Jenis Laporan Keluhan' maxLength={30} counter />
       <TextInput
         placeholder='Deskripsi keluhan anda...'
         multiline={true}
         numberOfLines={5}
         textAlignVertical='top'
-        style={{ minHeight: 150 }}
+        style={{ minHeight: 150, maxHeight: 200, paddingVertical: 10 }}
         counter
         maxLength={280}
       />
       <View style={styles.attachmentSection}>
-        <Text style={styles.sectionTitle}>Foto Pendukung</Text>
+        <SectionTitle>Foto Pendukung</SectionTitle>
         <ScrollView
           horizontal
           contentContainerStyle={styles.attachmentThumbnailContainer}>
-          <Image
-            source={{
-              uri: 'https://4.img-dpreview.com/files/p/E~TS590x0~articles/3925134721/0266554465.jpeg',
-            }}
-            style={styles.attachmentThumbnail}
-          />
-          <Image
-            source={{
-              uri: 'https://4.img-dpreview.com/files/p/E~TS590x0~articles/3925134721/0266554465.jpeg',
-            }}
-            style={styles.attachmentThumbnail}
-          />
-          <Image
-            source={{
-              uri: 'https://4.img-dpreview.com/files/p/E~TS590x0~articles/3925134721/0266554465.jpeg',
-            }}
-            style={styles.attachmentThumbnail}
-          />
+          {[0, 1, 2].map((e, i) => {
+            return (
+              <View key={i}>
+                <Image
+                  source={{
+                    uri: 'https://4.img-dpreview.com/files/p/E~TS590x0~articles/3925134721/0266554465.jpeg',
+                  }}
+                  style={styles.attachmentThumbnail}
+                />
+                <IconButton
+                  size={18}
+                  icon={'close-circle'}
+                  color={theme.colors.primary}
+                  style={styles.btnAttachmentCancel}
+                />
+              </View>
+            );
+          })}
         </ScrollView>
         <Button mode='outlined' primary>
           Tambah Foto (Maks. 5 foto, total 10MB)
         </Button>
       </View>
-      <Button onPress={onPressCreate}>Buat Laporan</Button>
+      <Button onPress={onPressCreate} btnStyle={{ width: '100%' }}>
+        Buat Laporan
+      </Button>
     </Container>
   );
 };
@@ -68,8 +72,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   attachmentSection: {
-    marginVertical: 15,
-    marginBottom: 30,
+    marginVertical: 5,
+    marginBottom: 120,
     width: '100%',
   },
   attachmentThumbnail: {
@@ -78,6 +82,12 @@ const styles = StyleSheet.create({
     marginRight: 10,
     borderRadius: 10,
     resizeMode: 'contain',
+  },
+  btnAttachmentCancel: {
+    position: 'absolute',
+    top: -4,
+    right: 2,
+    zIndex: 1,
   },
   attachmentThumbnailContainer: {
     marginVertical: 10,

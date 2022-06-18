@@ -1,10 +1,10 @@
 import Container from '@components/Container';
+import { Text } from '@components/typography';
 import { DashboardStackParamList } from '@dashboard/index';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Text } from 'react-native-paper';
 import ServiceCard from '../components/ServiceCard';
 
 const ServiceScreen: React.FC = () => {
@@ -33,6 +33,7 @@ const ServiceScreen: React.FC = () => {
       />
       <Text
         style={styles.history}
+        size={18}
         onPress={() => onPressCard('DocumentHistory')}>
         Lihat Riwayat Surat / Dokumen
       </Text>

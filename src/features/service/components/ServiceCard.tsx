@@ -1,9 +1,9 @@
 import Separator from '@components/Separator';
+import { Caption, Title } from '@components/typography';
 import DeviceContants from '@constants/device';
 import onPressInterface from '@interfaces/Press.interface';
 import React from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { Caption, Title } from 'react-native-paper';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 
 type ServiceCardProps = {
   title: string;
@@ -14,20 +14,15 @@ type ServiceCardProps = {
 const ServiceCard = ({ title, description, onPress }: ServiceCardProps) => {
   return (
     <TouchableOpacity style={styles.card} onPress={onPress}>
-      <Title
-        style={{
-          textAlign: 'center',
-          fontWeight: 'bold',
-          lineHeight: undefined,
-        }}>
-        {title}
-      </Title>
+      <Title style={{ textAlign: 'center' }}>{title}</Title>
       <Separator
         height={2}
         color={'lightgrey'}
-        style={{ marginVertical: 20 }}
+        style={{ marginVertical: 10 }}
       />
-      <Caption style={{ textAlign: 'center' }}>{description}</Caption>
+      <Caption size={14} style={{ textAlign: 'center' }}>
+        {description}
+      </Caption>
     </TouchableOpacity>
   );
 };

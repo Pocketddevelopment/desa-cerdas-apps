@@ -1,9 +1,9 @@
 import Button from '@components/Button';
 import Container from '@components/Container';
 import TextInput from '@components/Input';
+import SectionTitle from '@components/typography/SectionTitle';
 import React from 'react';
 import { KeyboardAvoidingView, ScrollView, View } from 'react-native';
-import { Text } from 'react-native-paper';
 
 const DocumentFormScreen: React.FC = ({ navigation }: any) => {
   const onPressRequest = () => {
@@ -16,9 +16,7 @@ const DocumentFormScreen: React.FC = ({ navigation }: any) => {
         <Container>
           <TextInput placeholder='Jenis Dokumen' suffixIcon='chevron-down' />
           <View style={{ width: '100%', marginTop: 10, marginBottom: 20 }}>
-            <Text style={{ fontWeight: 'bold', marginBottom: 5 }}>
-              Data-data yang diperlukan
-            </Text>
+            <SectionTitle>Data-data yang diperlukan</SectionTitle>
             <TextInput placeholder='Jenis Dokumen' />
             <TextInput placeholder='Jenis Dokumen' suffixIcon='chevron-down' />
             <TextInput placeholder='Jenis Dokumen' />
@@ -31,7 +29,9 @@ const DocumentFormScreen: React.FC = ({ navigation }: any) => {
               style={{ minHeight: 150 }}
             />
           </View>
-          <Button onPress={onPressRequest}>Cetak dan Unduh Dokumen</Button>
+          <Button onPress={onPressRequest} btnStyle={{ width: '100%' }}>
+            Cetak dan Unduh Dokumen
+          </Button>
         </Container>
       </KeyboardAvoidingView>
     </ScrollView>

@@ -1,11 +1,11 @@
 import Button from '@components/Button';
+import { Caption, Text } from '@components/typography';
 import DeviceContants from '@constants/device';
 import { DashboardStackParamList } from '@dashboard/index';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Caption, Text } from 'react-native-paper';
 
 const ComplaintCard = () => {
   const navigation =

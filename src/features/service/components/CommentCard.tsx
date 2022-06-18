@@ -1,8 +1,9 @@
 import Row from '@components/Row';
 import SpaceBetween from '@components/SpaceBetween';
+import { Caption, Text } from '@components/typography';
 import React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
-import { Caption, Text, useTheme } from 'react-native-paper';
+import { useTheme } from 'react-native-paper';
 
 type CommentCardProps = {
   thumbnailUri?: string;
@@ -25,7 +26,7 @@ const CommentCard = ({
 
   const ContentElement = (
     <View style={{ flex: 1 }}>
-      <Text>{content}</Text>
+      <Text size={16}>{content}</Text>
     </View>
   );
 
@@ -60,7 +61,9 @@ const CommentCard = ({
       style={[styles.card, { backgroundColor: isSelf ? '#FFF8E0' : 'white' }]}>
       {getLayout()}
       <View style={styles.footer}>
-        <Caption style={{ color: theme.colors.primary }}>{name}</Caption>
+        <Caption size={14} color={theme.colors.primary}>
+          {name}
+        </Caption>
         <Caption>
           {date} via {medium}
         </Caption>
@@ -81,7 +84,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     shadowOpacity: 0.5,
     shadowRadius: 5,
-    padding: 10,
+    padding: 8,
     width: 'auto',
     marginBottom: 15,
   },
@@ -93,7 +96,7 @@ const styles = StyleSheet.create({
   },
   footer: {
     alignItems: 'flex-end',
-    marginTop: 10,
+    marginTop: 5,
   },
   content: {
     alignItems: 'flex-start',

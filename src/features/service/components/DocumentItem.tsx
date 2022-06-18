@@ -1,7 +1,8 @@
 import Row from '@components/Row';
+import { Caption, Text, Title } from '@components/typography';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Caption, Title, useTheme } from 'react-native-paper';
+import { useTheme } from 'react-native-paper';
 
 interface ReportItemProps {
   format: string;
@@ -14,14 +15,16 @@ const DocumentItem = ({ format, date, title }: ReportItemProps) => {
   return (
     <View style={styles.container}>
       <Row>
-        <Title style={[styles.fileFormat, { color: theme.colors.primary }]}>
-          {format && format.toUpperCase()}
-        </Title>
-        <View style={{ flex: 1 }}>
-          <Caption>{date}</Caption>
-          <Title style={styles.title} numberOfLines={1}>
-            {title}
+        <View style={{ flex: 1.5 }}>
+          <Title
+            size={14}
+            style={[styles.fileFormat, { color: theme.colors.primary }]}>
+            {format && format.toUpperCase()}
           </Title>
+        </View>
+        <View style={{ flex: 8.5 }}>
+          <Caption size={11}>{date}</Caption>
+          <Text numberOfLines={1}>{title}</Text>
         </View>
       </Row>
     </View>
@@ -33,14 +36,14 @@ export default DocumentItem;
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 20,
-    paddingVertical: 10,
+    paddingVertical: 7,
   },
   title: {
     fontSize: 14,
+    lineHeight: undefined,
+    letterSpacing: 0,
   },
   fileFormat: {
-    fontSize: 14,
-    textAlign: 'center',
-    marginRight: 15,
+    textAlign: 'left',
   },
 });
