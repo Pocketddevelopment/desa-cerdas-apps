@@ -2,12 +2,13 @@ import Button from '@components/Button';
 import Row from '@components/Row';
 import Separator from '@components/Separator';
 import SpaceBetween from '@components/SpaceBetween';
+import { Text, Title } from '@components/typography';
 import DeviceContants from '@constants/device';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Avatar, Text, Title, useTheme } from 'react-native-paper';
+import { Avatar, useTheme } from 'react-native-paper';
 import { DashboardStackParamList } from '..';
 
 const AccountCard = () => {
@@ -30,7 +31,7 @@ const AccountCard = () => {
           style={{ backgroundColor: '#FFEBEB', marginRight: 10, marginTop: 5 }}
         />
         <View>
-          <Title style={{ fontWeight: 'bold' }}>Bambang Sudrajat</Title>
+          <Title>Bambang Sudrajat</Title>
           <Text>bambang.sudrajat@gmail.com</Text>
           <Text>0812345678</Text>
         </View>
@@ -38,8 +39,8 @@ const AccountCard = () => {
       <Separator style={{ marginVertical: 10 }} />
       <SpaceBetween>
         <View style={{ flex: 1 }}>
-          <Text>NIK: 100000000</Text>
-          <Text>Tgl. Lahir: 100000000</Text>
+          <Text size={16}>NIK: 301491109900003</Text>
+          <Text size={16}>Tgl. Lahir: 11-09-1990</Text>
         </View>
         <Button style={styles.btnUpdate} onPress={onPressUpdate}>
           Perbarui
@@ -74,5 +75,5 @@ const styles = StyleSheet.create({
     width: 50,
     marginRight: 10,
   },
-  btnUpdate: { width: 'auto', marginLeft: 40 },
+  btnUpdate: { width: 'auto' },
 });

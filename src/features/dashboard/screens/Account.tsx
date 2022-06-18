@@ -38,19 +38,19 @@ const AccountScreen: React.FC = () => {
           />
           <Separator />
           <ScrollItem
-            icon={require('@assets/account/tnc.webp')}
+            icon={require('@assets/account/pp.webp')}
             title='Kebijakan Privasi'
             onPress={() => onPressItem('UpdatePassword')}
           />
           <Separator />
           <ScrollItem
-            icon={require('@assets/account/tnc.webp')}
+            icon={require('@assets/account/about.webp')}
             title='Tentang Desa Cerdas'
             onPress={() => onPressItem('UpdatePassword')}
           />
           <Separator />
           <ScrollItem
-            icon={require('@assets/account/tnc.webp')}
+            icon={require('@assets/account/logout.webp')}
             title='Keluar dari Akun'
             textStyle={{ color: 'red' }}
             onPress={() => onPressItem('UpdatePassword')}
