@@ -1,9 +1,12 @@
 import Button from '@components/Button';
+import Dot from '@components/pagination/PaginationDot';
+import { Text, Title } from '@components/typography';
 import DeviceContants from '@constants/device';
-import React from 'react';
+import React, { useState } from 'react';
 import { ScrollView, StyleSheet, View, Image } from 'react-native';
-import { Caption, Text, Title } from 'react-native-paper';
-import Carousel from 'react-native-snap-carousel';
+import Share from 'react-native-share';
+import { useTheme } from 'react-native-paper';
+import Carousel, { Pagination } from 'react-native-snap-carousel';
 
 const data: string[] = [
   'https://img.freepik.com/free-photo/big-hamburger-with-double-beef-french-fries_252907-8.jpg?w=2000',
@@ -12,25 +15,62 @@ const data: string[] = [
 ];
 
 const SMEDetailScreen: React.FC = () => {
+  const theme = useTheme();
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+
+  const onSnapItem = (index: number) => {
+    setActiveIndex(index);
+  };
+
+  const onPressChat = async () => {
+    const shareOptions = {
+      title: 'Hubungi melalui Whatsapp',
+      message: 'Halo nama bisnis',
+      social: Share.Social.WHATSAPP,
+      whatsAppNumber: '6285224340019',
+    };
+    try {
+      await Share.shareSingle(shareOptions);
+    } catch (err) {
+      console.log('Anda tidak memilki aplikasi Whatsapp yang terpasang');
+    }
+  };
+
   const renderCarouselItem = ({ item, index }: any) => {
-    return <Image source={{ uri: item }} style={styles.image} />;
+    return (
+      <View style={styles.carouselContainer}>
+        <Image source={{ uri: item }} style={styles.image} />
+        <Pagination
+          activeDotIndex={activeIndex}
+          dotsLength={data.length}
+          dotStyle={{ margin: 0 }}
+          containerStyle={[
+            styles.pagination,
+            { left: DeviceContants.screenWidth / 2 - data.length * 16 },
+          ]}
+          dotElement={<Dot color={theme.colors.primary} />}
+          inactiveDotScale={1.5}
+          inactiveDotOpacity={1}
+          dotColor={'white'}
+          inactiveDotColor={'white'}
+        />
+      </View>
+    );
   };
   return (
-    <ScrollView
-      style={styles.container}
-      contentContainerStyle={styles.bodyContainer}>
+    <ScrollView style={styles.container}>
       <Carousel
         layout='default'
+        initialScrollIndex={activeIndex}
         data={data}
+        onSnapToItem={onSnapItem}
         renderItem={renderCarouselItem}
-        layoutCardOffset={9}
         sliderWidth={DeviceContants.screenWidth}
         itemWidth={DeviceContants.screenWidth}
-        contentContainerStyle={{ flexGrow: 0 }}
         snapToAlignment={'center'}
       />
       <View style={styles.contentContainer}>
-        <Button mode='outlined' primary>
+        <Button mode='outlined' primary onPress={onPressChat}>
           <Image
             source={{
               uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/2044px-WhatsApp.svg.png',
@@ -39,16 +79,23 @@ const SMEDetailScreen: React.FC = () => {
           />{' '}
           Hubungi via Whatsapp
         </Button>
-        <View style={styles.section}>
-          <Title style={styles.title}>Deskripsi</Title>
-          <Text>
-            Kulit lumpia cocok untuk dijadikan lumpia atau digoreng saja menjadi
-            camilan pangsit goreng. Satu plastik isi 500 lembar.
-          </Text>
-        </View>
-        <View style={styles.section}>
-          <Title style={styles.title}>Info Penjual</Title>
-          <Text>H. Slamet Barokah 08123456789</Text>
+        <View style={styles.sectionContainer}>
+          <View style={styles.section}>
+            <Title size={14} style={styles.title}>
+              Deskripsi
+            </Title>
+            <Text size={16}>
+              Kulit lumpia cocok untuk dijadikan lumpia atau digoreng saja
+              menjadi camilan pangsit goreng.{'\n\n'}Satu plastik isi 500
+              lembar.
+            </Text>
+          </View>
+          <View style={styles.section}>
+            <Title size={14} style={styles.title}>
+              Info Penjual
+            </Title>
+            <Text size={16}>H. Slamet Barokah{'\n'}08123456789</Text>
+          </View>
         </View>
       </View>
     </ScrollView>
@@ -70,35 +117,33 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   pagination: {
-    marginTop: 10,
-  },
-  paginationDot: {
-    borderColor: 'white',
-    borderWidth: 2,
-    borderRadius: 10,
-    opacity: 1,
-    width: 20,
-    height: 20,
+    position: 'absolute',
+    bottom: -15,
   },
   icon: {
     height: 20,
     width: 20,
   },
+  carouselContainer: {
+    height: 250,
+  },
   image: {
     flex: 1,
-    height: 10,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    resizeMode: 'cover',
   },
   itemContainer: {
     alignItems: 'center',
     justifyContent: 'center',
   },
+  sectionContainer: {
+    marginVertical: 5,
+  },
   section: {
     marginVertical: 10,
   },
   title: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    marginBottom: 10,
-    lineHeight: undefined,
+    marginBottom: 8,
   },
 });

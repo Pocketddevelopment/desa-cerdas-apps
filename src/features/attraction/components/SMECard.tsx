@@ -1,8 +1,8 @@
-import DeviceContants from '@constants/device';
+import { Text, Title } from '@components/typography';
 import onPressInterface from '@interfaces/Press.interface';
 import React from 'react';
 import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
-import { Text, Title, useTheme } from 'react-native-paper';
+import { useTheme } from 'react-native-paper';
 
 type SMECardProps = {
   thumbnailUri: string;
@@ -29,10 +29,12 @@ const SMECard = ({
         style={styles.img}
       />
       <View style={styles.content}>
-        <Title style={[styles.title, { color: theme.colors.primary }]}>
+        <Title color={theme.colors.primary} size={16}>
           {name}
         </Title>
-        <Text>{phone}</Text>
+        <Text size={15} style={styles.phone}>
+          {phone}
+        </Text>
         <Text>{seller}</Text>
       </View>
     </TouchableOpacity>
@@ -55,7 +57,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginHorizontal: 5,
     overflow: 'hidden',
-    marginBottom: 10,
+    marginBottom: 15,
   },
   content: {
     padding: 10,
@@ -66,10 +68,7 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
     center: true,
   },
-  title: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    lineHeight: undefined,
+  phone: {
     marginBottom: 5,
   },
 });
