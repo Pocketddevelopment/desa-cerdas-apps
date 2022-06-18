@@ -1,8 +1,9 @@
 import Row from '@components/Row';
+import { Text, Title } from '@components/typography';
 import onPressInterface from '@interfaces/Press.interface';
 import React from 'react';
 import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
-import { Paragraph, Title, useTheme } from 'react-native-paper';
+import { useTheme } from 'react-native-paper';
 
 type AttractionItemProps = {
   thumbnailUri: string;
@@ -21,7 +22,7 @@ const AttractionItem = ({
 
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
-      <Row>
+      <Row align='top'>
         <Image
           style={styles.image}
           source={{
@@ -29,10 +30,8 @@ const AttractionItem = ({
           }}
         />
         <View style={{ flex: 1 }}>
-          <Title style={[styles.title, { color: theme.colors.primary }]}>
-            {title}
-          </Title>
-          <Paragraph numberOfLines={2}>{description}</Paragraph>
+          <Title color={theme.colors.primary}>{title}</Title>
+          <Text numberOfLines={2}>{description}</Text>
         </View>
       </Row>
     </TouchableOpacity>

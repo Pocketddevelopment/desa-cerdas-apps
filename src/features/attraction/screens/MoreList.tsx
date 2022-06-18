@@ -1,14 +1,24 @@
 import AttractionItem from '@attraction/components/AttractionItem';
 import Separator from '@components/Separator';
 import { DashboardStackParamList } from '@dashboard/index';
-import { useNavigation } from '@react-navigation/native';
+import { RouteProp, useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 
-const AttractionListScreen: React.FC = () => {
-  const navigation =
-    useNavigation<NativeStackNavigationProp<DashboardStackParamList>>();
+type MoreListProps = {
+  navigation: NativeStackNavigationProp<DashboardStackParamList, any>;
+  route: RouteProp<any>;
+};
+
+const MoreListScreen: React.FC<MoreListProps> = ({ navigation, route }) => {
+  const target = route.params?.target;
+
+  useEffect(() => {
+    navigation.setOptions({
+      title: target === 'attraction' ? 'Destinasi Lokal' : 'Industri Kreatif',
+    });
+  }, target);
 
   const onPressItem = () => {
     navigation.navigate('AttractionDetail');
@@ -45,7 +55,7 @@ const AttractionListScreen: React.FC = () => {
   );
 };
 
-export default AttractionListScreen;
+export default MoreListScreen;
 
 const styles = StyleSheet.create({
   container: {

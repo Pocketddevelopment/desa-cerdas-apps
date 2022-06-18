@@ -1,12 +1,14 @@
 import AttractionItem from '@attraction/components/AttractionItem';
 import Separator from '@components/Separator';
 import SpaceBetween from '@components/SpaceBetween';
+import { Text } from '@components/typography';
+import SectionTitle from '@components/typography/SectionTitle';
 import { DashboardStackParamList } from '@dashboard/index';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { Text, useTheme } from 'react-native-paper';
+import { useTheme } from 'react-native-paper';
 
 const AttractionScreen: React.FC = () => {
   const theme = useTheme();
@@ -17,17 +19,23 @@ const AttractionScreen: React.FC = () => {
     navigation.navigate('AttractionDetail');
   };
 
+  const onPressMore = (target: string) => {
+    navigation.navigate('MoreList', {
+      target: target,
+    });
+  };
+
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
       contentContainerStyle={styles.container}>
       <View style={styles.section}>
         <SpaceBetween>
-          <Text style={styles.sectionTitle}>Destinasi Lokal</Text>
+          <SectionTitle>Destinasi Lokal</SectionTitle>
           <Text
-            style={{ color: theme.colors.primary }}
-            onPress={() => navigation.navigate('AttractionList')}>
-            Lihat Selengkapnya
+            color={theme.colors.primary}
+            onPress={() => onPressMore('attraction')}>
+            Lihat selengkapnya
           </Text>
         </SpaceBetween>
         <AttractionItem
@@ -58,9 +66,9 @@ const AttractionScreen: React.FC = () => {
         <SpaceBetween>
           <Text style={styles.sectionTitle}>Industri Kreatif</Text>
           <Text
-            style={{ color: theme.colors.primary }}
-            onPress={() => navigation.navigate('AttractionList')}>
-            Lihat Selengkapnya
+            color={theme.colors.primary}
+            onPress={() => onPressMore('industry')}>
+            Lihat selengkapnya
           </Text>
         </SpaceBetween>
         <AttractionItem

@@ -1,6 +1,7 @@
 import AttractionScreen from '@attraction/screens/Attraction';
 import AttractionDetailScreen from '@attraction/screens/AttractionDetail';
-import AttractionListScreen from '@attraction/screens/AttractionList';
+import MoreListScreen from '@attraction/screens/MoreList';
+import AttractionListScreen from '@attraction/screens/MoreList';
 import SMEScreen from '@attraction/screens/SME';
 import SMEDetailScreen from '@attraction/screens/SMEDetail';
 import ImagePreviewModal from '@components/ImagePreview';
@@ -176,7 +177,7 @@ export default function DashboardStack() {
           title: 'Wisata Desa',
         }}
       />
-      <Stack.Screen name='AttractionList' component={AttractionListScreen} />
+      <Stack.Screen name='MoreList' component={MoreListScreen} />
       <Stack.Screen
         name='AttractionDetail'
         component={AttractionDetailScreen}
@@ -226,7 +227,7 @@ export type DashboardStackParamList = {
   SME: Object | undefined;
   SMEDetail: Object | undefined;
   Attraction: Object | undefined;
-  AttractionList: Object | undefined;
+  MoreList: Object | undefined;
   AttractionDetail: Object | undefined;
   Profile: Object | undefined;
 
