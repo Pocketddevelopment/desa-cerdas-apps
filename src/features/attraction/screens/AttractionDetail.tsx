@@ -2,7 +2,10 @@ import Button from '@components/Button';
 import Dot from '@components/pagination/PaginationDot';
 import { Text } from '@components/typography';
 import DeviceContants from '@constants/device';
-import React, { useRef, useState } from 'react';
+import { DashboardStackParamList } from '@dashboard/index';
+import { RouteProp } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import React, { useEffect, useRef, useState } from 'react';
 import { Image, ScrollView, StyleSheet, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
@@ -13,16 +16,31 @@ const data: string[] = [
   'https://img.freepik.com/free-photo/big-hamburger-with-double-beef-french-fries_252907-8.jpg?w=2000',
 ];
 
-const AttractionDetailScreen: React.FC = () => {
+type AttractionDetailProps = {
+  navigation: NativeStackNavigationProp<DashboardStackParamList, any>;
+  route: RouteProp<any>;
+};
+
+const AttractionDetailScreen: React.FC<AttractionDetailProps> = ({
+  navigation,
+  route,
+}) => {
   const theme = useTheme();
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
   const onSnapItem = (index: number) => {
     setActiveIndex(index);
   };
+
+  useEffect(() => {
+    navigation.setOptions({
+      title: 'Curug Plered',
+    });
+  }, [navigation]);
+
   const renderCarouselItem = ({ item, index }: any) => {
     return (
-      <>
+      <View style={styles.carouselContainer}>
         <Image source={{ uri: item }} style={styles.image} />
         <Pagination
           activeDotIndex={activeIndex}
@@ -38,13 +56,11 @@ const AttractionDetailScreen: React.FC = () => {
           dotColor={'white'}
           inactiveDotColor={'white'}
         />
-      </>
+      </View>
     );
   };
   return (
-    <ScrollView
-      style={styles.container}
-      contentContainerStyle={styles.bodyContainer}>
+    <ScrollView style={styles.container}>
       <Carousel
         layout='default'
         initialScrollIndex={activeIndex}
@@ -117,9 +133,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  bodyContainer: {
-    flexGrow: 1,
-  },
   contentContainer: {
     paddingHorizontal: 20,
     marginTop: 30,
@@ -133,11 +146,15 @@ const styles = StyleSheet.create({
     height: 20,
     width: 20,
   },
+  carouselContainer: {
+    height: 250,
+  },
   image: {
     flex: 1,
     height: 250,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
+    resizeMode: 'cover',
   },
   itemContainer: {
     alignItems: 'center',

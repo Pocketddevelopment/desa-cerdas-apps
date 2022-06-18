@@ -18,7 +18,7 @@ const MoreListScreen: React.FC<MoreListProps> = ({ navigation, route }) => {
     navigation.setOptions({
       title: target === 'attraction' ? 'Destinasi Lokal' : 'Industri Kreatif',
     });
-  }, target);
+  }, [navigation, target]);
 
   const onPressItem = () => {
     navigation.navigate('AttractionDetail');
