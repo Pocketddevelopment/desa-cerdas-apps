@@ -1,6 +1,5 @@
 import Row from '@components/Row';
 import { Caption, Text, Title } from '@components/typography';
-import { format } from 'prettier';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
@@ -36,7 +35,7 @@ export default ReportItem;
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 10,
+    paddingHorizontal: 20,
     paddingVertical: 7,
   },
   title: {

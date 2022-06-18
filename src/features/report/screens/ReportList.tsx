@@ -12,16 +12,19 @@ const ReportListScreen: React.FC = () => {
   return (
     <ScrollView>
       <ReportItem
+        format='xlsx'
         date='Selasa, 12 Maret 2022'
         title='Anggaran Pendapatan Belanja Desa 2022'
       />
       <Separator width={'85%'} />
       <ReportItem
+        format='pdf'
         date='Selasa, 12 Maret 2022'
         title='Anggaran Pendapatan Belanja Desa 2022'
       />
       <Separator width={'85%'} />
       <ReportItem
+        format='docx'
         date='Selasa, 12 Maret 2022'
         title='Anggaran Pendapatan Belanja Desa 2022'
       />
