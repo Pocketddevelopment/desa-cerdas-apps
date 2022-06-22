@@ -4,6 +4,8 @@ import MoreListScreen from '@attraction/screens/MoreList';
 import SMEScreen from '@attraction/screens/SME';
 import SMEDetailScreen from '@attraction/screens/SMEDetail';
 import ImagePreviewModal from '@components/ImagePreview';
+import DistrictHighlightScreen from '@profile/screens/DistrictHighlight';
+import EventListScreen from '@profile/screens/EventList';
 import PlacemanListScreen from '@profile/screens/PlacemanList';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -196,6 +198,20 @@ export default function DashboardStack() {
           title: 'Struktur Pemerintahan',
         }}
       />
+      <Stack.Screen
+        name='DistrictHighlight'
+        component={DistrictHighlightScreen}
+        options={{
+          title: 'Badan Usaha Milik Desa',
+        }}
+      />
+      <Stack.Screen
+        name='EventList'
+        component={EventListScreen}
+        options={{
+          title: 'Event Kegiatan BUM Des',
+        }}
+      />
       <Stack.Group
         screenOptions={{
           presentation: 'transparentModal',
@@ -238,5 +254,7 @@ export type DashboardStackParamList = {
   AttractionDetail: Object | undefined;
   Profile: Object | undefined;
   PlacemanList: Object | undefined;
+  DistrictHighlight: Object | undefined;
+  EventList: Object | undefined;
   ImagePreview: Object | undefined;
 };
