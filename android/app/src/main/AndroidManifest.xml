@@ -1,5 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   package="com.desacerdas">
+    <queries>
+      <package android:name="com.example.store" />
+      <package android:name="com.example.services" />
+    </queries>
 
     <uses-permission android:name="android.permission.INTERNET" />
 
