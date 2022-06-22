@@ -1,10 +1,10 @@
 import AttractionScreen from '@attraction/screens/Attraction';
 import AttractionDetailScreen from '@attraction/screens/AttractionDetail';
 import MoreListScreen from '@attraction/screens/MoreList';
-import AttractionListScreen from '@attraction/screens/MoreList';
 import SMEScreen from '@attraction/screens/SME';
 import SMEDetailScreen from '@attraction/screens/SMEDetail';
 import ImagePreviewModal from '@components/ImagePreview';
+import PlacemanListScreen from '@profile/screens/PlacemanList';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ComplaintScreen from '@service/screens/Complaint';
@@ -189,6 +189,13 @@ export default function DashboardStack() {
           title: 'Profil Desa',
         }}
       />
+      <Stack.Screen
+        name='PlacemanList'
+        component={PlacemanListScreen}
+        options={{
+          title: 'Struktur Pemerintahan',
+        }}
+      />
       <Stack.Group
         screenOptions={{
           presentation: 'transparentModal',
@@ -230,6 +237,6 @@ export type DashboardStackParamList = {
   MoreList: Object | undefined;
   AttractionDetail: Object | undefined;
   Profile: Object | undefined;
-
+  PlacemanList: Object | undefined;
   ImagePreview: Object | undefined;
 };

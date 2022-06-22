@@ -73,7 +73,7 @@ const ProfileScreen: React.FC = () => {
       <View style={[styles.section, { paddingHorizontal: 0 }]}>
         <SpaceBetween style={{ paddingHorizontal: 20 }}>
           <SectionTitle>Pemerintah Desa</SectionTitle>
-          <Text color={theme.colors.primary}>Lihat selengkapnya</Text>
+          <Text color={theme.colors.primary} onPress={() => navigation.navigate('PlacemanList')}>Lihat selengkapnya</Text>
         </SpaceBetween>
         <Placeman />
       </View>
