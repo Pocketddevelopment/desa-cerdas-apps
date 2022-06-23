@@ -25,7 +25,7 @@ const DistrictCard = () => {
       <Row>
         <Image
           source={{
-            uri: 'https://4.img-dpreview.com/files/p/E~TS590x0~articles/3925134721/0266554465.jpeg',
+            uri: 'http://13.250.44.36:8001/assets/images/logo-desa.png',
           }}
           style={styles.image}
         />

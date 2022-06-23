@@ -16,6 +16,10 @@ import Carousel, { Pagination } from 'react-native-snap-carousel';
 
 const data = [
   {
+    img: require('@assets/logo-desa.png'),
+    text: '<Tagline>',
+  },
+  {
     img: require('@assets/onboarding/slide-1.webp'),
     text: 'Cari tahu semua tentang desa Anda termasuk berita, statistik, wisata, dan lainnya',
   },

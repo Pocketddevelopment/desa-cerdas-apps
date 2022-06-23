@@ -40,12 +40,7 @@ const LoginScreen: React.FC = () => {
         style={styles.background}
         resizeMode={'cover'}
         source={require('@assets/onboarding/background-login.webp')}>
-        <Image
-          source={{
-            uri: 'http://majasari-cibogo.sideka.id/wp-content/uploads/sites/5085/2019/01/logo-desa-e1548663894269.png',
-          }}
-          style={styles.logo}
-        />
+        <Image source={require('@assets/logo-desa.png')} style={styles.logo} />
         <View style={styles.formLogin}>
           <Input placeholder='Email / NIK' shadow={false} />
           <SpaceBetween>
@@ -114,10 +109,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   logo: {
-    height: 200,
+    height: 250,
     aspectRatio: 1,
     resizeMode: 'contain',
-    marginBottom: 30,
+    marginBottom: 10,
   },
   iconBiometric: {
     height: 60,
