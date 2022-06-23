@@ -10,7 +10,7 @@ const Stack = createNativeStackNavigator();
 
 export default function AuthenticationStack() {
   function getInitialRouteName(): string {
-    const shouldOnboardLocal = Storage.getItem('onboarding', true);
+    const shouldOnboardLocal = Storage.getItem('shouldOnboard', true);
     if (shouldOnboardLocal) {
       return 'Onboarding';
     }
