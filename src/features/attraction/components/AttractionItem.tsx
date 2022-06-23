@@ -30,7 +30,9 @@ const AttractionItem = ({
           }}
         />
         <View style={{ flex: 1 }}>
-          <Title color={theme.colors.primary}>{title}</Title>
+          <Title numberOfLines={1} color={theme.colors.primary}>
+            {title}
+          </Title>
           <Text numberOfLines={2}>{description}</Text>
         </View>
       </Row>

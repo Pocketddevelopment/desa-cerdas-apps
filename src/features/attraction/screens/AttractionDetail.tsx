@@ -6,7 +6,14 @@ import { DashboardStackParamList } from '@dashboard/index';
 import { RouteProp } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useEffect, useRef, useState } from 'react';
-import { Image, ScrollView, StyleSheet, View } from 'react-native';
+import {
+  Image,
+  Linking,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  View,
+} from 'react-native';
 import { useTheme } from 'react-native-paper';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 
@@ -25,6 +32,7 @@ const AttractionDetailScreen: React.FC<AttractionDetailProps> = ({
   navigation,
   route,
 }) => {
+  const { thumbnailUri, title, description, location } = route.params?.data;
   const theme = useTheme();
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
@@ -34,9 +42,24 @@ const AttractionDetailScreen: React.FC<AttractionDetailProps> = ({
 
   useEffect(() => {
     navigation.setOptions({
-      title: 'Curug Plered',
+      title: title || '',
     });
   }, [navigation]);
+
+  const openMaps = () => {
+    const scheme = Platform.select({
+      ios: 'maps:0,0?q=',
+      android: 'geo:0,0?q=',
+    });
+    const latLng = `${location.x},${location.y}`;
+    const label = title;
+    const url: string = Platform.select({
+      ios: `${scheme}${label}@${latLng}`,
+      android: `${scheme}${latLng}(${label})`,
+    }) as string;
+
+    Linking.openURL(url);
+  };
 
   const renderCarouselItem = ({ item, index }: any) => {
     return (
@@ -44,7 +67,7 @@ const AttractionDetailScreen: React.FC<AttractionDetailProps> = ({
         <Image source={{ uri: item }} style={styles.image} />
         <Pagination
           activeDotIndex={activeIndex}
-          dotsLength={data.length}
+          dotsLength={1}
           dotStyle={{ margin: 0 }}
           containerStyle={[
             styles.pagination,
@@ -64,7 +87,7 @@ const AttractionDetailScreen: React.FC<AttractionDetailProps> = ({
       <Carousel
         layout='default'
         initialScrollIndex={activeIndex}
-        data={data}
+        data={[thumbnailUri]}
         onSnapToItem={onSnapItem}
         renderItem={renderCarouselItem}
         sliderWidth={DeviceContants.screenWidth}
@@ -76,7 +99,7 @@ const AttractionDetailScreen: React.FC<AttractionDetailProps> = ({
           mode='outlined'
           primary
           style={{ height: 50 }}
-          onPress={() => {}}>
+          onPress={openMaps}>
           <Image
             source={{
               uri: 'https://cdn.vox-cdn.com/thumbor/pOMbzDvdEWS8NIeUuhxp23wi_cU=/1400x1400/filters:format(png)/cdn.vox-cdn.com/uploads/chorus_asset/file/19700731/googlemaps.png',
@@ -86,41 +109,7 @@ const AttractionDetailScreen: React.FC<AttractionDetailProps> = ({
           Lihat Lokasi di Google Maps
         </Button>
         <View style={styles.section}>
-          <Text size={16}>
-            Tempat wisata alam yang tidak kalah dari tempat di pulau lainnya,
-            yaitu wisata air terjun plered. Lorem ipsum dolor sit amet,
-            consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
-            ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero
-            eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
-            gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-            Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-            sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-            et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-            accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
-            no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum
-            dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-            tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-            voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-            Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
-            dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing
-            elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore
-            magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
-            justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-            takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor
-            sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-            invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-            At vero eos et accusam et justo duo dolores et ea rebum. Stet clita
-            kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
-            amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-            diam nonumy eirmod tempor invidunt ut labore et dolore magna
-            aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
-            duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-            sanctus.
-          </Text>
+          <Text size={16}>{description}</Text>
         </View>
       </View>
     </ScrollView>
@@ -143,8 +132,8 @@ const styles = StyleSheet.create({
     bottom: -15,
   },
   icon: {
-    height: 20,
-    width: 20,
+    height: 18,
+    width: 18,
   },
   carouselContainer: {
     height: 250,

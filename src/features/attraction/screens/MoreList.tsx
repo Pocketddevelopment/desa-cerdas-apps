@@ -5,6 +5,8 @@ import { RouteProp, useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useEffect } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
+import dataAttraction from '@attraction/attraction.json';
+import dataIndustry from '@attraction/industry.json';
 
 type MoreListProps = {
   navigation: NativeStackNavigationProp<DashboardStackParamList, any>;
@@ -20,37 +22,45 @@ const MoreListScreen: React.FC<MoreListProps> = ({ navigation, route }) => {
     });
   }, [navigation, target]);
 
-  const onPressItem = () => {
-    navigation.navigate('AttractionDetail');
+  const onPressItem = (item: any) => {
+    navigation.navigate('AttractionDetail', {
+      data: item,
+    });
   };
 
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
       contentContainerStyle={styles.container}>
-      <AttractionItem
-        thumbnailUri='https://akcdn.detik.net.id/visual/2020/12/16/air-terjun-banyumala_169.jpeg?w=650'
-        title='Curug Plered'
-        description='Tempat wisata alam yang tidak kalah dari tempat di pulau lainnya,
-              yaitu wisata air terjun'
-        onPress={() => onPressItem()}
-      />
-      <Separator width={'85%'} color={'lightgrey'} />
-      <AttractionItem
-        thumbnailUri='https://akcdn.detik.net.id/visual/2020/12/16/air-terjun-banyumala_169.jpeg?w=650'
-        title='Curug Plered'
-        description='Tempat wisata alam yang tidak kalah dari tempat di pulau lainnya,
-              yaitu wisata air terjun'
-        onPress={onPressItem}
-      />
-      <Separator width={'85%'} color={'lightgrey'} />
-      <AttractionItem
-        thumbnailUri='https://akcdn.detik.net.id/visual/2020/12/16/air-terjun-banyumala_169.jpeg?w=650'
-        title='Curug Plered'
-        description='Tempat wisata alam yang tidak kalah dari tempat di pulau lainnya,
-              yaitu wisata air terjun'
-        onPress={onPressItem}
-      />
+      {target === 'attraction'
+        ? dataAttraction.map((e, i) => (
+            <>
+              <AttractionItem
+                key={e.title}
+                thumbnailUri={e.thumbnailUri}
+                title={e.title}
+                description={e.description}
+                onPress={() => onPressItem(e)}
+              />
+              {i !== dataAttraction.length - 1 && (
+                <Separator width={'85%'} color={'lightgrey'} />
+              )}
+            </>
+          ))
+        : dataIndustry.slice(0, 5).map((e, i) => (
+            <>
+              <AttractionItem
+                key={e.title}
+                thumbnailUri={e.thumbnailUri}
+                title={e.title}
+                description={e.description}
+                onPress={() => onPressItem(e)}
+              />
+              {i !== dataIndustry.length - 1 && (
+                <Separator width={'85%'} color={'lightgrey'} />
+              )}
+            </>
+          ))}
     </ScrollView>
   );
 };
