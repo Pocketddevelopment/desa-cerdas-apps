@@ -13,9 +13,12 @@ const UpdateAccountScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Input placeholder='Alamat surel' />
-      <Input placeholder='Nomor telepon genggam' />
-      <Button style={styles.btnUpdate} onPress={onPressUpdate}>
+      <Input
+        placeholder='Alamat surel'
+        defaultValue='bambang.sudrajat@gmail.com'
+      />
+      <Input placeholder='Nomor telepon genggam' defaultValue='08123456789' />
+      <Button btnStyle={styles.btnUpdate} onPress={onPressUpdate}>
         Perbarui Data
       </Button>
     </View>
@@ -33,6 +36,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   btnUpdate: {
-    marginTop: 10,
+    marginTop: 30,
+    width: '100%',
   },
 });
