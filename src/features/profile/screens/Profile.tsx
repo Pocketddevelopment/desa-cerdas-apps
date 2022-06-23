@@ -47,12 +47,12 @@ const ProfileScreen: React.FC = () => {
       <TouchableOpacity
         onPress={() =>
           navigation.navigate('ImagePreview', {
-            uri: 'https://upload.wikimedia.org/wikipedia/commons/8/85/Peta_Desa_Langkura.jpg',
+            uri: 'https://www.pasirampo.desa.id/desa/upload/artikel/sedang_1612102240_FB_IMG_1611857150939.jpg',
           })
         }>
         <Image
           source={{
-            uri: 'https://upload.wikimedia.org/wikipedia/commons/8/85/Peta_Desa_Langkura.jpg',
+            uri: 'https://www.pasirampo.desa.id/desa/upload/artikel/sedang_1612102240_FB_IMG_1611857150939.jpg',
           }}
           style={styles.locationImage}
         />
@@ -116,11 +116,13 @@ const styles = StyleSheet.create({
   },
   btnMaps: {
     margin: 20,
+    padding: 0,
     width: 'auto',
   },
   icon: {
-    height: 20,
-    width: 20,
+    height: 17,
+    width: 17,
+    resizeMode: 'cover',
   },
   section: {
     marginVertical: 10,
