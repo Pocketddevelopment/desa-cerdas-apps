@@ -3,7 +3,7 @@ import SpaceBetween from '@components/SpaceBetween';
 import { Caption, Text } from '@components/typography';
 import React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
-import { useTheme } from 'react-native-paper';
+import { Avatar, useTheme } from 'react-native-paper';
 
 type CommentCardProps = {
   thumbnailUri?: string;
@@ -42,12 +42,22 @@ const CommentCard = ({
     />
   );
 
+  const AvatarElement = (
+    <Avatar.Text
+      size={36}
+      label='B'
+      color={theme.colors.text}
+      labelStyle={{ fontWeight: '700', fontSize: 20 }}
+      style={{ backgroundColor: '#FFEBEB' }}
+    />
+  );
+
   const getLayout = () => {
     const RowTag = isSelf ? SpaceBetween : Row;
 
     function getElementsOrder() {
       if (isSelf) {
-        return [ContentElement, ImageElement];
+        return [ContentElement, AvatarElement];
       } else {
         return [ImageElement, ContentElement];
       }

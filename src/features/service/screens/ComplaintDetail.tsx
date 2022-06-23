@@ -4,8 +4,11 @@ import Row from '@components/Row';
 import { Caption, Text } from '@components/typography';
 import SectionTitle from '@components/typography/SectionTitle';
 import DeviceContants from '@constants/device';
+import { DashboardStackParamList } from '@dashboard/index';
+import { RouteProp } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import CommentCard from '@service/components/CommentCard';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, ScrollView, StyleSheet, View } from 'react-native';
 import { IconButton, useTheme } from 'react-native-paper';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
@@ -18,10 +21,25 @@ const data: string[] = [
 
 const CHAT_BOX_HEIGHT = 50;
 
-const ComplaintDetailScreen: React.FC = () => {
+type ComplaintDetailProps = {
+  navigation: NativeStackNavigationProp<DashboardStackParamList, any>;
+  route: RouteProp<any>;
+};
+
+const ComplaintDetailScreen: React.FC<ComplaintDetailProps> = ({
+  navigation,
+  route,
+}) => {
+  const { date, thumbnailUri, title, description, count } = route.params?.data;
   const theme = useTheme();
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [inputHeight, setInputHeight] = useState<number>(20);
+
+  useEffect(() => {
+    navigation.setOptions({
+      title: title || '',
+    });
+  }, [navigation, title]);
 
   const onSnapItem = (index: number) => {
     setActiveIndex(index);
@@ -33,7 +51,7 @@ const ComplaintDetailScreen: React.FC = () => {
         <Image source={{ uri: item }} style={styles.image} />
         <Pagination
           activeDotIndex={activeIndex}
-          dotsLength={data.length}
+          dotsLength={1}
           dotStyle={{ margin: 0 }}
           containerStyle={[
             styles.pagination,
@@ -60,7 +78,7 @@ const ComplaintDetailScreen: React.FC = () => {
         <Carousel
           layout='default'
           initialScrollIndex={activeIndex}
-          data={data}
+          data={[thumbnailUri]}
           onSnapToItem={onSnapItem}
           renderItem={renderCarouselItem}
           sliderWidth={DeviceContants.screenWidth}
@@ -68,25 +86,15 @@ const ComplaintDetailScreen: React.FC = () => {
           snapToAlignment={'center'}
         />
         <View style={styles.contentContainer}>
-          <Text size={16}>
-            Yth. pak kades, saya ada sedikit uneg2 nih. Lorem ipsum dolor sit
-            amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-            invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-            At vero eos et accusam et justo duo dolores et ea rebum. Stet clita
-            kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
-            amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-            diam nonumy eirmod tempor invidunt ut labore et dolore magna
-            aliquyam erat, sed diam voluptua.{'\n'}Tolong bantuannya, terima
-            kasih.
-          </Text>
+          <Text size={16}>{description}</Text>
           <View style={styles.commentMetaDetail}>
             <Caption size={14} color={theme.colors.primary}>
               Bambang Hariyadi
             </Caption>
-            <Caption>12 Maret 2022 14.04 via Aplikasi</Caption>
+            <Caption>{date} via Aplikasi</Caption>
           </View>
           <View style={styles.commentSection}>
-            <SectionTitle>Balasan Keluhan (6)</SectionTitle>
+            <SectionTitle>{`Balasan Keluhan (${count})`}</SectionTitle>
             <View style={styles.commentCards}>
               <CommentCard
                 thumbnailUri='https://4.img-dpreview.com/files/p/E~TS590x0~articles/3925134721/0266554465.jpeg'

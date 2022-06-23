@@ -26,8 +26,22 @@ const ComplaintItem = ({
   const theme = useTheme();
   const navigation =
     useNavigation<NativeStackNavigationProp<DashboardStackParamList>>();
+
+  const onPress = () => {
+    const data = {
+      date,
+      thumbnailUri,
+      title,
+      description,
+      count,
+    };
+    navigation.navigate('ComplaintDetail', {
+      data: data,
+    });
+  };
+
   return (
-    <TouchableOpacity onPress={() => navigation.navigate('ComplaintDetail')}>
+    <TouchableOpacity onPress={onPress}>
       <Row style={styles.container}>
         <Image
           source={{
