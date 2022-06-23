@@ -1,4 +1,5 @@
 import { Text, Title } from '@components/typography';
+import DeviceContants from '@constants/device';
 import onPressInterface from '@interfaces/Press.interface';
 import React from 'react';
 import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
@@ -58,6 +59,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     overflow: 'hidden',
     marginBottom: 15,
+    width: DeviceContants.screenWidth / 2 - 20,
   },
   content: {
     padding: 10,
@@ -66,7 +68,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 120,
     resizeMode: 'cover',
-    center: true,
+    alignItems: 'flex-start',
   },
   phone: {
     marginBottom: 5,

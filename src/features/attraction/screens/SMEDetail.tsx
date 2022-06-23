@@ -23,13 +23,14 @@ type SMEDetailProps = {
 };
 
 const SMEDetailScreen: React.FC<SMEDetailProps> = ({ navigation, route }) => {
+  const { thumbnailUri, name, description, seller, phone } = route.params?.data;
   const theme = useTheme();
 
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
   useEffect(() => {
     navigation.setOptions({
-      title: 'Kulit Lumpia BAROKAH',
+      title: name || '',
     });
   }, [navigation]);
 
@@ -39,10 +40,10 @@ const SMEDetailScreen: React.FC<SMEDetailProps> = ({ navigation, route }) => {
 
   const onPressChat = async () => {
     const shareOptions = {
-      title: 'Hubungi melalui Whatsapp',
-      message: 'Halo nama bisnis',
+      title: `Hubungi ${name} melalui Whatsapp`,
+      message: `Halo ${name}`,
       social: Share.Social.WHATSAPP,
-      whatsAppNumber: '6285224340019',
+      whatsAppNumber: phone,
     };
     try {
       await Share.shareSingle(shareOptions);
@@ -57,7 +58,7 @@ const SMEDetailScreen: React.FC<SMEDetailProps> = ({ navigation, route }) => {
         <Image source={{ uri: item }} style={styles.image} />
         <Pagination
           activeDotIndex={activeIndex}
-          dotsLength={data.length}
+          dotsLength={1}
           dotStyle={{ margin: 0 }}
           containerStyle={[
             styles.pagination,
@@ -77,7 +78,7 @@ const SMEDetailScreen: React.FC<SMEDetailProps> = ({ navigation, route }) => {
       <Carousel
         layout='default'
         initialScrollIndex={activeIndex}
-        data={data}
+        data={[thumbnailUri]}
         onSnapToItem={onSnapItem}
         renderItem={renderCarouselItem}
         sliderWidth={DeviceContants.screenWidth}
@@ -99,17 +100,17 @@ const SMEDetailScreen: React.FC<SMEDetailProps> = ({ navigation, route }) => {
             <Title size={14} style={styles.title}>
               Deskripsi
             </Title>
-            <Text size={16}>
-              Kulit lumpia cocok untuk dijadikan lumpia atau digoreng saja
-              menjadi camilan pangsit goreng.{'\n\n'}Satu plastik isi 500
-              lembar.
-            </Text>
+            <Text size={16}>{description}</Text>
           </View>
           <View style={styles.section}>
             <Title size={14} style={styles.title}>
               Info Penjual
             </Title>
-            <Text size={16}>H. Slamet Barokah{'\n'}08123456789</Text>
+            <Text size={16}>
+              {seller}
+              {'\n'}
+              {phone}
+            </Text>
           </View>
         </View>
       </View>
