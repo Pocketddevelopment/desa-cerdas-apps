@@ -1,3 +1,4 @@
+import { AuthContext } from '@@@/App';
 import Separator from '@components/Separator';
 import DeviceContants from '@constants/device';
 import AccountCard from '@dashboard/components/AccountCard';
@@ -12,9 +13,13 @@ import { DashboardStackParamList } from '..';
 const AccountScreen: React.FC = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<DashboardStackParamList>>();
+  const { logOut }: any = React.useContext(AuthContext);
 
-  function onPressItem(target: keyof DashboardStackParamList) {
-    navigation.navigate(target);
+  function onPressItem(target: keyof DashboardStackParamList, params?: any) {
+    navigation.navigate(target, {
+      title: params?.title,
+      uri: params?.uri,
+    });
   }
 
   return (
@@ -34,26 +39,31 @@ const AccountScreen: React.FC = () => {
           <ScrollItem
             icon={require('@assets/account/tnc.webp')}
             title='Syarat dan Ketentuan'
-            onPress={() => onPressItem('UpdatePassword')}
+            onPress={() => onPressItem('TermsCondition')}
           />
           <Separator />
           <ScrollItem
             icon={require('@assets/account/pp.webp')}
             title='Kebijakan Privasi'
-            onPress={() => onPressItem('UpdatePassword')}
+            onPress={() => onPressItem('PrivacyPolicy')}
           />
           <Separator />
           <ScrollItem
             icon={require('@assets/account/about.webp')}
             title='Tentang Desa Cerdas'
-            onPress={() => onPressItem('UpdatePassword')}
+            onPress={() =>
+              onPressItem('WebView', {
+                title: 'Tentang Desa Cerdas',
+                uri: 'http://13.250.44.36:8001/WebDesaCerdas/index.html',
+              })
+            }
           />
           <Separator />
           <ScrollItem
             icon={require('@assets/account/logout.webp')}
             title='Keluar dari Akun'
             textStyle={{ color: 'red' }}
-            onPress={() => onPressItem('UpdatePassword')}
+            onPress={() => logOut()}
           />
         </ScrollView>
       </View>

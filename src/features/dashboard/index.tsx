@@ -5,6 +5,7 @@ import SMEScreen from '@attraction/screens/SME';
 import SMEDetailScreen from '@attraction/screens/SMEDetail';
 import ImagePreviewModal from '@components/ImagePreview';
 import NavigationTabItem from '@components/NavigationTabItem';
+import WebView from '@components/WebView';
 import DeviceContants from '@constants/device';
 import DistrictHighlightScreen from '@profile/screens/DistrictHighlight';
 import EventListScreen from '@profile/screens/EventList';
@@ -25,6 +26,8 @@ import ReportListScreen from '../report/screens/ReportList';
 import DocumentFormScreen from '../service/screens/DocumentForm';
 import ServiceScreen from '../service/screens/ServiceHome';
 import AccountScreen from './screens/Account';
+import PrivacyPolicyScreen from './screens/account/PrivacyPolicy';
+import TermsConditionScreen from './screens/account/TermsCondition';
 import UpdateAccountScreen from './screens/account/UpdateAccount';
 import UpdatePasswordScreen from './screens/account/UpdatePassword';
 import HomeScreen from './screens/Home';
@@ -133,6 +136,20 @@ export default function DashboardStack() {
         }}
       />
       <Stack.Screen
+        name='TermsCondition'
+        component={TermsConditionScreen}
+        options={{
+          title: 'Syarat dan Ketentuan',
+        }}
+      />
+      <Stack.Screen
+        name='PrivacyPolicy'
+        component={PrivacyPolicyScreen}
+        options={{
+          title: 'Kebijakan Privasi',
+        }}
+      />
+      <Stack.Screen
         name='Report'
         component={ReportListScreen}
         options={{
@@ -223,6 +240,7 @@ export default function DashboardStack() {
           title: 'Event Kegiatan BUM Des',
         }}
       />
+      <Stack.Screen name='WebView' component={WebView} />
       <Stack.Group
         screenOptions={{
           presentation: 'transparentModal',
@@ -267,6 +285,9 @@ export type DashboardStackParamList = {
   PlacemanList: Object | undefined;
   DistrictHighlight: Object | undefined;
   EventList: Object | undefined;
+  TermsCondition: Object | undefined;
+  PrivacyPolicy: Object | undefined;
+  WebView: Object | undefined;
   ImagePreview: Object | undefined;
 };
 

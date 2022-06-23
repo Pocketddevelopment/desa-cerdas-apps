@@ -1,9 +1,28 @@
-import React from 'react';
+import { DashboardStackParamList } from '@dashboard/index';
+import { RouteProp } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import React, { useEffect } from 'react';
 import RNWebView from 'react-native-webview';
 
-const WebView = () => {
+type WebViewProps = {
+  navigation: NativeStackNavigationProp<DashboardStackParamList, any>;
+  route: RouteProp<any>;
+};
+
+const WebView: React.FC<WebViewProps> = ({ navigation, route }) => {
+  const title = route.params?.title;
+  const uri = route.params?.uri;
+
+  useEffect(() => {
+    navigation.setOptions({
+      title: title ? title : '',
+    });
+  }, [navigation, title]);
+
   return (
-    <RNWebView source={{ uri: 'https://policies.google.com/terms?hl=en-US' }} />
+    <RNWebView
+      source={{ uri: uri || 'https://policies.google.com/terms?hl=en-US' }}
+    />
   );
 };
 
