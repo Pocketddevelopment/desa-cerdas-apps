@@ -1,53 +1,7 @@
 import Row from '@components/Row';
-import SpaceBetween from '@components/SpaceBetween';
-import DeviceContants from '@constants/device';
+import { Caption, Text } from '@components/typography';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { BarChart, PieChart } from 'react-native-chart-kit';
-import { Caption, Text } from 'react-native-paper';
-
-const data = {
-  labels: ['January', 'February', 'March', 'April', 'May', 'June'],
-  datasets: [
-    {
-      data: [100, 45, 28, 80, 99, 43],
-    },
-  ],
-};
-
-const chartConfig = {
-  backgroundGradientFrom: '#FFFFFF',
-  backgroundGradientFromOpacity: 0,
-  backgroundGradientTo: '#FFFFFF',
-  backgroundGradientToOpacity: 0,
-  color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
-  strokeWidth: 2, // optional, default 3
-  barPercentage: 0.5,
-  useShadowColorFromDataset: false, // optional
-};
-
-const pieData = [
-  {
-    population: 21500000,
-    color: 'rgba(131, 167, 234, 1)',
-  },
-  {
-    population: 2800000,
-    color: '#F00',
-  },
-  {
-    population: 527612,
-    color: 'red',
-  },
-  {
-    population: 8538000,
-    color: '#ffffff',
-  },
-  {
-    population: 11920000,
-    color: 'rgb(0, 0, 255)',
-  },
-];
+import { Image, StyleSheet, View } from 'react-native';
 
 const Population = () => {
   return (
@@ -73,27 +27,37 @@ const Population = () => {
         </View>
       </Row>
 
-      <BarChart
-        data={data}
-        chartConfig={chartConfig}
-        height={200}
-        width={DeviceContants.screenWidth - 50}
-        yAxisLabel={''}
-        yAxisSuffix={''}
+      <Image
+        source={require('@assets/profile/population-chart.png')}
+        style={styles.populationChart}
       />
 
       <View style={styles.section}>
         <Row style={{ width: '100%' }}>
           <Row style={{ flex: 1, justifyContent: 'flex-end' }}>
-            <Text style={[styles.flex, styles.man, styles.right]}>24.39%</Text>
-            <Text style={[styles.flex, styles.right]}>149</Text>
+            <Text style={[styles.flex, styles.man, styles.right]}>2.39%</Text>
+            <Text style={[styles.flex, styles.right]}>14519</Text>
           </Row>
           <Caption
             style={{ marginHorizontal: 10, flex: 1, textAlign: 'center' }}>
             Belum Kawin
           </Caption>
           <Row style={{ flex: 1 }}>
-            <Text style={styles.flex}>149</Text>
+            <Text style={styles.flex}>145</Text>
+            <Text style={[styles.flex, styles.woman, styles.left]}>24.39%</Text>
+          </Row>
+        </Row>
+        <Row style={{ width: '100%' }}>
+          <Row style={{ flex: 1, justifyContent: 'flex-end' }}>
+            <Text style={[styles.flex, styles.man, styles.right]}>0.39%</Text>
+            <Text style={[styles.flex, styles.right]}>19</Text>
+          </Row>
+          <Caption
+            style={{ marginHorizontal: 10, flex: 1, textAlign: 'center' }}>
+            Kawin
+          </Caption>
+          <Row style={{ flex: 1 }}>
+            <Text style={styles.flex}>459</Text>
             <Text style={[styles.flex, styles.woman, styles.left]}>24.39%</Text>
           </Row>
         </Row>
@@ -104,32 +68,66 @@ const Population = () => {
           </Row>
           <Caption
             style={{ marginHorizontal: 10, flex: 1, textAlign: 'center' }}>
-            Kawin
+            Cerai
           </Caption>
           <Row style={{ flex: 1 }}>
-            <Text style={styles.flex}>19</Text>
+            <Text style={styles.flex}>159</Text>
+            <Text style={[styles.flex, styles.woman, styles.left]}>24.9%</Text>
+          </Row>
+        </Row>
+        <Row style={{ width: '100%' }}>
+          <Row style={{ flex: 1, justifyContent: 'flex-end' }}>
+            <Text style={[styles.flex, styles.man, styles.right]}>24.39%</Text>
+            <Text style={[styles.flex, styles.right]}>159</Text>
+          </Row>
+          <Caption
+            style={{ marginHorizontal: 10, flex: 1, textAlign: 'center' }}>
+            Hidup Cerai
+          </Caption>
+          <Row style={{ flex: 1 }}>
+            <Text style={styles.flex}>9</Text>
             <Text style={[styles.flex, styles.woman, styles.left]}>4.39%</Text>
+          </Row>
+        </Row>
+        <Row style={{ width: '100%' }}>
+          <Row style={{ flex: 1, justifyContent: 'flex-end' }}>
+            <Text style={[styles.flex, styles.man, styles.right]}>2.39%</Text>
+            <Text style={[styles.flex, styles.right]}>159</Text>
+          </Row>
+          <Caption
+            style={{ marginHorizontal: 10, flex: 1, textAlign: 'center' }}>
+            Mati
+          </Caption>
+          <Row style={{ flex: 1 }}>
+            <Text style={styles.flex}>14519</Text>
+            <Text style={[styles.flex, styles.woman, styles.left]}>24.39%</Text>
+          </Row>
+        </Row>
+        <Row style={{ width: '100%' }}>
+          <Row style={{ flex: 1, justifyContent: 'flex-end' }}>
+            <Text style={[styles.flex, styles.man, styles.right]}>14.39%</Text>
+            <Text style={[styles.flex, styles.right]}>149</Text>
+          </Row>
+          <Caption
+            style={{ marginHorizontal: 10, flex: 1, textAlign: 'center' }}>
+            Belum Mengisi
+          </Caption>
+          <Row style={{ flex: 1 }}>
+            <Text style={styles.flex}>159</Text>
+            <Text style={[styles.flex, styles.woman, styles.left]}>32.9%</Text>
           </Row>
         </Row>
       </View>
 
-      <PieChart
-        data={pieData}
-        width={DeviceContants.screenWidth - 50}
-        height={220}
-        hasLegend={false}
-        center={[DeviceContants.screenWidth / 2 - 110, 0]}
-        chartConfig={chartConfig}
-        accessor='population'
-        backgroundColor='transparent'
-        paddingLeft='0'
+      <Image
+        source={require('@assets/profile/education-chart.png')}
+        style={styles.educationChart}
       />
-
       <View style={styles.section}>
         <Row style={{ width: '100%' }}>
           <Row style={{ flex: 1, justifyContent: 'flex-end' }}>
-            <Text style={[styles.flex, styles.right]}>SLTP</Text>
-            <Text style={[{ flex: 0.5 }, styles.right]}>149</Text>
+            <Text style={[styles.flex, styles.right]}>Tidak Sekolah</Text>
+            <Caption style={[{ flex: 0.7 }, styles.right]}>11.00%</Caption>
           </Row>
           <Row
             style={{
@@ -139,7 +137,7 @@ const Population = () => {
             }}>
             <View
               style={{
-                backgroundColor: '#457920',
+                backgroundColor: '#3366CC',
                 borderRadius: 100,
                 width: 10,
                 height: 10,
@@ -148,7 +146,7 @@ const Population = () => {
             />
             <View
               style={{
-                backgroundColor: '#956287',
+                backgroundColor: '#DC3912',
                 borderRadius: 100,
                 width: 10,
                 height: 10,
@@ -156,15 +154,15 @@ const Population = () => {
               }}
             />
           </Row>
-          <Row style={{ flex: 1 }}>
-            <Text style={{ flex: 0.5 }}>149</Text>
-            <Text style={[styles.flex, styles.left]}>SD</Text>
+          <Row style={{ flex: 1, justifyContent: 'flex-start' }}>
+            <Caption style={[{ flex: 0.7 }, styles.left]}>13.09%</Caption>
+            <Text style={[styles.flex, styles.left]}>Putus SD</Text>
           </Row>
         </Row>
         <Row style={{ width: '100%' }}>
           <Row style={{ flex: 1, justifyContent: 'flex-end' }}>
-            <Text style={[styles.flex, styles.right]}>Tidak Sekolah</Text>
-            <Text style={[{ flex: 0.5 }, styles.right]}>149</Text>
+            <Text style={[styles.flex, styles.right]}>SD</Text>
+            <Caption style={[{ flex: 0.7 }, styles.right]}>40.29%</Caption>
           </Row>
           <Row
             style={{
@@ -174,7 +172,7 @@ const Population = () => {
             }}>
             <View
               style={{
-                backgroundColor: '#457920',
+                backgroundColor: '#FF9900',
                 borderRadius: 100,
                 width: 10,
                 height: 10,
@@ -183,7 +181,7 @@ const Population = () => {
             />
             <View
               style={{
-                backgroundColor: '#956287',
+                backgroundColor: '#109618',
                 borderRadius: 100,
                 width: 10,
                 height: 10,
@@ -191,9 +189,79 @@ const Population = () => {
               }}
             />
           </Row>
-          <Row style={{ flex: 1 }}>
-            <Text style={{ flex: 0.5 }}>149</Text>
-            <Text style={[styles.flex, styles.left]}>Putus Sekolah</Text>
+          <Row style={{ flex: 1, justifyContent: 'flex-start' }}>
+            <Caption style={[{ flex: 0.7 }, styles.left]}>22.67%</Caption>
+            <Text style={[styles.flex, styles.left]}>SLTP</Text>
+          </Row>
+        </Row>
+        <Row style={{ width: '100%' }}>
+          <Row style={{ flex: 1, justifyContent: 'flex-end' }}>
+            <Text style={[styles.flex, styles.right]}>SLTA</Text>
+            <Caption style={[{ flex: 0.7 }, styles.right]}>12.27%</Caption>
+          </Row>
+          <Row
+            style={{
+              flex: 0.5,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <View
+              style={{
+                backgroundColor: '#990099',
+                borderRadius: 100,
+                width: 10,
+                height: 10,
+                marginRight: 5,
+              }}
+            />
+            <View
+              style={{
+                backgroundColor: '#313131',
+                borderRadius: 100,
+                width: 10,
+                height: 10,
+                marginLeft: 5,
+              }}
+            />
+          </Row>
+          <Row style={{ flex: 1, justifyContent: 'flex-start' }}>
+            <Caption style={[{ flex: 0.7 }, styles.left]}>0.00%</Caption>
+            <Text style={[styles.flex, styles.left]}>D1/D2</Text>
+          </Row>
+        </Row>
+        <Row style={{ width: '100%' }}>
+          <Row style={{ flex: 1, justifyContent: 'flex-end' }}>
+            <Text style={[styles.flex, styles.right]}>D3</Text>
+            <Caption style={[{ flex: 0.7 }, styles.right]}>0.30%</Caption>
+          </Row>
+          <Row
+            style={{
+              flex: 0.5,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <View
+              style={{
+                backgroundColor: '#DD4477',
+                borderRadius: 100,
+                width: 10,
+                height: 10,
+                marginRight: 5,
+              }}
+            />
+            <View
+              style={{
+                backgroundColor: '#66AA00',
+                borderRadius: 100,
+                width: 10,
+                height: 10,
+                marginLeft: 5,
+              }}
+            />
+          </Row>
+          <Row style={{ flex: 1, justifyContent: 'flex-start' }}>
+            <Caption style={[{ flex: 0.7 }, styles.left]}>0.35%</Caption>
+            <Text style={[styles.flex, styles.left]}>Strata1/2/3</Text>
           </Row>
         </Row>
       </View>
@@ -222,6 +290,7 @@ const styles = StyleSheet.create({
   },
   section: {
     marginVertical: 10,
+    marginBottom: 20,
   },
   flex: {
     flex: 1,
@@ -256,5 +325,16 @@ const styles = StyleSheet.create({
     width: '90%',
     alignItems: 'center',
     alignSelf: 'center',
+  },
+  populationChart: {
+    height: 300,
+    aspectRatio: 1,
+    resizeMode: 'cover',
+  },
+  educationChart: {
+    height: 200,
+    aspectRatio: 1,
+    resizeMode: 'cover',
+    marginTop: 40,
   },
 });

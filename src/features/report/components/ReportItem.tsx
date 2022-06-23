@@ -1,7 +1,7 @@
 import Row from '@components/Row';
 import { Caption, Text, Title } from '@components/typography';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Linking, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
 interface ReportItemProps {
@@ -12,8 +12,15 @@ interface ReportItemProps {
 
 const ReportItem = ({ format, date, title }: ReportItemProps) => {
   const theme = useTheme();
+
+  const onPress = () => {
+    Linking.openURL(
+      'https://media.neliti.com/media/publications/191064-ID-klasifikasi-citra-menggunakan-convolutio.pdf'
+    );
+  };
+
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <Row>
         <View style={{ flex: 1.5 }}>
           <Title
@@ -27,7 +34,7 @@ const ReportItem = ({ format, date, title }: ReportItemProps) => {
           <Text numberOfLines={1}>{title}</Text>
         </View>
       </Row>
-    </View>
+    </TouchableOpacity>
   );
 };
 
