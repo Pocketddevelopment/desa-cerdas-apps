@@ -25,7 +25,9 @@ const App: React.FC = () => {
         // dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
         setLoggedIn(true);
       },
-      logOut: () => {},
+      logOut: () => {
+        setLoggedIn(false);
+      },
       register: async (_: any) => {
         // In a production app, we need to send user data to server and get a token
         // We will also need to handle errors if sign up failed
