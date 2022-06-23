@@ -1,7 +1,10 @@
 import Dot from '@components/pagination/PaginationDot';
 import { Caption, Text, Title } from '@components/typography';
 import DeviceContants from '@constants/device';
-import React, { useState } from 'react';
+import { DashboardStackParamList } from '@dashboard/index';
+import { RouteProp } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import React, { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, View, Image } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
@@ -12,9 +15,25 @@ const data: string[] = [
   'https://img.freepik.com/free-photo/big-hamburger-with-double-beef-french-fries_252907-8.jpg?w=2000',
 ];
 
-const NewsDetailScreen: React.FC = () => {
+type NewsDetailProps = {
+  navigation: NativeStackNavigationProp<DashboardStackParamList, any>;
+  route: RouteProp<any>;
+};
+
+const NewsDetailScreen: React.FC<NewsDetailProps> = ({ navigation, route }) => {
+  const image = route.params?.image;
+  const title = route.params?.title;
+  const date = route.params?.date;
+  const description = route.params?.description;
+
   const theme = useTheme();
   const [activeIndex, setActiveIndex] = useState<number>(0);
+
+  useEffect(() => {
+    navigation.setOptions({
+      title: title || '',
+    });
+  }, [navigation, title]);
 
   const onSnapItem = (index: number) => {
     setActiveIndex(index);
@@ -26,7 +45,7 @@ const NewsDetailScreen: React.FC = () => {
         <Image source={{ uri: item }} style={styles.image} />
         <Pagination
           activeDotIndex={activeIndex}
-          dotsLength={data.length}
+          dotsLength={1}
           dotStyle={{ margin: 0 }}
           containerStyle={[
             styles.pagination,
@@ -42,13 +61,11 @@ const NewsDetailScreen: React.FC = () => {
     );
   };
   return (
-    <ScrollView
-      style={styles.container}
-      contentContainerStyle={styles.bodyContainer}>
+    <ScrollView style={styles.container}>
       <Carousel
         layout='default'
         initialScrollIndex={activeIndex}
-        data={data}
+        data={[image]}
         onSnapToItem={onSnapItem}
         renderItem={renderCarouselItem}
         sliderWidth={DeviceContants.screenWidth}
@@ -56,35 +73,14 @@ const NewsDetailScreen: React.FC = () => {
         snapToAlignment={'center'}
       />
       <View style={styles.contentContainer}>
-        <Caption>Selasa, 12 Maret 2022</Caption>
+        <Caption>{date}</Caption>
         <Title
           style={{ marginVertical: 10 }}
           size={20}
           color={theme.colors.primary}>
-          Himbauan vaksinasi booster dalam rangka mempercepat ketahanan Covid19
-          nasional
+          {title}
         </Title>
-        <Text>
-          Perjuangan pemutusan rantai penularan Covid19 di Indonesia belumlah
-          selesai. Oleh karena itu, lorem ipsum dolor sit amet, consetetur
-          sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-          dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
-          et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-          takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-          amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-          invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-          At vero eos et accusam et justo duo dolores et ea rebum. Stet clita
-          kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
-          amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-          diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-          erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-          et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-          Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-          sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-          dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
-          et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-          takimata sanctus est Lorem ipsum dolor sit amet.
-        </Text>
+        <Text>{description}</Text>
       </View>
     </ScrollView>
   );
@@ -95,9 +91,6 @@ export default NewsDetailScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  bodyContainer: {
-    flexGrow: 1,
   },
   contentContainer: {
     padding: 20,

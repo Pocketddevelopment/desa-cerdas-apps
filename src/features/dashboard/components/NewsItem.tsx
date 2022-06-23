@@ -7,27 +7,47 @@ import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { DashboardStackParamList } from '..';
 
-const NewsItem = () => {
+type NewsItemProps = {
+  thumbnailUri: string;
+  date: string;
+  title: string;
+  description: string;
+};
+
+const NewsItem = ({
+  thumbnailUri,
+  date,
+  title,
+  description,
+}: NewsItemProps) => {
   const theme = useTheme();
   const navigation =
     useNavigation<NativeStackNavigationProp<DashboardStackParamList>>();
+
+  const onPress = () => {
+    navigation.navigate('NewsDetail', {
+      image: thumbnailUri,
+      date: date,
+      title: title,
+      description: description,
+    });
+  };
+
   return (
-    <TouchableOpacity onPress={() => navigation.navigate('NewsDetail')}>
+    <TouchableOpacity onPress={onPress}>
       <Row style={styles.container}>
         <Image
           source={{
-            uri: 'https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-674010.jpg&fm=jpg',
+            uri: thumbnailUri,
           }}
           style={styles.image}
         />
         <View style={{ flex: 1 }}>
-          <Caption>Selasa, 12 Maret 2022</Caption>
+          <Caption>{date}</Caption>
           <Title numberOfLines={1} size={16} color={theme.colors.primary}>
-            Himbauan vaksinasi booster dalam
+            {title}
           </Title>
-          <Text numberOfLines={1}>
-            Perjuangan pemutusan rantai penularan C...
-          </Text>
+          <Text numberOfLines={1}>{description}</Text>
         </View>
       </Row>
     </TouchableOpacity>
