@@ -13,11 +13,11 @@ const UpdatePasswordScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Input placeholder='Kata sandi lama' />
-      <Input placeholder='Kata sandi baru' />
-      <Input placeholder='Konfirmasi kata sandi' />
-      <Button style={styles.btnUpdate} onPress={onPressUpdate}>
-        Ganti Kata Sandi
+      <Input placeholder='Password lama' suffixIcon='eye' />
+      <Input placeholder='Password baru' suffixIcon='eye' />
+      <Input placeholder='Konfirmasi password baru' suffixIcon='eye' />
+      <Button btnStyle={styles.btnUpdate} onPress={onPressUpdate}>
+        Ganti Password
       </Button>
     </View>
   );
@@ -35,5 +35,6 @@ const styles = StyleSheet.create({
   },
   btnUpdate: {
     marginTop: 30,
+    width: '100%',
   },
 });
