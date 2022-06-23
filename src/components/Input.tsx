@@ -26,7 +26,7 @@ export default function TextInput(
     newStyles.push(styles.shadow);
   }
   const rightIcon = props.suffixIcon ? (
-    <PaperTextInput.Icon icon={props.suffixIcon} color={theme.colors.primary} />
+    <PaperTextInput.Icon icon={props.suffixIcon} color={'black'} />
   ) : null;
   return (
     <View style={[styles.container, containerStyle]}>
