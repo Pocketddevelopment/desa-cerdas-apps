@@ -19,7 +19,7 @@ const AttractionScreen: React.FC = () => {
 
   const onPressItem = (item: any) => {
     navigation.navigate('AttractionDetail', {
-      attraction: item,
+      data: item,
     });
   };
 
