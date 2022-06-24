@@ -73,6 +73,7 @@ const TabBar = ({ state, descriptors, navigation, colors }: any) => {
 
         return (
           <NavigationTabItem
+            key={label}
             label={label}
             isActive={isFocused}
             onPress={onPress}
