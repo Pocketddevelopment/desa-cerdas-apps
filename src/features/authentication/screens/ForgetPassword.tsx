@@ -20,7 +20,7 @@ const ForgetPasswordScreen: React.FC = () => {
             Anda
           </Text>
           <Input containerStyle={styles.input} placeholder={'Email / NIK'} />
-          <Button btnStyle={{ width: '40%' }}>Kirim</Button>
+          <Button btnStyle={{ width: '30%' }}>Kirim</Button>
         </View>
       </ImageBackground>
     </View>

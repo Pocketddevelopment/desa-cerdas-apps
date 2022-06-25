@@ -45,6 +45,7 @@ const LoginScreen: React.FC = () => {
           <Input placeholder='Email / NIK' shadow={false} />
           <SpaceBetween>
             <Input
+              type='password'
               placeholder='Password'
               containerStyle={{ flex: 1 }}
               shadow={false}
@@ -57,7 +58,7 @@ const LoginScreen: React.FC = () => {
             </Button>
           </SpaceBetween>
           <SpaceBetween>
-            <Row>
+            <Row style={{ marginLeft: -10 }}>
               <Checkbox
                 status={rememberMe}
                 color={theme.colors.background}

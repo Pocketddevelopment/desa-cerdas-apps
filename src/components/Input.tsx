@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, ViewStyle } from 'react-native';
+import { KeyboardType, StyleSheet, View, ViewStyle } from 'react-native';
 import {
   HelperText,
   TextInput as PaperTextInput,
@@ -9,6 +9,7 @@ import type { TextInputProps } from 'react-native-paper/lib/typescript/component
 
 type AdditionalTextInputProps = {
   shadow: boolean;
+  type: 'email' | 'password' | 'phone' | 'url';
   suffixIcon: string;
   counter?: boolean;
   containerStyle: ViewStyle;
@@ -19,15 +20,43 @@ export default function TextInput(
 ) {
   const theme = useTheme();
   const [text, setText] = useState<string>('');
-  const { counter, containerStyle, style } = props;
+  const { counter, containerStyle, type } = props;
   const isShadowPresent = props.shadow === undefined ? true : props.shadow;
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+
+  const getKeyboardType = (): KeyboardType => {
+    if (type === 'email') {
+      return 'email-address';
+    } else if (type === 'password' || type === 'url') {
+      return 'default';
+    } else if (type === 'phone') {
+      return 'phone-pad';
+    }
+    return 'default';
+  };
+
+  const getRightIcon = (): JSX.Element => {
+    const rightIcon = props.suffixIcon ? (
+      <PaperTextInput.Icon icon={props.suffixIcon} color={'black'} />
+    ) : null;
+    if (type === 'password') {
+      return (
+        <PaperTextInput.Icon
+          icon={showPassword ? 'eye' : 'eye-off'}
+          color={'black'}
+          onPress={() => setShowPassword(!showPassword)}
+        />
+      );
+    } else if (rightIcon) {
+      return rightIcon;
+    } else {
+      return <></>;
+    }
+  };
   const newStyles: ViewStyle[] = [styles.inputContainer];
   if (isShadowPresent) {
     newStyles.push(styles.shadow);
   }
-  const rightIcon = props.suffixIcon ? (
-    <PaperTextInput.Icon icon={props.suffixIcon} color={'black'} />
-  ) : null;
   return (
     <View style={[styles.container, containerStyle]}>
       <PaperTextInput
@@ -36,12 +65,15 @@ export default function TextInput(
         activeUnderlineColor={'transparent'}
         selectionColor={theme.colors.primary}
         dense
+        type
         mode='flat'
         editable={props.suffixIcon ? false : true}
         {...props}
-        right={rightIcon}
         style={[newStyles, props.style]}
         onChangeText={(value: string) => setText(value)}
+        keyboardType={getKeyboardType()}
+        right={getRightIcon()}
+        secureTextEntry={type === 'password' && !showPassword}
       />
       {counter && props.maxLength && (
         <HelperText

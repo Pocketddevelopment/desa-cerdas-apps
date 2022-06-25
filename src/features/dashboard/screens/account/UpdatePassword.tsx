@@ -13,9 +13,9 @@ const UpdatePasswordScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Input placeholder='Password lama' suffixIcon='eye' />
-      <Input placeholder='Password baru' suffixIcon='eye' />
-      <Input placeholder='Konfirmasi password baru' suffixIcon='eye' />
+      <Input placeholder='Password lama' type='password' />
+      <Input placeholder='Password baru' type='password' />
+      <Input placeholder='Konfirmasi password baru' type='password' />
       <Button btnStyle={styles.btnUpdate} onPress={onPressUpdate}>
         Ganti Password
       </Button>
