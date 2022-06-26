@@ -1,5 +1,6 @@
 import Row from '@components/Row';
 import { Caption, Text, Title } from '@components/typography';
+import onPressInterface from '@interfaces/Press.interface';
 import React from 'react';
 import { Linking, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
@@ -8,19 +9,14 @@ interface ReportItemProps {
   format: string;
   date: string;
   title: string;
+  onDownload: onPressInterface;
 }
 
-const ReportItem = ({ format, date, title }: ReportItemProps) => {
+const ReportItem = ({ format, date, title, onDownload }: ReportItemProps) => {
   const theme = useTheme();
 
-  const onPress = () => {
-    Linking.openURL(
-      'https://media.neliti.com/media/publications/191064-ID-klasifikasi-citra-menggunakan-convolutio.pdf'
-    );
-  };
-
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
+    <TouchableOpacity style={styles.container} onPress={onDownload}>
       <Row>
         <View style={{ flex: 1.5 }}>
           <Title

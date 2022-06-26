@@ -1,19 +1,22 @@
 import Row from '@components/Row';
 import { Caption, Text, Title } from '@components/typography';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
+import onPressInterface from '@interfaces/Press.interface';
 
 interface ReportItemProps {
   format: string;
   date: string;
   title: string;
+  onDownload: onPressInterface;
 }
 
-const DocumentItem = ({ format, date, title }: ReportItemProps) => {
+const DocumentItem = ({ format, date, title, onDownload }: ReportItemProps) => {
   const theme = useTheme();
+
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onDownload}>
       <Row>
         <View style={{ flex: 1.5 }}>
           <Title
@@ -27,7 +30,7 @@ const DocumentItem = ({ format, date, title }: ReportItemProps) => {
           <Text numberOfLines={1}>{title}</Text>
         </View>
       </Row>
-    </View>
+    </TouchableOpacity>
   );
 };
 
