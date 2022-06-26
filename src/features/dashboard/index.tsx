@@ -134,7 +134,7 @@ export default function DashboardStack() {
         name='UpdatePassword'
         component={UpdatePasswordScreen}
         options={{
-          title: 'Ganti Kata Sandi',
+          title: 'Ganti Password',
         }}
       />
       <Stack.Screen
@@ -206,7 +206,7 @@ export default function DashboardStack() {
         name='Attraction'
         component={AttractionScreen}
         options={{
-          title: 'Wisata Desa',
+          title: 'Wisata Desa Pasir Ampo',
         }}
       />
       <Stack.Screen name='MoreList' component={MoreListScreen} />
@@ -218,7 +218,7 @@ export default function DashboardStack() {
         name='Profile'
         component={ProfileScreen}
         options={{
-          title: 'Profil Desa',
+          title: 'Profil Desa Pasir Ampo',
         }}
       />
       <Stack.Screen

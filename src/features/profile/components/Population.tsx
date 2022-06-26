@@ -126,7 +126,9 @@ const Population = () => {
       <View style={styles.section}>
         <Row style={{ width: '100%' }}>
           <Row style={{ flex: 1, justifyContent: 'flex-end' }}>
-            <Text style={[styles.flex, styles.right]}>Tidak Sekolah</Text>
+            <Text style={[styles.flex, styles.right]} size={11}>
+              Tidak Sekolah
+            </Text>
             <Caption style={[{ flex: 0.7 }, styles.right]}>11.00%</Caption>
           </Row>
           <Row
@@ -156,12 +158,16 @@ const Population = () => {
           </Row>
           <Row style={{ flex: 1, justifyContent: 'flex-start' }}>
             <Caption style={[{ flex: 0.7 }, styles.left]}>13.09%</Caption>
-            <Text style={[styles.flex, styles.left]}>Putus SD</Text>
+            <Text style={[styles.flex, styles.left]} size={11}>
+              Putus SD
+            </Text>
           </Row>
         </Row>
         <Row style={{ width: '100%' }}>
           <Row style={{ flex: 1, justifyContent: 'flex-end' }}>
-            <Text style={[styles.flex, styles.right]}>SD</Text>
+            <Text style={[styles.flex, styles.right]} size={11}>
+              SD
+            </Text>
             <Caption style={[{ flex: 0.7 }, styles.right]}>40.29%</Caption>
           </Row>
           <Row
@@ -191,12 +197,16 @@ const Population = () => {
           </Row>
           <Row style={{ flex: 1, justifyContent: 'flex-start' }}>
             <Caption style={[{ flex: 0.7 }, styles.left]}>22.67%</Caption>
-            <Text style={[styles.flex, styles.left]}>SLTP</Text>
+            <Text style={[styles.flex, styles.left]} size={11}>
+              SLTP
+            </Text>
           </Row>
         </Row>
         <Row style={{ width: '100%' }}>
           <Row style={{ flex: 1, justifyContent: 'flex-end' }}>
-            <Text style={[styles.flex, styles.right]}>SLTA</Text>
+            <Text style={[styles.flex, styles.right]} size={11}>
+              SLTA
+            </Text>
             <Caption style={[{ flex: 0.7 }, styles.right]}>12.27%</Caption>
           </Row>
           <Row
@@ -226,12 +236,16 @@ const Population = () => {
           </Row>
           <Row style={{ flex: 1, justifyContent: 'flex-start' }}>
             <Caption style={[{ flex: 0.7 }, styles.left]}>0.00%</Caption>
-            <Text style={[styles.flex, styles.left]}>D1/D2</Text>
+            <Text style={[styles.flex, styles.left]} size={11}>
+              D1/D2
+            </Text>
           </Row>
         </Row>
         <Row style={{ width: '100%' }}>
           <Row style={{ flex: 1, justifyContent: 'flex-end' }}>
-            <Text style={[styles.flex, styles.right]}>D3</Text>
+            <Text style={[styles.flex, styles.right]} size={11}>
+              D3
+            </Text>
             <Caption style={[{ flex: 0.7 }, styles.right]}>0.30%</Caption>
           </Row>
           <Row
@@ -261,7 +275,9 @@ const Population = () => {
           </Row>
           <Row style={{ flex: 1, justifyContent: 'flex-start' }}>
             <Caption style={[{ flex: 0.7 }, styles.left]}>0.35%</Caption>
-            <Text style={[styles.flex, styles.left]}>Strata1/2/3</Text>
+            <Text style={[styles.flex, styles.left]} size={11}>
+              Strata1/2/3
+            </Text>
           </Row>
         </Row>
       </View>

@@ -24,7 +24,15 @@ const EventItem = ({
   const navigation =
     useNavigation<NativeStackNavigationProp<DashboardStackParamList>>();
   return (
-    <TouchableOpacity onPress={() => navigation.navigate('NewsDetail')}>
+    <TouchableOpacity
+      onPress={() =>
+        navigation.navigate('NewsDetail', {
+          image: thumbnailUri,
+          date: date,
+          title: title,
+          description: description,
+        })
+      }>
       <Row style={styles.container}>
         <Image
           source={{

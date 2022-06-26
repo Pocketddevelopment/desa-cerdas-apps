@@ -15,14 +15,16 @@ const DocumentFormScreen: React.FC = ({ navigation }: any) => {
       <KeyboardAvoidingView style={{ flex: 1 }} behavior={'padding'}>
         <Container>
           <TextInput placeholder='Jenis Dokumen' suffixIcon='chevron-down' />
-          <View style={{ width: '100%', marginTop: 10, marginBottom: 20 }}>
-            <SectionTitle>Data-data yang diperlukan</SectionTitle>
+          <View style={{ width: '100%', marginTop: 5 }}>
+            <View style={{ marginBottom: 5 }}>
+              <SectionTitle>Data-data yang diperlukan</SectionTitle>
+            </View>
             <TextInput placeholder='Jenis Dokumen' />
             <TextInput placeholder='Jenis Dokumen' suffixIcon='chevron-down' />
             <TextInput placeholder='Jenis Dokumen' />
             <TextInput placeholder='Jenis Dokumen' />
             <TextInput
-              placeholder='Text Area'
+              placeholder='Deskripsi'
               multiline={true}
               numberOfLines={5}
               textAlignVertical='top'

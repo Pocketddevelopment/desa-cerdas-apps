@@ -37,7 +37,10 @@ export default function TextInput(
 
   const getRightIcon = (): JSX.Element => {
     const rightIcon = props.suffixIcon ? (
-      <PaperTextInput.Icon icon={props.suffixIcon} color={'black'} />
+      <PaperTextInput.Icon
+        icon={props.suffixIcon}
+        color={theme.colors.primary}
+      />
     ) : null;
     if (type === 'password') {
       return (

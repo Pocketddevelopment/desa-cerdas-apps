@@ -43,7 +43,7 @@ const MoreListScreen: React.FC<MoreListProps> = ({ navigation, route }) => {
                 onPress={() => onPressItem(e)}
               />
               {i !== dataAttraction.length - 1 && (
-                <Separator width={'85%'} color={'lightgrey'} />
+                <Separator width={'90%'} color={'lightgrey'} />
               )}
             </>
           ))
@@ -57,7 +57,7 @@ const MoreListScreen: React.FC<MoreListProps> = ({ navigation, route }) => {
                 onPress={() => onPressItem(e)}
               />
               {i !== dataIndustry.length - 1 && (
-                <Separator width={'85%'} color={'lightgrey'} />
+                <Separator width={'90%'} color={'lightgrey'} />
               )}
             </>
           ))}

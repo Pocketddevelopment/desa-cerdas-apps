@@ -48,13 +48,13 @@ const DistrictHighlight = () => {
           date='Senin, 12 Maret 2022'
           title='Pengembangan sentra usaha tahu bulan Februari'
         />
-        <Separator color='lightgrey' />
+        <Separator width={'90%'} />
         <ReportItem
           format='pdf'
           date='Senin, 11 Maret 2022'
           title='Rencana pembangunan sentra usaha tahu bulan Februari'
         />
-        <Separator color='lightgrey' />
+        <Separator width={'90%'} />
         <ReportItem
           format='xlsx'
           date='Senin, 10 Maret 2022'

@@ -42,7 +42,7 @@ export default ReportItem;
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 20,
+    // paddingHorizontal: 20,
     paddingVertical: 10,
   },
   title: {

@@ -1,8 +1,8 @@
 import { RouteProp } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, View } from 'react-native';
-import { IconButton } from 'react-native-paper';
+import { ActivityIndicator, IconButton, useTheme } from 'react-native-paper';
 
 type ImagePreviewProps = {
   navigation: NativeStackNavigationProp<any, any>;
@@ -11,6 +11,9 @@ type ImagePreviewProps = {
 
 const ImagePreviewModal = ({ navigation, route }: ImagePreviewProps) => {
   const uri = route.params?.uri;
+  const theme = useTheme();
+  const [loading, setLoading] = useState<boolean>(true);
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <IconButton
@@ -20,14 +23,19 @@ const ImagePreviewModal = ({ navigation, route }: ImagePreviewProps) => {
         style={{ position: 'absolute', top: 0, right: 0 }}
         onPress={() => navigation.goBack()}
       />
-      <Image
-        source={{ uri: uri }}
-        style={{
-          width: '100%',
-          resizeMode: 'contain',
-          aspectRatio: 1,
-        }}
-      />
+      {loading ? (
+        <ActivityIndicator size={'large'} color={theme.colors.primary} />
+      ) : (
+        <Image
+          source={{ uri: uri }}
+          style={{
+            width: '100%',
+            resizeMode: 'contain',
+            aspectRatio: 1,
+          }}
+          onLoadEnd={() => setLoading(false)}
+        />
+      )}
     </View>
   );
 };

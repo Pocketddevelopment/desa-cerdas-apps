@@ -26,7 +26,7 @@ const PlacemanCard = ({
         <View style={{ flex: 1 }}>
           <View style={{ flex: 1 }}>
             <Title style={[styles.name, { color: theme.colors.primary }]}>
-              {name}
+              {name?.toUpperCase()}
             </Title>
             <Text>{position}</Text>
             <Text>{phone}</Text>

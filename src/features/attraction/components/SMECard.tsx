@@ -23,19 +23,26 @@ const SMECard = ({
   const theme = useTheme();
   return (
     <TouchableOpacity style={styles.card} onPress={onPress}>
-      <Image
-        source={{
-          uri: thumbnailUri,
-        }}
-        style={styles.img}
-      />
+      <View style={styles.imgContainer}>
+        <Image
+          source={{
+            uri: thumbnailUri,
+          }}
+          style={styles.img}
+        />
+      </View>
       <View style={styles.content}>
-        <Title color={theme.colors.primary} size={16}>
-          {name}
-        </Title>
-        <Text size={15} style={styles.phone}>
-          {phone}
-        </Text>
+        <View
+          style={{
+            flex: 1,
+          }}>
+          <Title color={theme.colors.primary} size={16}>
+            {name}
+          </Title>
+          <Text size={15} style={styles.phone}>
+            {phone}
+          </Text>
+        </View>
         <Text>{seller}</Text>
       </View>
     </TouchableOpacity>
@@ -55,20 +62,19 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     shadowOpacity: 0.5,
     shadowRadius: 5,
-    justifyContent: 'center',
     marginHorizontal: 5,
     overflow: 'hidden',
     marginBottom: 15,
     width: DeviceContants.screenWidth / 2 - 20,
   },
   content: {
+    flex: 1,
     padding: 10,
   },
+  imgContainer: { justifyContent: 'flex-start' },
   img: {
     width: '100%',
     height: 120,
-    resizeMode: 'cover',
-    alignItems: 'flex-start',
   },
   phone: {
     marginBottom: 5,

@@ -97,7 +97,7 @@ const ComplaintDetailScreen: React.FC<ComplaintDetailProps> = ({
             <SectionTitle>{`Balasan Keluhan (${count})`}</SectionTitle>
             <View style={styles.commentCards}>
               <CommentCard
-                thumbnailUri='https://4.img-dpreview.com/files/p/E~TS590x0~articles/3925134721/0266554465.jpeg'
+                thumbnailUri='http://13.250.44.36:8001/assets/images/foto-lurah.png'
                 content='Terima kasih bapak Bambang atas masukannya. Untuk saat ini pak Kades
             tengah mencanangkan program baru seperti yang telah bapak usulkan
             diatas. Mohon untuk bapak agar sabar menunggu hingga berjalan ya.'
@@ -106,7 +106,6 @@ const ComplaintDetailScreen: React.FC<ComplaintDetailProps> = ({
                 name='Rokim | Kepala Seksi Kesejahteraan'
               />
               <CommentCard
-                thumbnailUri='https://4.img-dpreview.com/files/p/E~TS590x0~articles/3925134721/0266554465.jpeg'
                 content='Wah, pak rokim ya ini yang jawabin. Kira2 tanggal mulai berjalannya kapan ya pak?'
                 date='10 Maret 2022 15:27'
                 medium='Aplikasi'
@@ -114,14 +113,13 @@ const ComplaintDetailScreen: React.FC<ComplaintDetailProps> = ({
                 isSelf
               />
               <CommentCard
-                thumbnailUri='https://4.img-dpreview.com/files/p/E~TS590x0~articles/3925134721/0266554465.jpeg'
+                thumbnailUri='http://13.250.44.36:8001/assets/images/foto-lurah.png'
                 content='Untuk perihal tersebut kami belum bisa pastikan ya pak.'
                 date='10 Maret 2022 16:55'
                 medium='Anjungan Pelayanan Mandiri'
                 name='Rokim | Kepala Seksi Kesejahteraan'
               />
               <CommentCard
-                thumbnailUri='https://4.img-dpreview.com/files/p/E~TS590x0~articles/3925134721/0266554465.jpeg'
                 content='Waduh bisa2 keberlangsungan desa kita bisa terancam dong kalua tidak segera dilaksanakan. Kalau sudah seperti itu apa bentuk tanggungjawab dari aparat desa?'
                 date='10 Maret 2022 17:24'
                 medium='Aplikasi'
@@ -129,7 +127,7 @@ const ComplaintDetailScreen: React.FC<ComplaintDetailProps> = ({
                 isSelf
               />
               <CommentCard
-                thumbnailUri='https://4.img-dpreview.com/files/p/E~TS590x0~articles/3925134721/0266554465.jpeg'
+                thumbnailUri='http://13.250.44.36:8001/assets/images/foto-lurah.png'
                 content='Mohon maaf pak, sekali lagi kami belum bisa pastikan karena sedang dikaji oleh tim ahlinya. Terima kasih.'
                 date='11 Maret 2022 09:31'
                 medium='Anjungan Pelayanan Mandiri'

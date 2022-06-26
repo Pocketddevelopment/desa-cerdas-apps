@@ -51,7 +51,7 @@ const AttractionScreen: React.FC = () => {
               description={e.description}
               onPress={() => onPressItem(e)}
             />
-            {i !== 4 && <Separator width={'85%'} color={'lightgrey'} />}
+            {i !== 4 && <Separator width={'90%'} color={'lightgrey'} />}
           </>
         ))}
       </View>
@@ -73,7 +73,7 @@ const AttractionScreen: React.FC = () => {
               description={e.description}
               onPress={() => onPressItem(e)}
             />
-            {i !== 4 && <Separator width={'85%'} color={'lightgrey'} />}
+            {i !== 4 && <Separator width={'90%'} color={'lightgrey'} />}
           </>
         ))}
       </View>

@@ -19,7 +19,7 @@ const ServiceScreen: React.FC = () => {
 
   return (
     <Container color='primary'>
-      <Text style={styles.head}>Pilih layanan yang anda butuhkan</Text>
+      <Text style={styles.head}>Pilih layanan yang anda butuhkan :</Text>
       <ServiceCard
         title='PERMOHONAN SURAT / DOKUMEN DARI APARAT DESA'
         description='Surat Keterangan Domisili, Surat Ijin Mengadakan Acara, Surat Keterangan
