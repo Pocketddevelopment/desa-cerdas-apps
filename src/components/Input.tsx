@@ -1,3 +1,4 @@
+import onPressInterface from '@interfaces/Press.interface';
 import React, { useState } from 'react';
 import { KeyboardType, StyleSheet, View, ViewStyle } from 'react-native';
 import {
@@ -11,6 +12,7 @@ type AdditionalTextInputProps = {
   shadow: boolean;
   type: 'email' | 'password' | 'phone' | 'url';
   suffixIcon: string;
+  onPressSuffix: onPressInterface;
   counter?: boolean;
   containerStyle: ViewStyle;
 };
@@ -20,7 +22,7 @@ export default function TextInput(
 ) {
   const theme = useTheme();
   const [text, setText] = useState<string>('');
-  const { counter, containerStyle, type } = props;
+  const { counter, containerStyle, type, onPressSuffix } = props;
   const isShadowPresent = props.shadow === undefined ? true : props.shadow;
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
@@ -40,6 +42,7 @@ export default function TextInput(
       <PaperTextInput.Icon
         icon={props.suffixIcon}
         color={theme.colors.primary}
+        onPress={() => onPressSuffix && onPressSuffix()}
       />
     ) : null;
     if (type === 'password') {
