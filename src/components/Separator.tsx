@@ -7,9 +7,16 @@ interface SeparatorProps {
   width?: number | string;
   height?: number | string;
   color?: string;
+  vertical?: boolean;
 }
 
-const Separator = ({ style, width, height, color }: SeparatorProps) => {
+const Separator = ({
+  style,
+  width,
+  height,
+  color,
+  vertical,
+}: SeparatorProps) => {
   const theme = useTheme();
   return (
     <View
@@ -17,8 +24,18 @@ const Separator = ({ style, width, height, color }: SeparatorProps) => {
         styles.separator,
         style,
         {
-          width: width ? width : '100%',
+          width: vertical ? 0 : width ? width : '100%',
           height: height ? height : 1,
+          borderRightWidth: vertical
+            ? width
+              ? (width as number)
+              : 0.5
+            : undefined,
+          borderRightColor: vertical
+            ? color
+              ? color
+              : theme.colors.separator
+            : 'transparent',
           backgroundColor: color ? color : theme.colors.separator,
         },
         {},
