@@ -15,21 +15,21 @@ const NotificationListScreen: React.FC = () => {
     <ScrollView>
       <NotificationItem
         date='Selasa, 12 Maret 2022'
-        description='Lorem ipsum dolor sit amet, consetetur sadipscing…Lorem ipsum dolor sit amet, consetetur sadipscing…'
+        description='Dear Bupati, Jalan Rusak dan Berlubang Masih Banyak Bertebaran di Sidoarjo'
         title='Ada balasan atas keluhan Anda'
         read={false}
       />
       <Separator width={'85%'} />
       <NotificationItem
         date='Selasa, 12 Maret 2022'
-        description='Lorem ipsum dolor sit amet, consetetur sadipscing…Lorem ipsum dolor sit amet, consetetur sadipscing…'
+        description='Sampah-sampah ini kiriman dari desa di atasnya'
         title='Ada balasan atas keluhan Anda'
         read={false}
       />
       <Separator width={'85%'} />
       <NotificationItem
         date='Selasa, 12 Maret 2022'
-        description='Lorem ipsum dolor sit amet, consetetur sadipscing…Lorem ipsum dolor sit amet, consetetur sadipscing…'
+        description='“Menuju sore jalan ini suka ramai di lintasi apalagi sekarang bulan ramadhan banyak yang ngabuburit ke arah kota, kalau bisa cepat di bereskan agar kami warga tidak kesusahan mepet terus ke pinggir jalan apalagi kalau bawa anak susah'
         title='Ada balasan atas keluhan Anda'
       />
       <Separator width={'85%'} />
