@@ -6,6 +6,7 @@ import SectionTitle from '@components/typography/SectionTitle';
 import DeviceContants from '@constants/device';
 import DistrictCard from '@dashboard/components/DistrictCard';
 import NewsItem from '@dashboard/components/NewsItem';
+import WeatherCard from '@dashboard/components/WeatherCard';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
@@ -61,6 +62,7 @@ const HomeScreen: React.FC = () => {
           />
           <DistrictCard />
         </View>
+        <WeatherCard />
         <View style={styles.body}>
           <SectionTitle>Berita Terkini</SectionTitle>
           <NewsItem

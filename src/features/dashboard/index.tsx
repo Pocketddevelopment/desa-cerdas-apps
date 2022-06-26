@@ -31,6 +31,7 @@ import TermsConditionScreen from './screens/account/TermsCondition';
 import UpdateAccountScreen from './screens/account/UpdateAccount';
 import UpdatePasswordScreen from './screens/account/UpdatePassword';
 import HomeScreen from './screens/Home';
+import WeatherDetailScreen from './screens/WeatherDetail';
 
 const Stack = createNativeStackNavigator<DashboardStackParamList>();
 const Tab = createBottomTabNavigator();
@@ -241,6 +242,13 @@ export default function DashboardStack() {
           title: 'Event Kegiatan BUM Des',
         }}
       />
+      <Stack.Screen
+        name='WeatherDetail'
+        component={WeatherDetailScreen}
+        options={{
+          title: 'Cuaci Desa Pasir Ampo',
+        }}
+      />
       <Stack.Screen name='WebView' component={WebView} />
       <Stack.Group
         screenOptions={{
@@ -288,6 +296,7 @@ export type DashboardStackParamList = {
   EventList: Object | undefined;
   TermsCondition: Object | undefined;
   PrivacyPolicy: Object | undefined;
+  WeatherDetail: Object | undefined;
   WebView: Object | undefined;
   ImagePreview: Object | undefined;
 };
