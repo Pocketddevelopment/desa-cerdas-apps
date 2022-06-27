@@ -16,7 +16,10 @@ const ReportItem = ({ format, date, title, onDownload }: ReportItemProps) => {
   const theme = useTheme();
 
   return (
-    <TouchableOpacity style={styles.container} onPress={onDownload}>
+    <TouchableOpacity
+      delayPressIn={80}
+      style={styles.container}
+      onPress={onDownload}>
       <Row>
         <View style={{ flex: 1.5 }}>
           <Title

@@ -34,7 +34,7 @@ const NewsItem = ({
   };
 
   return (
-    <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity delayPressIn={80} onPress={onPress}>
       <Row style={styles.container}>
         <Image
           source={{
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     height: 70,
     width: 70,
     borderRadius: 10,
-    resizeMode: 'contain',
+    resizeMode: 'cover',
     marginRight: 10,
   },
 });

@@ -25,6 +25,7 @@ const EventItem = ({
     useNavigation<NativeStackNavigationProp<DashboardStackParamList>>();
   return (
     <TouchableOpacity
+      delayPressIn={80}
       onPress={() =>
         navigation.navigate('NewsDetail', {
           image: thumbnailUri,
@@ -62,7 +63,7 @@ const styles = StyleSheet.create({
     height: 70,
     width: 70,
     borderRadius: 10,
-    resizeMode: 'contain',
+    resizeMode: 'cover',
     marginRight: 10,
   },
 });

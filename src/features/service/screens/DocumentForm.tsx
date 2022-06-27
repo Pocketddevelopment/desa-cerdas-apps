@@ -65,24 +65,20 @@ const DocumentFormScreen: React.FC = ({ navigation }: any) => {
               suffixIcon='chevron-down'
               onPressSuffix={onPressDocumentTypeList}
             />
-            <View style={{ width: '100%', marginTop: 5 }}>
+            <View style={{ width: '100%', marginTop: 5, marginBottom: 10 }}>
               <View style={{ marginBottom: 5 }}>
                 <SectionTitle>Data-data yang diperlukan</SectionTitle>
               </View>
-              <TextInput placeholder='Jenis Dokumen' />
-              <TextInput
-                placeholder='Jenis Dokumen'
-                suffixIcon='chevron-down'
-              />
-              <TextInput placeholder='Jenis Dokumen' />
-              <TextInput placeholder='Jenis Dokumen' />
-              <TextInput
-                placeholder='Deskripsi'
+              <TextInput placeholder='NIK' />
+              <TextInput placeholder='Nama Depan' />
+              <TextInput placeholder='Nama Belakang' />
+              {/* <TextInput
+                placeholder='Deskripsi...'
                 multiline={true}
                 numberOfLines={5}
                 textAlignVertical='top'
                 style={{ minHeight: 150 }}
-              />
+              /> */}
             </View>
             <Button onPress={onPressRequest} btnStyle={{ width: '100%' }}>
               Cetak dan Unduh Dokumen
@@ -113,6 +109,7 @@ const DocumentFormScreen: React.FC = ({ navigation }: any) => {
             {documentTypes.map((e, i) => {
               return (
                 <TouchableOpacity
+                  delayPressIn={80}
                   key={e.label}
                   onPress={() => onSelectDocument(i)}>
                   <Row style={styles.selectItem}>

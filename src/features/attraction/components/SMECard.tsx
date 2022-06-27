@@ -22,7 +22,7 @@ const SMECard = ({
 }: SMECardProps) => {
   const theme = useTheme();
   return (
-    <TouchableOpacity style={styles.card} onPress={onPress}>
+    <TouchableOpacity delayPressIn={80} style={styles.card} onPress={onPress}>
       <View style={styles.imgContainer}>
         <Image
           source={{

@@ -47,7 +47,7 @@ const MoreListScreen: React.FC<MoreListProps> = ({ navigation, route }) => {
               )}
             </>
           ))
-        : dataIndustry.slice(0, 5).map((e, i) => (
+        : dataIndustry.map((e, i) => (
             <>
               <AttractionItem
                 key={e.title}

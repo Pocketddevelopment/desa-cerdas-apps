@@ -21,7 +21,10 @@ const AttractionItem = ({
   const theme = useTheme();
 
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
+    <TouchableOpacity
+      delayPressIn={80}
+      style={styles.container}
+      onPress={onPress}>
       <Row align='top'>
         <Image
           style={styles.image}
@@ -51,7 +54,7 @@ const styles = StyleSheet.create({
     width: 70,
     marginRight: 10,
     borderRadius: 10,
-    resizeMode: 'contain',
+    resizeMode: 'cover',
   },
   title: {
     fontSize: 16,

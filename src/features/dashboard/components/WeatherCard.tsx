@@ -49,7 +49,9 @@ const WeatherCard = () => {
               22°C
             </Title>
           </Row>
-          <Text size={16}>Hujan Sedang</Text>
+          <Text size={16} style={{ marginTop: -5 }}>
+            Hujan Sedang
+          </Text>
           <Row>
             <Image
               source={require('@assets/weather/wind.png')}
@@ -78,23 +80,23 @@ const WeatherCard = () => {
         Kualitas Udara
       </Caption>
       <Row align='center'>
-        <Row style={{ flex: 3, marginRight: 10 }}>
-          <Title color={'#F9C828'} size={22}>
+        <Row style={{ flex: 3, marginRight: 40 }}>
+          <Title color={'#F9C828'} size={24} style={{ marginRight: 10 }}>
             31
           </Title>
           <Text> </Text>
-          <Title color={'#F9C828'} size={16}>
+          <Title color={'#F9C828'} size={18}>
             Sedang
           </Title>
         </Row>
-        <View style={{ flex: 4 }}>
+        <Row style={{ flex: 4 }}>
           <Text size={12}>
             Berdasarkan Skala Indeks{' '}
-            <Row style={{ position: 'absolute', bottom: -5, left: 0 }}>
+            <Row align='bottom'>
               <Text thickness='bold' size={12}>
                 PM
               </Text>
-              <Text thickness='bold' size={8} style={{ marginTop: 8 }}>
+              <Text thickness='bold' size={8} style={{ lineHeight: 8 }}>
                 2.5
               </Text>
               <Text thickness='bold' size={12}>
@@ -103,7 +105,7 @@ const WeatherCard = () => {
               </Text>
             </Row>
           </Text>
-        </View>
+        </Row>
         <View style={{ flex: 2.5 }} />
       </Row>
     </View>
@@ -131,7 +133,7 @@ const styles = StyleSheet.create({
   image: {
     height: 90,
     width: 100,
-    resizeMode: 'contain',
+    resizeMode: 'cover',
     justifyContent: 'flex-start',
   },
   captionTitle: {
@@ -143,7 +145,7 @@ const styles = StyleSheet.create({
     marginVertical: 2,
   },
   weatherIcon: {
-    resizeMode: 'contain',
+    resizeMode: 'cover',
     width: 12,
     height: 12,
     marginRight: 5,

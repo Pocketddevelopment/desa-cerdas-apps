@@ -28,7 +28,10 @@ const ScrollItem = ({
   textStyle,
 }: ScrollItemProps) => {
   return (
-    <TouchableOpacity style={[styles.container, style]} onPress={onPress}>
+    <TouchableOpacity
+      delayPressIn={80}
+      style={[styles.container, style]}
+      onPress={onPress}>
       <Row>
         <Image style={styles.icon} source={icon} />
         <Text size={16} style={[styles.text, textStyle]}>

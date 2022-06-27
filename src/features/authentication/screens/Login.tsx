@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
   logo: {
     height: 250,
     aspectRatio: 1,
-    resizeMode: 'contain',
+    resizeMode: 'cover',
     marginBottom: 10,
   },
   iconBiometric: {

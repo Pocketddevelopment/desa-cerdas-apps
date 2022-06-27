@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     height: 50,
     width: 50,
     borderRadius: 10,
-    resizeMode: 'contain',
+    resizeMode: 'cover',
   },
   footer: {
     alignItems: 'flex-end',

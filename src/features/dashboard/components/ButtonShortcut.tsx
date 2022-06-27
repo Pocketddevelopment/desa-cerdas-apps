@@ -17,7 +17,10 @@ interface ButtonShortcutProps {
 
 const ButtonShortcut = ({ icon, title, onPress }: ButtonShortcutProps) => {
   return (
-    <TouchableOpacity onPress={onPress} style={styles.btnContainer}>
+    <TouchableOpacity
+      delayPressIn={80}
+      onPress={onPress}
+      style={styles.btnContainer}>
       <View style={styles.btnCard}>
         <Image style={styles.iconImage} source={icon} />
       </View>
@@ -52,6 +55,6 @@ const styles = StyleSheet.create({
   iconImage: {
     height: 20,
     width: 20,
-    resizeMode: 'contain',
+    resizeMode: 'cover',
   },
 });

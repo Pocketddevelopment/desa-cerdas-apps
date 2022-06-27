@@ -113,7 +113,7 @@ const UVIndexTable = () => {
               color='#CC3333'
               size={15}
               style={styles.indicator}>
-              Parah
+              Ekstrim
             </Text>
           </View>
           <View style={styles.contentCell}>

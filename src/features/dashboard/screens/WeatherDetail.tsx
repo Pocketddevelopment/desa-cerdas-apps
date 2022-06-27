@@ -152,11 +152,11 @@ const styles = StyleSheet.create({
   image: {
     height: 90,
     width: 100,
-    resizeMode: 'contain',
+    resizeMode: 'cover',
     justifyContent: 'flex-start',
   },
   weatherIcon: {
-    resizeMode: 'contain',
+    resizeMode: 'cover',
     width: 12,
     height: 12,
     marginRight: 5,

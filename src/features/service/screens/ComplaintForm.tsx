@@ -20,9 +20,9 @@ const ComplaintFormScreen: React.FC = () => {
 
   return (
     <Container>
-      <TextInput placeholder='Jenis Laporan Keluhan' maxLength={30} counter />
+      <TextInput placeholder='Subject' maxLength={30} counter />
       <TextInput
-        placeholder='Deskripsi keluhan anda...'
+        placeholder='Deskripsi keluhan Anda...'
         multiline={true}
         numberOfLines={5}
         textAlignVertical='top'
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     width: 70,
     marginRight: 10,
     borderRadius: 10,
-    resizeMode: 'contain',
+    resizeMode: 'cover',
   },
   btnAttachmentCancel: {
     position: 'absolute',

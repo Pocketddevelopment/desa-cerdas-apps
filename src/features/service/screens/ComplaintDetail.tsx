@@ -140,7 +140,7 @@ const ComplaintDetailScreen: React.FC<ComplaintDetailProps> = ({
       <Row style={styles.chatBox}>
         <View style={styles.inputBox}>
           <TextInput
-            placeholder='Balas Keluhan'
+            placeholder='Balas Keluhan...'
             multiline
             style={{ paddingTop: 5 }}
             onContentSizeChange={(event) => {

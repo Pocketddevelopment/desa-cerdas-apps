@@ -45,6 +45,7 @@ const ProfileScreen: React.FC = () => {
       showsVerticalScrollIndicator={false}
       contentContainerStyle={styles.container}>
       <TouchableOpacity
+        delayPressIn={80}
         onPress={() =>
           navigation.navigate('ImagePreview', {
             uri: 'https://www.pasirampo.desa.id/desa/upload/artikel/sedang_1612102240_FB_IMG_1611857150939.jpg',

@@ -41,7 +41,7 @@ const ComplaintItem = ({
   };
 
   return (
-    <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity delayPressIn={80} onPress={onPress}>
       <Row style={styles.container}>
         <Image
           source={{
@@ -81,6 +81,6 @@ const styles = StyleSheet.create({
     width: 70,
     marginRight: 10,
     borderRadius: 10,
-    resizeMode: 'contain',
+    resizeMode: 'cover',
   },
 });

@@ -176,6 +176,64 @@ const HomeScreen: React.FC = () => {
 
             Agnez mengatakan, ia belum pernah ke Hawaii, tapi ia sering mendapatkan cerita dari teman-temannya yang sudah pernah berkunjung ke Hawaii dan Bali. Pelantun lagu Tak Ada Logika ini menuturkan, teman-temannya mengatakan bahwa Bali jauh lebih indah dibanding Hawaii yang juga dikenal dengan beragam pantainya yang menawan.'
           />
+          <Separator width={'90%'} />
+          <NewsItem
+            thumbnailUri='https://cdn0-production-images-kly.akamaized.net/hZsX1eWtj_wDBzBH47rhrav4eew=/640x360/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/4052933/original/028856600_1655214874-Banner_Infografis_Tarif_Listrik_untuk_Orang_Kaya_Naik.jpg'
+            date='15 Jun 2022, 09:01 WIB'
+            title='Infografis Tarif Listrik untuk Orang Kaya Naik'
+            description='Pemerintah melalui Kementerian Energi dan Sumber Daya Mineral atau ESDM menaikkan tarif listrik untuk pelanggan daya 3.500 Volt Ampere atau VA ke atas terhitung mulai 1 Juli 2022. Rencana kenaikan tarif listrik untuk pelanggan yang dianggap mampu ini sebelumnya telah dikemukakan Menteri Keuangan Sri Mulyani Indrawati pada 19 Mei 2022.
+
+            Penyesuaian kali ini membuat tarif listrik untuk golongan mampu menjadi naik sekitar 17 persen. Kementerian ESDM mencatat ada sejumlah faktor yang mendasari kenaikan biaya yang perlu dibayarkan, termasuk lonjakan harga sejumlah komoditas dunia.
+
+            Imbasnya, biaya pokok produksi listrik di dalam negeri pun mengalami peningkatan. Ini berarti beban terhadap anggaran negara semakin berat jika terus memberikan subsidi terhadap tarif listrik.
+
+            Namun, Direktur Utama Perusahaan Listrik Negara atau PLN Darmawan Prasodjo mengatakan kenaikan tarif listrik tak berlaku bagi masyarakat bawah. Artinya, hanya golongan mampu yang akan dikenakan tarif terbaru.
+
+            Dirut PLN menyebutkan penyesuaian tarif dilakukan guna mewujudkan tarif listrik yang berkeadilan. Lebih jelasnya, kompensasi diberikan kepada masyarakat yang berhak, sedangkan masyarakat mampu membayar tarif listrik 3.500 VA ke atas sesuai keekonomian.'
+          />
+          <Separator width={'90%'} />
+          <NewsItem
+            thumbnailUri='https://cdn0-production-images-kly.akamaized.net/iBLEZAgeuq5DzTTU7ycwEUvPBRY=/1231x710/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/4053427/original/098010500_1655271815-Strawberry-Supermoon-AP-1.jpg'
+            date='15 Jun 2022, 11:30 WIB'
+            title='FOTO: Fenomena Strawberry Supermoon Hiasi Langit Berbagai Negara'
+            description='Supermoon merupakan fenomena ketika bulan purnama berada dalam posisi terdekatnya dengan Bumi, sementara nama Strawberry Supermoon berasal dari masyarakat suku asli Amerika Algonquin di AS timur laut dan Kanada Timur yang mengacu pada waktu panen Strawberry.'
+          />
+          <Separator width={'90%'} />
+          <NewsItem
+            thumbnailUri='https://cdn0-production-images-kly.akamaized.net/jbTfItaGmwSDIggy8ullIWe1-oo=/640x360/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/4004478/original/053974800_1650745443-000_328U2KX.jpg'
+            date='13 Jun 2022, 09:13 WIB'
+            title='Bola Ganjil: Para Diktator Lapangan Hijau, Lama Kuasai Takhta'
+            description='Bayern Munchen sukses menjaga dominasi di Bundesliga. FC Hollywood kini bertakhta 10 musim beruntun usai menjuarai musim 2021/2022.
+
+            Pasukan Julian Nagelsmann mengamankan manhkota sepak bola Jerman setelah mengalahkan pesaing terdekat Borussia Dortmund 3-1 pada pekan ke-31 Bundesliga. Mereka mengakhiri kampanye dengan keunggulan delapan poin.
+
+            Dortmund tidak mampu menghentikan hegemoni Bayern. Mereka tercatat enam kali jadi runner-up dalam satu dekade terakhir, tepatnya 2012/2013, 2013/2014, 2015/2016, 2018/2019, 2019/2020, 2021/2022. Sementara rival terberat Bayern di sisa periode adalah VfL Wolsburg (2014/2015), RB Leipzig (2016/2017, 2020/2021), dan Schalke 04 (2017/2018).
+
+            Capaian Bayern Munchen tidak tertandingi di liga-liga top Eropa. Juventus hampir melakukannya setelah berkuasa sejak 2011/2012. Sayang mereka terhenti di angka sembilan usai dihentikan Inter Milan pada 2020/2021.
+
+            Sementara Inggris barangkali jadi kompetisi dengan persaingan paling sengit. Pasalnya, klub cuma maksimal tiga musim beruntun jadi raja. Adalah Huddersfield Town (1923-26), Arsenal (1932-35), Liverpool (1981-84), dan Manchester United (1998-2001, 2006-09) yang melakukannya.
+
+            Meski impresif, torehan Bayern nyatanya tidak ada apa-apanya jika dibandingkan rekor Eropa dan juga dunia.'
+          />
+          <Separator width={'90%'} />
+          <NewsItem
+            thumbnailUri='https://cdn0-production-images-kly.akamaized.net/KL4s6m1fq_sglAnzx0FbvwCKPxk=/640x360/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/1040536/original/091030100_1446442504-20151102-IHSG-Masih-Berkutat-di-Zona-Merah-Jakarta2.jpg'
+            date='15 Jun 2022, 19:25 WIB'
+            title='IPO, Hillcon Bidik Dana hingga Rp 884,60 Miliar'
+            description='PT Hillcon Tbk, perusahaan bergerak di aktivitas perusahaan holding, konsultasi manajemen dan jasa pertambangan akan menawarkan saham perdana atau initial public offering (IPO) sebanyak-banyaknya 2,21 miliar saham dengan nilai nominal Rp 20.
+
+            Mengutip laman e-ipo.co.id, Rabu (15/6/2022), jumlah saham Hillcon yang ditawarkan tersebut setara 15 persen dari jumlah modal ditempatkan dan disetor penuh perseroan setelah IPO. Perseroan menawarkan harga IPO Rp 250-Rp 400 per saham. Dengan demikian, perseroan akan meraup dana sebanyak-banyaknya Rp 884,60 miliar.
+
+            Dana hasil IPO akan digunakan oleh PT Hillconjaya Sakti antara lain sekitar 55 persen untuk modal kerja HS terkait dengan biaya produksi penambangan termasuk di antaranya biaya terkait bahan bakar, gaji, biaya overhead dan pemeliharaan alat-alat berat.
+
+            Selain itu sekitar 45 persen akan digunakan untuk belanja modal yang terdiri atas pembelian alat-alat mendukung kegiatan operasional HS.
+
+            Dalam melaksanakan IPO ini, perseroan telah menunjuk penjamin pelaksana emisi efek antara lain PT BRI Danareksa Sekuritas, PT Mirae Asset Sekuritas Indonesia dan PT Sucor Sekuritas.
+
+            Setelah IPO, pemegang saham Hillcon antara lain PT Hillcon Equity Management sebesar 68,85 persen, PT Bukit Persada Indonesia sebesar 16,15 persen dan masyarakat sebesar 15 persen.
+
+            Mengutip keterangan tertulis, Direktur Utama Hillcon Hersan Qiu menuturkan, rencana IPO Hillcon ini bagian dari upaya mengembangkan bisnis, menciptakan nilai yang optimal bagi perusahaan dan stakeholder serta demi mewujudkan ekosistem industri nikel Indonesia dan global.'
+          />
         </View>
       </ScrollView>
     </View>
