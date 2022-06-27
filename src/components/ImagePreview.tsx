@@ -23,19 +23,18 @@ const ImagePreviewModal = ({ navigation, route }: ImagePreviewProps) => {
         style={{ position: 'absolute', top: 0, right: 0 }}
         onPress={() => navigation.goBack()}
       />
-      {loading ? (
+      {loading && (
         <ActivityIndicator size={'large'} color={theme.colors.primary} />
-      ) : (
-        <Image
-          source={{ uri: uri }}
-          style={{
-            width: '100%',
-            resizeMode: 'contain',
-            aspectRatio: 1,
-          }}
-          onLoadEnd={() => setLoading(false)}
-        />
       )}
+      <Image
+        source={{ uri: uri }}
+        style={{
+          width: '100%',
+          resizeMode: 'contain',
+          aspectRatio: 1,
+        }}
+        onLoadEnd={() => setLoading(false)}
+      />
     </View>
   );
 };
