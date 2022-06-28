@@ -1,6 +1,7 @@
 import Dot from '@authentication/components/PaginationDot';
 import Button from '@components/Button';
 import { Text } from '@components/typography';
+import DeviceContants from '@constants/device';
 import { CommonActions, useNavigation } from '@react-navigation/native';
 import Storage from '@utils/async-storage';
 import React, { useRef, useState } from 'react';
@@ -100,10 +101,14 @@ const OnboardingScreen: React.FC = () => {
         data={data}
         onSnapToItem={onSnapItem}
         renderItem={renderCarouselItem}
-        layoutCardOffset={9}
         sliderWidth={SLIDER_WIDTH}
         itemWidth={SLIDER_WIDTH - 20}
-        snapToAlignment={'center'}
+        snapToStart
+        enableSnap
+        enableMomentum
+        lockScrollWhileSnapping
+        inactiveSlideOpacity={1}
+        inactiveSlideScale={1}
         contentContainerCustomStyle={{ paddingTop: SLIDER_WIDTH / 5 }}
       />
     </View>
