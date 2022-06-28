@@ -105,6 +105,7 @@ const OnboardingScreen: React.FC = () => {
         itemWidth={SLIDER_WIDTH - 20}
         snapToStart
         enableSnap
+        scrollEnabled={false}
         enableMomentum
         lockScrollWhileSnapping
         inactiveSlideOpacity={1}
