@@ -33,6 +33,7 @@ const ComplaintFormScreen: React.FC = () => {
         textAlignVertical='top'
         style={{ minHeight: 150, maxHeight: 200, paddingVertical: 10 }}
         counter
+        counterColor='error'
         maxLength={280}
       />
       <View style={styles.attachmentSection}>
