@@ -33,7 +33,7 @@ const UVIndexTable = () => {
               color='#00850C'
               size={15}
               style={styles.indicator}>
-              Baik
+              Rendah
             </Text>
           </View>
           <View style={styles.contentCell}>
@@ -55,7 +55,7 @@ const UVIndexTable = () => {
               color='#53E060'
               size={15}
               style={styles.indicator}>
-              Wajar
+              Sedang
             </Text>
           </View>
           <View style={styles.contentCell}>
@@ -75,7 +75,7 @@ const UVIndexTable = () => {
               color='#F9C828'
               size={15}
               style={styles.indicator}>
-              Sedang
+              Tinggi
             </Text>
           </View>
           <View style={styles.contentCell}>
@@ -94,7 +94,7 @@ const UVIndexTable = () => {
               color='#FF3E3E'
               size={15}
               style={styles.indicator}>
-              Buruk
+              Berbahaya
             </Text>
           </View>
           <View style={styles.contentCell}>
