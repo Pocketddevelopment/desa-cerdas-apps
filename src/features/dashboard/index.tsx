@@ -246,7 +246,7 @@ export default function DashboardStack() {
         name='WeatherDetail'
         component={WeatherDetailScreen}
         options={{
-          title: 'Cuaci Desa Pasir Ampo',
+          title: 'Cuaca Desa Pasir Ampo',
         }}
       />
       <Stack.Screen name='WebView' component={WebView} />
