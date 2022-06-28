@@ -32,7 +32,7 @@ const WeatherDetailScreen: React.FC = () => {
             />
             <Caption>13:00 WIB</Caption>
           </View>
-          <View>
+          <View style={{ flex: 1, flexWrap: 'wrap' }}>
             <Row align='center'>
               <Title size={24}>29°/ </Title>
               <Title
@@ -50,19 +50,21 @@ const WeatherDetailScreen: React.FC = () => {
               />
               <Text size={13}>Angin : 4,8m/detik - Utara</Text>
             </Row>
-            <Row>
-              <Image
-                source={require('@assets/weather/humid.png')}
-                style={styles.weatherIcon}
-              />
-              <Text size={13}>Kelembaban Udara: 35%</Text>
-            </Row>
-            <Row>
-              <Image
-                source={require('@assets/weather/uv.png')}
-                style={styles.weatherIcon}
-              />
-              <Text size={13}>Indeks UV : 8</Text>
+            <Row style={{ flex: 1, flexWrap: 'wrap' }}>
+              <Row style={{ marginRight: 10 }}>
+                <Image
+                  source={require('@assets/weather/humid.png')}
+                  style={styles.weatherIcon}
+                />
+                <Text size={13}>Kelembaban Udara: 35%</Text>
+              </Row>
+              <Row>
+                <Image
+                  source={require('@assets/weather/uv.png')}
+                  style={styles.weatherIcon}
+                />
+                <Text size={13}>Indeks UV : 8</Text>
+              </Row>
             </Row>
           </View>
         </Row>
