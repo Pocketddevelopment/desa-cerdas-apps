@@ -13,7 +13,7 @@ const UVIndexTable = () => {
       </Title>
       <View style={styles.card}>
         <Row style={[styles.row, { backgroundColor: '#FFEBEB' }]}>
-          <View style={{ flex: 0.9 }} />
+          <View style={{ flex: 1 }} />
           <View style={styles.contentCell}>
             <Text thickness='bold' size={12}>
               UVI
@@ -27,7 +27,7 @@ const UVIndexTable = () => {
         </Row>
 
         <Row style={[styles.row]}>
-          <View style={{ flex: 0.9 }}>
+          <View style={styles.title}>
             <Text
               thickness='900'
               color='#00850C'
@@ -49,7 +49,7 @@ const UVIndexTable = () => {
         </Row>
 
         <Row style={[styles.row, { backgroundColor: '#FFEBEB' }]}>
-          <View style={{ flex: 0.9 }}>
+          <View style={styles.title}>
             <Text
               thickness='900'
               color='#53E060'
@@ -69,7 +69,7 @@ const UVIndexTable = () => {
         </Row>
 
         <Row style={[styles.row]}>
-          <View style={{ flex: 0.9 }}>
+          <View style={styles.title}>
             <Text
               thickness='900'
               color='#F9C828'
@@ -88,7 +88,7 @@ const UVIndexTable = () => {
           </View>
         </Row>
         <Row style={[styles.row, { backgroundColor: '#FFEBEB' }]}>
-          <View style={{ flex: 0.9 }}>
+          <View style={styles.title}>
             <Text
               thickness='900'
               color='#FF3E3E'
@@ -107,7 +107,7 @@ const UVIndexTable = () => {
           </View>
         </Row>
         <Row style={[styles.row]}>
-          <View style={{ flex: 0.9 }}>
+          <View style={styles.title}>
             <Text
               thickness='900'
               color='#CC3333'
@@ -166,8 +166,11 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     alignItems: 'center',
   },
-  contentCell: {
+  title: {
     flex: 1,
+  },
+  contentCell: {
+    flex: 0.8,
     alignItems: 'center',
     justifyContent: 'center',
     paddingRight: 5,
