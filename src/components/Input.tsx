@@ -15,6 +15,7 @@ type AdditionalTextInputProps = {
   onPressSuffix: onPressInterface;
   counter?: boolean;
   containerStyle: ViewStyle;
+  counterColor: 'error' | 'info';
 };
 
 export default function TextInput(
@@ -22,7 +23,7 @@ export default function TextInput(
 ) {
   const theme = useTheme();
   const [text, setText] = useState<string>('');
-  const { counter, containerStyle, type, onPressSuffix } = props;
+  const { counter, containerStyle, type, counterColor, onPressSuffix } = props;
   const isShadowPresent = props.shadow === undefined ? true : props.shadow;
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
@@ -83,7 +84,13 @@ export default function TextInput(
       />
       {counter && props.maxLength && (
         <HelperText
-          type={text.length > props.maxLength ? 'error' : 'info'}
+          type={
+            counterColor
+              ? counterColor
+              : text.length > props.maxLength
+              ? 'error'
+              : 'info'
+          }
           style={styles.counter}>
           {text.length} / {props.maxLength}
         </HelperText>
