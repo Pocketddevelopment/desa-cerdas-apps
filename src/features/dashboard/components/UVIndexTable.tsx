@@ -6,6 +6,7 @@ import { Colors, useTheme } from 'react-native-paper';
 
 const UVIndexTable = () => {
   const theme = useTheme();
+  const titleSize = 14;
   return (
     <View style={styles.container}>
       <Title size={16} style={{ textAlign: 'center' }}>
@@ -27,11 +28,11 @@ const UVIndexTable = () => {
         </Row>
 
         <Row style={[styles.row]}>
-          <View style={styles.title}>
+          <View style={styles.titleCell}>
             <Text
               thickness='900'
               color='#00850C'
-              size={15}
+              size={14}
               style={styles.indicator}>
               Rendah
             </Text>
@@ -40,7 +41,7 @@ const UVIndexTable = () => {
             <Text>{'<2'}</Text>
           </View>
           <View style={[styles.contentCell, styles.contentCellNote]}>
-            <Text size={13}>
+            <Text size={12}>
               {
                 'Gunakan cairan pelembab tabir surya SPF 30+ bagi kulit sensitif'
               }
@@ -49,11 +50,11 @@ const UVIndexTable = () => {
         </Row>
 
         <Row style={[styles.row, { backgroundColor: '#FFEBEB' }]}>
-          <View style={styles.title}>
+          <View style={styles.titleCell}>
             <Text
               thickness='900'
               color='#53E060'
-              size={15}
+              size={14}
               style={styles.indicator}>
               Sedang
             </Text>
@@ -62,18 +63,18 @@ const UVIndexTable = () => {
             <Text>{'3-5'}</Text>
           </View>
           <View style={[styles.contentCell, styles.contentCellNote]}>
-            <Text size={13}>
+            <Text size={12}>
               {'Gunakan cairan pelembab tabir surya SPF 30+ setiap 2 jam'}
             </Text>
           </View>
         </Row>
 
         <Row style={[styles.row]}>
-          <View style={styles.title}>
+          <View style={styles.titleCell}>
             <Text
               thickness='900'
               color='#F9C828'
-              size={15}
+              size={14}
               style={styles.indicator}>
               Tinggi
             </Text>
@@ -82,17 +83,17 @@ const UVIndexTable = () => {
             <Text>{'6-7'}</Text>
           </View>
           <View style={[styles.contentCell, styles.contentCellNote]}>
-            <Text size={13}>
+            <Text size={12}>
               {'Kurangi waktu di bawah paparan matahari antara pukul 10-4 sore'}
             </Text>
           </View>
         </Row>
         <Row style={[styles.row, { backgroundColor: '#FFEBEB' }]}>
-          <View style={styles.title}>
+          <View style={styles.titleCell}>
             <Text
               thickness='900'
               color='#FF3E3E'
-              size={15}
+              size={14}
               style={styles.indicator}>
               Berbahaya
             </Text>
@@ -101,17 +102,17 @@ const UVIndexTable = () => {
             <Text>{'8-10'}</Text>
           </View>
           <View style={[styles.contentCell, styles.contentCellNote]}>
-            <Text size={13}>
+            <Text size={12}>
               {'Tindakan pencegahan ekstra, kulit & mata dapat cepat terbakar'}
             </Text>
           </View>
         </Row>
         <Row style={[styles.row]}>
-          <View style={styles.title}>
+          <View style={styles.titleCell}>
             <Text
               thickness='900'
               color='#CC3333'
-              size={15}
+              size={14}
               style={styles.indicator}>
               Ekstrim
             </Text>
@@ -120,7 +121,7 @@ const UVIndexTable = () => {
             <Text>{'>11'}</Text>
           </View>
           <View style={[styles.contentCell, styles.contentCellNote]}>
-            <Text size={13}>
+            <Text size={12}>
               {'Kulit & mata dapat rusak dan terbakar dalam hitungan menit'}
             </Text>
           </View>
@@ -166,7 +167,7 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     alignItems: 'center',
   },
-  title: {
+  titleCell: {
     flex: 1,
   },
   contentCell: {
