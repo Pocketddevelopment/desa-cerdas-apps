@@ -20,6 +20,8 @@ module.exports = {
           '@enums': './src/interfaces/enums',
           '@config': './src/config',
           '@utils': './src/utils',
+          '@services': './src/services',
+          '@store': './src/store',
           '@@@': '.',
           '@@': './src',
         },

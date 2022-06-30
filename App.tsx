@@ -7,7 +7,10 @@ import DashboardStack from '@dashboard/index';
 import { NavigationContainer } from '@react-navigation/native';
 import React, { createContext, useMemo, useState } from 'react';
 import { Provider as PaperProvider } from 'react-native-paper';
-import AuthenticationStack from './src/features/authentication';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import AuthenticationStack from '@authentication/index';
+import { store, persistor } from '@store/store';
 
 export const AuthContext = createContext({});
 
@@ -57,11 +60,15 @@ const App: React.FC = () => {
   return (
     <PreferencesContext.Provider value={preferences}>
       <AuthContext.Provider value={authContext}>
-        <PaperProvider theme={theme}>
-          <NavigationContainer theme={theme}>
-            {isLoggedIn ? DashboardStack() : AuthenticationStack()}
-          </NavigationContainer>
-        </PaperProvider>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <PaperProvider theme={theme}>
+              <NavigationContainer theme={theme}>
+                {isLoggedIn ? DashboardStack() : AuthenticationStack()}
+              </NavigationContainer>
+            </PaperProvider>
+          </PersistGate>
+        </Provider>
       </AuthContext.Provider>
     </PreferencesContext.Provider>
   );
