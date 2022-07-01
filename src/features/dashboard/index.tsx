@@ -1,3 +1,4 @@
+import { Stack } from '@@@/App';
 import AttractionScreen from '@attraction/screens/Attraction';
 import AttractionDetailScreen from '@attraction/screens/AttractionDetail';
 import MoreListScreen from '@attraction/screens/MoreList';
@@ -5,13 +6,13 @@ import SMEScreen from '@attraction/screens/SME';
 import SMEDetailScreen from '@attraction/screens/SMEDetail';
 import ImagePreviewModal from '@components/ImagePreview';
 import NavigationTabItem from '@components/NavigationTabItem';
+import { Text } from '@components/typography';
 import WebView from '@components/WebView';
 import DeviceContants from '@constants/device';
 import DistrictHighlightScreen from '@profile/screens/DistrictHighlight';
 import EventListScreen from '@profile/screens/EventList';
 import PlacemanListScreen from '@profile/screens/PlacemanList';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ComplaintScreen from '@service/screens/Complaint';
 import ComplaintDetail from '@service/screens/ComplaintDetail';
 import ComplaintFormScreen from '@service/screens/ComplaintForm';
@@ -33,7 +34,6 @@ import UpdatePasswordScreen from './screens/account/UpdatePassword';
 import HomeScreen from './screens/Home';
 import WeatherDetailScreen from './screens/WeatherDetail';
 
-const Stack = createNativeStackNavigator<DashboardStackParamList>();
 const Tab = createBottomTabNavigator();
 
 const TabBar = ({ state, descriptors, navigation, colors }: any) => {
@@ -88,7 +88,7 @@ const TabBar = ({ state, descriptors, navigation, colors }: any) => {
   );
 };
 
-export default function DashboardStack() {
+export default function DashboardScreens(): JSX.Element[] {
   function Dashboard() {
     const theme = useTheme();
     return (
@@ -102,154 +102,156 @@ export default function DashboardStack() {
       </Tab.Navigator>
     );
   }
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name='Dashboard'
-        component={Dashboard}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name='NewsDetail'
-        component={NewsDetailScreen}
-        options={{
-          title: 'Berita',
-        }}
-      />
-      <Stack.Screen
-        name='NotificationList'
-        component={NotificationListScreen}
-        options={{
-          title: 'Notifikasi',
-        }}
-      />
-      <Stack.Screen
-        name='UpdateAccount'
-        component={UpdateAccountScreen}
-        options={{
-          title: 'Perbarui Akun',
-        }}
-      />
-      <Stack.Screen
-        name='UpdatePassword'
-        component={UpdatePasswordScreen}
-        options={{
-          title: 'Ganti Password',
-        }}
-      />
-      <Stack.Screen
-        name='TermsCondition'
-        component={TermsConditionScreen}
-        options={{
-          title: 'Syarat dan Ketentuan',
-        }}
-      />
-      <Stack.Screen
-        name='PrivacyPolicy'
-        component={PrivacyPolicyScreen}
-        options={{
-          title: 'Kebijakan Privasi',
-        }}
-      />
-      <Stack.Screen
-        name='Report'
-        component={ReportListScreen}
-        options={{
-          title: 'Unduh Laporan',
-        }}
-      />
-      <Stack.Screen
-        name='Service'
-        component={ServiceScreen}
-        options={{
-          title: 'Layanan',
-        }}
-      />
-      <Stack.Screen
-        name='DocumentForm'
-        component={DocumentFormScreen}
-        options={{
-          title: 'Permohonan Surat / Dokumen',
-        }}
-      />
-      <Stack.Screen
-        name='Complaint'
-        component={ComplaintScreen}
-        options={{
-          title: 'Keluhan Warga',
-        }}
-      />
-      <Stack.Screen
-        name='ComplaintForm'
-        component={ComplaintFormScreen}
-        options={{
-          title: 'Buat Keluhan Baru',
-        }}
-      />
-      <Stack.Screen
-        name='DocumentHistory'
-        component={DocumentHistoryScreen}
-        options={{
-          title: 'Riwayat Surat / Dokumen',
-        }}
-      />
-      <Stack.Screen name='ComplaintDetail' component={ComplaintDetail} />
-      <Stack.Screen
-        name='SME'
-        component={SMEScreen}
-        options={{
-          title: 'UMKM',
-        }}
-      />
-      <Stack.Screen name='SMEDetail' component={SMEDetailScreen} />
-      <Stack.Screen
-        name='Attraction'
-        component={AttractionScreen}
-        options={{
-          title: 'Wisata Desa Pasir Ampo',
-        }}
-      />
-      <Stack.Screen name='MoreList' component={MoreListScreen} />
-      <Stack.Screen
-        name='AttractionDetail'
-        component={AttractionDetailScreen}
-      />
-      <Stack.Screen
-        name='Profile'
-        component={ProfileScreen}
-        options={{
-          title: 'Profil Desa Pasir Ampo',
-        }}
-      />
-      <Stack.Screen
-        name='PlacemanList'
-        component={PlacemanListScreen}
-        options={{
-          title: 'Struktur Pemerintahan',
-        }}
-      />
-      <Stack.Screen
-        name='DistrictHighlight'
-        component={DistrictHighlightScreen}
-        options={{
-          title: 'Badan Usaha Milik Desa',
-        }}
-      />
-      <Stack.Screen
-        name='EventList'
-        component={EventListScreen}
-        options={{
-          title: 'Event Kegiatan BUM Des',
-        }}
-      />
-      <Stack.Screen
-        name='WeatherDetail'
-        component={WeatherDetailScreen}
-        options={{
-          title: 'Cuaca Desa Pasir Ampo',
-        }}
-      />
-      <Stack.Screen name='WebView' component={WebView} />
+  return [
+    <>
+      <Stack.Group>
+        <Stack.Screen
+          name='Dashboard'
+          component={Dashboard}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name='NewsDetail'
+          component={NewsDetailScreen}
+          options={{
+            title: 'Berita',
+          }}
+        />
+        <Stack.Screen
+          name='NotificationList'
+          component={NotificationListScreen}
+          options={{
+            title: 'Notifikasi',
+          }}
+        />
+        <Stack.Screen
+          name='UpdateAccount'
+          component={UpdateAccountScreen}
+          options={{
+            title: 'Perbarui Akun',
+          }}
+        />
+        <Stack.Screen
+          name='UpdatePassword'
+          component={UpdatePasswordScreen}
+          options={{
+            title: 'Ganti Password',
+          }}
+        />
+        <Stack.Screen
+          name='TermsCondition'
+          component={TermsConditionScreen}
+          options={{
+            title: 'Syarat dan Ketentuan',
+          }}
+        />
+        <Stack.Screen
+          name='PrivacyPolicy'
+          component={PrivacyPolicyScreen}
+          options={{
+            title: 'Kebijakan Privasi',
+          }}
+        />
+        <Stack.Screen
+          name='Report'
+          component={ReportListScreen}
+          options={{
+            title: 'Unduh Laporan',
+          }}
+        />
+        <Stack.Screen
+          name='Service'
+          component={ServiceScreen}
+          options={{
+            title: 'Layanan',
+          }}
+        />
+        <Stack.Screen
+          name='DocumentForm'
+          component={DocumentFormScreen}
+          options={{
+            title: 'Permohonan Surat / Dokumen',
+          }}
+        />
+        <Stack.Screen
+          name='Complaint'
+          component={ComplaintScreen}
+          options={{
+            title: 'Keluhan Warga',
+          }}
+        />
+        <Stack.Screen
+          name='ComplaintForm'
+          component={ComplaintFormScreen}
+          options={{
+            title: 'Buat Keluhan Baru',
+          }}
+        />
+        <Stack.Screen
+          name='DocumentHistory'
+          component={DocumentHistoryScreen}
+          options={{
+            title: 'Riwayat Surat / Dokumen',
+          }}
+        />
+        <Stack.Screen name='ComplaintDetail' component={ComplaintDetail} />
+        <Stack.Screen
+          name='SME'
+          component={SMEScreen}
+          options={{
+            title: 'UMKM',
+          }}
+        />
+        <Stack.Screen name='SMEDetail' component={SMEDetailScreen} />
+        <Stack.Screen
+          name='Attraction'
+          component={AttractionScreen}
+          options={{
+            title: 'Wisata Desa Pasir Ampo',
+          }}
+        />
+        <Stack.Screen name='MoreList' component={MoreListScreen} />
+        <Stack.Screen
+          name='AttractionDetail'
+          component={AttractionDetailScreen}
+        />
+        <Stack.Screen
+          name='Profile'
+          component={ProfileScreen}
+          options={{
+            title: 'Profil Desa Pasir Ampo',
+          }}
+        />
+        <Stack.Screen
+          name='PlacemanList'
+          component={PlacemanListScreen}
+          options={{
+            title: 'Struktur Pemerintahan',
+          }}
+        />
+        <Stack.Screen
+          name='DistrictHighlight'
+          component={DistrictHighlightScreen}
+          options={{
+            title: 'Badan Usaha Milik Desa',
+          }}
+        />
+        <Stack.Screen
+          name='EventList'
+          component={EventListScreen}
+          options={{
+            title: 'Event Kegiatan BUM Des',
+          }}
+        />
+        <Stack.Screen
+          name='WeatherDetail'
+          component={WeatherDetailScreen}
+          options={{
+            title: 'Cuaca Desa Pasir Ampo',
+          }}
+        />
+        <Stack.Screen name='WebView' component={WebView} />
+      </Stack.Group>
       <Stack.Group
         screenOptions={{
           presentation: 'transparentModal',
@@ -264,8 +266,8 @@ export default function DashboardStack() {
           options={{}}
         />
       </Stack.Group>
-    </Stack.Navigator>
-  );
+    </>,
+  ];
 }
 
 export type DashboardStackParamList = {

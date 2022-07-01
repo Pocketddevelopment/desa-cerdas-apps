@@ -74,9 +74,7 @@ const CommentCard = ({
         <Caption size={14} color={theme.colors.primary}>
           {name}
         </Caption>
-        <Caption>
-          {date} via {medium}
-        </Caption>
+        <Caption>{date}</Caption>
       </View>
     </View>
   );

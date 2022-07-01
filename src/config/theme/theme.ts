@@ -12,6 +12,8 @@ declare global {
     interface ThemeColors {
       caption: string;
       separator: string;
+      success: string;
+      'success-background': string;
     }
 
     interface Theme {
@@ -41,6 +43,8 @@ export const CombinedDefaultTheme = {
     background: '#FFFFFF',
     caption: '#95989A',
     separator: '#E3E3E3',
+    'success-background': '#DEF7E3',
+    success: '#00850C',
   },
   myOwnProperty: true,
 };
@@ -56,6 +60,8 @@ export const CombinedDarkTheme = {
     background: '#000000',
     caption: '#95989A',
     separator: '#E3E3E3',
+    'success-background': '#DEF7E3',
+    success: '#00850C',
   },
   myOwnProperty: true,
 };

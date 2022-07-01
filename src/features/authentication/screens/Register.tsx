@@ -53,8 +53,8 @@ const RegisterScreen: React.FC = () => {
         <View style={styles.form}>
           <Input placeholder='Email' />
           <Input placeholder='Nomor Telepon' />
-          <Input placeholder='Password' suffixIcon='eye' />
-          <Input placeholder='Konfirmasi Password' suffixIcon='eye' />
+          <Input type='password' placeholder='Password' />
+          <Input type='password' placeholder='Konfirmasi Password' />
         </View>
       )}
       <Button btnStyle={{ width: '100%' }} onPress={onPressNext}>

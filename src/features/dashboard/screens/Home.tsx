@@ -67,7 +67,7 @@ const HomeScreen: React.FC = () => {
           <SectionTitle>Berita Terkini</SectionTitle>
           <NewsItem
             thumbnailUri='https://cdn0-production-images-kly.akamaized.net/ziM87-DAY4HxpGxNQMUn1q47sxk=/640x360/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/4053640/original/044577000_1655279811-IMG-20220615-WA0064.jpg'
-            date='15 Jun 2022, 18:45 WIB'
+            date='15 Jun 2022'
             title='Ini Isi Pertemuan Para Ketua Umum Partai Koalisi Sebelum Reshuffle Kabinet'
             description='Agenda makan siang dengan ketua umum partai politik (parpol) koalisi pendukung pemerintah bersama Presiden Joko Widodo sebelum reshuffle kabinet menjadi tanda tanya besar. Lantas apa perbincangan yang dibahas di ruang makan Presidential Lounge?
 
@@ -86,7 +86,7 @@ const HomeScreen: React.FC = () => {
           <Separator width={'90%'} />
           <NewsItem
             thumbnailUri='https://cdn1-production-images-kly.akamaized.net/Kfn4ST5n759ghdSk6Myj6iGZ_Qw=/640x640/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/2838157/original/078231200_1653616364-58423621_185452302442672_1172999920324638983_n.jpg'
-            date='15 Jun 2022, 17:57 WIB'
+            date='15 Jun 2022'
             title='Ridwan Kamil Berterimakasih pada Media Beritakan Eril dengan Adil'
             description='Gubernur Jawa Barat Ridwan Kamil memberikan perhatian khusus terhadap pemberitaan seputar meninggalnya Emeril Kahn Mumtadz alias Eril. Pria yang kerap disapa Kang Emil itu pun berterimakasih kepada media yang memberitakan anaknya sesuai kaidah jurnalistik.
 
@@ -99,7 +99,7 @@ const HomeScreen: React.FC = () => {
           <Separator width={'90%'} />
           <NewsItem
             thumbnailUri='https://cdn1-production-images-kly.akamaized.net/QNAUqFGaPpGj299TDfNmr2hbrMI=/640x360/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/3901845/original/078821800_1641994795-20220112-Waspada-Omicron-1.jpg'
-            date='15 Jun 2022, 17:30 WIB'
+            date='15 Jun 2022'
             title='Terdeteksi 20 Kasus Subvarian Omicron BA.4 dan BA.5 di RI'
             description='Hingga Selasa, 14 Juni 2022 jumlah kasus baru BA.4 dan BA.5 tercatat sebanyak 20 kasus. Angka subvarian Omicron ini disampaikan oleh Juru Bicara Kementerian Kesehatan (Kemenkes) RI Mohammad Syahril.
 
@@ -120,7 +120,7 @@ const HomeScreen: React.FC = () => {
           <Separator width={'90%'} />
           <NewsItem
             thumbnailUri='https://cdn0-production-images-kly.akamaized.net/O0VsqMnKwEgDxIqGq_JSdJx2o34=/640x360/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/4053793/original/006195300_1655284948-Presiden_Jokowi_Resmi_Lantik_Zulkifli_Hasan_Jadi_Mendag_dan_Hadi_Tjahjanto_Menteri_ATR_BPN-AP-5.jpg'
-            date='15 Jun 2022, 17:24 WIB'
+            date='15 Jun 2022'
             title='Gerindra Sambut Baik Zulkifli Hasan Masuk Kabinet'
             description='Ketua Umum Partai Amanat Nasional (PAN) Zulkifli Hasan baru saja dilantik sebagai Menteri Perdagangan oleh Presiden Jokowi. Menanggapi hal tersebut, Partai Gerindra menyatakan tak mempermasalahkan masuknya PAN di kabinet.
 
@@ -135,7 +135,7 @@ const HomeScreen: React.FC = () => {
           <Separator width={'90%'} />
           <NewsItem
             thumbnailUri='https://cdn0-production-images-kly.akamaized.net/Okjul-26ApigIa1TFMGxmMnWBAw=/640x360/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/2950021/original/028640200_1572013911-JWW_KabarPapua.jpeg'
-            date='15 Jun 2022, 19:02 WIB'
+            date='15 Jun 2022'
             title='Profil Singkat John Wempi Wetipo, Putra Papua yang Ditunjuk Jokowi Jadi Wamendagri'
             description='John Wempi Wetipo baru saja dilantik Presiden Joko Widodo atau Jokowi sebagai Wakil Menteri Dalam Negeri (Wamendagri) pada hari ini, Rabu (15/6/2022) di Istana Negara Jakarta.
 
@@ -162,7 +162,7 @@ const HomeScreen: React.FC = () => {
           <Separator width={'90%'} />
           <NewsItem
             thumbnailUri='https://cdn0-production-images-kly.akamaized.net/G7GXJVhN_lU03ADH3DtintKrZMU=/0x783:1777x1784/640x360/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/3010932/original/076920300_1577941018-agnez_2.jpg'
-            date='15 Jun 2022, 19:02 WIB'
+            date='15 Jun 2022'
             title='Agnez Mo Sebut Bali Jauh Lebih Indah Dibanding Hawaii'
             description='Keindahan Bali tak hanya diakui orang Indonesia, tapi juga banyak wisatawan mancanegara. Penyanyi Agnez Mo yang sudah sering ke luar negeri pun juga mengakui keindahan Pulau Dewata.
 
@@ -179,7 +179,7 @@ const HomeScreen: React.FC = () => {
           <Separator width={'90%'} />
           <NewsItem
             thumbnailUri='https://cdn0-production-images-kly.akamaized.net/hZsX1eWtj_wDBzBH47rhrav4eew=/640x360/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/4052933/original/028856600_1655214874-Banner_Infografis_Tarif_Listrik_untuk_Orang_Kaya_Naik.jpg'
-            date='15 Jun 2022, 09:01 WIB'
+            date='15 Jun 2022'
             title='Infografis Tarif Listrik untuk Orang Kaya Naik'
             description='Pemerintah melalui Kementerian Energi dan Sumber Daya Mineral atau ESDM menaikkan tarif listrik untuk pelanggan daya 3.500 Volt Ampere atau VA ke atas terhitung mulai 1 Juli 2022. Rencana kenaikan tarif listrik untuk pelanggan yang dianggap mampu ini sebelumnya telah dikemukakan Menteri Keuangan Sri Mulyani Indrawati pada 19 Mei 2022.
 
@@ -194,14 +194,14 @@ const HomeScreen: React.FC = () => {
           <Separator width={'90%'} />
           <NewsItem
             thumbnailUri='https://cdn0-production-images-kly.akamaized.net/iBLEZAgeuq5DzTTU7ycwEUvPBRY=/1231x710/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/4053427/original/098010500_1655271815-Strawberry-Supermoon-AP-1.jpg'
-            date='15 Jun 2022, 11:30 WIB'
+            date='15 Jun 2022'
             title='FOTO: Fenomena Strawberry Supermoon Hiasi Langit Berbagai Negara'
             description='Supermoon merupakan fenomena ketika bulan purnama berada dalam posisi terdekatnya dengan Bumi, sementara nama Strawberry Supermoon berasal dari masyarakat suku asli Amerika Algonquin di AS timur laut dan Kanada Timur yang mengacu pada waktu panen Strawberry.'
           />
           <Separator width={'90%'} />
           <NewsItem
             thumbnailUri='https://cdn0-production-images-kly.akamaized.net/jbTfItaGmwSDIggy8ullIWe1-oo=/640x360/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/4004478/original/053974800_1650745443-000_328U2KX.jpg'
-            date='13 Jun 2022, 09:13 WIB'
+            date='13 Jun 2022'
             title='Bola Ganjil: Para Diktator Lapangan Hijau, Lama Kuasai Takhta'
             description='Bayern Munchen sukses menjaga dominasi di Bundesliga. FC Hollywood kini bertakhta 10 musim beruntun usai menjuarai musim 2021/2022.
 
@@ -218,7 +218,7 @@ const HomeScreen: React.FC = () => {
           <Separator width={'90%'} />
           <NewsItem
             thumbnailUri='https://cdn0-production-images-kly.akamaized.net/KL4s6m1fq_sglAnzx0FbvwCKPxk=/640x360/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/1040536/original/091030100_1446442504-20151102-IHSG-Masih-Berkutat-di-Zona-Merah-Jakarta2.jpg'
-            date='15 Jun 2022, 19:25 WIB'
+            date='15 Jun 2022'
             title='IPO, Hillcon Bidik Dana hingga Rp 884,60 Miliar'
             description='PT Hillcon Tbk, perusahaan bergerak di aktivitas perusahaan holding, konsultasi manajemen dan jasa pertambangan akan menawarkan saham perdana atau initial public offering (IPO) sebanyak-banyaknya 2,21 miliar saham dengan nilai nominal Rp 20.
 

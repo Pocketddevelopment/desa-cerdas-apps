@@ -1,22 +1,62 @@
+import AuthenticationScreens from '@authentication/index';
 import {
   CombinedDarkTheme,
   CombinedDefaultTheme,
   PreferencesContext,
 } from '@config/theme';
-import DashboardStack from '@dashboard/index';
+import DashboardScreens from '@dashboard/index';
 import { NavigationContainer } from '@react-navigation/native';
-import React, { createContext, useMemo, useState } from 'react';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { persistor, store } from '@store/store';
+import Storage from '@utils/async-storage';
+import React, {
+  createContext,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import AuthenticationStack from '@authentication/index';
-import { store, persistor } from '@store/store';
+import Toast from 'react-native-toast-message';
+import toastConfig from '@config/toast';
 
+export const Stack = createNativeStackNavigator();
 export const AuthContext = createContext({});
 
 const App: React.FC = () => {
   const [isLoggedIn, setLoggedIn] = useState<boolean>(false);
   const [isThemeDark, setIsThemeDark] = React.useState(false);
+  const [isReady, setReady] = useState<boolean>(false);
+  const [initialRouteName, setInitialRouteName] = useState<string>();
+
+  const getInitialRouteName = useCallback(async () => {
+    if (!isLoggedIn && !initialRouteName) {
+      const shouldOnboardLocal = await Storage.getItem('shouldOnboard', 'true');
+      if (shouldOnboardLocal === 'true') {
+        setInitialRouteName('Onboarding');
+      } else {
+        setInitialRouteName('Login');
+      }
+      return;
+    }
+  }, [isLoggedIn, initialRouteName]);
+
+  useEffect(() => {
+    async function getDefaultRoot() {
+      await getInitialRouteName();
+    }
+    if (!isReady) {
+      getDefaultRoot();
+    }
+  }, [isReady]);
+
+  useEffect(() => {
+    if (initialRouteName) {
+      setReady(true);
+    }
+  }, [initialRouteName]);
 
   const authContext = useMemo(
     () => ({
@@ -30,6 +70,8 @@ const App: React.FC = () => {
       },
       logOut: () => {
         setLoggedIn(false);
+        setReady(false);
+        setInitialRouteName(undefined);
       },
       register: async (_: any) => {
         // In a production app, we need to send user data to server and get a token
@@ -63,9 +105,15 @@ const App: React.FC = () => {
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
             <PaperProvider theme={theme}>
-              <NavigationContainer theme={theme}>
-                {isLoggedIn ? DashboardStack() : AuthenticationStack()}
-              </NavigationContainer>
+              {isReady && initialRouteName && (
+                <NavigationContainer theme={theme}>
+                  <Stack.Navigator initialRouteName={initialRouteName}>
+                    {isLoggedIn ? DashboardScreens() : AuthenticationScreens()}
+                  </Stack.Navigator>
+                  {/** @ts-ignore */}
+                  <Toast config={toastConfig} position={'bottom'} />
+                </NavigationContainer>
+              )}
             </PaperProvider>
           </PersistGate>
         </Provider>

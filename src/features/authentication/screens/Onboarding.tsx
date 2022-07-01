@@ -13,7 +13,17 @@ import {
   View,
 } from 'react-native';
 import { useTheme } from 'react-native-paper';
-import Carousel, { Pagination } from 'react-native-snap-carousel';
+import Carousel, {
+  Pagination,
+  ParallaxImage,
+} from 'react-native-snap-carousel';
+
+const background = [
+  require('@assets/onboarding/bg-1.png'),
+  require('@assets/onboarding/bg-2.png'),
+  require('@assets/onboarding/bg-3.png'),
+  require('@assets/onboarding/bg-4.png'),
+];
 
 const data = [
   {
@@ -59,28 +69,36 @@ const OnboardingScreen: React.FC = () => {
 
   const renderCarouselItem = ({ item, index }: any) => {
     return (
-      <View style={styles.itemContainer} key={index}>
-        <Image source={item.img} style={styles.image} />
-        <Pagination
-          activeDotIndex={activeIndex}
-          dotsLength={data.length}
-          containerStyle={styles.pagination}
-          dotStyle={{ margin: 0 }}
-          dotElement={<Dot isActive={index === activeIndex} />}
-          inactiveDotScale={1.5}
-          inactiveDotOpacity={1}
-          dotColor={'transparent'}
-          inactiveDotColor={'white'}
-        />
-        <View style={styles.textContainer}>
-          <Text style={styles.onboardingDescription} size={18} color={'white'}>
-            {item.text}
-          </Text>
+      <ImageBackground
+        style={styles.background}
+        resizeMode={'stretch'}
+        source={background[index]}>
+        <View style={styles.itemContainer} key={index}>
+          <Image source={item.img} style={styles.image} />
+          <Pagination
+            activeDotIndex={activeIndex}
+            dotsLength={data.length}
+            containerStyle={styles.pagination}
+            dotStyle={{ margin: 0 }}
+            dotElement={<Dot isActive={index === activeIndex} />}
+            inactiveDotScale={1.5}
+            inactiveDotOpacity={1}
+            dotColor={'transparent'}
+            inactiveDotColor={'white'}
+          />
+          <View style={styles.textContainer}>
+            <Text
+              style={styles.onboardingDescription}
+              size={18}
+              color={'white'}>
+              {item.text}
+            </Text>
+          </View>
+          <Button onPress={onPressNextButton} btnStyle={styles.btnNext}>
+            {activeIndex === data.length - 1 ? 'Mulai' : 'Lanjut'}
+          </Button>
         </View>
-        <Button onPress={onPressNextButton} btnStyle={styles.btnNext}>
-          {activeIndex === data.length - 1 ? 'Mulai' : 'Lanjut'}
-        </Button>
-      </View>
+      </ImageBackground>
     );
   };
 
@@ -90,10 +108,6 @@ const OnboardingScreen: React.FC = () => {
 
   return (
     <View style={[styles.container, { backgroundColor: theme.colors.primary }]}>
-      <ImageBackground
-        source={require('@assets/curve-background.svg')}
-        style={{ flex: 1, position: 'absolute' }}
-      />
       <Carousel
         ref={carouselRef}
         layout='default'
@@ -102,7 +116,7 @@ const OnboardingScreen: React.FC = () => {
         onSnapToItem={onSnapItem}
         renderItem={renderCarouselItem}
         sliderWidth={SLIDER_WIDTH}
-        itemWidth={SLIDER_WIDTH - 20}
+        itemWidth={SLIDER_WIDTH}
         snapToStart
         enableSnap
         scrollEnabled={false}
@@ -157,5 +171,11 @@ const styles = StyleSheet.create({
   image: {
     width: 250,
     height: 250,
+  },
+  background: {
+    flex: 1,
+    alignItems: 'center',
+    resizeMode: 'cover',
+    width: DeviceContants.screenWidth,
   },
 });

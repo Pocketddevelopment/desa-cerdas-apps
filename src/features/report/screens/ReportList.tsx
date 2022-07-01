@@ -14,17 +14,22 @@ const ReportListScreen: React.FC = () => {
 
   const onPressItem = (title: string) => {
     RNFS.downloadFile({
-      fromUrl: 'https://facebook.github.io/react-native/img/header_logo.png',
-      toFile: `${RNFS.DocumentDirectoryPath}/react-native.png`,
+      fromUrl:
+        'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+      toFile: `${RNFS.DocumentDirectoryPath}/${title}`,
     })
       .promise.then((r) => {
+        console.log(`${RNFS.DocumentDirectoryPath}/${title}.pdf`);
         Toast.show({
+          type: 'standard',
           text1: `Berhasil mengunduh ${title}`,
         });
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log(err);
         Toast.show({
-          text1: `Berhasil mengunduh ${title}`,
+          type: 'standard',
+          text1: `Gagal mengunduh ${title}`,
         });
       });
   };
@@ -80,7 +85,6 @@ const ReportListScreen: React.FC = () => {
         title='Anggaran Pendapatan Belanja Desa 2021'
         onDownload={() => onPressItem('Anggaran Pendapatan Belanja Desa 2021')}
       />
-      <Toast position='bottom' bottomOffset={20} />
     </ScrollView>
   );
 };

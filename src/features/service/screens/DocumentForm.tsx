@@ -60,7 +60,7 @@ const DocumentFormScreen: React.FC = ({ navigation }: any) => {
         <KeyboardAvoidingView style={{ flex: 1 }} behavior={'padding'}>
           <Container>
             <TextInput
-              placeholder='Jenis Dokumen'
+              placeholder='Judul Laporan Keluhan'
               value={selectedDocumentTypes}
               suffixIcon='chevron-down'
               onPressSuffix={onPressDocumentTypeList}

@@ -52,12 +52,17 @@ const WeatherCard = () => {
           <Text size={16} style={{ marginTop: -5 }}>
             Hujan Sedang
           </Text>
-          <Row>
-            <Image
-              source={require('@assets/weather/wind.png')}
-              style={styles.weatherIcon}
-            />
-            <Text size={13}>Angin : 4,8m/detik - Utara</Text>
+          <Row align='top' style={{ flex: 1, flexWrap: 'wrap' }}>
+            <Row align='center'>
+              <Image
+                source={require('@assets/weather/wind.png')}
+                style={styles.weatherIcon}
+              />
+              <Text size={13}>Angin : </Text>
+            </Row>
+            <View style={{ flex: 1 }}>
+              <Text size={13}>4,8m/detik - Utara</Text>
+            </View>
           </Row>
           <Row style={{ flex: 1, flexWrap: 'wrap' }}>
             <Row style={{ marginRight: 10 }}>
@@ -151,5 +156,10 @@ const styles = StyleSheet.create({
     width: 12,
     height: 12,
     marginRight: 5,
+    transform: [
+      {
+        rotate: '90deg',
+      },
+    ],
   },
 });

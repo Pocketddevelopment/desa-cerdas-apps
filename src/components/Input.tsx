@@ -1,6 +1,12 @@
 import onPressInterface from '@interfaces/Press.interface';
 import React, { useState } from 'react';
-import { KeyboardType, StyleSheet, View, ViewStyle } from 'react-native';
+import {
+  KeyboardType,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  ViewStyle,
+} from 'react-native';
 import {
   HelperText,
   TextInput as PaperTextInput,
@@ -64,8 +70,15 @@ export default function TextInput(
   if (isShadowPresent) {
     newStyles.push(styles.shadow);
   }
+
+  const ContainerTag: React.ElementType = onPressSuffix
+    ? TouchableOpacity
+    : View;
+
   return (
-    <View style={[styles.container, containerStyle]}>
+    <ContainerTag
+      style={[styles.container, containerStyle]}
+      onPress={() => onPressSuffix && onPressSuffix()}>
       <PaperTextInput
         underlineColor='transparent'
         underlineColorAndroid={'transparent'}
@@ -74,7 +87,7 @@ export default function TextInput(
         dense
         type
         mode='flat'
-        editable={props.suffixIcon ? false : true}
+        editable={onPressSuffix ? false : true}
         {...props}
         style={[newStyles, props.style]}
         onChangeText={(value: string) => setText(value)}
@@ -95,7 +108,7 @@ export default function TextInput(
           {text.length} / {props.maxLength}
         </HelperText>
       )}
-    </View>
+    </ContainerTag>
   );
 }
 

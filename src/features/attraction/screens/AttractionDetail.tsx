@@ -44,7 +44,6 @@ const AttractionDetailScreen: React.FC<AttractionDetailProps> = ({
     navigation.setOptions({
       title: title || '',
     });
-    console.log(thumbnailUri);
   }, [navigation, title]);
 
   const openMaps = () => {

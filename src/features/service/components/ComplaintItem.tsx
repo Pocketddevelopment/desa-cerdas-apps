@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
-import { useTheme } from 'react-native-paper';
+import { IconButton, useTheme } from 'react-native-paper';
 import { DashboardStackParamList } from '@dashboard/index';
 import SpaceBetween from '@components/SpaceBetween';
 import { Caption, Text, Title } from '@components/typography';
@@ -14,6 +14,7 @@ type ComplaintItemProps = {
   title: string;
   description: string;
   count: number;
+  resolved?: boolean;
 };
 
 const ComplaintItem = ({
@@ -22,6 +23,7 @@ const ComplaintItem = ({
   title,
   description,
   count,
+  resolved,
 }: ComplaintItemProps) => {
   const theme = useTheme();
   const navigation =
@@ -34,6 +36,7 @@ const ComplaintItem = ({
       title,
       description,
       count,
+      resolved,
     };
     navigation.navigate('ComplaintDetail', {
       data: data,
@@ -43,12 +46,21 @@ const ComplaintItem = ({
   return (
     <TouchableOpacity delayPressIn={80} onPress={onPress}>
       <Row style={styles.container}>
-        <Image
-          source={{
-            uri: thumbnailUri,
-          }}
-          style={styles.image}
-        />
+        <View>
+          <Image
+            source={{
+              uri: thumbnailUri,
+            }}
+            style={styles.image}
+          />
+          {resolved && (
+            <Image
+              source={require('@assets/check.webp')}
+              style={styles.btnAttachmentCancel}
+            />
+          )}
+        </View>
+
         <View style={{ flex: 1 }}>
           <SpaceBetween style={{ marginBottom: 3 }}>
             <Caption>{date}</Caption>
@@ -82,5 +94,13 @@ const styles = StyleSheet.create({
     marginRight: 10,
     borderRadius: 10,
     resizeMode: 'cover',
+  },
+  btnAttachmentCancel: {
+    width: 20,
+    height: 20,
+    position: 'absolute',
+    top: 3,
+    right: 12,
+    zIndex: 1,
   },
 });

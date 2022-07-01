@@ -48,6 +48,7 @@ const ComplaintScreen: React.FC = () => {
             title='Sampah Kiriman Berdampak Banjir di Kabupaten Bandung'
             description='Sampah kiriman dari Kota Bandung yang mengalir dari Sungai Cikapundung dan bermuara ke Sungai Citarum menumpuk di Jembatan Leuwi Bandung, Kecamatan Bojongsoang. Akibatnya, air yang ada di sungai tersebut meluap ke pemukiman warga dan merendam ratusan rumah yang berada di Kampung Lewi Bandung, Desa Cijagra, Kecamatan Bojong Soang.'
             count={0}
+            resolved
           />
           <Separator />
           <ComplaintItem

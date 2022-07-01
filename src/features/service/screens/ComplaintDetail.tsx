@@ -30,7 +30,8 @@ const ComplaintDetailScreen: React.FC<ComplaintDetailProps> = ({
   navigation,
   route,
 }) => {
-  const { date, thumbnailUri, title, description, count } = route.params?.data;
+  const { date, thumbnailUri, title, description, count, resolved } =
+    route.params?.data;
   const theme = useTheme();
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [inputHeight, setInputHeight] = useState<number>(20);
@@ -138,21 +139,37 @@ const ComplaintDetailScreen: React.FC<ComplaintDetailProps> = ({
         </View>
       </ScrollView>
       <Row style={styles.chatBox}>
-        <View style={styles.inputBox}>
-          <TextInput
-            placeholder='Balas Keluhan...'
-            multiline
-            style={{ paddingTop: 5 }}
-            onContentSizeChange={(event) => {
-              setInputHeight(
-                event.nativeEvent.contentSize.height > 150
-                  ? 100
-                  : event.nativeEvent.contentSize.height - 10
-              );
-            }}
-          />
-        </View>
-        <IconButton icon={'send'} color={theme.colors.primary} />
+        {resolved ? (
+          <View
+            style={[
+              styles.successContainer,
+              { backgroundColor: theme.colors['success-background'] },
+            ]}>
+            <Image
+              source={require('@assets/check.webp')}
+              style={styles.successIcon}
+            />
+            <Text color={theme.colors.success}>Selesai</Text>
+          </View>
+        ) : (
+          <>
+            <View style={styles.inputBox}>
+              <TextInput
+                placeholder='Balas Keluhan...'
+                multiline
+                style={{ paddingTop: 5 }}
+                onContentSizeChange={(event) => {
+                  setInputHeight(
+                    event.nativeEvent.contentSize.height > 150
+                      ? 100
+                      : event.nativeEvent.contentSize.height - 10
+                  );
+                }}
+              />
+            </View>
+            <IconButton icon={'send'} color={theme.colors.primary} />
+          </>
+        )}
       </Row>
     </View>
   );
@@ -217,11 +234,26 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     paddingLeft: 20,
     paddingVertical: 10,
+    justifyContent: 'center',
   },
   inputBox: {
     flex: 1,
     marginRight: 5,
     minHeight: CHAT_BOX_HEIGHT,
     maxHeight: 150,
+  },
+  successContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 10,
+    paddingHorizontal: 25,
+    marginVertical: 5,
+    borderRadius: 20,
+  },
+  successIcon: {
+    height: 20,
+    width: 20,
+    marginRight: 5,
   },
 });
