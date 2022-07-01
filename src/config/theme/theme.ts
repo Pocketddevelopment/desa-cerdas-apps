@@ -3,9 +3,67 @@ import {
   DefaultTheme as NavigationDefaultTheme,
 } from '@react-navigation/native';
 import {
+  configureFonts,
   DarkTheme as PaperDarkTheme,
   DefaultTheme as PaperDefaultTheme,
 } from 'react-native-paper';
+
+const fontConfig = {
+  web: {
+    regular: {
+      fontFamily: 'Inter-Regular',
+      fontWeight: 'normal',
+    },
+    medium: {
+      fontFamily: 'Inter-Medium',
+      fontWeight: 'normal',
+    },
+    light: {
+      fontFamily: 'Inter-Light',
+      fontWeight: 'normal',
+    },
+    thin: {
+      fontFamily: 'Inter-Thin',
+      fontWeight: 'normal',
+    },
+  },
+  ios: {
+    regular: {
+      fontFamily: 'Inter-Regular',
+      fontWeight: 'normal',
+    },
+    medium: {
+      fontFamily: 'Inter-Medium',
+      fontWeight: 'normal',
+    },
+    light: {
+      fontFamily: 'Inter-Light',
+      fontWeight: 'normal',
+    },
+    thin: {
+      fontFamily: 'Inter-Thin',
+      fontWeight: 'normal',
+    },
+  },
+  android: {
+    regular: {
+      fontFamily: 'Inter-Regular',
+      fontWeight: 'normal',
+    },
+    medium: {
+      fontFamily: 'Inter-Medium',
+      fontWeight: 'normal',
+    },
+    light: {
+      fontFamily: 'Inter-Light',
+      fontWeight: 'normal',
+    },
+    thin: {
+      fontFamily: 'Inter-Thin',
+      fontWeight: 'normal',
+    },
+  },
+};
 
 declare global {
   namespace ReactNativePaper {
@@ -46,6 +104,8 @@ export const CombinedDefaultTheme = {
     'success-background': '#DEF7E3',
     success: '#00850C',
   },
+  // @ts-ignore
+  fonts: configureFonts(fontConfig),
   myOwnProperty: true,
 };
 
