@@ -22,7 +22,7 @@ const EventListScreen: React.FC<EventListProps> = ({ navigation, route }) => {
       showsVerticalScrollIndicator={false}
       contentContainerStyle={styles.container}>
       <EventItem
-        thumbnailUri='https://www.panggungharjo.desa.id/wp-content/uploads/2016/06/DSC0394-e1466498426643-660x400.jpg'
+        thumbnailUri='http://13.250.44.36:8002/bumdes/1.jpg'
         date='Selasa, 21 Juni 2016'
         title='Memajukan Ekonomi Desa Melalui BUMDes'
         description='Empat tujuan pendirian Bumdes itu sudah seharusnya melekat pada visi-misi sebuah pemerintahan desa. Ke empat tujuan itu seharusnya menjadi sikap dan dedikasi semua kepala desa dan perangkatnya. Sejumlah BUMdes yang sukses seperti BUMDes Minggirsari di Kabupaten Blitar atau BUMDes Panggungharjo di Kabupaten Bantul adalah contoh bagaimana pemerintahan desa memiliki visi-misi memajukan ekonomi desa mereka. BUMDes Panggungharjo berhasil membangun usaha pengelolaan sampah dan terus mengembangkan usahanya dengan menggandeng mitra-mitra strategis yang mereka miliki.
@@ -30,7 +30,7 @@ const EventListScreen: React.FC<EventListProps> = ({ navigation, route }) => {
       />
       <Separator width={'85%'} />
       <EventItem
-        thumbnailUri='http://pulosari-jombang.web.id/assets/files/artikel/kecil_1508244312IMG20171005122358.jpg'
+        thumbnailUri='http://13.250.44.36:8002/bumdes/2.jpg'
         date='Selasa, 21 Juni 2016'
         title='PEMANFAATAN DANA DESA UNTUK KEGIATAN BUMDes TAHUN 2018'
         description='Ini Kegiatan BUMDes 2018 Yang Dapat Didukung Oleh Dana Desa 2018
@@ -44,7 +44,7 @@ const EventListScreen: React.FC<EventListProps> = ({ navigation, route }) => {
       />
       <Separator width={'85%'} />
       <EventItem
-        thumbnailUri='https://kwadungan.ngawikab.id/wp-content/uploads/2021/07/WhatsApp-Image-2021-07-01-at-09.39.59-1080x675.jpeg'
+        thumbnailUri='http://13.250.44.36:8002/bumdes/3.jpg'
         date='Jumat, 1 Juli 2021'
         title='MUSYAWARAH DESA PENDIRIAN BUMDES DAN PEMBENTUKAN UNIT USAHA BUMDES'
         description='Kamis (01/07) bertempat di kantor Desa Kwadungan diselenggarakan musdes pendirian BUMDes dan pembentukan BUMDes. Musdes dihadiri oleh Camat Kwadungan beserta kasi pemerintahannya, Kepala Desa Kwadungan beserta perangkatnya dan ketua BPD beserta anggotanya. Musdes dimulai pukul 09.00 WIB.
@@ -53,7 +53,7 @@ const EventListScreen: React.FC<EventListProps> = ({ navigation, route }) => {
       />
       <Separator width={'85%'} />
       <EventItem
-        thumbnailUri='http://pasirsalam.sideka.id/wp-content/uploads/sites/5695/2018/10/image005-2-678x381.jpg'
+        thumbnailUri='http://13.250.44.36:8002/bumdes/4.jpg'
         date='Rabu, 22 Oktober 2021'
         title='Mengintip Kegiatan Bumdes Cahaya Abadi Desa Pasirsalam'
         description='Mengintip Kegiatan Bumdes Cahaya Abadi Desa Pasirsalam</div>
@@ -63,7 +63,7 @@ Fasilitas yang tersedia di Bumdes Cahaya Abadi masih terbatas, seperti ruangan y
       />
       <Separator width={'85%'} />
       <EventItem
-        thumbnailUri='https://lenterajambi.id/site/file/blog/63de18be991c075ce96a8eedb4e6ae98.jpg'
+        thumbnailUri='http://13.250.44.36:8002/bumdes/5.jpg'
         date='Kamis, 03 Juli 2020'
         title='Bangkitkan Ekonomi Desa Dimasa Pandemi: BumDes Cahaya Berkah Adakan Pelatihan'
         description='Bangkitkan Ekonomi Desa Dimasa Pandemi: BumDes Cahaya Berkah Adakan Pelatihan</div>
@@ -76,7 +76,7 @@ Kegiatan positif Bumdes ini bertujuan juga untuk membangkitkan kembali semangat 
       />
       <Separator width={'85%'} />
       <EventItem
-        thumbnailUri='https://camatpinggir.bengkaliskab.go.id/asset/berita/original/79385661194-img-20190410-wa0008.jpg'
+        thumbnailUri='http://13.250.44.36:8002/bumdes/1.jpg'
         date='Senin, 13 April 2019'
         title='Badan Usaha Milik Desa (BUMDESA) Muara Basung Melaksanakan Kegiatan Gebyar BUMDES'
         description='Badan Usaha Milik Desa (BUMDESA) Muara Basung Melaksanakan Kegiatan Gebyar BUMDES, Rabu 10 April 2019  Di Balai Pertemuan Kampung baru  Dusun III Sialang  Muda
@@ -85,14 +85,14 @@ Kegiatan positif Bumdes ini bertujuan juga untuk membangkitkan kembali semangat 
       />
       <Separator width={'85%'} />
       <EventItem
-        thumbnailUri='http://pulosari-jombang.web.id/assets/files/artikel/kecil_1508683660IMG20171005122312.jpg'
+        thumbnailUri='http://13.250.44.36:8002/bumdes/2.jpg'
         date='Senin, 22 Oktober 2019'
         title='MERAJUT KARYA DENGAN DANA DESA MELALUI BUMDES'
         description='BUM Des Bersama – Pengembangan produk unggulan Desa atau kawasan perdesaan, BUM Desa atau BUM Desa Bersama, embung air desa, dan sarana olahraga Desa sesuai dengan kewenangan Desa merupakan kegiatan prioritas penggunaan Dana Desa 2018. Sarana Olah Raga Desa merupakan salah satu unit usaha yang berada dibawah BUM Desa atau BUM Desa Bersama.'
       />
       <Separator width={'85%'} />
       <EventItem
-        thumbnailUri='https://suarabanyumas.com/wp-content/uploads/2019/12/12lserasi-K37-bms-2-640x375.jpg'
+        thumbnailUri='http://13.250.44.36:8002/bumdes/3.jpg'
         date='Senin, 14 November 2020'
         title='Pemdes dan Masyarakat Diminta Dorong BUMDes'
         description='Masyarakat dan pemerintah desa diminta terus mendorong perkembangan Badan Usaha Milik Desa (BUMDes) dengan memanfaatkan berbagai potensi dan usaha ekonomi yang ada di desanya masing-masing.
@@ -103,7 +103,7 @@ Kegiatan positif Bumdes ini bertujuan juga untuk membangkitkan kembali semangat 
       />
       <Separator width={'85%'} />
       <EventItem
-        thumbnailUri='https://1.bp.blogspot.com/-qADeEMBhmPo/XFOjn7uv7FI/AAAAAAABrsE/lWycU3WOsOgJEq25ycyHV_eqSOQvLLftwCLcBGAs/s1600/image%25281%2529.jpg'
+        thumbnailUri='http://13.250.44.36:8002/bumdes/4.jpg'
         date='Senin, 01 Februari 2019'
         title='Laporan Kegiatan Usaha dan Keuangan BUMDes Artha Jaya Kesuma'
         description='Kegiatan Musyawarah Desa (Musdes)
@@ -113,7 +113,7 @@ Kegiatan positif Bumdes ini bertujuan juga untuk membangkitkan kembali semangat 
         "Secara sistematis sebagai komisaris saya memantau perkembangan BUMDes Desa Tanjung Kesuma. Mulai pertama kali diberikan modal dari Dana Desa dan mekanismenya sudah kita ketahui bersama tahun ini kita belum melahirkan Perdes. Memang banyak sekali kendala -kendala yang dihadapi dan sikapi karena banyak sekali masalah - masalah yang  kita ketahui bersama ketika berbicara BUMDes sampai saat ini masih asa",kata Sugianto Komisaris BUMDes Artha Jaya Kesuma Desa Tanjung Kesuma Kamis, 31/1 jam 09:30 WIB diruang pertemuan kantor Desa setempat.'
       />
       <EventItem
-        thumbnailUri='https://desaloano.com/wp-content/uploads/2020/11/IMG-20201108-WA0016-1024x768.jpg'
+        thumbnailUri='http://13.250.44.36:8002/bumdes/5.jpg'
         date='Senin, 08 November 2020'
         title='Tunjukkan Eksistensi BUMDES Lowano Adikarso Mulai Beroperasi'
         description='Badan Usaha Milik Desa (BUMDES) Lowano Adikarso memulai kegiatan usaha perdananya di Kompleks Pasar Loano pada Minggu pagi 08/11. Bazar sembako murah merupakan tajuk kegiatan yang dilaksanakan pagi-siang hari tersebut.
