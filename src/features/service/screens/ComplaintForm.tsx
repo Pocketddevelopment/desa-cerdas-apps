@@ -30,7 +30,7 @@ const ComplaintFormScreen: React.FC = () => {
     <>
       <Container>
         <TextInput
-          placeholder='Subject'
+          placeholder='Judul Laporan Keluhan'
           maxLength={30}
           counter
           counterColor='error'
