@@ -158,10 +158,5 @@ const styles = StyleSheet.create({
     width: 12,
     height: 12,
     marginRight: 5,
-    transform: [
-      {
-        rotate: '90deg',
-      },
-    ],
   },
 });
