@@ -1,33 +1,38 @@
 import Separator from '@components/Separator';
 import { Caption } from '@components/typography';
+import { requestAndroidOnly } from '@utils/permissions';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
+import RNFS from 'react-native-fs';
+import Toast from 'react-native-toast-message';
 import ReportItem from '../../report/components/ReportItem';
 import EventItem from './EventItem';
-import Toast from 'react-native-toast-message';
-import RNFS from 'react-native-fs';
 
 const DistrictHighlight = () => {
-  const onPressItem = (title: string) => {
-    RNFS.downloadFile({
-      fromUrl:
-        'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
-      toFile: `${RNFS.DocumentDirectoryPath}/${title}`,
-    })
-      .promise.then((r) => {
-        console.log(`${RNFS.DocumentDirectoryPath}/${title}.pdf`);
-        Toast.show({
-          type: 'standard',
-          text1: `Berhasil mengunduh ${title}`,
-        });
+  const onPressItem = async (title: string) => {
+    const isGranted = await requestAndroidOnly(
+      'android.permission.WRITE_EXTERNAL_STORAGE'
+    );
+    if (isGranted) {
+      RNFS.downloadFile({
+        fromUrl:
+          'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+        toFile: `${RNFS.DownloadDirectoryPath}/${title}.pdf`,
       })
-      .catch((err) => {
-        console.log(err);
-        Toast.show({
-          type: 'standard',
-          text1: `Gagal mengunduh ${title}`,
+        .promise.then((r) => {
+          Toast.show({
+            type: 'standard',
+            text1: `Berhasil mengunduh ${title}`,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+          Toast.show({
+            type: 'standard',
+            text1: `Gagal mengunduh ${title}`,
+          });
         });
-      });
+    }
   };
   return (
     <View style={styles.card}>

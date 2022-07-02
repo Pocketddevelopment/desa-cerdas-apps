@@ -1,31 +1,36 @@
 import Separator from '@components/Separator';
 import DocumentItem from '@service/components/DocumentItem';
+import { requestAndroidOnly } from '@utils/permissions';
 import React from 'react';
+import RNFS from 'react-native-fs';
 import { ScrollView } from 'react-native-gesture-handler';
 import Toast from 'react-native-toast-message';
-import RNFS from 'react-native-fs';
 
 const DocumentHistoryScreen: React.FC = () => {
-  const onPressItem = (title: string) => {
-    RNFS.downloadFile({
-      fromUrl:
-        'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
-      toFile: `${RNFS.DocumentDirectoryPath}/${title}`,
-    })
-      .promise.then((r) => {
-        console.log(`${RNFS.DocumentDirectoryPath}/${title}.pdf`);
-        Toast.show({
-          type: 'standard',
-          text1: `Berhasil mengunduh ${title}`,
-        });
+  const onPressItem = async (title: string) => {
+    const isGranted = await requestAndroidOnly(
+      'android.permission.WRITE_EXTERNAL_STORAGE'
+    );
+    if (isGranted) {
+      RNFS.downloadFile({
+        fromUrl:
+          'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+        toFile: `${RNFS.DownloadDirectoryPath}/${title}.pdf`,
       })
-      .catch((err) => {
-        console.log(err);
-        Toast.show({
-          type: 'standard',
-          text1: `Gagal mengunduh ${title}`,
+        .promise.then((r) => {
+          Toast.show({
+            type: 'standard',
+            text1: `Berhasil mengunduh ${title}`,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+          Toast.show({
+            type: 'standard',
+            text1: `Gagal mengunduh ${title}`,
+          });
         });
-      });
+    }
   };
 
   return (
