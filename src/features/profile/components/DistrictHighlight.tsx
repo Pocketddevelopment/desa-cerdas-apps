@@ -4,14 +4,37 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import ReportItem from '../../report/components/ReportItem';
 import EventItem from './EventItem';
+import Toast from 'react-native-toast-message';
+import RNFS from 'react-native-fs';
 
 const DistrictHighlight = () => {
+  const onPressItem = (title: string) => {
+    RNFS.downloadFile({
+      fromUrl:
+        'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+      toFile: `${RNFS.DocumentDirectoryPath}/${title}`,
+    })
+      .promise.then((r) => {
+        console.log(`${RNFS.DocumentDirectoryPath}/${title}.pdf`);
+        Toast.show({
+          type: 'standard',
+          text1: `Berhasil mengunduh ${title}`,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        Toast.show({
+          type: 'standard',
+          text1: `Gagal mengunduh ${title}`,
+        });
+      });
+  };
   return (
     <View style={styles.card}>
       <View style={styles.section}>
         <Caption size={11}>Event Kegiatan</Caption>
         <EventItem
-          thumbnailUri='https://www.panggungharjo.desa.id/wp-content/uploads/2016/06/DSC0394-e1466498426643-660x400.jpg'
+          thumbnailUri='http://13.250.44.36:8002/bumdes/1.jpg'
           date='Selasa, 21 Juni 2016'
           title='Memajukan Ekonomi Desa Melalui BUMDes'
           description='Empat tujuan pendirian Bumdes itu sudah seharusnya melekat pada visi-misi sebuah pemerintahan desa. Ke empat tujuan itu seharusnya menjadi sikap dan dedikasi semua kepala desa dan perangkatnya. Sejumlah BUMdes yang sukses seperti BUMDes Minggirsari di Kabupaten Blitar atau BUMDes Panggungharjo di Kabupaten Bantul adalah contoh bagaimana pemerintahan desa memiliki visi-misi memajukan ekonomi desa mereka. BUMDes Panggungharjo berhasil membangun usaha pengelolaan sampah dan terus mengembangkan usahanya dengan menggandeng mitra-mitra strategis yang mereka miliki.
@@ -19,7 +42,7 @@ const DistrictHighlight = () => {
         />
         <Separator width={'85%'} />
         <EventItem
-          thumbnailUri='http://pulosari-jombang.web.id/assets/files/artikel/kecil_1508244312IMG20171005122358.jpg'
+          thumbnailUri='http://13.250.44.36:8002/bumdes/2.jpg'
           date='Selasa, 21 Juni 2016'
           title='PEMANFAATAN DANA DESA UNTUK KEGIATAN BUMDes TAHUN 2018'
           description='Ini Kegiatan BUMDes 2018 Yang Dapat Didukung Oleh Dana Desa 2018
@@ -33,7 +56,7 @@ const DistrictHighlight = () => {
         />
         <Separator width={'85%'} />
         <EventItem
-          thumbnailUri='https://kwadungan.ngawikab.id/wp-content/uploads/2021/07/WhatsApp-Image-2021-07-01-at-09.39.59-1080x675.jpeg'
+          thumbnailUri='http://13.250.44.36:8002/bumdes/3.jpg'
           date='Jumat, 1 Juli 2021'
           title='MUSYAWARAH DESA PENDIRIAN BUMDES DAN PEMBENTUKAN UNIT USAHA BUMDES'
           description='Kamis (01/07) bertempat di kantor Desa Kwadungan diselenggarakan musdes pendirian BUMDes dan pembentukan BUMDes. Musdes dihadiri oleh Camat Kwadungan beserta kasi pemerintahannya, Kepala Desa Kwadungan beserta perangkatnya dan ketua BPD beserta anggotanya. Musdes dimulai pukul 09.00 WIB.
@@ -47,18 +70,27 @@ const DistrictHighlight = () => {
           format='xlsx'
           date='Senin, 12 Maret 2022'
           title='Pengembangan sentra usaha tahu bulan Februari'
+          onDownload={() =>
+            onPressItem('Pengembangan sentra usaha tahu bulan Februari')
+          }
         />
         <Separator width={'90%'} />
         <ReportItem
           format='pdf'
           date='Senin, 11 Maret 2022'
           title='Rencana pembangunan sentra usaha tahu bulan Februari'
+          onDownload={() =>
+            onPressItem('Pengembangan sentra usaha tahu bulan Februari')
+          }
         />
         <Separator width={'90%'} />
         <ReportItem
           format='xlsx'
           date='Senin, 10 Maret 2022'
           title='Anggaran Pendapatan Belanja Desa 2021'
+          onDownload={() =>
+            onPressItem('Pengembangan sentra usaha tahu bulan Februari')
+          }
         />
       </View>
     </View>

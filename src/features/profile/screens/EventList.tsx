@@ -76,7 +76,7 @@ Kegiatan positif Bumdes ini bertujuan juga untuk membangkitkan kembali semangat 
       />
       <Separator width={'85%'} />
       <EventItem
-        thumbnailUri='http://13.250.44.36:8002/bumdes/1.jpg'
+        thumbnailUri='http://13.250.44.36:8002/bumdes/6.jpg'
         date='Senin, 13 April 2019'
         title='Badan Usaha Milik Desa (BUMDESA) Muara Basung Melaksanakan Kegiatan Gebyar BUMDES'
         description='Badan Usaha Milik Desa (BUMDESA) Muara Basung Melaksanakan Kegiatan Gebyar BUMDES, Rabu 10 April 2019  Di Balai Pertemuan Kampung baru  Dusun III Sialang  Muda
@@ -85,14 +85,14 @@ Kegiatan positif Bumdes ini bertujuan juga untuk membangkitkan kembali semangat 
       />
       <Separator width={'85%'} />
       <EventItem
-        thumbnailUri='http://13.250.44.36:8002/bumdes/2.jpg'
+        thumbnailUri='http://13.250.44.36:8002/bumdes/7.jpg'
         date='Senin, 22 Oktober 2019'
         title='MERAJUT KARYA DENGAN DANA DESA MELALUI BUMDES'
         description='BUM Des Bersama – Pengembangan produk unggulan Desa atau kawasan perdesaan, BUM Desa atau BUM Desa Bersama, embung air desa, dan sarana olahraga Desa sesuai dengan kewenangan Desa merupakan kegiatan prioritas penggunaan Dana Desa 2018. Sarana Olah Raga Desa merupakan salah satu unit usaha yang berada dibawah BUM Desa atau BUM Desa Bersama.'
       />
       <Separator width={'85%'} />
       <EventItem
-        thumbnailUri='http://13.250.44.36:8002/bumdes/3.jpg'
+        thumbnailUri='http://13.250.44.36:8002/bumdes/8.jpg'
         date='Senin, 14 November 2020'
         title='Pemdes dan Masyarakat Diminta Dorong BUMDes'
         description='Masyarakat dan pemerintah desa diminta terus mendorong perkembangan Badan Usaha Milik Desa (BUMDes) dengan memanfaatkan berbagai potensi dan usaha ekonomi yang ada di desanya masing-masing.
@@ -103,7 +103,7 @@ Kegiatan positif Bumdes ini bertujuan juga untuk membangkitkan kembali semangat 
       />
       <Separator width={'85%'} />
       <EventItem
-        thumbnailUri='http://13.250.44.36:8002/bumdes/4.jpg'
+        thumbnailUri='http://13.250.44.36:8002/bumdes/9.jpg'
         date='Senin, 01 Februari 2019'
         title='Laporan Kegiatan Usaha dan Keuangan BUMDes Artha Jaya Kesuma'
         description='Kegiatan Musyawarah Desa (Musdes)
@@ -113,7 +113,7 @@ Kegiatan positif Bumdes ini bertujuan juga untuk membangkitkan kembali semangat 
         "Secara sistematis sebagai komisaris saya memantau perkembangan BUMDes Desa Tanjung Kesuma. Mulai pertama kali diberikan modal dari Dana Desa dan mekanismenya sudah kita ketahui bersama tahun ini kita belum melahirkan Perdes. Memang banyak sekali kendala -kendala yang dihadapi dan sikapi karena banyak sekali masalah - masalah yang  kita ketahui bersama ketika berbicara BUMDes sampai saat ini masih asa",kata Sugianto Komisaris BUMDes Artha Jaya Kesuma Desa Tanjung Kesuma Kamis, 31/1 jam 09:30 WIB diruang pertemuan kantor Desa setempat.'
       />
       <EventItem
-        thumbnailUri='http://13.250.44.36:8002/bumdes/5.jpg'
+        thumbnailUri='http://13.250.44.36:8002/bumdes/10.jpg'
         date='Senin, 08 November 2020'
         title='Tunjukkan Eksistensi BUMDES Lowano Adikarso Mulai Beroperasi'
         description='Badan Usaha Milik Desa (BUMDES) Lowano Adikarso memulai kegiatan usaha perdananya di Kompleks Pasar Loano pada Minggu pagi 08/11. Bazar sembako murah merupakan tajuk kegiatan yang dilaksanakan pagi-siang hari tersebut.

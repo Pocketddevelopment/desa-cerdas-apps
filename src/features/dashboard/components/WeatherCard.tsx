@@ -52,19 +52,21 @@ const WeatherCard = () => {
           <Text size={16} style={{ marginTop: -5 }}>
             Hujan Sedang
           </Text>
-          <Row align='top' style={{ flex: 1, flexWrap: 'wrap' }}>
-            <Row align='center'>
-              <Image
-                source={require('@assets/weather/wind.png')}
-                style={styles.weatherIcon}
-              />
-              <Text size={13}>Angin : </Text>
+          <Row>
+            <Row align='top' style={{ flex: 1, flexWrap: 'wrap' }}>
+              <Row align='center'>
+                <Image
+                  source={require('@assets/weather/wind.png')}
+                  style={styles.weatherIcon}
+                />
+                <Text size={13}>Angin : </Text>
+              </Row>
+              <View style={{ flex: 1 }}>
+                <Text size={13}>4,8m/detik - Utara</Text>
+              </View>
             </Row>
-            <View style={{ flex: 1 }}>
-              <Text size={13}>4,8m/detik - Utara</Text>
-            </View>
           </Row>
-          <Row style={{ flex: 1, flexWrap: 'wrap' }}>
+          <Row align='top' style={{ flex: 1, flexWrap: 'wrap' }}>
             <Row style={{ marginRight: 10 }}>
               <Image
                 source={require('@assets/weather/humid.png')}

@@ -18,21 +18,21 @@ const Placeman = () => {
         idNumber='141/Kep.1124-Huk/201'
       />
       <PlacemanCard
-        thumbnailUri='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9F59uOTpkeTJpE-nzq-Cm-U-O7TmiP_Gf4A&usqp=CAU'
+        thumbnailUri='http://13.250.44.36:8002/pejabat/4.jpg'
         name='Mastur'
         position='Wakil Kepala Desa'
         phone='08913131931'
         idNumber='141/Kep.1124-Huk/201'
       />
       <PlacemanCard
-        thumbnailUri='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiQ5EXJpIZhLKIkfixdYpl-U8GbtgHzlGVLA&usqp=CAU'
+        thumbnailUri='http://13.250.44.36:8002/pejabat/3.jpg'
         name='BUDI'
         position='Bendahara'
         phone='08913131931'
         idNumber='141/Kep.1124-Huk/201'
       />
       <PlacemanCard
-        thumbnailUri='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQc8eVUVcDv0d721VpLhrqDGZ__O2h4_i_TLw&usqp=CAU'
+        thumbnailUri='http://13.250.44.36:8002/pejabat/2.jpg'
         name='Arban'
         position='Humas'
         phone='08913131931'

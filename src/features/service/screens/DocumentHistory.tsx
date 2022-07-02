@@ -56,7 +56,7 @@ const DocumentHistoryScreen: React.FC = () => {
       <DocumentItem
         format='pdf'
         date='Senin, 11 Maret 2022'
-        title='Surat Pengesahan ANggaran Usaha 2022'
+        title='Surat Pengesahan Anggaran Usaha 2022'
         onDownload={() => onPressItem('Surat Pengesahan ANggaran Usaha 2022')}
       />
       <Separator width={'85%'} color={'lightgrey'} />
