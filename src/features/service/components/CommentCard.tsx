@@ -74,7 +74,9 @@ const CommentCard = ({
         <Caption size={14} color={theme.colors.primary}>
           {name}
         </Caption>
-        <Caption>{date}</Caption>
+        <Caption>
+          {date} {`${isSelf ? `via ${medium}` : ''}`}
+        </Caption>
       </View>
     </View>
   );
