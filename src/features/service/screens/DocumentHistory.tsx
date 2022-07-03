@@ -39,42 +39,42 @@ const DocumentHistoryScreen: React.FC = () => {
       contentContainerStyle={{ flexGrow: 1 }}>
       <DocumentItem
         format='xlsx'
-        date='Senin, 11 Maret 2022'
+        date='Senin, 11 Maret 2022 | 12:33'
         title='SKTM'
         onDownload={() => onPressItem('SKTM')}
       />
       <Separator width={'85%'} color={'lightgrey'} />
       <DocumentItem
         format='xlsx'
-        date='Senin, 11 Maret 2022'
+        date='Senin, 11 Maret 2022 | 13:13'
         title='SKCK'
         onDownload={() => onPressItem('SKCK')}
       />
       <Separator width={'85%'} color={'lightgrey'} />
       <DocumentItem
         format='pdf'
-        date='Senin, 11 Maret 2022'
+        date='Senin, 11 Maret 2022 | 09:55'
         title='Surat Pengantar'
         onDownload={() => onPressItem('Surat Pengantar')}
       />
       <Separator width={'85%'} color={'lightgrey'} />
       <DocumentItem
         format='pdf'
-        date='Senin, 11 Maret 2022'
+        date='Senin, 11 Maret 2022 | 02:43'
         title='Surat Pengesahan Anggaran Usaha 2022'
         onDownload={() => onPressItem('Surat Pengesahan ANggaran Usaha 2022')}
       />
       <Separator width={'85%'} color={'lightgrey'} />
       <DocumentItem
         format='pdf'
-        date='Senin, 11 Maret 2022'
+        date='Senin, 11 Maret 2022 | 12:33'
         title='Akte Pendirian Usaha'
         onDownload={() => onPressItem('Akte Pendirian Usaha')}
       />
       <Separator width={'85%'} color={'lightgrey'} />
       <DocumentItem
         format='xlsx'
-        date='Senin, 11 Maret 2022'
+        date='Senin, 11 Maret 2022 | 16:22'
         title='Surat Pengaktifan Pajak'
         onDownload={() => onPressItem('Surat Pengaktifan Pajak')}
       />
