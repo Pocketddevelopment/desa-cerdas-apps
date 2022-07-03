@@ -93,7 +93,6 @@ const LoginScreen: React.FC = () => {
                   shadow={false}
                   onChangeText={onChange}
                   value={value}
-                  maxLength={16}
                   errorMessage={errors?.Password?.message}
                   errorColor={theme.colors['error-secondary']}
                 />
