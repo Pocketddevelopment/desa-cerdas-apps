@@ -23,6 +23,7 @@ type AdditionalTextInputProps = {
   containerStyle: ViewStyle;
   counterColor: 'error' | 'info';
   errorMessage: string;
+  errorColor: string;
 };
 
 export default function TextInput(
@@ -36,6 +37,7 @@ export default function TextInput(
     counterColor,
     onPressSuffix,
     errorMessage,
+    errorColor,
   } = props;
   const isShadowPresent = props.shadow === undefined ? true : props.shadow;
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -110,16 +112,21 @@ export default function TextInput(
           type={
             counterColor
               ? counterColor
-              : text.length > props.maxLength
+              : props.value && props.value.length > props.maxLength
               ? 'error'
               : 'info'
           }
           style={styles.counter}>
-          {text.length} / {props.maxLength}
+          {props.value && props.value.length} / {props.maxLength}
         </HelperText>
       )}
       {errorMessage && (
-        <HelperText type={'error'} style={styles.counter}>
+        <HelperText
+          type={'error'}
+          style={[
+            styles.counter,
+            { color: errorColor ? errorColor : theme.colors.error },
+          ]}>
           {errorMessage}
         </HelperText>
       )}

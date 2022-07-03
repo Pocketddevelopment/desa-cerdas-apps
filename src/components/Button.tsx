@@ -1,11 +1,17 @@
 import React from 'react';
-import { StyleSheet, ViewStyle } from 'react-native';
+import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 import { Button as PaperButton, useTheme } from 'react-native-paper';
 import Props from 'react-native-paper/lib/typescript/components/Button';
 
 type ButtonAdditionalProps = {
   primary: boolean;
-  btnStyle: ViewStyle;
+  btnStyle:
+    | ViewStyle
+    | ViewStyle[]
+    | StyleProp<ViewStyle>
+    | StyleProp<ViewStyle>[]
+    | undefined
+    | any;
 };
 
 type ButtonProps = React.ComponentProps<typeof Props> & ButtonAdditionalProps;
