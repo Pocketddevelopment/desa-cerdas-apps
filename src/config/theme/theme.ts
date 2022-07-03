@@ -72,6 +72,7 @@ declare global {
       separator: string;
       success: string;
       'success-background': string;
+      'error-secondary': string;
     }
 
     interface Theme {
@@ -104,6 +105,7 @@ export const CombinedDefaultTheme = {
     'success-background': '#DEF7E3',
     success: '#00850C',
     error: '#B00020',
+    'error-secondary': '#FFB3B3',
   },
   // @ts-ignore
   fonts: configureFonts(fontConfig),
@@ -124,6 +126,7 @@ export const CombinedDarkTheme = {
     'success-background': '#DEF7E3',
     success: '#00850C',
     error: '#B00020',
+    'error-secondary': '#FFB3B3',
   },
   myOwnProperty: true,
 };
