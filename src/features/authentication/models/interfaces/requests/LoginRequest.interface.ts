@@ -1,5 +1,9 @@
 export default interface LoginRequest {
   NIK: string;
   Password: string;
-  Type: string;
+}
+
+export interface LoginInputForm {
+  NIK: string;
+  Password: string;
 }
