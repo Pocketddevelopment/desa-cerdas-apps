@@ -1,6 +1,6 @@
 import Separator from '@components/Separator';
 import { Caption } from '@components/typography';
-import { requestAndroidOnly } from '@utils/permissions';
+import { requestStorageAndroid } from '@utils/permissions';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import RNFS from 'react-native-fs';
@@ -10,9 +10,7 @@ import EventItem from './EventItem';
 
 const DistrictHighlight = () => {
   const onPressItem = async (title: string) => {
-    const isGranted = await requestAndroidOnly(
-      'android.permission.WRITE_EXTERNAL_STORAGE'
-    );
+    const isGranted = await requestStorageAndroid();
     if (isGranted) {
       RNFS.downloadFile({
         fromUrl:
@@ -26,12 +24,16 @@ const DistrictHighlight = () => {
           });
         })
         .catch((err) => {
-          console.log(err);
           Toast.show({
             type: 'standard',
             text1: `Gagal mengunduh ${title}`,
           });
         });
+    } else {
+      Toast.show({
+        type: 'standard',
+        text1: 'Tidak ada izin akses penyimpanan',
+      });
     }
   };
   return (

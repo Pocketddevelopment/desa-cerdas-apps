@@ -1,6 +1,6 @@
 import Separator from '@components/Separator';
 import DocumentItem from '@service/components/DocumentItem';
-import { requestAndroidOnly } from '@utils/permissions';
+import { requestStorageAndroid } from '@utils/permissions';
 import React from 'react';
 import RNFS from 'react-native-fs';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -8,9 +8,7 @@ import Toast from 'react-native-toast-message';
 
 const DocumentHistoryScreen: React.FC = () => {
   const onPressItem = async (title: string) => {
-    const isGranted = await requestAndroidOnly(
-      'android.permission.WRITE_EXTERNAL_STORAGE'
-    );
+    const isGranted = await requestStorageAndroid();
     if (isGranted) {
       RNFS.downloadFile({
         fromUrl:
@@ -24,12 +22,16 @@ const DocumentHistoryScreen: React.FC = () => {
           });
         })
         .catch((err) => {
-          console.log(err);
           Toast.show({
             type: 'standard',
             text1: `Gagal mengunduh ${title}`,
           });
         });
+    } else {
+      Toast.show({
+        type: 'standard',
+        text1: 'Tidak ada izin akses penyimpanan',
+      });
     }
   };
 

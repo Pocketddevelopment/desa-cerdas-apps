@@ -2,7 +2,7 @@ import Separator from '@components/Separator';
 import { DashboardStackParamList } from '@dashboard/index';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { requestAndroidOnly } from '@utils/permissions';
+import { requestStorageAndroid } from '@utils/permissions';
 import React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 import RNFS from 'react-native-fs';
@@ -14,9 +14,7 @@ const ReportListScreen: React.FC = () => {
     useNavigation<NativeStackNavigationProp<DashboardStackParamList>>();
 
   const onPressItem = async (title: string) => {
-    const isGranted = await requestAndroidOnly(
-      'android.permission.WRITE_EXTERNAL_STORAGE'
-    );
+    const isGranted = await requestStorageAndroid();
     if (isGranted) {
       RNFS.downloadFile({
         fromUrl:
@@ -36,6 +34,11 @@ const ReportListScreen: React.FC = () => {
             text1: `Gagal mengunduh ${title}`,
           });
         });
+    } else {
+      Toast.show({
+        type: 'standard',
+        text1: 'Tidak ada izin akses penyimpanan',
+      });
     }
   };
 
