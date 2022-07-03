@@ -70,7 +70,11 @@ const CommentCard = ({
     <View
       style={[styles.card, { backgroundColor: isSelf ? '#FFF8E0' : 'white' }]}>
       {getLayout()}
-      <View style={styles.footer}>
+      <View
+        style={[
+          styles.footer,
+          { alignItems: isSelf ? 'flex-start' : 'flex-end' },
+        ]}>
         <Caption size={14} color={theme.colors.primary}>
           {name}
         </Caption>
