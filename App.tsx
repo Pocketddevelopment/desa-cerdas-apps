@@ -4,6 +4,7 @@ import {
   CombinedDefaultTheme,
   PreferencesContext,
 } from '@config/theme';
+import toastConfig from '@config/toast';
 import DashboardScreens from '@dashboard/index';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -17,10 +18,9 @@ import React, {
   useState,
 } from 'react';
 import { Provider as PaperProvider } from 'react-native-paper';
+import Toast from 'react-native-toast-message';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import Toast from 'react-native-toast-message';
-import toastConfig from '@config/toast';
 
 export const Stack = createNativeStackNavigator();
 export const AuthContext = createContext({});
@@ -72,13 +72,6 @@ const App: React.FC = () => {
         setLoggedIn(false);
         setReady(false);
         setInitialRouteName(undefined);
-      },
-      register: async (_: any) => {
-        // In a production app, we need to send user data to server and get a token
-        // We will also need to handle errors if sign up failed
-        // After getting token, we need to persist the token using `SecureStore`
-        // In the example, we'll use a dummy token
-        // dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
       },
     }),
     []
