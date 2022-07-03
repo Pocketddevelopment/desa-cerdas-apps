@@ -103,6 +103,7 @@ export const CombinedDefaultTheme = {
     separator: '#E3E3E3',
     'success-background': '#DEF7E3',
     success: '#00850C',
+    error: '#B00020',
   },
   // @ts-ignore
   fonts: configureFonts(fontConfig),
@@ -122,6 +123,7 @@ export const CombinedDarkTheme = {
     separator: '#E3E3E3',
     'success-background': '#DEF7E3',
     success: '#00850C',
+    error: '#B00020',
   },
   myOwnProperty: true,
 };

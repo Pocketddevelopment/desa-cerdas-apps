@@ -22,14 +22,21 @@ type AdditionalTextInputProps = {
   counter?: boolean;
   containerStyle: ViewStyle;
   counterColor: 'error' | 'info';
+  errorMessage: string;
 };
 
 export default function TextInput(
   props: Partial<TextInputProps & AdditionalTextInputProps>
 ) {
   const theme = useTheme();
-  const [text, setText] = useState<string>('');
-  const { counter, containerStyle, type, counterColor, onPressSuffix } = props;
+  const {
+    counter,
+    containerStyle,
+    type,
+    counterColor,
+    onPressSuffix,
+    errorMessage,
+  } = props;
   const isShadowPresent = props.shadow === undefined ? true : props.shadow;
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
@@ -70,6 +77,9 @@ export default function TextInput(
   if (isShadowPresent) {
     newStyles.push(styles.shadow);
   }
+  if (errorMessage) {
+    newStyles.push(styles.errorContainer, { borderColor: theme.colors.error });
+  }
 
   const ContainerTag: React.ElementType = onPressSuffix
     ? TouchableOpacity
@@ -88,9 +98,9 @@ export default function TextInput(
         type
         mode='flat'
         editable={onPressSuffix ? false : true}
+        // error={!!errorMessage}
         {...props}
         style={[newStyles, props.style]}
-        onChangeText={(value: string) => setText(value)}
         keyboardType={getKeyboardType()}
         right={getRightIcon()}
         secureTextEntry={type === 'password' && !showPassword}
@@ -106,6 +116,11 @@ export default function TextInput(
           }
           style={styles.counter}>
           {text.length} / {props.maxLength}
+        </HelperText>
+      )}
+      {errorMessage && (
+        <HelperText type={'error'} style={styles.counter}>
+          {errorMessage}
         </HelperText>
       )}
     </ContainerTag>
@@ -131,8 +146,11 @@ const styles = StyleSheet.create({
       width: 5,
     },
   },
+  errorContainer: {
+    borderWidth: 1,
+  },
   counter: {
-    alignSelf: 'flex-end',
+    alignSelf: 'flex-start',
     paddingHorizontal: 0,
   },
 });
