@@ -8,8 +8,14 @@ import { DashboardStackParamList } from '@dashboard/index';
 import { RouteProp } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import CommentCard from '@service/components/CommentCard';
-import React, { useEffect, useState } from 'react';
-import { Image, ScrollView, StyleSheet, View } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import {
+  Image,
+  ScrollView,
+  ScrollViewProps,
+  StyleSheet,
+  View,
+} from 'react-native';
 import { IconButton, useTheme } from 'react-native-paper';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 
@@ -33,6 +39,7 @@ const ComplaintDetailScreen: React.FC<ComplaintDetailProps> = ({
   const { date, thumbnailUri, title, description, count, resolved } =
     route.params?.data;
   const theme = useTheme();
+  const commentScrollRef = useRef<ScrollView>(null);
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [inputHeight, setInputHeight] = useState<number>(20);
 
@@ -71,6 +78,7 @@ const ComplaintDetailScreen: React.FC<ComplaintDetailProps> = ({
   return (
     <View style={styles.container}>
       <ScrollView
+        ref={commentScrollRef}
         style={styles.container}
         contentContainerStyle={[
           styles.bodyContainer,
@@ -165,6 +173,7 @@ const ComplaintDetailScreen: React.FC<ComplaintDetailProps> = ({
                       : event.nativeEvent.contentSize.height - 10
                   );
                 }}
+                onFocus={() => commentScrollRef?.current?.scrollToEnd()}
               />
             </View>
             <IconButton icon={'send'} color={theme.colors.primary} />
