@@ -28,7 +28,6 @@ const ReportListScreen: React.FC = () => {
           });
         })
         .catch((err) => {
-          console.log(err);
           Toast.show({
             type: 'standard',
             text1: `Gagal mengunduh ${title}`,
