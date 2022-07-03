@@ -2,12 +2,33 @@ import Button from '@components/Button';
 import Input from '@components/Input';
 import { Text } from '@components/typography';
 import DeviceContants from '@constants/device';
+import { DashboardStackParamList } from '@dashboard/index';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
+import { Controller, useForm } from 'react-hook-form';
 import { ImageBackground, StyleSheet, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
+interface ForgetPasswordForm {
+  NIK: string;
+}
+
 const ForgetPasswordScreen: React.FC = () => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<DashboardStackParamList>>();
   const theme = useTheme();
+
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<ForgetPasswordForm>();
+
+  const onPressSend = () => {
+    navigation.goBack();
+  };
+
   return (
     <View style={[styles.container, { backgroundColor: theme.colors.primary }]}>
       <ImageBackground
@@ -19,8 +40,34 @@ const ForgetPasswordScreen: React.FC = () => {
             Kami akan mengirimkan pesan berisi password baru ke alamat email
             Anda
           </Text>
-          <Input containerStyle={styles.input} placeholder={'Email / NIK'} />
-          <Button btnStyle={{ width: '30%' }}>Kirim</Button>
+          <Controller
+            name='NIK'
+            control={control}
+            rules={{
+              required: {
+                value: true,
+                message: 'Email / NIK harus diisi',
+              },
+            }}
+            render={({ field: { onChange, value } }) => (
+              <Input
+                containerStyle={styles.input}
+                placeholder={'Email / NIK'}
+                shadow={false}
+                onChangeText={onChange}
+                value={value}
+                maxLength={16}
+                keyboardType={'email-address'}
+                errorMessage={errors?.NIK?.message}
+                errorColor={theme.colors['error-secondary']}
+              />
+            )}
+          />
+          <Button
+            btnStyle={{ width: '30%' }}
+            onPress={handleSubmit(onPressSend)}>
+            Kirim
+          </Button>
         </View>
       </ImageBackground>
     </View>

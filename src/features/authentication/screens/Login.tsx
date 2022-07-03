@@ -8,7 +8,7 @@ import DeviceContants from '@constants/device';
 import CheckBoxStatus from '@interfaces/enums/CheckBoxStatus.enum';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Image, ImageBackground, StyleSheet, View } from 'react-native';
 import { Checkbox, Text, useTheme } from 'react-native-paper';
@@ -23,6 +23,8 @@ const LoginScreen: React.FC = () => {
   const [rememberMe, setRememberMe] = useState<CheckBoxStatus>(
     CheckBoxStatus.UNCHECKED
   );
+
+  useEffect(() => {}, []);
 
   // Form control
   const {
@@ -69,6 +71,7 @@ const LoginScreen: React.FC = () => {
                 maxLength={16}
                 keyboardType={'email-address'}
                 errorMessage={errors?.NIK?.message}
+                errorColor={theme.colors['error-secondary']}
               />
             )}
           />
@@ -92,6 +95,7 @@ const LoginScreen: React.FC = () => {
                   value={value}
                   maxLength={16}
                   errorMessage={errors?.Password?.message}
+                  errorColor={theme.colors['error-secondary']}
                 />
               )}
             />

@@ -7,5 +7,6 @@ export default class APIConstants {
   // Authentication
   static AUTHENTICATION = {
     LOGIN: '/api/Customer/Login',
+    REGISTER: '/api/Customer/Register',
   };
 }

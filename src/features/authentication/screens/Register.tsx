@@ -2,13 +2,15 @@ import {
   RegisterFormStep1,
   RegisterFormStep2,
 } from '@authentication/models/interfaces/requests/RegisterRequest.interface';
+import { registerThunk } from '@authentication/models/thunks';
 import Button from '@components/Button';
 import Container from '@components/Container';
 import Input from '@components/Input';
 import { useNavigation } from '@react-navigation/native';
+import { useAppDispatch } from '@store/hooks';
 import moment from 'moment';
 import 'moment/locale/id';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { StyleSheet, View } from 'react-native';
 import { DatePickerModal } from 'react-native-paper-dates';
@@ -16,6 +18,7 @@ moment.locale('id');
 
 const RegisterScreen: React.FC = () => {
   const navigation = useNavigation();
+  const dispatch = useAppDispatch();
   const [step, setStep] = useState<number>(0);
   const [showDatePicker, setShowDatePicker] = useState<boolean>(false);
   const [birthdate, setBirthdate] = useState<Date | undefined>(undefined);
@@ -28,13 +31,14 @@ const RegisterScreen: React.FC = () => {
     formState: { errors },
     setValue,
     trigger,
+    getValues,
   } = useForm<RegisterFormStep1>();
 
   const {
     handleSubmit: handleSubmit2,
     control: control2,
     formState: { errors: errors2 },
-    getValues,
+    getValues: getValues1,
   } = useForm<RegisterFormStep2>();
 
   const onDismissSingle = React.useCallback(() => {
@@ -50,18 +54,23 @@ const RegisterScreen: React.FC = () => {
     [setShowDatePicker, setBirthdate]
   );
 
-  const onPressNext = async (data: RegisterFormStep1 | RegisterFormStep2) => {
+  const onPressNext = async () => {
     if (step === 0) {
       setStep(step + 1);
     }
     if (step === 1) {
+      const step1Form = getValues();
+      const step2Form = getValues1();
+      delete step2Form.ConfirmPassword;
+      step2Form.RegisterType = 'AndroidInput';
+      const data = {
+        ...step1Form,
+        ...step2Form,
+      };
+      // dispatch(registerThunk(data));
       navigation.goBack();
     }
   };
-
-  useEffect(() => {
-    console.log(errors);
-  }, [errors]);
 
   return (
     <Container>
@@ -225,8 +234,8 @@ const RegisterScreen: React.FC = () => {
                 value: true,
                 message: 'Konfirmasi password harus diisi',
               },
-              validate: (confirmPassword: string) =>
-                confirmPassword === getValues('Password')
+              validate: (confirmPassword?: string) =>
+                confirmPassword === getValues1('Password')
                   ? true
                   : 'Konfirmasi password harus sama dengan password',
             }}

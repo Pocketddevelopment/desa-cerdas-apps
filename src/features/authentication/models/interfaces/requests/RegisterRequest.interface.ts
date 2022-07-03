@@ -8,5 +8,6 @@ export interface RegisterFormStep2 {
   Email: string;
   MobileNo: string;
   Password: string;
-  ConfirmPassword: string;
+  ConfirmPassword?: string;
+  RegisterType?: string;
 }
