@@ -30,6 +30,7 @@ export default function TextInput(
   props: Partial<TextInputProps & AdditionalTextInputProps>
 ) {
   const theme = useTheme();
+  const [text, setText] = useState<string>('');
   const {
     counter,
     containerStyle,
@@ -102,6 +103,9 @@ export default function TextInput(
         editable={onPressSuffix ? false : true}
         // error={!!errorMessage}
         {...props}
+        onChangeText={(value: string) => (
+          setText(value), props.onChangeText && props.onChangeText(value)
+        )}
         style={[newStyles, props.style]}
         keyboardType={getKeyboardType()}
         right={getRightIcon()}
@@ -112,19 +116,20 @@ export default function TextInput(
           type={
             counterColor
               ? counterColor
-              : props.value && props.value.length > props.maxLength
+              : (props.value ? props.value.length : text.length) >
+                props.maxLength
               ? 'error'
               : 'info'
           }
           style={styles.counter}>
-          {props.value && props.value.length} / {props.maxLength}
+          {props.value ? props.value.length : text.length} / {props.maxLength}
         </HelperText>
       )}
       {errorMessage && (
         <HelperText
           type={'error'}
           style={[
-            styles.counter,
+            styles.errorText,
             { color: errorColor ? errorColor : theme.colors.error },
           ]}>
           {errorMessage}
@@ -157,6 +162,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   counter: {
+    alignSelf: 'flex-end',
+    paddingHorizontal: 0,
+  },
+  errorText: {
     alignSelf: 'flex-start',
     paddingHorizontal: 0,
   },
