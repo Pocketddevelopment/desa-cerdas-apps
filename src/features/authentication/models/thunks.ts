@@ -16,7 +16,10 @@ export const loginThunk = createAsyncThunk(
 export const registerThunk = createAsyncThunk(
   'authentication/register',
   async (body: RegisterFormStep1 & RegisterFormStep2, _) => {
-    // return await register(body);
-    return;
+    try {
+      return await register(body);
+    } catch (err) {
+      throw err;
+    }
   }
 );

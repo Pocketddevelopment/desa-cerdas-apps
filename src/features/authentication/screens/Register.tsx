@@ -14,6 +14,7 @@ import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { StyleSheet, View } from 'react-native';
 import { DatePickerModal } from 'react-native-paper-dates';
+import Toast from 'react-native-toast-message';
 moment.locale('id');
 
 const RegisterScreen: React.FC = () => {
@@ -61,14 +62,35 @@ const RegisterScreen: React.FC = () => {
     if (step === 1) {
       const step1Form = getValues();
       const step2Form = getValues1();
+      const names: string[] = step1Form?.Name?.split(' ') as string[];
+      const FirstName = names[0];
+      names.splice(0, 1);
+      const LastName = names.join(' ');
+      step1Form.FirstName = FirstName;
+      step1Form.LastName = LastName;
+      delete step1Form.Name;
       delete step2Form.ConfirmPassword;
       step2Form.RegisterType = 'AndroidInput';
       const data = {
         ...step1Form,
         ...step2Form,
+        DateOfBirth: moment(step1Form.DateOfBirth).format('YYYY-MM-DD'),
       };
-      // dispatch(registerThunk(data));
-      navigation.goBack();
+      await dispatch(registerThunk(data))
+        .unwrap()
+        .then((response) => {
+          Toast.show({
+            type: 'standard',
+            text1: response.ResponseMessage,
+          });
+          navigation.goBack();
+        })
+        .catch((err) =>
+          Toast.show({
+            type: 'standard',
+            text1: err.ResponseMessage,
+          })
+        );
     }
   };
 
