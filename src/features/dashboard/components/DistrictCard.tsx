@@ -8,10 +8,16 @@ import { DashboardStackParamList } from '..';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Caption, Text, Title } from '@components/typography';
+import { useAppSelector } from '@store/hooks';
+import { RootState } from '@store/store';
 
 const DistrictCard = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<DashboardStackParamList>>();
+
+  const { account } = useAppSelector(
+    (state: RootState) => state.authentication
+  );
 
   function onPressShortcut(target: keyof DashboardStackParamList) {
     navigation.navigate(target);
@@ -25,13 +31,13 @@ const DistrictCard = () => {
       <Row>
         <Image
           source={{
-            uri: 'http://13.250.44.36:8001/assets/images/logo-desa.png',
+            uri: account?.DistrictIcon,
           }}
           style={styles.image}
         />
         <View>
-          <Title size={17}>Desa Pasir Ampo</Title>
-          <Text>Kresek, Tangerang</Text>
+          <Title size={17}>{account?.DistrictName}</Title>
+          <Text>{account?.DistrictDescription}</Text>
         </View>
       </Row>
       <Separator style={{ marginVertical: 10 }} />

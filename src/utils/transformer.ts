@@ -10,3 +10,7 @@ export const getQueryUrlParams = (
   }
   return queryUrl || '';
 };
+
+export const getInitialName = (name: string) => {
+  return (name && name.substring(0, 1)) || '';
+};

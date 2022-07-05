@@ -9,6 +9,9 @@ import NewsItem from '@dashboard/components/NewsItem';
 import WeatherCard from '@dashboard/components/WeatherCard';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useAppSelector } from '@store/hooks';
+import { RootState } from '@store/store';
+import { getInitialName } from '@utils/transformer';
 import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { Avatar, IconButton, useTheme } from 'react-native-paper';
@@ -17,6 +20,11 @@ import { DashboardStackParamList } from '..';
 const HomeScreen: React.FC = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<DashboardStackParamList>>();
+
+  const { account } = useAppSelector(
+    (state: RootState) => state.authentication
+  );
+
   const theme = useTheme();
   return (
     <View style={styles.container}>
@@ -29,15 +37,18 @@ const HomeScreen: React.FC = () => {
           <Row>
             <Avatar.Text
               size={48}
-              label='B'
+              label={getInitialName(account.FirstName)}
               color={theme.colors.text}
               labelStyle={{ fontWeight: '700', fontSize: 20 }}
               style={{ backgroundColor: '#FFEBEB' }}
             />
             <View style={styles.profileDetail}>
               <Text color={theme.colors.background}>Selamat Datang,</Text>
-              <Title color={theme.colors.background} style={styles.name}>
-                Bambang Sudrajat
+              <Title
+                color={theme.colors.background}
+                style={styles.name}
+                numberOfLines={1}>
+                {account.FirstName} {account.LastName}
               </Title>
             </View>
           </Row>
