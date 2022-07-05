@@ -44,4 +44,12 @@ export default class Storage {
   static removeItem = (key: string): void => {
     AsyncStorage.removeItem(key);
   };
+
+  /**
+   * Clear all local storage item
+   * @returns void
+   */
+  static clearItem = (): void => {
+    AsyncStorage.clear();
+  };
 }
