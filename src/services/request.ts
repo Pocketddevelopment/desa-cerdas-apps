@@ -2,6 +2,7 @@ import APIConstants from '@constants/api';
 import axiosInstance, { AxiosError, AxiosResponse } from 'axios';
 import type { Method, AxiosRequestConfig } from 'axios';
 import { getQueryUrlParams } from '@utils/transformer';
+import APIResponse from '@interfaces/APIResponse.interface';
 
 const axios = axiosInstance.create({
   baseURL: APIConstants.STAGING,
@@ -17,7 +18,7 @@ const defaultHttpHeaders: Record<string, string> = {
 const errorHandler = (error: {
   response: AxiosResponse;
   errorData: any;
-}): Record<string, string> => {
+}): APIResponse & Record<string, string> => {
   const { response, errorData } = error;
   // handle ResponseCode from API
   if (errorData) {
@@ -42,7 +43,9 @@ const errorHandler = (error: {
 /**
  * Response Handler
  */
-const responseHandler = (response: AxiosResponse): Record<string, string> => {
+const responseHandler = (
+  response: AxiosResponse
+): APIResponse & Record<string, string> => {
   const { data } = response;
   // Error occured
   if (data.ResponseCode === '99') {
