@@ -7,12 +7,14 @@ import rootReducers from './rootReducers';
 const persistConfig: PersistConfig<any> = {
   key: 'dc-app',
   storage,
+  whitelist: ['authentication'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducers);
 
 const store = configureStore({
   reducer: persistedReducer,
+  devTools: process.env.NODE_ENV !== 'production',
 });
 const persistor = persistStore(store);
 export { store, persistor };
