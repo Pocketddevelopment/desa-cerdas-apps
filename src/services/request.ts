@@ -14,11 +14,18 @@ const defaultHttpHeaders: Record<string, string> = {
 /**
  * Error handler
  */
-const errorHandler = (error: { response: AxiosResponse }): Response => {
-  const { response } = error;
-  if (response && response.status) {
-    const { status, data } = response;
-    console.error(data);
+const errorHandler = (error: {
+  response: AxiosResponse;
+  errorData: any;
+}): Record<string, string> => {
+  const { response, errorData } = error;
+  // handle ResponseCode from API
+  if (errorData) {
+    throw errorData.data;
+  }
+  // handle Error from axios
+  else if (response && response.status) {
+    const { status } = response;
     if (status === 401) {
       throw response.data;
     } else if (status === 403) {
@@ -28,12 +35,23 @@ const errorHandler = (error: { response: AxiosResponse }): Response => {
     } else if (status >= 400) {
       throw response.data;
     }
-    // handle ResponseCode from API
-    else if (data.ResponseCode == '99') {
-      throw data;
-    }
   }
   return response.data;
+};
+
+/**
+ * Response Handler
+ */
+const responseHandler = (response: AxiosResponse): Record<string, string> => {
+  const { data } = response;
+  // Error occured
+  if (data.ResponseCode === '99') {
+    throw {
+      errorData: response,
+    };
+  } else {
+    return data;
+  }
 };
 
 class NetworkRequest {
@@ -96,7 +114,7 @@ class NetworkRequest {
         ...options,
       })
       .then((response) => {
-        return response.data;
+        return responseHandler(response);
       })
       .catch((err: AxiosError) => {
         return errorHandler(err as any);
