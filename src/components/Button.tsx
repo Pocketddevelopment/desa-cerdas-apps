@@ -57,6 +57,7 @@ export default function Button(props: Partial<ButtonProps>) {
       uppercase={false}
       color={mainColor}
       labelStyle={getLabelStyle}
+      disabled={props.loading}
       {...props}
       style={props.btnStyle}
       contentStyle={[styles.container, getAdditionalStyle, props.style]}
