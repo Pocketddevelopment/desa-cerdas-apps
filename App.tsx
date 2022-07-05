@@ -5,6 +5,7 @@ import {
   PreferencesContext,
 } from '@config/theme';
 import toastConfig from '@config/toast';
+import StoreConstants from '@constants/store';
 import DashboardScreens from '@dashboard/index';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -33,11 +34,17 @@ const App: React.FC = () => {
 
   const getInitialRouteName = useCallback(async () => {
     if (!isLoggedIn && !initialRouteName) {
-      const isAutoLogin = await Storage.getItem('autoLogin', false);
+      const isAutoLogin = await Storage.getItem(
+        StoreConstants.AUTO_LOGIN,
+        false
+      );
       if (isAutoLogin) {
         setLoggedIn(true);
       }
-      const shouldOnboardLocal = await Storage.getItem('shouldOnboard', 'true');
+      const shouldOnboardLocal = await Storage.getItem(
+        StoreConstants.ONBOARDING,
+        'true'
+      );
       if (shouldOnboardLocal === 'true') {
         setInitialRouteName('Onboarding');
       } else {
