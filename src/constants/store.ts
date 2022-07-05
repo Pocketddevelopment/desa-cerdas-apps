@@ -5,6 +5,10 @@ export default class StoreConstants {
 
   // attraction, news, notification, report
   static MISC = 'misc';
+  static ATTRACTION = this.MISC;
+  static NEWS = this.MISC;
+  static NOTIFICATION = this.MISC;
+  static REPORT = this.MISC;
 
   // Storage Key Constants
   static AUTO_LOGIN = 'autoLogin';
