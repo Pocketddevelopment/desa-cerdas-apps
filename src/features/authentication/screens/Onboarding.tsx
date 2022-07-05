@@ -2,6 +2,7 @@ import Dot from '@authentication/components/PaginationDot';
 import Button from '@components/Button';
 import { Text } from '@components/typography';
 import DeviceContants from '@constants/device';
+import StoreConstants from '@constants/store';
 import { CommonActions, useNavigation } from '@react-navigation/native';
 import Storage from '@utils/async-storage';
 import React, { useRef, useState } from 'react';
@@ -62,7 +63,7 @@ const OnboardingScreen: React.FC = () => {
             routes: [{ name: 'Login' }],
           })
         );
-        Storage.setItem('shouldOnboard', false);
+        Storage.setItem(StoreConstants.ONBOARDING, false);
       }
     }
   };

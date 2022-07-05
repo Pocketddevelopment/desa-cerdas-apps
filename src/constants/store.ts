@@ -5,4 +5,9 @@ export default class StoreConstants {
 
   // attraction, news, notification, report
   static MISC = 'misc';
+
+  // Storage Key Constants
+  static AUTO_LOGIN = 'autoLogin';
+  static ONBOARDING = 'shouldOnboard';
+  static REFRESH_TOKEN = 'dc-ac-rt';
 }

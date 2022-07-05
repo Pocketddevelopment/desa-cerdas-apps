@@ -7,6 +7,7 @@ import Input from '@components/Input';
 import Row from '@components/Row';
 import SpaceBetween from '@components/SpaceBetween';
 import DeviceContants from '@constants/device';
+import StoreConstants from '@constants/store';
 import CheckBoxStatus from '@interfaces/enums/CheckBoxStatus.enum';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -64,7 +65,7 @@ const LoginScreen: React.FC = () => {
         });
       });
     if (rememberMe === 'checked') {
-      Storage.setItem('autoLogin', true);
+      Storage.setItem(StoreConstants.AUTO_LOGIN, true);
     }
   };
 
