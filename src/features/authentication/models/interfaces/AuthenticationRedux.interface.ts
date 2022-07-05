@@ -1,4 +1,4 @@
 export default interface AuthenticationRedux {
   account: any;
-  loading?: Record<string, boolean>;
+  loading: Record<string, boolean>;
 }

@@ -8,18 +8,22 @@ import {
 
 export const loginThunk = createAsyncThunk(
   'authentication/login',
-  async (body: LoginRequest, _) => {
-    return await login(body);
+  async (body: LoginRequest, { rejectWithValue }) => {
+    try {
+      return await login(body);
+    } catch (err) {
+      throw rejectWithValue(err);
+    }
   }
 );
 
 export const registerThunk = createAsyncThunk(
   'authentication/register',
-  async (body: RegisterFormStep1 & RegisterFormStep2, _) => {
+  async (body: RegisterFormStep1 & RegisterFormStep2, { rejectWithValue }) => {
     try {
       return await register(body);
     } catch (err) {
-      throw err;
+      throw rejectWithValue(err);
     }
   }
 );

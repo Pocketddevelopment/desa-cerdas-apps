@@ -1,5 +1,7 @@
 import { AuthContext } from '@@@/App';
+import AuthenticationRedux from '@authentication/models/interfaces/AuthenticationRedux.interface';
 import { LoginInputForm } from '@authentication/models/interfaces/requests/LoginRequest.interface';
+import { loginThunk } from '@authentication/models/thunks';
 import Button from '@components/Button';
 import Input from '@components/Input';
 import Row from '@components/Row';
@@ -8,14 +10,21 @@ import DeviceContants from '@constants/device';
 import CheckBoxStatus from '@interfaces/enums/CheckBoxStatus.enum';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { RootState } from '@store/store';
 import React, { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Image, ImageBackground, StyleSheet, View } from 'react-native';
 import { Checkbox, Text, useTheme } from 'react-native-paper';
+import Toast from 'react-native-toast-message';
 import { AuthenticationStackParamList } from '..';
 
 const LoginScreen: React.FC = () => {
   const theme = useTheme();
+  const dispatch = useAppDispatch();
+  const { loading } = useAppSelector(
+    (state: RootState) => state.authentication
+  );
   const navigation =
     useNavigation<NativeStackNavigationProp<AuthenticationStackParamList>>();
 
@@ -41,8 +50,18 @@ const LoginScreen: React.FC = () => {
     }
   };
 
-  const onPressLogin = () => {
-    logIn();
+  const onPressLogin = (data: LoginInputForm) => {
+    dispatch(loginThunk(data))
+      .unwrap()
+      .then(() => {
+        logIn();
+      })
+      .catch((err: any) => {
+        Toast.show({
+          type: 'standard',
+          text1: err.ResponseMessage,
+        });
+      });
   };
 
   return (
@@ -106,6 +125,7 @@ const LoginScreen: React.FC = () => {
                   marginTop: 5,
                 },
               ]}
+              loading={loading.account}
               style={{ width: 'auto' }}
               onPress={handleSubmit(onPressLogin)}>
               Masuk
