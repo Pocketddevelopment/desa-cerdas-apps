@@ -16,7 +16,13 @@ const initialState: AuthenticationRedux = {
 const Model = createSlice({
   name: 'authentication',
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    reset: (_, __) => {
+      return {
+        ...initialState,
+      };
+    },
+  },
   extraReducers: (builder) => {
     //Login handlers
     builder.addCase(

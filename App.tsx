@@ -33,6 +33,10 @@ const App: React.FC = () => {
 
   const getInitialRouteName = useCallback(async () => {
     if (!isLoggedIn && !initialRouteName) {
+      const isAutoLogin = await Storage.getItem('autoLogin', false);
+      if (isAutoLogin) {
+        setLoggedIn(true);
+      }
       const shouldOnboardLocal = await Storage.getItem('shouldOnboard', 'true');
       if (shouldOnboardLocal === 'true') {
         setInitialRouteName('Onboarding');
@@ -72,6 +76,7 @@ const App: React.FC = () => {
         setLoggedIn(false);
         setReady(false);
         setInitialRouteName(undefined);
+        Storage.clearItem();
       },
     }),
     []

@@ -1,12 +1,12 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { configureStore } from '@reduxjs/toolkit';
 import { PersistConfig, persistStore } from 'redux-persist';
 import persistReducer from 'redux-persist/es/persistReducer';
-import storage from 'redux-persist/lib/storage';
 import rootReducers from './rootReducers';
 
 const persistConfig: PersistConfig<any> = {
   key: 'dc-app',
-  storage,
+  storage: AsyncStorage,
   whitelist: ['authentication'],
 };
 

@@ -12,6 +12,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { RootState } from '@store/store';
+import Storage from '@utils/async-storage';
 import React, { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Image, ImageBackground, StyleSheet, View } from 'react-native';
@@ -62,6 +63,9 @@ const LoginScreen: React.FC = () => {
           text1: err.ResponseMessage,
         });
       });
+    if (rememberMe === 'checked') {
+      Storage.setItem('autoLogin', true);
+    }
   };
 
   return (

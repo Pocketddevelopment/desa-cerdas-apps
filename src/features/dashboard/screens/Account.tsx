@@ -5,6 +5,7 @@ import AccountCard from '@dashboard/components/AccountCard';
 import ScrollItem from '@dashboard/components/ScrollItem';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useAppDispatch } from '@store/hooks';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -13,6 +14,7 @@ import { DashboardStackParamList } from '..';
 const AccountScreen: React.FC = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<DashboardStackParamList>>();
+  const dispatch = useAppDispatch();
   const { logOut }: any = React.useContext(AuthContext);
 
   function onPressItem(target: keyof DashboardStackParamList, params?: any) {
@@ -20,6 +22,14 @@ const AccountScreen: React.FC = () => {
       title: params?.title,
       uri: params?.uri,
     });
+  }
+
+  function logout() {
+    // dispatch({
+    //   type: 'authentication/reset',
+    // });
+    logOut();
+    return;
   }
 
   return (
@@ -63,7 +73,7 @@ const AccountScreen: React.FC = () => {
             icon={require('@assets/account/logout.webp')}
             title='Keluar dari Akun'
             textStyle={{ color: 'red' }}
-            onPress={() => logOut()}
+            onPress={logout}
           />
         </ScrollView>
       </View>
