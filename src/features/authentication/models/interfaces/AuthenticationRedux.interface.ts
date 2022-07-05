@@ -1,4 +1,6 @@
+import { AccountInterface } from '@dashboard/models/Account.interface';
+
 export default interface AuthenticationRedux {
-  account: any;
+  account: AccountInterface | null;
   loading: Record<string, boolean>;
 }
