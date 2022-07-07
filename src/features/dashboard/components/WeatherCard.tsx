@@ -79,7 +79,12 @@ const WeatherCard = () => {
                 source={require('@assets/weather/uv.png')}
                 style={styles.weatherIcon}
               />
-              <Text size={13}>Indeks UV : 8</Text>
+              <Text size={13}>
+                Indeks UV :{' '}
+                <Text color='#FF3E3E' size={13}>
+                  8
+                </Text>
+              </Text>
             </Row>
           </Row>
         </View>

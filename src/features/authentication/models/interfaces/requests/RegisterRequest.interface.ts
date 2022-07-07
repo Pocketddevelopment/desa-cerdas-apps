@@ -4,6 +4,8 @@ export interface RegisterFormStep1 {
   DateOfBirth: string;
   FirstName: string;
   LastName: string;
+  MonthOfBirth: string;
+  YearOfBirth: string;
 }
 
 export interface RegisterFormStep2 {
