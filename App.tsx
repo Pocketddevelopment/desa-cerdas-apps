@@ -1,4 +1,7 @@
 import AuthenticationScreens from '@authentication/index';
+import ModalSelectorScreen, {
+  ModalSelectorScreenProps,
+} from '@components/ModalSelect';
 import {
   CombinedDarkTheme,
   CombinedDefaultTheme,
@@ -102,6 +105,16 @@ const App: React.FC = () => {
                 <NavigationContainer theme={theme}>
                   <Stack.Navigator initialRouteName={initialRouteName}>
                     {isLoggedIn ? DashboardScreens() : AuthenticationScreens()}
+                    <Stack.Group
+                      screenOptions={{
+                        presentation: 'transparentModal',
+                        headerShown: false,
+                      }}>
+                      <Stack.Screen
+                        name='ModalSelector'
+                        component={ModalSelectorScreen}
+                      />
+                    </Stack.Group>
                   </Stack.Navigator>
                   {/** @ts-ignore */}
                   <Toast config={toastConfig} position={'bottom'} />
@@ -116,3 +129,7 @@ const App: React.FC = () => {
 };
 
 export default App;
+
+export type RootStackParamList = {
+  ModalSelector: ModalSelectorScreenProps;
+};

@@ -2,6 +2,8 @@ export interface RegisterFormStep1 {
   NIK: string;
   Name: string;
   DateOfBirth: string;
+  MonthOfBirth: string;
+  YearOfBirth: string;
 }
 
 export interface RegisterFormStep2 {

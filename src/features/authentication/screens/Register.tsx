@@ -1,27 +1,86 @@
+import { RootStackParamList } from '@@@/App';
 import {
   RegisterFormStep1,
   RegisterFormStep2,
 } from '@authentication/models/interfaces/requests/RegisterRequest.interface';
-import { registerThunk } from '@authentication/models/thunks';
 import Button from '@components/Button';
 import Container from '@components/Container';
 import Input from '@components/Input';
+import Row from '@components/Row';
+import SelectItemInterface from '@interfaces/SelectItem.interface';
 import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useAppDispatch } from '@store/hooks';
 import moment from 'moment';
 import 'moment/locale/id';
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { StyleSheet, View } from 'react-native';
-import { DatePickerModal } from 'react-native-paper-dates';
 moment.locale('id');
 
 const RegisterScreen: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const dispatch = useAppDispatch();
+  const [dateList, setDateList] = useState<SelectItemInterface[]>([]);
+  const [monthList, setMonthList] = useState<SelectItemInterface[]>([]);
+  const [yearList, setYearList] = useState<SelectItemInterface[]>([]);
+
+  const getYears = useMemo(() => {
+    const currentYear = new Date().getFullYear(),
+      years: SelectItemInterface[] = [];
+    let startYear = currentYear - 102;
+    let index = 0;
+    while (startYear <= currentYear) {
+      years.push({ label: startYear++, value: index++ });
+    }
+    return years;
+  }, []);
+
+  const getMonths = useMemo(() => {
+    const months = moment().localeData().months();
+    const monthSelections = months.map((e: string, i: number) => {
+      return {
+        value: i,
+        label: e,
+      };
+    });
+    setMonthList(monthSelections);
+    return monthSelections;
+  }, []);
+
+  const getDates = useCallback((month?: number, year?: number) => {
+    const selectedYear = year || new Date().getFullYear();
+    const selectedMonth = month || '01';
+    let index = 0;
+
+    const daysInMonth = Array.from(
+      { length: moment(`${selectedYear}-${selectedMonth}`).daysInMonth() },
+      (x, i) => {
+        return {
+          label: moment().startOf('month').add(i, 'days').format('DD'),
+          value: index++,
+        };
+      }
+    );
+    const selectedDate = Number.parseInt(getValues('DateOfBirth') || '0');
+    // No date is present means its not valid date in month
+    if (!daysInMonth[selectedDate]) {
+      setValue(
+        'DateOfBirth',
+        daysInMonth[daysInMonth.length - 1].value.toString()
+      );
+    }
+    setDateList(daysInMonth);
+  }, []);
+
   const [step, setStep] = useState<number>(0);
-  const [showDatePicker, setShowDatePicker] = useState<boolean>(false);
-  const [birthdate, setBirthdate] = useState<Date | undefined>(undefined);
+
+  useEffect(() => {
+    setYearList(getYears);
+    setMonthList(getMonths);
+    getDates();
+  }, [getYears, getMonths]);
 
   // Form controls
   /** Step 1 Form control */
@@ -41,19 +100,6 @@ const RegisterScreen: React.FC = () => {
     getValues: getValues1,
   } = useForm<RegisterFormStep2>();
 
-  const onDismissSingle = React.useCallback(() => {
-    setShowDatePicker(false);
-  }, [showDatePicker]);
-
-  const onConfirmSingle = React.useCallback(
-    (params: any) => {
-      setShowDatePicker(false);
-      setValue('DateOfBirth', params.date);
-      trigger('DateOfBirth');
-    },
-    [setShowDatePicker, setBirthdate]
-  );
-
   const onPressNext = async () => {
     if (step === 0) {
       setStep(step + 1);
@@ -61,11 +107,25 @@ const RegisterScreen: React.FC = () => {
     if (step === 1) {
       const step1Form = getValues();
       const step2Form = getValues1();
+      const DateOfBirth = `${
+        yearList[Number.parseInt(step1Form.YearOfBirth)].label
+      }-${moment()
+        .startOf('years')
+        .add(
+          Number.parseInt(
+            monthList[Number.parseInt(step1Form.MonthOfBirth)].value as string
+          ),
+          'months'
+        )
+        .format('MM')}-${
+        dateList[Number.parseInt(step1Form.DateOfBirth)].label
+      }`;
       delete step2Form.ConfirmPassword;
       step2Form.RegisterType = 'AndroidInput';
       const data = {
         ...step1Form,
         ...step2Form,
+        DateOfBirth: DateOfBirth,
       };
       // dispatch(registerThunk(data));
       navigation.goBack();
@@ -123,26 +183,134 @@ const RegisterScreen: React.FC = () => {
               />
             )}
           />
-          <Controller
-            name='DateOfBirth'
-            control={control}
-            rules={{
-              required: {
-                value: true,
-                message: 'Tanggal lahir harus diisi',
-              },
-            }}
-            render={({ field: { onChange, value } }) => (
-              <Input
-                placeholder='Tanggal Lahir'
-                editable={false}
-                suffixIcon={'chevron-right'}
-                value={value ? moment(value).format('DD MMMM YYYY') : ''}
-                onPressSuffix={() => setShowDatePicker(true)}
-                errorMessage={errors?.DateOfBirth?.message}
+          <Row align='top'>
+            <View style={{ flex: 1 }}>
+              <Controller
+                name='DateOfBirth'
+                control={control}
+                rules={{
+                  required: {
+                    value: true,
+                    message: 'Tanggal lahir harus diisi',
+                  },
+                }}
+                render={({ field: { onChange, value } }) => (
+                  <Input
+                    placeholder='Tgl'
+                    editable={false}
+                    suffixIcon={'chevron-down'}
+                    value={
+                      value !== undefined
+                        ? (dateList[Number.parseInt(value)].label as string)
+                        : undefined
+                    }
+                    onPressSuffix={() =>
+                      navigation.navigate('ModalSelector', {
+                        title: 'Tanggal Lahir',
+                        data: dateList,
+                        initialSelectedIndex: value as unknown as number,
+                        onSelectItem: (selectedItem: SelectItemInterface) => {
+                          onChange(selectedItem.value);
+                        },
+                      })
+                    }
+                    errorMessage={errors?.DateOfBirth?.message}
+                  />
+                )}
               />
-            )}
-          />
+            </View>
+            <View style={{ flex: 1.5, marginHorizontal: 10 }}>
+              <Controller
+                name='MonthOfBirth'
+                control={control}
+                rules={{
+                  required: {
+                    value: true,
+                    message: 'Bulan lahir harus diisi',
+                  },
+                }}
+                render={({ field: { onChange, value } }) => (
+                  <Input
+                    placeholder='Bln lahir'
+                    editable={false}
+                    suffixIcon={'chevron-down'}
+                    value={
+                      value !== undefined
+                        ? (monthList[Number.parseInt(value)].label as string)
+                        : undefined
+                    }
+                    onPressSuffix={() =>
+                      navigation.navigate('ModalSelector', {
+                        title: 'Tanggal Lahir',
+                        data: monthList,
+                        initialSelectedIndex: value as unknown as number,
+                        onSelectItem: (selectedItem: SelectItemInterface) => {
+                          getDates(
+                            Number.parseInt(selectedItem.value as string) + 1,
+                            Number.parseInt(
+                              yearList[
+                                Number.parseInt(getValues('YearOfBirth') || '0')
+                              ].label.toString()
+                            )
+                          );
+                          onChange(selectedItem.value);
+                        },
+                      })
+                    }
+                    errorMessage={errors?.MonthOfBirth?.message}
+                  />
+                )}
+              />
+            </View>
+            <View style={{ flex: 1 }}>
+              <Controller
+                name='YearOfBirth'
+                control={control}
+                rules={{
+                  required: {
+                    value: true,
+                    message: 'Tahun lahir harus diisi',
+                  },
+                }}
+                render={({ field: { onChange, value } }) => (
+                  <Input
+                    placeholder='Tahun'
+                    editable={false}
+                    suffixIcon={'chevron-down'}
+                    value={
+                      value !== undefined
+                        ? yearList[Number.parseInt(value)].label.toString()
+                        : undefined
+                    }
+                    onPressSuffix={() =>
+                      navigation.navigate('ModalSelector', {
+                        title: 'Tahun Lahir',
+                        data: yearList,
+                        initialSelectedIndex: value as unknown as number,
+                        onSelectItem: (selectedItem: SelectItemInterface) => {
+                          onChange(selectedItem.value);
+                          getDates(
+                            Number.parseInt(
+                              monthList[
+                                Number.parseInt(
+                                  getValues('MonthOfBirth') || '0'
+                                )
+                              ].value as string
+                            ) + 1,
+                            Number.parseInt(
+                              yearList[selectedItem.value as number]
+                                .label as string
+                            )
+                          );
+                        },
+                      })
+                    }
+                    errorMessage={errors?.YearOfBirth?.message}
+                  />
+                )}
+              />
+            </View>
+          </Row>
         </View>
       )}
       {step === 1 && (
@@ -258,18 +426,6 @@ const RegisterScreen: React.FC = () => {
         }>
         {step === 1 ? 'Buat Akun' : 'Lanjut'}
       </Button>
-
-      <DatePickerModal
-        locale='id'
-        mode='single'
-        animationType='slide'
-        label='Pilih Tanggal'
-        saveLabel='Simpan'
-        visible={showDatePicker}
-        onDismiss={onDismissSingle}
-        date={birthdate || new Date()}
-        onConfirm={onConfirmSingle}
-      />
     </Container>
   );
 };
