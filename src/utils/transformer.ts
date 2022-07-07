@@ -5,7 +5,7 @@ export const getQueryUrlParams = (
   if (params) {
     Object.keys(params).map(
       (e: string, index: number) =>
-        (queryUrl += `${index === 0 ? '' : '&'}${params[e]}`)
+        (queryUrl += `${index === 0 ? '' : '&'}${e}=${params[e]}`)
     );
   }
   return queryUrl || '';

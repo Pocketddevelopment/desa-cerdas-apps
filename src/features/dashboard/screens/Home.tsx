@@ -1,6 +1,7 @@
 import Row from '@components/Row';
 import SpaceBetween from '@components/SpaceBetween';
 import { Text, Title } from '@components/typography';
+import SectionTitle from '@components/typography/SectionTitle';
 import DeviceContants from '@constants/device';
 import DistrictCard from '@dashboard/components/DistrictCard';
 import WeatherCard from '@dashboard/components/WeatherCard';
@@ -72,7 +73,10 @@ const HomeScreen: React.FC = () => {
           <DistrictCard />
         </View>
         <WeatherCard />
-        <NewsList />
+        <View style={styles.body}>
+          <SectionTitle>Berita Terkini</SectionTitle>
+          <NewsList />
+        </View>
       </ScrollView>
     </View>
   );
@@ -84,6 +88,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingBottom: 64,
+  },
+  body: {
+    paddingTop: 10,
+    paddingHorizontal: 25,
   },
   profileContainer: {
     padding: 20,

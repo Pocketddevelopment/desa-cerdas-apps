@@ -22,6 +22,8 @@ import { Provider as PaperProvider } from 'react-native-paper';
 import Toast from 'react-native-toast-message';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import moment from 'moment';
+moment.locale('id');
 
 export const Stack = createNativeStackNavigator();
 export const AuthContext = createContext({});

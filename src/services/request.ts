@@ -109,6 +109,7 @@ class NetworkRequest {
         Authorization: `Bearer ${this.accessToken}`,
       };
     }
+    console.log('Making request to', url);
     return axios
       .request({
         url: url,
