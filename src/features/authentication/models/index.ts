@@ -43,10 +43,10 @@ const Model = createSlice({
     builder.addCase(
       loginThunk.fulfilled,
       (state: AuthenticationRedux, action: any) => {
-        GlobalNetworking.setAccessToken(action.payload.accessToken);
+        GlobalNetworking.setAccessToken(action.payload.Token);
         Storage.setItem(
           StoreConstants.REFRESH_TOKEN,
-          action.payload.accessToken
+          action.payload.RefreshToken
         );
         return {
           ...state,
