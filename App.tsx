@@ -89,6 +89,7 @@ const App: React.FC = () => {
         setReady(false);
         setInitialRouteName(undefined);
         Storage.clearItem();
+        Storage.setItem(StoreConstants.ONBOARDING, false);
       },
     }),
     []
