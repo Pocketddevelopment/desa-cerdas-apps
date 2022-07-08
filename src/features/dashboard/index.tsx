@@ -20,7 +20,7 @@ import DocumentHistoryScreen from '@service/screens/DocumentHistory';
 import React from 'react';
 import { ImageSourcePropType, StyleSheet, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
-import NewsDetailScreen from '../news/screens/NewsDetail';
+import NewsDetailScreen, { NewsDetailProps } from '../news/screens/NewsDetail';
 import NotificationListScreen from '../notification/screens/NotificationList';
 import ProfileScreen from '../profile/screens/Profile';
 import ReportListScreen from '../report/screens/ReportList';
@@ -276,7 +276,7 @@ export type DashboardStackParamList = {
   Login: Object | undefined;
   Register: Object | undefined;
   ForgetPassword: Object | undefined;
-  NewsDetail: Object | undefined;
+  NewsDetail: NewsDetailProps;
   NotificationList: Object | undefined;
   UpdateAccount: Object | undefined;
   UpdatePassword: Object | undefined;

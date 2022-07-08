@@ -8,3 +8,7 @@ export const getNewsList = (id: string, page: number) => {
     pagesize: 10,
   });
 };
+
+export const getNewsDetail = (params: Record<string, string>) => {
+  return GlobalNetworking.get(APIConstants.NEWS.DETAIL.URL, params);
+};

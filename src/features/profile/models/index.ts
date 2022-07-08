@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import GlobalNetworking from '@services/request';
 import { mapLoadingStates } from '@utils/store';
 import MiscRedux from './interfaces/MiscRedux.interface';
-import { getNewsListThunk } from './thunks';
+import { getNewsDetailThunk, getNewsListThunk } from './thunks';
 
 const defaultInitialState: MiscRedux = {
   attraction: [],
@@ -30,12 +30,12 @@ const Model = createSlice({
     },
   },
   extraReducers: (builder) => {
-    //Login handlers
+    // News list handlers
     builder.addCase(getNewsListThunk.pending, (state: MiscRedux, action) => {
       return {
         ...state,
         loading: {
-          [StoreConstants.NEWS]: false,
+          [StoreConstants.NEWS]: true,
         },
       };
     });
@@ -52,6 +52,35 @@ const Model = createSlice({
       }
     );
     builder.addCase(getNewsListThunk.rejected, (state: MiscRedux) => {
+      return {
+        ...state,
+        loading: {
+          [StoreConstants.NEWS]: false,
+        },
+      };
+    });
+
+    // News detail handlers
+    builder.addCase(getNewsDetailThunk.pending, (state: MiscRedux, action) => {
+      return {
+        ...state,
+        loading: {
+          [StoreConstants.NEWS]: true,
+        },
+      };
+    });
+    builder.addCase(
+      getNewsDetailThunk.fulfilled,
+      (state: MiscRedux, _: any) => {
+        return {
+          ...state,
+          loading: {
+            [StoreConstants.NEWS]: false,
+          },
+        };
+      }
+    );
+    builder.addCase(getNewsDetailThunk.rejected, (state: MiscRedux) => {
       return {
         ...state,
         loading: {

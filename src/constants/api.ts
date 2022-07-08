@@ -17,5 +17,9 @@ export default class APIConstants {
       METHOD: 'GET',
       URL: '/api/news',
     },
+    DETAIL: {
+      METHOD: 'GET',
+      URL: '/api/news/detail',
+    },
   };
 }

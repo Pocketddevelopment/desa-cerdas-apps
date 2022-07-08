@@ -10,6 +10,7 @@ import RenderHTML from 'react-native-render-html';
 import { DashboardStackParamList } from '..';
 
 type NewsItemProps = {
+  id: string;
   thumbnailUri: string;
   date: string;
   title: string;
@@ -17,6 +18,7 @@ type NewsItemProps = {
 };
 
 const NewsItem = ({
+  id,
   thumbnailUri,
   date,
   title,
@@ -28,10 +30,8 @@ const NewsItem = ({
 
   const onPress = () => {
     navigation.navigate('NewsDetail', {
-      image: thumbnailUri,
-      date: date,
+      id: id,
       title: title,
-      description: description,
     });
   };
 

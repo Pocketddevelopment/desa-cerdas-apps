@@ -24,7 +24,13 @@ const NewsList: React.FC = () => {
   );
 
   useEffect(() => {
-    getNews(page);
+    if (news) {
+      if (page <= news.TotalPage) {
+        getNews(page);
+      }
+    } else {
+      getNews(page);
+    }
   }, [page, getNews]);
 
   const renderItem = ({ item, index }: { item: News; index: number }) => {
@@ -32,9 +38,10 @@ const NewsList: React.FC = () => {
       <>
         <NewsItem
           key={item.ID}
+          id={item.ID}
           thumbnailUri={item.ImageUrl}
           date={moment(item.Created).format('dddd, DD MMM YYYY')}
-          title={'asfda'}
+          title={item.Title}
           description={item.Description}
         />
         {index !== news?.ListNews.length && <Separator width={'90%'} />}
