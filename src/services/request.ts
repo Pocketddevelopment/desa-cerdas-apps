@@ -47,6 +47,7 @@ const responseHandler = (
   response: AxiosResponse
 ): APIResponse & Record<string, string> => {
   const { data } = response;
+  process.env.NODE_ENV !== 'production' && console.log('Response', data);
   // Error occured
   if (data.ResponseCode === '99') {
     throw {
@@ -109,7 +110,8 @@ class NetworkRequest {
         Authorization: `Bearer ${this.accessToken}`,
       };
     }
-    console.log('Making request to', url);
+    process.env.NODE_ENV !== 'production' &&
+      console.log('Making', method, 'request to', url);
     return axios
       .request({
         url: url,
