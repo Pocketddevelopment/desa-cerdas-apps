@@ -8,6 +8,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useAppSelector } from '@store/hooks';
 import { RootState } from '@store/store';
+import { getInitialName } from '@utils/transformer';
 import moment from 'moment';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
@@ -32,7 +33,7 @@ const AccountCard = () => {
       <Row style={{ alignItems: 'flex-start' }}>
         <Avatar.Text
           size={48}
-          label='B'
+          label={getInitialName(account?.FirstName)}
           color={theme.colors.text}
           labelStyle={{ fontWeight: '700', fontSize: 20 }}
           style={{ backgroundColor: '#FFEBEB', marginRight: 10, marginTop: 5 }}
