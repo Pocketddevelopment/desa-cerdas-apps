@@ -10,6 +10,10 @@ export default class APIConstants {
   static AUTHENTICATION = {
     LOGIN: '/api/Customer/Login',
     REGISTER: '/api/Customer/Register',
+    UPDATE_ACCOUNT: {
+      METHOD: 'PUT',
+      URL: '/api/customer',
+    },
   };
 
   static NEWS = {

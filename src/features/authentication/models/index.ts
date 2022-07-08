@@ -4,7 +4,7 @@ import GlobalNetworking from '@services/request';
 import Storage from '@utils/async-storage';
 import { mapLoadingStates } from '@utils/store';
 import AuthenticationRedux from './interfaces/AuthenticationRedux.interface';
-import { loginThunk } from './thunks';
+import { loginThunk, updateAccountThunk } from './thunks';
 
 const defaultInitialState: AuthenticationRedux = {
   account: null,
@@ -17,7 +17,7 @@ const initialState: AuthenticationRedux = {
 };
 
 const Model = createSlice({
-  name: 'authentication',
+  name: StoreConstants.AUTH,
   initialState: initialState,
   reducers: {
     reset: (_, __) => {
@@ -65,6 +65,41 @@ const Model = createSlice({
         },
       };
     });
+
+    //Update account handlers
+    builder.addCase(
+      updateAccountThunk.pending,
+      (state: AuthenticationRedux, action) => {
+        return {
+          ...state,
+          loading: {
+            account: true,
+          },
+        };
+      }
+    );
+    builder.addCase(
+      updateAccountThunk.fulfilled,
+      (state: AuthenticationRedux, action: any) => {
+        return {
+          ...state,
+          loading: {
+            account: false,
+          },
+        };
+      }
+    );
+    builder.addCase(
+      updateAccountThunk.rejected,
+      (state: AuthenticationRedux) => {
+        return {
+          ...state,
+          loading: {
+            account: false,
+          },
+        };
+      }
+    );
   },
 });
 

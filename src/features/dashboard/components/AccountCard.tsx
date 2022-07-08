@@ -6,6 +6,9 @@ import { Text, Title } from '@components/typography';
 import DeviceContants from '@constants/device';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useAppSelector } from '@store/hooks';
+import { RootState } from '@store/store';
+import moment from 'moment';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Avatar, useTheme } from 'react-native-paper';
@@ -15,6 +18,10 @@ const AccountCard = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<DashboardStackParamList>>();
   const theme = useTheme();
+
+  const { account } = useAppSelector(
+    (state: RootState) => state.authentication
+  );
 
   const onPressUpdate = () => {
     navigation.navigate('UpdateAccount');
@@ -31,16 +38,18 @@ const AccountCard = () => {
           style={{ backgroundColor: '#FFEBEB', marginRight: 10, marginTop: 5 }}
         />
         <View>
-          <Title>Bambang Sudrajat</Title>
-          <Text>bambang.sudrajat@gmail.com</Text>
-          <Text>0812345678</Text>
+          <Title>{`${account?.FirstName} ${account?.LastName}`}</Title>
+          <Text>{account?.Email}</Text>
+          <Text>{account?.MobileNo}</Text>
         </View>
       </Row>
       <Separator style={{ marginVertical: 10 }} />
       <SpaceBetween>
         <View style={{ flex: 1 }}>
-          <Text size={16}>NIK: 301491109900003</Text>
-          <Text size={16}>Tgl. Lahir: 11-09-1990</Text>
+          <Text size={16}>NIK: {account?.CustomerID}</Text>
+          <Text size={16}>
+            Tgl. Lahir: {moment(account?.DateOfBirth).format('DD-MM-YYYY')}
+          </Text>
         </View>
         <Button style={styles.btnUpdate} onPress={onPressUpdate}>
           Perbarui

@@ -4,6 +4,7 @@ import {
   RegisterFormStep2,
 } from '@authentication/models/interfaces/requests/RegisterRequest.interface';
 import APIConstants from '@constants/api';
+import UpdateAccountFormInterface from '@dashboard/models/requests/UpdateAccountRequest.interface';
 import GlobalNetworking from '@services/request';
 
 export const login = (body: LoginRequest) => {
@@ -12,4 +13,11 @@ export const login = (body: LoginRequest) => {
 
 export const register = (body: RegisterFormStep1 & RegisterFormStep2) => {
   return GlobalNetworking.post(APIConstants.AUTHENTICATION.REGISTER, body);
+};
+
+export const updateAccount = (body: UpdateAccountFormInterface) => {
+  return GlobalNetworking.put(
+    APIConstants.AUTHENTICATION.UPDATE_ACCOUNT.URL,
+    body
+  );
 };
