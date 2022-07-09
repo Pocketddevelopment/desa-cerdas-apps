@@ -20,6 +20,16 @@ export const loginThunk = createAsyncThunk(
   }
 );
 
+export const logoutThunk = createAsyncThunk(
+  `${StoreConstants.AUTH}/logout`,
+  async (_, { dispatch }) => {
+    dispatch({
+      type: 'authentication/reset',
+    });
+    return;
+  }
+);
+
 export const registerThunk = createAsyncThunk(
   `${StoreConstants.AUTH}/register`,
   async (body: RegisterFormStep1 & RegisterFormStep2, { rejectWithValue }) => {

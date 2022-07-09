@@ -1,4 +1,5 @@
 import { AuthContext } from '@@@/App';
+import { logoutThunk } from '@authentication/models/thunks';
 import Separator from '@components/Separator';
 import DeviceContants from '@constants/device';
 import AccountCard from '@dashboard/components/AccountCard';
@@ -25,9 +26,7 @@ const AccountScreen: React.FC = () => {
   }
 
   function logout() {
-    // dispatch({
-    //   type: 'authentication/reset',
-    // });
+    dispatch(logoutThunk());
     logOut();
     return;
   }
