@@ -1,4 +1,4 @@
-import { AccountInterface } from '@dashboard/models/Account.interface';
+import { AccountInterface } from '@authentication/models/interfaces/Account.interface';
 
 export default interface AuthenticationRedux {
   account: AccountInterface | null;

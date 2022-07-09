@@ -4,7 +4,7 @@ import {
   RegisterFormStep2,
 } from '@authentication/models/interfaces/requests/RegisterRequest.interface';
 import APIConstants from '@constants/api';
-import UpdateAccountFormInterface from '@dashboard/models/requests/UpdateAccountRequest.interface';
+import UpdateAccountFormInterface from '@authentication/models/interfaces/requests/requests/UpdateAccountRequest.interface';
 import GlobalNetworking from '@services/request';
 
 export const login = (body: LoginRequest) => {
