@@ -7,7 +7,19 @@ import AuthenticationRedux from './interfaces/AuthenticationRedux.interface';
 import { loginThunk, refreshTokenThunk, updateAccountThunk } from './thunks';
 
 const defaultInitialState: AuthenticationRedux = {
-  account: null,
+  account: {
+    CustomerID: '',
+    DateOfBirth: new Date(),
+    DistrictDescription: '',
+    DistrictIcon: '',
+    DistrictID: '',
+    DistrictName: '',
+    Email: '',
+    FirstName: '',
+    Gender: '',
+    LastName: '',
+    MobileNo: '',
+  },
   loading: {},
 };
 

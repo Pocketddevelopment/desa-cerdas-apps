@@ -1,6 +1,6 @@
 import { AccountInterface } from '@authentication/models/interfaces/Account.interface';
 
 export default interface AuthenticationRedux {
-  account: AccountInterface | null;
+  account: AccountInterface;
   loading: Record<string, boolean>;
 }
