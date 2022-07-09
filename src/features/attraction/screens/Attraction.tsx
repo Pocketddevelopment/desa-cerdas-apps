@@ -1,4 +1,10 @@
 import AttractionItem from '@attraction/components/AttractionItem';
+import { AttractionCreativeInterface } from '@attraction/models/interfaces/AttractionCreative.interface';
+import { AttractionDestinationInterface } from '@attraction/models/interfaces/AttractionDestination.interface';
+import {
+  getAttractionCreativeListThunk,
+  getAttractionDestinationListThunk,
+} from '@attraction/models/thunks';
 import Separator from '@components/Separator';
 import SpaceBetween from '@components/SpaceBetween';
 import { Text } from '@components/typography';
@@ -6,19 +12,11 @@ import SectionTitle from '@components/typography/SectionTitle';
 import { DashboardStackParamList } from '@dashboard/index';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { RootState } from '@store/store';
 import React, { useEffect } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { ActivityIndicator, useTheme } from 'react-native-paper';
-import dataAttraction from '@attraction/attraction.json';
-import dataIndustry from '@attraction/industry.json';
-import { useAppDispatch, useAppSelector } from '@store/hooks';
-import {
-  getAttractionCreativeListThunk,
-  getAttractionDestinationListThunk,
-} from '@attraction/models/thunks';
-import { RootState } from '@store/store';
-import { AttractionDestinationInterface } from '@attraction/models/interfaces/AttractionDestination.interface';
-import { AttractionCreativeInterface } from '@attraction/models/interfaces/AttractionCreative.interface';
 
 enum TargetType {
   DESTINATION = 'destination',
