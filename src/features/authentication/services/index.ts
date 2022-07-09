@@ -11,6 +11,13 @@ export const login = (body: LoginRequest) => {
   return GlobalNetworking.post(APIConstants.AUTHENTICATION.LOGIN, body);
 };
 
+export const getNewToken = (id: string, refreshToken: string) => {
+  return GlobalNetworking.get(APIConstants.AUTHENTICATION.TOKEN.URL, {
+    customerid: id,
+    refreshtoken: refreshToken,
+  });
+};
+
 export const register = (body: RegisterFormStep1 & RegisterFormStep2) => {
   return GlobalNetworking.post(APIConstants.AUTHENTICATION.REGISTER, body);
 };

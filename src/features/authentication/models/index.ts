@@ -4,7 +4,7 @@ import GlobalNetworking from '@services/request';
 import Storage from '@utils/async-storage';
 import { mapLoadingStates } from '@utils/store';
 import AuthenticationRedux from './interfaces/AuthenticationRedux.interface';
-import { loginThunk, updateAccountThunk } from './thunks';
+import { loginThunk, refreshTokenThunk, updateAccountThunk } from './thunks';
 
 const defaultInitialState: AuthenticationRedux = {
   account: null,
@@ -48,6 +48,8 @@ const Model = createSlice({
           StoreConstants.REFRESH_TOKEN,
           action.payload.RefreshToken
         );
+        delete action.payload.Token;
+        delete action.payload.RefreshToken;
         return {
           ...state,
           account: action.payload,
@@ -65,6 +67,42 @@ const Model = createSlice({
         },
       };
     });
+
+    //Token handlers
+    builder.addCase(
+      refreshTokenThunk.pending,
+      (state: AuthenticationRedux, action) => {
+        return {
+          ...state,
+          loading: {
+            account: true,
+          },
+        };
+      }
+    );
+    builder.addCase(
+      refreshTokenThunk.fulfilled,
+      (state: AuthenticationRedux, action: any) => {
+        GlobalNetworking.setAccessToken(action.payload.Token);
+        return {
+          ...state,
+          loading: {
+            account: false,
+          },
+        };
+      }
+    );
+    builder.addCase(
+      refreshTokenThunk.rejected,
+      (state: AuthenticationRedux) => {
+        return {
+          ...state,
+          loading: {
+            account: false,
+          },
+        };
+      }
+    );
 
     //Update account handlers
     builder.addCase(
