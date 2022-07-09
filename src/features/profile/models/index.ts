@@ -1,3 +1,7 @@
+import {
+  getAttractionCreativeListThunk,
+  getAttractionDestinationListThunk,
+} from '@attraction/models/thunks';
 import StoreConstants from '@constants/store';
 import { createSlice } from '@reduxjs/toolkit';
 import GlobalNetworking from '@services/request';
@@ -6,7 +10,8 @@ import MiscRedux from './interfaces/MiscRedux.interface';
 import { getNewsDetailThunk, getNewsListThunk } from './thunks';
 
 const defaultInitialState: MiscRedux = {
-  attraction: [],
+  creative: null,
+  destination: null,
   news: null,
   notification: [],
   report: [],
@@ -88,6 +93,78 @@ const Model = createSlice({
         },
       };
     });
+
+    // Tourist destination handlers
+    builder.addCase(
+      getAttractionDestinationListThunk.pending,
+      (state: MiscRedux, _) => {
+        return {
+          ...state,
+          loading: {
+            destination: true,
+          },
+        };
+      }
+    );
+    builder.addCase(
+      getAttractionDestinationListThunk.fulfilled,
+      (state: MiscRedux, action: any) => {
+        return {
+          ...state,
+          destination: action.payload,
+          loading: {
+            destination: false,
+          },
+        };
+      }
+    );
+    builder.addCase(
+      getAttractionDestinationListThunk.rejected,
+      (state: MiscRedux) => {
+        return {
+          ...state,
+          loading: {
+            destination: false,
+          },
+        };
+      }
+    );
+
+    // Creative destination handlers
+    builder.addCase(
+      getAttractionCreativeListThunk.pending,
+      (state: MiscRedux, _) => {
+        return {
+          ...state,
+          loading: {
+            creative: true,
+          },
+        };
+      }
+    );
+    builder.addCase(
+      getAttractionCreativeListThunk.fulfilled,
+      (state: MiscRedux, action: any) => {
+        return {
+          ...state,
+          creative: action.payload,
+          loading: {
+            creative: false,
+          },
+        };
+      }
+    );
+    builder.addCase(
+      getAttractionCreativeListThunk.rejected,
+      (state: MiscRedux) => {
+        return {
+          ...state,
+          loading: {
+            creative: false,
+          },
+        };
+      }
+    );
   },
 });
 

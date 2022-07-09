@@ -1,9 +1,11 @@
 import Row from '@components/Row';
-import { Text, Title } from '@components/typography';
+import { Title } from '@components/typography';
+import DeviceContants from '@constants/device';
 import onPressInterface from '@interfaces/Press.interface';
 import React from 'react';
 import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
+import RenderHTML from 'react-native-render-html';
 
 type AttractionItemProps = {
   thumbnailUri: string;
@@ -12,12 +14,12 @@ type AttractionItemProps = {
   onPress: onPressInterface;
 };
 
-const AttractionItem = ({
+const AttractionItem = React.memo(function AttractionItem({
   thumbnailUri,
   title,
   description,
   onPress,
-}: AttractionItemProps) => {
+}: AttractionItemProps) {
   const theme = useTheme();
 
   return (
@@ -36,12 +38,16 @@ const AttractionItem = ({
           <Title numberOfLines={1} color={theme.colors.primary}>
             {title}
           </Title>
-          <Text numberOfLines={2}>{description}</Text>
+          <RenderHTML
+            source={{ html: description }}
+            baseStyle={{ maxHeight: 38 }}
+            contentWidth={DeviceContants.screenWidth}
+          />
         </View>
       </Row>
     </TouchableOpacity>
   );
-};
+});
 
 export default AttractionItem;
 

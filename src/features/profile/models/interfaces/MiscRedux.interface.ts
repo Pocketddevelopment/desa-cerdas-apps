@@ -1,9 +1,10 @@
-import StoreConstants from '@constants/store';
-import News from '@news/models/interfaces/News.interface';
+import GetCreativeListResponseInterface from '@attraction/models/interfaces/responses/GetCreativeListResponse.interface';
+import GetDestinationListResponseInterface from '@attraction/models/interfaces/responses/GetDestinationListResponse.interface';
 import GetNewsResponse from './responses/GetNewsResponse.interface';
 
 export default interface MiscRedux {
-  attraction: any[];
+  destination: GetDestinationListResponseInterface | null;
+  creative: GetCreativeListResponseInterface | null;
   news: GetNewsResponse | null;
   notification: any[];
   report: any[];

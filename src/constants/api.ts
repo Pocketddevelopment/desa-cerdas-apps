@@ -30,4 +30,23 @@ export default class APIConstants {
       URL: '/api/news/detail',
     },
   };
+
+  static ATTRACTION = {
+    DESTINATION: {
+      METHOD: 'GET',
+      URL: '/api/touristdestination',
+    },
+    DESTINATION_DETAIL: {
+      METHOD: 'GET',
+      URL: '/api/touristdestination/detail',
+    },
+    CREATIVE: {
+      METHOD: 'GET',
+      URL: '/api/creativedestination',
+    },
+    CREATIVE_DETAIL: {
+      METHOD: 'GET',
+      URL: '/api/touristdestination/detail',
+    },
+  };
 }

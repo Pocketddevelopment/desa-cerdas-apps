@@ -6,76 +6,126 @@ import SectionTitle from '@components/typography/SectionTitle';
 import { DashboardStackParamList } from '@dashboard/index';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { useTheme } from 'react-native-paper';
+import { ActivityIndicator, useTheme } from 'react-native-paper';
 import dataAttraction from '@attraction/attraction.json';
 import dataIndustry from '@attraction/industry.json';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
+import {
+  getAttractionCreativeListThunk,
+  getAttractionDestinationListThunk,
+} from '@attraction/models/thunks';
+import { RootState } from '@store/store';
+import { AttractionDestinationInterface } from '@attraction/models/interfaces/AttractionDestination.interface';
+import { AttractionCreativeInterface } from '@attraction/models/interfaces/AttractionCreative.interface';
+
+enum TargetType {
+  DESTINATION = 'destination',
+  CREATIVE = 'creative',
+}
+
+const DEFAULT_PAGE_SIZE = 5;
+const DEFAULT_PAGE = 1;
 
 const AttractionScreen: React.FC = () => {
+  const dispatch = useAppDispatch();
   const theme = useTheme();
   const navigation =
     useNavigation<NativeStackNavigationProp<DashboardStackParamList>>();
 
-  const onPressItem = (item: any) => {
+  const { loading, destination, creative } = useAppSelector(
+    (state: RootState) => state.misc
+  );
+
+  const onPressDestinationItem = (item: AttractionDestinationInterface) => {
     navigation.navigate('AttractionDetail', {
-      data: item,
+      id: item.ID,
+      title: item.Title,
+      type: 'destination',
     });
   };
 
-  const onPressMore = (target: string) => {
+  const onPressCreativeItem = (item: AttractionCreativeInterface) => {
+    navigation.navigate('AttractionDetail', {
+      id: item.ID,
+      title: item.Title,
+      type: 'creative',
+    });
+  };
+
+  const onPressMore = (target: TargetType) => {
     navigation.navigate('MoreList', {
       target: target,
     });
   };
+
+  useEffect(() => {
+    dispatch(
+      getAttractionDestinationListThunk({
+        page: DEFAULT_PAGE,
+        pageSize: DEFAULT_PAGE_SIZE,
+      })
+    );
+    dispatch(
+      getAttractionCreativeListThunk({
+        page: DEFAULT_PAGE,
+        pageSize: DEFAULT_PAGE_SIZE,
+      })
+    );
+  }, [dispatch]);
 
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
       contentContainerStyle={styles.container}>
       <View style={styles.section}>
-        <SpaceBetween>
+        <SpaceBetween key={TargetType.DESTINATION}>
           <SectionTitle>Destinasi Lokal</SectionTitle>
           <Text
             color={theme.colors.primary}
-            onPress={() => onPressMore('attraction')}>
+            onPress={() => onPressMore(TargetType.DESTINATION)}>
             Lihat selengkapnya
           </Text>
         </SpaceBetween>
-        {dataAttraction.slice(0, 5).map((e, i) => (
-          <>
+        {destination?.ListTouristDestination.map((e, i) => (
+          <View key={e.ID}>
             <AttractionItem
-              key={e.title}
-              thumbnailUri={e.thumbnailUri}
-              title={e.title}
-              description={e.description}
-              onPress={() => onPressItem(e)}
+              thumbnailUri={e.ImageUrl}
+              title={e.Title}
+              description={e.Description}
+              onPress={() => onPressDestinationItem(e)}
             />
-            {i !== 4 && <Separator width={'90%'} color={'lightgrey'} />}
-          </>
+            {i !== destination?.ListTouristDestination.length - 1 && (
+              <Separator width={'90%'} color={'lightgrey'} />
+            )}
+          </View>
         ))}
+        {loading.destination && <ActivityIndicator />}
       </View>
-      <View style={styles.section}>
+      <View style={styles.section} key={TargetType.CREATIVE}>
         <SpaceBetween>
           <Text style={styles.sectionTitle}>Industri Kreatif</Text>
           <Text
             color={theme.colors.primary}
-            onPress={() => onPressMore('industry')}>
+            onPress={() => onPressMore(TargetType.CREATIVE)}>
             Lihat selengkapnya
           </Text>
         </SpaceBetween>
-        {dataIndustry.slice(0, 5).map((e, i) => (
-          <>
+        {creative?.ListCreativeDestination.map((e, i) => (
+          <View key={e.ID}>
             <AttractionItem
-              key={e.title}
-              thumbnailUri={e.thumbnailUri}
-              title={e.title}
-              description={e.description}
-              onPress={() => onPressItem(e)}
+              thumbnailUri={e.ImageUrl}
+              title={e.Title}
+              description={e.Description}
+              onPress={() => onPressCreativeItem(e)}
             />
-            {i !== 4 && <Separator width={'90%'} color={'lightgrey'} />}
-          </>
+            {i !== creative?.ListCreativeDestination.length - 1 && (
+              <Separator width={'90%'} color={'lightgrey'} />
+            )}
+          </View>
         ))}
+        {loading.creative && <ActivityIndicator />}
       </View>
     </ScrollView>
   );

@@ -1,7 +1,11 @@
 import { Stack } from '@@@/App';
 import AttractionScreen from '@attraction/screens/Attraction';
-import AttractionDetailScreen from '@attraction/screens/AttractionDetail';
-import MoreListScreen from '@attraction/screens/MoreList';
+import AttractionDetailScreen, {
+  AttractionDetailProps,
+} from '@attraction/screens/AttractionDetail';
+import MoreListScreen, {
+  MoreListScreenProps,
+} from '@attraction/screens/MoreList';
 import SMEScreen from '@attraction/screens/SME';
 import SMEDetailScreen from '@attraction/screens/SMEDetail';
 import ImagePreviewModal from '@components/ImagePreview';
@@ -290,8 +294,8 @@ export type DashboardStackParamList = {
   SME: Object | undefined;
   SMEDetail: Object | undefined;
   Attraction: Object | undefined;
-  MoreList: Object | undefined;
-  AttractionDetail: Object | undefined;
+  MoreList: MoreListScreenProps;
+  AttractionDetail: AttractionDetailProps;
   Profile: Object | undefined;
   PlacemanList: Object | undefined;
   DistrictHighlight: Object | undefined;
