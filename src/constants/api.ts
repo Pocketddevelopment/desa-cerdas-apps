@@ -48,5 +48,15 @@ export default class APIConstants {
       METHOD: 'GET',
       URL: '/api/touristdestination/detail',
     },
+    SME: {
+      METHOD: 'GET',
+      URL: '/api/umkm',
+    },
+    SME_DETAIL: {
+      METHOD: 'GET',
+      URL: '/api/umkm/detail',
+    },
   };
+
+  static SME = {};
 }

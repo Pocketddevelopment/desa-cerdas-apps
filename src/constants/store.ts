@@ -3,9 +3,10 @@ export default class StoreConstants {
   static SERVICE = 'service';
   static PROFILE = 'profile';
 
-  // attraction, news, notification, report
+  // attraction, sme, news, notification, report
   static MISC = 'misc';
   static ATTRACTION = 'attraction';
+  static SME = 'sme';
   static NEWS = 'news';
   static NOTIFICATION = 'notification';
   static REPORT = 'report';

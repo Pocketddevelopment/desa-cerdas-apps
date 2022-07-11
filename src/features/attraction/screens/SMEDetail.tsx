@@ -1,38 +1,65 @@
+import { SMEDetailInterface } from '@attraction/models/interfaces/SMEDetail.interface';
+import { getSMEDetailThunk } from '@attraction/models/thunks';
 import Button from '@components/Button';
+import Failed from '@components/Failed';
 import Dot from '@components/pagination/PaginationDot';
 import { Text, Title } from '@components/typography';
 import DeviceContants from '@constants/device';
 import { DashboardStackParamList } from '@dashboard/index';
-import { RouteProp } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { RootState } from '@store/store';
 import React, { useEffect, useState } from 'react';
 import { Image, ScrollView, StyleSheet, View } from 'react-native';
-import { useTheme } from 'react-native-paper';
+import { ActivityIndicator, useTheme } from 'react-native-paper';
+import RenderHTML from 'react-native-render-html';
 import Share from 'react-native-share';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
+import Toast from 'react-native-toast-message';
 
-const data: string[] = [
-  'https://img.freepik.com/free-photo/big-hamburger-with-double-beef-french-fries_252907-8.jpg?w=2000',
-  'https://img.freepik.com/free-photo/big-hamburger-with-double-beef-french-fries_252907-8.jpg?w=2000',
-  'https://img.freepik.com/free-photo/big-hamburger-with-double-beef-french-fries_252907-8.jpg?w=2000',
-];
-
-type SMEDetailProps = {
-  navigation: NativeStackNavigationProp<DashboardStackParamList, any>;
-  route: RouteProp<any>;
+export type SMEDetailProps = {
+  id: string;
+  title: string;
 };
 
-const SMEDetailScreen: React.FC<SMEDetailProps> = ({ navigation, route }) => {
-  const { thumbnailUri, name, description, seller, phone } = route.params?.data;
+const SMEDetailScreen: React.FC<
+  NativeStackScreenProps<DashboardStackParamList, 'SMEDetail'>
+> = ({ navigation, route }) => {
+  const { id: smeId, title: placeholderTitle } = route.params;
+  const { loading } = useAppSelector((state: RootState) => state.misc);
+  const dispatch = useAppDispatch();
   const theme = useTheme();
 
+  const [data, setData] = useState<SMEDetailInterface>();
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
+  function getDetail() {
+    dispatch(getSMEDetailThunk(smeId))
+      .unwrap()
+      .then((response) => {
+        setData(response as SMEDetailInterface);
+      })
+      .catch((err) =>
+        Toast.show({
+          type: 'standard',
+          text1: err.ResponseMessage,
+        })
+      );
+  }
+
   useEffect(() => {
+    getDetail();
     navigation.setOptions({
-      title: name || '',
+      title: placeholderTitle,
     });
-  }, [navigation]);
+  }, []);
+
+  useEffect(() => {
+    data &&
+      navigation.setOptions({
+        title: data.Title,
+      });
+  }, [data]);
 
   const onSnapItem = (index: number) => {
     setActiveIndex(index);
@@ -40,29 +67,35 @@ const SMEDetailScreen: React.FC<SMEDetailProps> = ({ navigation, route }) => {
 
   const onPressChat = async () => {
     const shareOptions = {
-      title: `Hubungi ${name} melalui Whatsapp`,
-      message: `Halo ${name}`,
+      title: `Hubungi ${data?.Title} melalui Whatsapp`,
+      message: `Halo ${data?.Title} dengan Bapak/Ibu ${data?.ContactName}, saya mau bertanya. `,
       social: Share.Social.WHATSAPP,
-      whatsAppNumber: phone,
+      whatsAppNumber: data?.ContactPhone,
     };
     try {
       await Share.shareSingle(shareOptions);
     } catch (err) {
-      console.log('Anda tidak memilki aplikasi Whatsapp yang terpasang');
+      Toast.show({
+        type: 'standard',
+        text1: 'Anda tidak memilki aplikasi Whatsapp yang terpasang',
+      });
     }
   };
 
   const renderCarouselItem = ({ item, index }: any) => {
     return (
       <View style={styles.carouselContainer}>
-        <Image source={{ uri: item }} style={styles.image} />
+        <Image source={{ uri: item.ImageUrl }} style={styles.image} />
         <Pagination
           activeDotIndex={activeIndex}
           dotsLength={1}
           dotStyle={{ margin: 0 }}
           containerStyle={[
             styles.pagination,
-            { left: DeviceContants.screenWidth / 2 - data.length * 16 },
+            {
+              left:
+                DeviceContants.screenWidth / 2 - data!.ListImage.length * 16,
+            },
           ]}
           dotElement={<Dot color={theme.colors.primary} />}
           inactiveDotScale={1.5}
@@ -75,45 +108,57 @@ const SMEDetailScreen: React.FC<SMEDetailProps> = ({ navigation, route }) => {
   };
   return (
     <ScrollView style={styles.container}>
-      <Carousel
-        layout='default'
-        initialScrollIndex={activeIndex}
-        data={[thumbnailUri]}
-        onSnapToItem={onSnapItem}
-        renderItem={renderCarouselItem}
-        sliderWidth={DeviceContants.screenWidth}
-        itemWidth={DeviceContants.screenWidth}
-        snapToAlignment={'center'}
-      />
-      <View style={styles.contentContainer}>
-        <Button mode='outlined' primary onPress={onPressChat}>
-          <Image
-            source={{
-              uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/2044px-WhatsApp.svg.png',
-            }}
-            style={styles.icon}
-          />{' '}
-          Hubungi via Whatsapp
-        </Button>
-        <View style={styles.sectionContainer}>
-          <View style={styles.section}>
-            <Title size={14} style={styles.title}>
-              Deskripsi
-            </Title>
-            <Text size={16}>{description}</Text>
+      {loading.sme ? (
+        <ActivityIndicator size={'large'} style={styles.loading} />
+      ) : data ? (
+        <>
+          <Carousel
+            layout='default'
+            initialScrollIndex={activeIndex}
+            data={data?.ListImage}
+            onSnapToItem={onSnapItem}
+            renderItem={renderCarouselItem}
+            sliderWidth={DeviceContants.screenWidth}
+            itemWidth={DeviceContants.screenWidth}
+            snapToAlignment={'center'}
+          />
+          <View style={styles.contentContainer}>
+            <Button mode='outlined' primary onPress={onPressChat}>
+              <Image
+                source={{
+                  uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/2044px-WhatsApp.svg.png',
+                }}
+                style={styles.icon}
+              />{' '}
+              Hubungi via Whatsapp
+            </Button>
+            <View style={styles.sectionContainer}>
+              <View style={styles.section}>
+                <Title size={14} style={styles.title}>
+                  Deskripsi
+                </Title>
+                <RenderHTML
+                  baseStyle={{ fontSize: 16, color: theme.colors.text }}
+                  source={{ html: data.Description }}
+                  contentWidth={DeviceContants.screenWidth}
+                />
+              </View>
+              <View style={styles.section}>
+                <Title size={14} style={styles.title}>
+                  Info Penjual
+                </Title>
+                <Text size={16}>
+                  {data.ContactName}
+                  {'\n'}
+                  {data.ContactPhone}
+                </Text>
+              </View>
+            </View>
           </View>
-          <View style={styles.section}>
-            <Title size={14} style={styles.title}>
-              Info Penjual
-            </Title>
-            <Text size={16}>
-              {seller}
-              {'\n'}
-              {phone}
-            </Text>
-          </View>
-        </View>
-      </View>
+        </>
+      ) : (
+        <Failed onBtnPress={() => getDetail()} />
+      )}
     </ScrollView>
   );
 };
@@ -121,6 +166,9 @@ const SMEDetailScreen: React.FC<SMEDetailProps> = ({ navigation, route }) => {
 export default SMEDetailScreen;
 
 const styles = StyleSheet.create({
+  loading: {
+    marginVertical: 50,
+  },
   container: {
     flex: 1,
   },

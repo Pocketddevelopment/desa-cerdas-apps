@@ -1,6 +1,8 @@
 import {
   getAttractionCreativeListThunk,
   getAttractionDestinationListThunk,
+  getSMEDetailThunk,
+  getSMEListThunk,
 } from '@attraction/models/thunks';
 import StoreConstants from '@constants/store';
 import { createSlice } from '@reduxjs/toolkit';
@@ -12,6 +14,7 @@ import { getNewsDetailThunk, getNewsListThunk } from './thunks';
 const defaultInitialState: MiscRedux = {
   creative: null,
   destination: null,
+  sme: null,
   news: null,
   notification: [],
   report: [],
@@ -165,6 +168,68 @@ const Model = createSlice({
         };
       }
     );
+
+    // SME List handlers
+    builder.addCase(getSMEListThunk.pending, (state: MiscRedux, _) => {
+      return {
+        ...state,
+        loading: {
+          sme: true,
+        },
+      };
+    });
+    builder.addCase(
+      getSMEListThunk.fulfilled,
+      (state: MiscRedux, action: any) => {
+        return {
+          ...state,
+          sme: {
+            ...state.sme!,
+            ListUMKM: [
+              ...(state.sme?.ListUMKM || []),
+              ...action.payload.ListUMKM,
+            ],
+          },
+          loading: {
+            sme: false,
+          },
+        };
+      }
+    );
+    builder.addCase(getSMEListThunk.rejected, (state: MiscRedux) => {
+      return {
+        ...state,
+        loading: {
+          sme: false,
+        },
+      };
+    });
+
+    // SME List handlers
+    builder.addCase(getSMEDetailThunk.pending, (state: MiscRedux, _) => {
+      return {
+        ...state,
+        loading: {
+          sme: true,
+        },
+      };
+    });
+    builder.addCase(getSMEDetailThunk.fulfilled, (state: MiscRedux, _: any) => {
+      return {
+        ...state,
+        loading: {
+          sme: false,
+        },
+      };
+    });
+    builder.addCase(getSMEDetailThunk.rejected, (state: MiscRedux) => {
+      return {
+        ...state,
+        loading: {
+          sme: false,
+        },
+      };
+    });
   },
 });
 

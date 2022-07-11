@@ -4,6 +4,7 @@ import {
   getDestinationDetail,
   getDestinationList,
 } from '@attraction/services';
+import { getSMEDetail, getSMEList } from '@attraction/services/sme.service';
 import StoreConstants from '@constants/store';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '@store/rootReducers';
@@ -72,6 +73,41 @@ export const getAttractionCreativeDetailThunk = createAsyncThunk(
         await getCreativeDetail({
           districtid: DistrictID,
           creativedestinationid: id,
+        })
+      );
+    } catch (err) {
+      throw rejectWithValue(err);
+    }
+  }
+);
+
+export const getSMEListThunk = createAsyncThunk(
+  `${StoreConstants.ATTRACTION}/getSMEList`,
+  async (page: number, { getState, rejectWithValue }) => {
+    try {
+      const { DistrictID } = (getState() as RootState).authentication.account;
+      return sanitizeResponse(
+        await getSMEList({
+          districtId: DistrictID,
+          page: page,
+          pageSize: 10,
+        })
+      );
+    } catch (err) {
+      throw rejectWithValue(err);
+    }
+  }
+);
+
+export const getSMEDetailThunk = createAsyncThunk(
+  `${StoreConstants.ATTRACTION}/getSMEDetail`,
+  async (id: string, { getState, rejectWithValue }) => {
+    try {
+      const { DistrictID } = (getState() as RootState).authentication.account;
+      return sanitizeResponse(
+        await getSMEDetail({
+          districtid: DistrictID,
+          umkmid: id,
         })
       );
     } catch (err) {

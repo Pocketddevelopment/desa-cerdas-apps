@@ -7,7 +7,7 @@ import MoreListScreen, {
   MoreListScreenProps,
 } from '@attraction/screens/MoreList';
 import SMEScreen from '@attraction/screens/SME';
-import SMEDetailScreen from '@attraction/screens/SMEDetail';
+import SMEDetailScreen, { SMEDetailProps } from '@attraction/screens/SMEDetail';
 import ImagePreviewModal from '@components/ImagePreview';
 import NavigationTabItem from '@components/NavigationTabItem';
 import { Text } from '@components/typography';
@@ -292,7 +292,7 @@ export type DashboardStackParamList = {
   ComplaintForm: Object | undefined;
   ComplaintDetail: Object | undefined;
   SME: Object | undefined;
-  SMEDetail: Object | undefined;
+  SMEDetail: SMEDetailProps;
   Attraction: Object | undefined;
   MoreList: MoreListScreenProps;
   AttractionDetail: AttractionDetailProps;
