@@ -7,4 +7,5 @@ export interface DocumentHistoryInterface {
   RequestDate: string;
   ApprovalDate: string;
   FileURL: string;
+  Extesnsion: string;
 }

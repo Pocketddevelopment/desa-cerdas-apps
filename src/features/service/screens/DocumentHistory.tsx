@@ -75,10 +75,15 @@ const DocumentHistoryScreen: React.FC = () => {
     return (
       <DocumentItem
         key={index}
-        format={item.FileURL.substr(0, 4)}
+        format={item.Extesnsion}
         date={item.ApprovalDate}
         title={item.AdministrationName}
-        onDownload={() => onPressItem(item.FileURL, item.AdministrationName)}
+        onDownload={() =>
+          onPressItem(
+            item.FileURL,
+            `${item.AdministrationName}.${item.Extesnsion}`
+          )
+        }
       />
     );
   };
