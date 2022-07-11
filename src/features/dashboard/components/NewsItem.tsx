@@ -51,6 +51,7 @@ const NewsItem = ({
           </Title>
           <RenderHTML
             source={{ html: description }}
+            baseStyle={{ maxHeight: 38 }}
             contentWidth={DeviceContants.screenWidth}
           />
         </View>
