@@ -69,4 +69,17 @@ export default class APIConstants {
       },
     },
   };
+
+  static SERVICE = {
+    DOCUMENT_HISTORY: {
+      LIST: {
+        METHOD: 'GET',
+        URL: '/api/administration',
+        ADDITIONAL_PARAMS: {
+          pageSize: this.GLOBAL_PAGE_SIZE,
+          isApproval: true,
+        },
+      },
+    },
+  };
 }
