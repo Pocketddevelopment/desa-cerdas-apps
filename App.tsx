@@ -26,6 +26,7 @@ import Toast from 'react-native-toast-message';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import moment from 'moment';
+import { firebase } from '@react-native-firebase/messaging';
 moment.locale('id');
 
 export const Stack = createNativeStackNavigator();
@@ -36,6 +37,14 @@ const App: React.FC = () => {
   const [isThemeDark, setIsThemeDark] = React.useState(false);
   const [isReady, setReady] = useState<boolean>(false);
   const [initialRouteName, setInitialRouteName] = useState<string>();
+
+  useEffect(() => {
+    async function getToken() {
+      process.env.NODE_ENV !== 'production' &&
+        console.log('Firebase Token', await firebase.messaging().getToken());
+    }
+    getToken();
+  }, []);
 
   const getInitialRouteName = useCallback(async () => {
     if (!isLoggedIn && !initialRouteName) {

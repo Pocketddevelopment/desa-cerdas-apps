@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1077597444840",
+    "project_id": "desa-cerdas-dev",
+    "storage_bucket": "desa-cerdas-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1077597444840:android:389343afe4d0da5803875d",
+        "android_client_info": {
+          "package_name": "com.desacerdas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1077597444840-ao14q81j3do6jrhmca229q0db136diqp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.desacerdas",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "1077597444840-s0j99puqgtscjub897kfer9e96431fil.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsS4KfFdZ3arXuFvUVGjwXekp9c1k4LhY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1077597444840-s0j99puqgtscjub897kfer9e96431fil.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
