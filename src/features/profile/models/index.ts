@@ -8,6 +8,7 @@ import StoreConstants from '@constants/store';
 import { createSlice } from '@reduxjs/toolkit';
 import GlobalNetworking from '@services/request';
 import { mapLoadingStates } from '@utils/store';
+import { getReportAPBDListThunk } from '../../report/models/interfaces/thunks';
 import MiscRedux from './interfaces/MiscRedux.interface';
 import { getNewsDetailThunk, getNewsListThunk } from './thunks';
 
@@ -205,7 +206,7 @@ const Model = createSlice({
       };
     });
 
-    // SME List handlers
+    // SME Detail handlers
     builder.addCase(getSMEDetailThunk.pending, (state: MiscRedux, _) => {
       return {
         ...state,
@@ -227,6 +228,39 @@ const Model = createSlice({
         ...state,
         loading: {
           sme: false,
+        },
+      };
+    });
+
+    // Report APBD List Detail handlers
+    builder.addCase(getReportAPBDListThunk.pending, (state: MiscRedux, _) => {
+      return {
+        ...state,
+        loading: {
+          report: true,
+        },
+      };
+    });
+    builder.addCase(
+      getReportAPBDListThunk.fulfilled,
+      (state: MiscRedux, action: any) => {
+        return {
+          ...state,
+          report: {
+            ...state.report,
+            apbd: action.payload,
+          },
+          loading: {
+            report: false,
+          },
+        };
+      }
+    );
+    builder.addCase(getReportAPBDListThunk.rejected, (state: MiscRedux) => {
+      return {
+        ...state,
+        loading: {
+          report: false,
         },
       };
     });

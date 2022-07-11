@@ -58,5 +58,15 @@ export default class APIConstants {
     },
   };
 
-  static SME = {};
+  static REPORT = {
+    APBD: {
+      LIST: {
+        METHOD: 'GET',
+        URL: '/api/report/apbd',
+        ADDITIONAL_PARAMS: {
+          pageSize: 10,
+        },
+      },
+    },
+  };
 }

@@ -1,36 +1,61 @@
 import Separator from '@components/Separator';
+import { Text } from '@components/typography';
 import { DashboardStackParamList } from '@dashboard/index';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { RootState } from '@store/store';
 import { requestStorageAndroid } from '@utils/permissions';
-import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import React, { useCallback, useEffect, useState } from 'react';
+import { FlatList, ScrollView, StyleSheet } from 'react-native';
 import RNFS from 'react-native-fs';
+import { ActivityIndicator, Caption } from 'react-native-paper';
 import Toast from 'react-native-toast-message';
 import ReportItem from '../components/ReportItem';
+import ReportAPBDInterface from '../models/interfaces/ReportAPBD.interface';
+import { getReportAPBDListThunk } from '../models/interfaces/thunks';
 
 const ReportListScreen: React.FC = () => {
-  const navigation =
-    useNavigation<NativeStackNavigationProp<DashboardStackParamList>>();
+  const dispatch = useAppDispatch();
 
-  const onPressItem = async (title: string) => {
+  const { loading, report } = useAppSelector((state: RootState) => state.misc);
+
+  const [page, setPage] = useState<number>(1);
+
+  const getList = useCallback(
+    (page: number) => {
+      dispatch(getReportAPBDListThunk(page));
+    },
+    [dispatch]
+  );
+
+  useEffect(() => {
+    if (report.apbd) {
+      if (page <= report.apbd.TotalPage) {
+        getList(page);
+      }
+    } else {
+      getList(page);
+    }
+  }, [page, getList]);
+
+  const onPressItem = async (url: string, fileName: string) => {
     const isGranted = await requestStorageAndroid();
     if (isGranted) {
       RNFS.downloadFile({
-        fromUrl:
-          'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
-        toFile: `${RNFS.DownloadDirectoryPath}/${title}.pdf`,
+        fromUrl: url,
+        toFile: `${RNFS.DownloadDirectoryPath}/${fileName}`,
       })
         .promise.then((r) => {
           Toast.show({
             type: 'standard',
-            text1: `Berhasil mengunduh ${title}`,
+            text1: `Berhasil mengunduh ${fileName}`,
           });
         })
         .catch((err) => {
           Toast.show({
             type: 'standard',
-            text1: `Gagal mengunduh ${title}`,
+            text1: `Gagal mengunduh ${fileName}`,
           });
         });
     } else {
@@ -41,58 +66,57 @@ const ReportListScreen: React.FC = () => {
     }
   };
 
+  const renderItem = ({
+    item,
+    index,
+  }: {
+    item: ReportAPBDInterface;
+    index: number;
+  }) => {
+    return (
+      <ReportItem
+        key={index}
+        format={item.Extension.replace('.', '')}
+        date={item.Created}
+        title={item.Title}
+        onDownload={() =>
+          onPressItem(item.ImageUrl, `${item.Title}${item.Extension}`)
+        }
+      />
+    );
+  };
+
+  const EmptyComponent = () => {
+    return <Text style={styles.emptyContainer}>Tidak ada Laporan APBD</Text>;
+  };
+
+  const FooterComponent = () => {
+    return (
+      <>
+        {loading.report && <ActivityIndicator style={styles.loading} />}
+        {page >= ((report.apbd && report.apbd.TotalPage) || 1) && (
+          <Caption style={styles.listEnd}>
+            Semua Laporan APBD telah ditampilkan
+          </Caption>
+        )}
+      </>
+    );
+  };
+
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <ReportItem
-        format='xlsx'
-        date='Senin, 12 Maret 2022'
-        title='Pengembangan sentra usaha tahu bulan Februari'
-        onDownload={() =>
-          onPressItem('Pengembangan sentra usaha tahu bulan Februari')
-        }
-      />
-      <Separator width={'95%'} />
-      <ReportItem
-        format='pdf'
-        date='Senin, 11 Maret 2022'
-        title='Rencana pembangunan sentra usaha tahu bulan Februari'
-        onDownload={() =>
-          onPressItem('Rencana pembangunan sentra usaha tahu bulan Februari')
-        }
-      />
-      <Separator width={'95%'} />
-      <ReportItem
-        format='xlsx'
-        date='Senin, 10 Maret 2022'
-        title='Anggaran Pendapatan Belanja Desa 2021'
-        onDownload={() => onPressItem('Anggaran Pendapatan Belanja Desa 2021')}
-      />
-      <Separator width={'95%'} />
-      <ReportItem
-        format='xlsx'
-        date='Senin, 9 Maret 2022'
-        title='Pengembangan sentra usaha tahu bulan Februari'
-        onDownload={() =>
-          onPressItem('Pengembangan sentra usaha tahu bulan Februari')
-        }
-      />
-      <Separator width={'95%'} />
-      <ReportItem
-        format='pdf'
-        date='Senin, 8 Maret 2022'
-        title='Rencana pembangunan sentra usaha tahu bulan Februari'
-        onDownload={() =>
-          onPressItem('Rencana pembangunan sentra usaha tahu bulan Februari')
-        }
-      />
-      <Separator width={'95%'} />
-      <ReportItem
-        format='xlsx'
-        date='Senin, 7 Maret 2022'
-        title='Anggaran Pendapatan Belanja Desa 2021'
-        onDownload={() => onPressItem('Anggaran Pendapatan Belanja Desa 2021')}
-      />
-    </ScrollView>
+    <FlatList
+      contentContainerStyle={styles.container}
+      showsVerticalScrollIndicator={false}
+      data={report.apbd?.ListReportAPBD}
+      renderItem={renderItem}
+      ListEmptyComponent={EmptyComponent}
+      ListFooterComponent={FooterComponent}
+      ItemSeparatorComponent={() => <Separator width={'95%'} />}
+      onEndReachedThreshold={0.4}
+      onEndReached={() => {
+        setPage(page + 1);
+      }}
+    />
   );
 };
 
@@ -102,5 +126,16 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     paddingHorizontal: 20,
+  },
+  emptyContainer: {
+    alignSelf: 'center',
+    marginVertical: 20,
+  },
+  loading: {
+    marginVertical: 5,
+  },
+  listEnd: {
+    textAlign: 'center',
+    marginVertical: 10,
   },
 });

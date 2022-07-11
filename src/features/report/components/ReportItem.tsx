@@ -2,7 +2,7 @@ import Row from '@components/Row';
 import { Caption, Text, Title } from '@components/typography';
 import onPressInterface from '@interfaces/Press.interface';
 import React from 'react';
-import { Linking, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
 interface ReportItemProps {
