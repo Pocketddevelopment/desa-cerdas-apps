@@ -13,6 +13,7 @@ module.exports = {
           '@notification': './src/features/notification',
           '@attraction': './src/features/attraction',
           '@profile': './src/features/profile',
+          '@report': './src/features/report',
           '@news': './src/features/news',
           '@authentication': './src/features/authentication',
           '@dashboard': './src/features/dashboard',
