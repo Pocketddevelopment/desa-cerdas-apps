@@ -73,7 +73,7 @@ const DocumentFormScreen: React.FC<
 
   useEffect(() => {
     replace([]);
-    setError('DocumentForm', []);
+    setError('DocumentForm', {});
     const newDocumentBodyForm: any[] = [];
     if (selectedDocumentType) {
       const formString = documentBody?.split('|');
