@@ -1,4 +1,6 @@
+import DistrictProfileInterface from './DistrictProfile.interface';
+
 export default interface ProfileRedux {
-  profile: any | null;
+  profile: DistrictProfileInterface;
   loading: Record<string, boolean>;
 }

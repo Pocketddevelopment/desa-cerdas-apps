@@ -20,6 +20,13 @@ export default class APIConstants {
     },
   };
 
+  static PROFILE = {
+    PROFILE: {
+      METHOD: 'GET',
+      URL: '/api/district',
+    },
+  };
+
   static NEWS = {
     LIST: {
       METHOD: 'GET',

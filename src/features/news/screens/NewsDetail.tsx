@@ -4,7 +4,7 @@ import { Caption, Title } from '@components/typography';
 import DeviceContants from '@constants/device';
 import { DashboardStackParamList } from '@dashboard/index';
 import NewsDetailInterface from '@news/models/interfaces/NewsDetail.interface';
-import { getNewsDetailThunk } from '@profile/models/thunks';
+import { getNewsDetailThunk } from '@dashboard/models/thunks';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { RootState } from '@store/store';

@@ -19,8 +19,11 @@ const DistrictCard = () => {
     (state: RootState) => state.authentication
   );
 
-  function onPressShortcut(target: keyof DashboardStackParamList) {
-    navigation.navigate(target);
+  function onPressShortcut(
+    target: keyof DashboardStackParamList,
+    params?: Object
+  ) {
+    navigation.navigate(target, params);
   }
 
   return (
@@ -45,7 +48,11 @@ const DistrictCard = () => {
         <ButtonShortcut
           icon={require('@assets/district-card/profile.webp')}
           title={'Profil'}
-          onPress={() => onPressShortcut('Profile')}
+          onPress={() =>
+            onPressShortcut('Profile', {
+              title: account.DistrictName,
+            })
+          }
         />
         <ButtonShortcut
           icon={require('@assets/district-card/attraction.webp')}

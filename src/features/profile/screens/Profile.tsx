@@ -1,3 +1,14 @@
+import Button from '@components/Button';
+import SpaceBetween from '@components/SpaceBetween';
+import { Text } from '@components/typography';
+import SectionTitle from '@components/typography/SectionTitle';
+import { DashboardStackParamList } from '@dashboard/index';
+import Population from '@profile/components/Population';
+import { getDistrictProfileThunk } from '@profile/models/thunks';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { RootState } from '@store/store';
+import React, { useEffect } from 'react';
 import {
   Image,
   Linking,
@@ -7,31 +18,46 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
-import Button from '@components/Button';
-import Placeman from '../components/Placeman';
-import { useTheme } from 'react-native-paper';
-import SpaceBetween from '@components/SpaceBetween';
+import { ActivityIndicator, useTheme } from 'react-native-paper';
 import DistrictHighlight from '../components/DistrictHighlight';
-import Population from '@profile/components/Population';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { DashboardStackParamList } from '@dashboard/index';
-import { useNavigation } from '@react-navigation/native';
-import SectionTitle from '@components/typography/SectionTitle';
-import { Text } from '@components/typography';
+import Placeman from '../components/Placeman';
 
-const ProfileScreen: React.FC = () => {
+export type ProfileScreenProps = {
+  title: string;
+};
+
+const ProfileScreen: React.FC<
+  NativeStackScreenProps<DashboardStackParamList, 'Profile'>
+> = ({ navigation, route }) => {
+  const { title } = route.params;
   const theme = useTheme();
-  const navigation =
-    useNavigation<NativeStackNavigationProp<DashboardStackParamList>>();
+  const dispatch = useAppDispatch();
+  const { loading, profile } = useAppSelector(
+    (state: RootState) => state.profile
+  );
+
+  useEffect(() => {
+    if (profile.DistrictID === '') {
+      navigation.setOptions({
+        title: `Profil Desa ${title}`,
+      });
+      dispatch(getDistrictProfileThunk());
+    } else {
+      navigation.setOptions({
+        title: `Profil Desa ${profile.Description}`,
+      });
+    }
+  }, []);
+
+  useEffect(() => {}, [profile]);
 
   const openMaps = () => {
     const scheme = Platform.select({
       ios: 'maps:0,0?q=',
       android: 'geo:0,0?q=',
     });
-    const latLng = '';
-    const label = 'Desa';
+    const latLng = `${profile?.Latitude},${profile?.Longitude}`;
+    const label = `Desa ${profile.Description}`;
     const url: string = Platform.select({
       ios: `${scheme}${label}@${latLng}`,
       android: `${scheme}${latLng}(${label})`,
@@ -44,20 +70,26 @@ const ProfileScreen: React.FC = () => {
     <ScrollView
       showsVerticalScrollIndicator={false}
       contentContainerStyle={styles.container}>
-      <TouchableOpacity
-        delayPressIn={80}
-        onPress={() =>
-          navigation.navigate('ImagePreview', {
-            uri: 'https://www.pasirampo.desa.id/desa/upload/artikel/sedang_1612102240_FB_IMG_1611857150939.jpg',
-          })
-        }>
-        <Image
-          source={{
-            uri: 'https://www.pasirampo.desa.id/desa/upload/artikel/sedang_1612102240_FB_IMG_1611857150939.jpg',
-          }}
-          style={styles.locationImage}
-        />
-      </TouchableOpacity>
+      {loading.getDistrictProfile ? (
+        <View style={styles.locationImage}>
+          <ActivityIndicator />
+        </View>
+      ) : (
+        <TouchableOpacity
+          delayPressIn={80}
+          onPress={() =>
+            navigation.navigate('ImagePreview', {
+              uri: profile.MapURL,
+            })
+          }>
+          <Image
+            source={{
+              uri: profile.MapURL,
+            }}
+            style={styles.locationImage}
+          />
+        </TouchableOpacity>
+      )}
       <Button
         mode='outlined'
         primary
@@ -65,7 +97,7 @@ const ProfileScreen: React.FC = () => {
         onPress={openMaps}>
         <Image
           source={{
-            uri: 'https://cdn.vox-cdn.com/thumbor/pOMbzDvdEWS8NIeUuhxp23wi_cU=/1400x1400/filters:format(png)/cdn.vox-cdn.com/uploads/chorus_asset/file/19700731/googlemaps.png',
+            uri: 'http://13.250.44.36:8001/assets/images/icon/icon-maps.png',
           }}
           style={styles.icon}
         />{' '}
@@ -118,12 +150,12 @@ const styles = StyleSheet.create({
   btnMaps: {
     margin: 20,
     padding: 0,
+    height: 50,
     width: 'auto',
   },
   icon: {
-    height: 17,
-    width: 17,
-    resizeMode: 'cover',
+    height: 18,
+    width: 18,
   },
   section: {
     marginVertical: 10,

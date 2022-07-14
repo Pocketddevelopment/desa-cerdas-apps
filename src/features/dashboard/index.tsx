@@ -28,7 +28,7 @@ import { ImageSourcePropType, StyleSheet, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import NewsDetailScreen, { NewsDetailProps } from '../news/screens/NewsDetail';
 import NotificationListScreen from '../notification/screens/NotificationList';
-import ProfileScreen from '../profile/screens/Profile';
+import ProfileScreen, { ProfileScreenProps } from '../profile/screens/Profile';
 import ReportListScreen from '../report/screens/ReportList';
 import DocumentFormScreen from '../service/screens/DocumentForm';
 import ServiceScreen from '../service/screens/ServiceHome';
@@ -213,7 +213,7 @@ export default function DashboardScreens(): JSX.Element[] {
           name='Attraction'
           component={AttractionScreen}
           options={{
-            title: 'Wisata Desa Pasir Ampo',
+            title: 'Wisata Desa',
           }}
         />
         <Stack.Screen name='MoreList' component={MoreListScreen} />
@@ -225,7 +225,7 @@ export default function DashboardScreens(): JSX.Element[] {
           name='Profile'
           component={ProfileScreen}
           options={{
-            title: 'Profil Desa Pasir Ampo',
+            title: 'Profil Desa',
           }}
         />
         <Stack.Screen
@@ -298,7 +298,7 @@ export type DashboardStackParamList = {
   Attraction: Object | undefined;
   MoreList: MoreListScreenProps;
   AttractionDetail: AttractionDetailProps;
-  Profile: Object | undefined;
+  Profile: ProfileScreenProps;
   PlacemanList: Object | undefined;
   DistrictHighlight: Object | undefined;
   EventList: Object | undefined;

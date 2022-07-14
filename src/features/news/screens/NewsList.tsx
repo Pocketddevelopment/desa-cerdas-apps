@@ -2,7 +2,7 @@ import Separator from '@components/Separator';
 import { Caption, Text } from '@components/typography';
 import NewsItem from '@dashboard/components/NewsItem';
 import News from '@news/models/interfaces/News.interface';
-import { getNewsListThunk } from '@profile/models/thunks';
+import { getNewsListThunk } from '@dashboard/models/thunks';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { RootState } from '@store/store';
 import moment from 'moment';
