@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { mapLoadingStates } from '@utils/store';
 import ServiceRedux from './interfaces/ServiceRedux.interface';
 import {
+  createComplaintThunk,
   getComplaintDetailThunk,
   getComplaintListThunk,
   getDocumentFormFormatThunk,
@@ -227,6 +228,35 @@ const Model = createSlice({
         ...state,
         loading: {
           updateComment: false,
+        },
+      };
+    });
+
+    //Get complaint detail handlers
+    builder.addCase(createComplaintThunk.pending, (state: ServiceRedux) => {
+      return {
+        ...state,
+        loading: {
+          createComplaint: true,
+        },
+      };
+    });
+    builder.addCase(
+      createComplaintThunk.fulfilled,
+      (state: ServiceRedux, _: any) => {
+        return {
+          ...state,
+          loading: {
+            createComplaint: false,
+          },
+        };
+      }
+    );
+    builder.addCase(createComplaintThunk.rejected, (state: ServiceRedux) => {
+      return {
+        ...state,
+        loading: {
+          createComplaint: false,
         },
       };
     });

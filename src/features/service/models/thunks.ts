@@ -1,6 +1,7 @@
 import StoreConstants from '@constants/store';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import {
+  createComplaint,
   getComplaintDetail,
   getComplaintList,
   getDocumentFormat,
@@ -10,6 +11,7 @@ import {
 } from '@service/services';
 import { RootState } from '@store/store';
 import { sanitizeResponse } from '@utils/store';
+import CreateComplaintThunkPayloadInterface from './interfaces/requests/CreateComplaintThunkPayload.interface';
 import RequestDocumentThunkPayloadInterface from './interfaces/requests/RequestDocumentThunkPayload.interface';
 import UpdateCommentThunkPayloadInterface from './interfaces/requests/UpdateCommentThunkPayload.interface';
 
@@ -110,6 +112,28 @@ export const updateCommentThunk = createAsyncThunk(
         .authentication.account;
       return sanitizeResponse(
         await putComplaintComment({
+          customerId: CustomerID,
+          districtId: DistrictID,
+          ...params,
+        })
+      );
+    } catch (err) {
+      throw rejectWithValue(err);
+    }
+  }
+);
+
+export const createComplaintThunk = createAsyncThunk(
+  `${StoreConstants.SERVICE}/createComplaint`,
+  async (
+    params: CreateComplaintThunkPayloadInterface,
+    { getState, rejectWithValue }
+  ) => {
+    try {
+      const { CustomerID, DistrictID } = (getState() as RootState)
+        .authentication.account;
+      return sanitizeResponse(
+        await createComplaint({
           customerId: CustomerID,
           districtId: DistrictID,
           ...params,

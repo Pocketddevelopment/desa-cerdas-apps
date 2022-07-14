@@ -107,6 +107,14 @@ export default class APIConstants {
         URL: '/api/complaint/detail',
       },
 
+      POST_COMPLAINT: {
+        METHOD: 'POST',
+        URL: '/api/complaint',
+        ADDITIONAL_BODY: {
+          source: 'Aplikasi',
+        },
+      },
+
       UPDATE_COMMENT: {
         METHOD: 'PUT',
         URL: '/api/complaint',

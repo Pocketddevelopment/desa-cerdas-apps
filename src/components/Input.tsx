@@ -13,6 +13,7 @@ import {
   useTheme,
 } from 'react-native-paper';
 import type { TextInputProps } from 'react-native-paper/lib/typescript/components/TextInput/TextInput';
+import Row from './Row';
 
 type AdditionalTextInputProps = {
   shadow: boolean;
@@ -114,30 +115,38 @@ export default function TextInput(
         right={getRightIcon()}
         secureTextEntry={type === 'password' && !showPassword}
       />
-      {counter && props.maxLength && (
-        <HelperText
-          type={
-            counterColor
-              ? counterColor
-              : (props.value ? props.value.length : text.length) >
-                props.maxLength
-              ? 'error'
-              : 'info'
-          }
-          style={styles.counter}>
-          {props.value ? props.value.length : text.length} / {props.maxLength}
-        </HelperText>
-      )}
-      {errorMessage && (
-        <HelperText
-          type={'error'}
-          style={[
-            styles.errorText,
-            { color: errorColor ? errorColor : theme.colors.error },
-          ]}>
-          {errorMessage}
-        </HelperText>
-      )}
+      <Row>
+        <View style={{ flex: 8 }}>
+          {errorMessage && (
+            <HelperText
+              numberOfLines={1}
+              type={'error'}
+              style={[
+                styles.errorText,
+                { color: errorColor ? errorColor : theme.colors.error },
+              ]}>
+              {errorMessage}
+            </HelperText>
+          )}
+        </View>
+        <View style={{ flex: 2 }}>
+          {counter && props.maxLength && (
+            <HelperText
+              type={
+                counterColor
+                  ? counterColor
+                  : (props.value ? props.value.length : text.length) >
+                    props.maxLength
+                  ? 'error'
+                  : 'info'
+              }
+              style={styles.counter}>
+              {props.value ? props.value.length : text.length} /{' '}
+              {props.maxLength}
+            </HelperText>
+          )}
+        </View>
+      </Row>
     </ContainerTag>
   );
 }
