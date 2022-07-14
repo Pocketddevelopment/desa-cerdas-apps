@@ -18,7 +18,9 @@ import EventListScreen from '@profile/screens/EventList';
 import PlacemanListScreen from '@profile/screens/PlacemanList';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import ComplaintScreen from '@service/screens/Complaint';
-import ComplaintDetail from '@service/screens/ComplaintDetail';
+import ComplaintDetail, {
+  ComplaintDetailScreenProps,
+} from '@service/screens/ComplaintDetail';
 import ComplaintFormScreen from '@service/screens/ComplaintForm';
 import DocumentHistoryScreen from '@service/screens/DocumentHistory';
 import React from 'react';
@@ -290,7 +292,7 @@ export type DashboardStackParamList = {
   DocumentHistory: Object | undefined;
   Complaint: Object | undefined;
   ComplaintForm: Object | undefined;
-  ComplaintDetail: Object | undefined;
+  ComplaintDetail: ComplaintDetailScreenProps;
   SME: Object | undefined;
   SMEDetail: SMEDetailProps;
   Attraction: Object | undefined;

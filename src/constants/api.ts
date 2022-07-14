@@ -92,5 +92,30 @@ export default class APIConstants {
         URL: '/api/AdministrationRequest',
       },
     },
+
+    COMPLAINT: {
+      LIST: {
+        METHOD: 'GET',
+        URL: '/api/complaint',
+        ADDITIONAL_PARAMS: {
+          pageSize: this.GLOBAL_PAGE_SIZE,
+        },
+      },
+
+      DETAIL: {
+        METHOD: 'GET',
+        URL: '/api/complaint/detail',
+      },
+
+      UPDATE_COMMENT: {
+        METHOD: 'PUT',
+        URL: '/api/complaint',
+        ADDTIONAL_BODY: {
+          source: 'Aplikasi',
+          type: 'Customer',
+          isCompleted: false,
+        },
+      },
+    },
   };
 }

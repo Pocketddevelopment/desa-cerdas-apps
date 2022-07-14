@@ -1,12 +1,63 @@
 import Container from '@components/Container';
 import Separator from '@components/Separator';
+import { Caption, Text } from '@components/typography';
 import SectionTitle from '@components/typography/SectionTitle';
 import ComplaintCard from '@service/components/ComplaintCard';
 import ComplaintItem from '@service/components/ComplaintItem';
-import React from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import ComplaintInterface from '@service/models/interfaces/Complaint.interface';
+import { getComplaintListThunk } from '@service/models/thunks';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { RootState } from '@store/store';
+import React, { useEffect, useState } from 'react';
+import { FlatList, ScrollView, StyleSheet, View } from 'react-native';
+import { ActivityIndicator } from 'react-native-paper';
 
 const ComplaintScreen: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const [page, setPage] = useState<number>(1);
+  const { loading, complaintList } = useAppSelector(
+    (state: RootState) => state.service
+  );
+
+  useEffect(() => {
+    dispatch(getComplaintListThunk(page));
+  }, []);
+
+  const renderItem = ({ item }: { item: ComplaintInterface }) => {
+    return (
+      <ComplaintItem
+        key={item.ID}
+        id={item.ID}
+        date={item.Created}
+        thumbnailUri={item.ListImage[0].ImageUrl}
+        title={item.Subject}
+        description={item.Description}
+        count={item.Detail.length}
+        resolved={item.StatusType === 'Closed'}
+      />
+    );
+  };
+
+  const EmptyComponent = () => {
+    return !loading.complaintList ? (
+      <Text style={styles.emptyContainer}>Tidak ada keluhan</Text>
+    ) : null;
+  };
+
+  const FooterComponent = () => {
+    return (
+      <>
+        {loading.complaintList && <ActivityIndicator style={styles.loading} />}
+        {page >= complaintList.TotalPage &&
+          complaintList.ListComplaint.length > 0 && (
+            <Caption style={styles.listEnd}>
+              Semua keluhan telah ditampilkan
+            </Caption>
+          )}
+      </>
+    );
+  };
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Container>
@@ -16,47 +67,16 @@ const ComplaintScreen: React.FC = () => {
 
         <View style={styles.complaintSection}>
           <SectionTitle>Keluhan Warga</SectionTitle>
-          <ComplaintItem
-            date='2 Maret 2021 | 13:59'
-            thumbnailUri='http://13.250.44.36:8002/keluhan/1.jpg'
-            title='Dear Bupati, Jalan Rusak dan Berlubang Masih Banyak Bertebaran di Sidoarjo'
-            description='Jalan rusak dan berlubang di Sidoarjo ternyata masih banyak. Yang menderita dan terganggu tentu saja adalah para pengguna jalan. Ini keluhan mereka
-            Kerusakan parah yang terlihat di Jalan Bhayangkari di Kecamatan Porong. Jalan penghubung antara Porong ke Krembung itu banyak yang berlubang. Lubang jalan mulai dari pertigan Kelurahan Juwet hingga traffic light di Jalan Arteri
-            Dengan panjang jalan tak lebih dari 2 kilometer, terdapat puluhan lubang jalan dengan lebar 1 meter, panjang 1,5 meter dan dengan kedalaman satu jengkal orang dewasa. Apabila ada pengendara roda dua melintas dengan kecepatan agak tinggi, dipastikan jatuh.'
-            count={5}
-          />
-          <Separator />
-          <ComplaintItem
-            date='24 Juni 2020 | 10:33'
-            thumbnailUri='http://13.250.44.36:8002/keluhan/2.jpg'
-            title='Warga Buang Sampah Sembarangan, Bau Busuk Tercium dari Muara Sungai di Pasuruan'
-            description='Salah satu warga, Jufri, sampah-sampah ini berasal dari warga di lima desa yang berada di sepanjang aliran sungai. Desa-desa ini antara lain Branang, Tampung, Jatiarjo dan Balonganyar serta Tambak Lekok. Sampah-sampah ini kiriman dari desa di atasnya. Pas musim hujan, bukan cuma sampah seperti ini yang datang, tapi sudah kotoran sapi hingga kayu-kayu ukuran besar, katanya. Menurutnya, kurangnya fasilitas tempat pembungan sampah dan kesadaran kebersihan menjadikan warga terbiasa membuang sampah sembarangan.'
-            count={0}
-          />
-          <Separator />
-          <ComplaintItem
-            date='14 Mei 2020 | 12:33'
-            thumbnailUri='http://13.250.44.36:8002/keluhan/3.jpg'
-            title='Depo Tersedia, Tapi Masih Ada Warga Buang Sampah Sembarangan'
-            description='Terkait masih adanya warga yang membuang sampah tidak pada tempatnya tersebut, maka tegas Toha dirinya kembali meminta ketua RT setempat untuk menegaskan warganya agar tidak membuang sampah pada jalur tersebut, melainkan langsung dibuang ke depo sampah yang tersedia. Sementara itu Lurah Menteng Kecamatan Jekan Raya Kota Palangka Raya, Rossalinda mengungkapkan, bila selama ini pihak kelurahan telah menyurati bahkan melakukan sosialisasi kepada setiap lingkungan RT agar warganya tidak lagi membuang sampah tidak pada tempatnya.'
-            count={0}
-          />
-          <Separator />
-          <ComplaintItem
-            date='30 September 2017 | 12:57'
-            thumbnailUri='http://13.250.44.36:8002/keluhan/4.jpg'
-            title='Sampah Kiriman Berdampak Banjir di Kabupaten Bandung'
-            description='Sampah kiriman dari Kota Bandung yang mengalir dari Sungai Cikapundung dan bermuara ke Sungai Citarum menumpuk di Jembatan Leuwi Bandung, Kecamatan Bojongsoang. Akibatnya, air yang ada di sungai tersebut meluap ke pemukiman warga dan merendam ratusan rumah yang berada di Kampung Lewi Bandung, Desa Cijagra, Kecamatan Bojong Soang.'
-            count={0}
-            resolved
-          />
-          <Separator />
-          <ComplaintItem
-            date='07 April 2022 | 19:20'
-            thumbnailUri='http://13.250.44.36:8002/keluhan/5.jpg'
-            title='Warga Keluhkan Sisa Sisa Pohon Tumbang di Ciamis Belum di Bereskan'
-            description='Salah seorang pengendara Nandang (38) yang melintas memaparkan kekesalannya “Menuju sore jalan ini suka ramai di lintasi apalagi sekarang bulan ramadhan banyak yang ngabuburit ke arah kota, kalau bisa cepat di bereskan agar kami warga tidak kesusahan mepet terus ke pinggir jalan apalagi kalau bawa anak susah “, paparnya “Harapannya sigap cepat apalagi sekarang musim nya hujan jalan ini jalan hidup banyak di lalui pengendara luar kota juga dan bis,” tambahnya'
-            count={0}
+          <FlatList
+            data={complaintList.ListComplaint}
+            renderItem={renderItem}
+            ListEmptyComponent={EmptyComponent}
+            ListFooterComponent={FooterComponent}
+            ItemSeparatorComponent={() => <Separator width={'85%'} />}
+            onEndReachedThreshold={0.4}
+            onEndReached={() => {
+              setPage(page + 1);
+            }}
           />
         </View>
       </Container>
@@ -71,5 +91,16 @@ const styles = StyleSheet.create({
   complaintSection: {
     marginTop: 20,
     width: '100%',
+  },
+  emptyContainer: {
+    alignSelf: 'center',
+    marginVertical: 20,
+  },
+  loading: {
+    marginVertical: 5,
+  },
+  listEnd: {
+    marginVertical: 10,
+    textAlign: 'center',
   },
 });

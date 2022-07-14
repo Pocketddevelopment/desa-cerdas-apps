@@ -9,6 +9,7 @@ import SpaceBetween from '@components/SpaceBetween';
 import { Caption, Text, Title } from '@components/typography';
 
 type ComplaintItemProps = {
+  id: string;
   date: string;
   thumbnailUri: string;
   title: string;
@@ -18,6 +19,7 @@ type ComplaintItemProps = {
 };
 
 const ComplaintItem = ({
+  id,
   date,
   thumbnailUri,
   title,
@@ -31,15 +33,14 @@ const ComplaintItem = ({
 
   const onPress = () => {
     const data = {
+      id,
       date,
-      thumbnailUri,
+      images: [{ ImageUrl: thumbnailUri }],
       title,
       description,
-      count,
-      resolved,
     };
     navigation.navigate('ComplaintDetail', {
-      data: data,
+      ...data,
     });
   };
 

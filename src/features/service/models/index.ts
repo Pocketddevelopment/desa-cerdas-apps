@@ -3,9 +3,12 @@ import { createSlice } from '@reduxjs/toolkit';
 import { mapLoadingStates } from '@utils/store';
 import ServiceRedux from './interfaces/ServiceRedux.interface';
 import {
+  getComplaintDetailThunk,
+  getComplaintListThunk,
   getDocumentFormFormatThunk,
   getDocumentHistoryListThunk,
   requestDocumentThunk,
+  updateCommentThunk,
 } from './thunks';
 
 const defaultInitialState: ServiceRedux = {
@@ -15,6 +18,11 @@ const defaultInitialState: ServiceRedux = {
     TotalRow: 0,
   },
   documentFormat: [],
+  complaintList: {
+    ListComplaint: [],
+    TotalPage: 1,
+    TotalRow: 0,
+  },
   loading: {},
 };
 
@@ -106,7 +114,7 @@ const Model = createSlice({
       }
     );
 
-    //Get document form format handlers
+    //Request document handlers
     builder.addCase(requestDocumentThunk.pending, (state: ServiceRedux) => {
       return {
         ...state,
@@ -131,6 +139,94 @@ const Model = createSlice({
         ...state,
         loading: {
           requestDocument: false,
+        },
+      };
+    });
+
+    //Get complaint list handlers
+    builder.addCase(getComplaintListThunk.pending, (state: ServiceRedux) => {
+      return {
+        ...state,
+        loading: {
+          complaintList: true,
+        },
+      };
+    });
+    builder.addCase(
+      getComplaintListThunk.fulfilled,
+      (state: ServiceRedux, action: any) => {
+        return {
+          ...state,
+          complaintList: action.payload,
+          loading: {
+            complaintList: false,
+          },
+        };
+      }
+    );
+    builder.addCase(getComplaintListThunk.rejected, (state: ServiceRedux) => {
+      return {
+        ...state,
+        loading: {
+          complaintList: false,
+        },
+      };
+    });
+
+    //Get complaint detail handlers
+    builder.addCase(getComplaintDetailThunk.pending, (state: ServiceRedux) => {
+      return {
+        ...state,
+        loading: {
+          complaintDetail: true,
+        },
+      };
+    });
+    builder.addCase(
+      getComplaintDetailThunk.fulfilled,
+      (state: ServiceRedux, _: any) => {
+        return {
+          ...state,
+          loading: {
+            complaintDetail: false,
+          },
+        };
+      }
+    );
+    builder.addCase(getComplaintDetailThunk.rejected, (state: ServiceRedux) => {
+      return {
+        ...state,
+        loading: {
+          complaintDetail: false,
+        },
+      };
+    });
+
+    //Get complaint detail handlers
+    builder.addCase(updateCommentThunk.pending, (state: ServiceRedux) => {
+      return {
+        ...state,
+        loading: {
+          updateComment: true,
+        },
+      };
+    });
+    builder.addCase(
+      updateCommentThunk.fulfilled,
+      (state: ServiceRedux, _: any) => {
+        return {
+          ...state,
+          loading: {
+            updateComment: false,
+          },
+        };
+      }
+    );
+    builder.addCase(updateCommentThunk.rejected, (state: ServiceRedux) => {
+      return {
+        ...state,
+        loading: {
+          updateComment: false,
         },
       };
     });

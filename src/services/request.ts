@@ -215,7 +215,10 @@ class NetworkRequest {
         method,
         'request to',
         url,
-        `${method === 'POST' && `with payload ${JSON.stringify(options.data)}`}`
+        `${
+          method === 'POST' ||
+          (method === 'PUT' && `with payload ${JSON.stringify(options.data)}`)
+        }`
       );
     return axios
       .request({

@@ -2,6 +2,9 @@ import APIConstants from '@constants/api';
 import GetDocumentHistoryListRequestInterface from '@service/models/interfaces/requests/GetDocumentHistoryListRequest.interface';
 import DocumentFormRequestInterface from '@service/models/interfaces/requests/DocumentFormRequest.interface';
 import GlobalNetworking from '@services/request';
+import GetComplaintListRequestInterface from '@service/models/interfaces/requests/GetComplaintListRequest.interface';
+import GetComplaintDetailRequestInterface from '@service/models/interfaces/requests/GetComplaintDetailRequest.interface';
+import UpdateCommentRequestInterface from '@service/models/interfaces/requests/UpdateCommentRequest.interface';
 
 export const getDocumentHistoryList = (
   params: GetDocumentHistoryListRequestInterface
@@ -27,5 +30,31 @@ export const requestDocument = (params: DocumentFormRequestInterface) => {
   return GlobalNetworking.post(
     APIConstants.SERVICE.DOCUMENT_REQUEST.REQUEST.URL,
     params
+  );
+};
+
+export const getComplaintList = (params: GetComplaintListRequestInterface) => {
+  return GlobalNetworking.get(APIConstants.SERVICE.COMPLAINT.LIST.URL, {
+    ...params,
+    ...APIConstants.SERVICE.COMPLAINT.LIST.ADDITIONAL_PARAMS,
+  });
+};
+
+export const getComplaintDetail = (
+  params: GetComplaintDetailRequestInterface
+) => {
+  return GlobalNetworking.get(
+    APIConstants.SERVICE.COMPLAINT.DETAIL.URL,
+    params
+  );
+};
+
+export const putComplaintComment = (params: UpdateCommentRequestInterface) => {
+  return GlobalNetworking.put(
+    APIConstants.SERVICE.COMPLAINT.UPDATE_COMMENT.URL,
+    {
+      ...params,
+      ...APIConstants.SERVICE.COMPLAINT.UPDATE_COMMENT.ADDTIONAL_BODY,
+    }
   );
 };

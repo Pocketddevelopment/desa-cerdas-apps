@@ -1,8 +1,7 @@
 import Failed from '@components/Failed';
 import Dot from '@components/pagination/PaginationDot';
-import { Caption, Text, Title } from '@components/typography';
+import { Caption, Title } from '@components/typography';
 import DeviceContants from '@constants/device';
-import StoreConstants from '@constants/store';
 import { DashboardStackParamList } from '@dashboard/index';
 import NewsDetailInterface from '@news/models/interfaces/NewsDetail.interface';
 import { getNewsDetailThunk } from '@profile/models/thunks';
