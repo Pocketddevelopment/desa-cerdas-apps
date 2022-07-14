@@ -3,7 +3,10 @@ import { createSlice } from '@reduxjs/toolkit';
 import GlobalNetworking from '@services/request';
 import { mapLoadingStates } from '@utils/store';
 import ProfileRedux from './interfaces/ProfileRedux.interface';
-import { getDistrictProfileThunk } from './thunks';
+import {
+  getDistrictOrganizationStructureThunk,
+  getDistrictProfileThunk,
+} from './thunks';
 
 const defaultInitialState: ProfileRedux = {
   profile: {
@@ -15,6 +18,7 @@ const defaultInitialState: ProfileRedux = {
     MapURL: '',
     StructureOrganizationURL: '',
   },
+  structure: [],
   loading: {},
 };
 
@@ -64,6 +68,42 @@ const Model = createSlice({
         },
       };
     });
+
+    //Get organization structure handlers
+    builder.addCase(
+      getDistrictOrganizationStructureThunk.pending,
+      (state: ProfileRedux) => {
+        return {
+          ...state,
+          loading: {
+            getDistrictOrganizationStructure: true,
+          },
+        };
+      }
+    );
+    builder.addCase(
+      getDistrictOrganizationStructureThunk.fulfilled,
+      (state: ProfileRedux, action: any) => {
+        return {
+          ...state,
+          structure: action.payload,
+          loading: {
+            getDistrictOrganizationStructure: false,
+          },
+        };
+      }
+    );
+    builder.addCase(
+      getDistrictOrganizationStructureThunk.rejected,
+      (state: ProfileRedux) => {
+        return {
+          ...state,
+          loading: {
+            getDistrictOrganizationStructure: false,
+          },
+        };
+      }
+    );
   },
 });
 

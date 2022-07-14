@@ -6,3 +6,9 @@ export const getDistrictProfile = (id: string) => {
     districtId: id,
   });
 };
+
+export const getDistrictOrganizationStructure = (id: string) => {
+  return GlobalNetworking.get(APIConstants.PROFILE.STRUCTURE.URL, {
+    districtId: id,
+  });
+};

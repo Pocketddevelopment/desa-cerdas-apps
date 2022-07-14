@@ -1,15 +1,36 @@
 import Button from '@components/Button';
-import Separator from '@components/Separator';
+import Failed from '@components/Failed';
 import { DashboardStackParamList } from '@dashboard/index';
 import PlacemanCard from '@profile/components/PlacemanCard';
+import {
+  getDistrictOrganizationStructureThunk,
+  getDistrictProfileThunk,
+} from '@profile/models/thunks';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import React from 'react';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { RootState } from '@store/store';
+import React, { useEffect } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
+import { ActivityIndicator } from 'react-native-paper';
 
 const PlacemanListScreen: React.FC = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<DashboardStackParamList>>();
+
+  const dispatch = useAppDispatch();
+  const { loading, profile, structure } = useAppSelector(
+    (state: RootState) => state.profile
+  );
+
+  useEffect(() => {
+    if (profile.DistrictID === '') {
+      dispatch(getDistrictProfileThunk());
+    }
+    if (structure.length <= 0) {
+      dispatch(getDistrictOrganizationStructureThunk());
+    }
+  }, [profile, structure]);
 
   const openChart = () => {
     navigation.navigate('ImagePreview', {
@@ -23,37 +44,27 @@ const PlacemanListScreen: React.FC = () => {
         mode='outlined'
         primary
         btnStyle={styles.btnMaps}
-        onPress={openChart}>
+        onPress={openChart}
+        loading={loading.getDistrictProfile}>
         Bagan Pemerintahan
       </Button>
-      <PlacemanCard
-        thumbnailUri='http://13.250.44.36:8001/assets/images/foto-lurah.png'
-        name='ASEP'
-        position='Kepala Desa'
-        phone='08123456789'
-        idNumber='141/Kep.1124-Huk/201'
-      />
-      <PlacemanCard
-        thumbnailUri='http://13.250.44.36:8002/pejabat/4.jpg'
-        name='Mastur'
-        position='Wakil Kepala Desa'
-        phone='08913131931'
-        idNumber='141/Kep.1124-Huk/201'
-      />
-      <PlacemanCard
-        thumbnailUri='http://13.250.44.36:8002/pejabat/3.jpg'
-        name='BUDI'
-        position='Bendahara'
-        phone='08913131931'
-        idNumber='141/Kep.1124-Huk/201'
-      />
-      <PlacemanCard
-        thumbnailUri='http://13.250.44.36:8002/pejabat/2.jpg'
-        name='Arban'
-        position='Humas'
-        phone='08913131931'
-        idNumber='141/Kep.1124-Huk/201'
-      />
+      {loading.getDistrictOrganizationStructure ? (
+        <ActivityIndicator size={'large'} style={styles.loading} />
+      ) : structure.length > 0 ? (
+        structure.map((e) => (
+          <PlacemanCard
+            thumbnailUri={e.ImageURL}
+            name={e.FullName.toUpperCase()}
+            position={e.NIK}
+            phone={e.MobileNo}
+            idNumber={e.NIK}
+          />
+        ))
+      ) : (
+        <Failed
+          onBtnPress={() => dispatch(getDistrictOrganizationStructureThunk())}
+        />
+      )}
     </ScrollView>
   );
 };
@@ -68,4 +79,5 @@ const styles = StyleSheet.create({
     margin: 5,
     width: 'auto',
   },
+  loading: { marginTop: 20 },
 });

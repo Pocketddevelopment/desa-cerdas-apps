@@ -25,6 +25,11 @@ export default class APIConstants {
       METHOD: 'GET',
       URL: '/api/district',
     },
+
+    STRUCTURE: {
+      METHOD: 'GET',
+      URL: '/api/OrganizationalStructure',
+    },
   };
 
   static NEWS = {

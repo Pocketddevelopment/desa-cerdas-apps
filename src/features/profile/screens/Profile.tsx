@@ -47,9 +47,7 @@ const ProfileScreen: React.FC<
         title: `Profil Desa ${profile.Description}`,
       });
     }
-  }, []);
-
-  useEffect(() => {}, [profile]);
+  }, [profile]);
 
   const openMaps = () => {
     const scheme = Platform.select({
