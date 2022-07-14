@@ -19,6 +19,7 @@ import React, {
   useCallback,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from 'react';
 import { Provider as PaperProvider } from 'react-native-paper';
@@ -27,6 +28,8 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import moment from 'moment';
 import { firebase } from '@react-native-firebase/messaging';
+import Logout from '@components/Logout';
+import { navigationRef } from '@utils/navigation';
 moment.locale('id');
 
 export const Stack = createNativeStackNavigator();
@@ -126,7 +129,7 @@ const App: React.FC = () => {
           <PersistGate loading={null} persistor={persistor}>
             <PaperProvider theme={theme}>
               {isReady && initialRouteName && (
-                <NavigationContainer theme={theme}>
+                <NavigationContainer ref={navigationRef} theme={theme}>
                   <Stack.Navigator initialRouteName={initialRouteName}>
                     {isLoggedIn ? DashboardScreens() : AuthenticationScreens()}
                     <Stack.Group
@@ -138,6 +141,7 @@ const App: React.FC = () => {
                         name='ModalSelector'
                         component={ModalSelectorScreen}
                       />
+                      <Stack.Screen name='Logout' component={Logout} />
                     </Stack.Group>
                   </Stack.Navigator>
                   {/** @ts-ignore */}
@@ -155,5 +159,6 @@ const App: React.FC = () => {
 export default App;
 
 export type RootStackParamList = {
+  Logout: undefined;
   ModalSelector: ModalSelectorScreenProps;
 };

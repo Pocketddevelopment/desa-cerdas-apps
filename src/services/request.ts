@@ -4,7 +4,7 @@ import type { Method, AxiosRequestConfig } from 'axios';
 import { getQueryUrlParams } from '@utils/transformer';
 import APIResponse from '@interfaces/APIResponse.interface';
 import { store } from '@store/store';
-import { refreshTokenThunk } from '@authentication/models/thunks';
+import { logoutThunk, refreshTokenThunk } from '@authentication/models/thunks';
 
 declare module 'axios' {
   export interface AxiosRequestConfig {
@@ -34,7 +34,10 @@ axios.interceptors.response.use(
     const originalRequest = response.config;
     if (response.data.ResponseCode === '11' && !originalRequest._retry) {
       originalRequest._retry = true;
-      const access_token = await store.dispatch(refreshTokenThunk());
+      const access_token: string = await store
+        .dispatch(refreshTokenThunk())
+        .unwrap();
+      // GlobalNetworking.setAccessToken(access_token);
       axios.defaults.headers.common.Authorization = 'Bearer ' + access_token;
       return axios(originalRequest);
     }
@@ -86,10 +89,22 @@ const errorHandler = (error: {
 const responseHandler = (
   response: AxiosResponse
 ): APIResponse & Record<string, string> => {
-  const { data }: { data: APIResponse & Record<string, string> } = response;
+  const {
+    data,
+    config,
+  }: { data: APIResponse & Record<string, string>; config: any } = response;
   process.env.NODE_ENV !== 'production' && console.log('Response', data);
   // Error occured
-  if (data.ResponseCode === '99') {
+  // First handle refresh token error
+  if (
+    data.ResponseCode == '99' &&
+    config.url.includes(APIConstants.AUTHENTICATION.TOKEN.URL)
+  ) {
+    store.dispatch(logoutThunk());
+    throw {
+      errorData: response,
+    };
+  } else if (data.ResponseCode === '99') {
     throw {
       errorData: response,
     };
@@ -132,7 +147,7 @@ class NetworkRequest {
           this.request(
             this.lastRequest.method,
             this.lastRequest.url,
-            this.lastRequest.options || {}
+            this.lastRequest.options || { _retry: true }
           );
           break;
         case 'PUT':
@@ -151,6 +166,7 @@ class NetworkRequest {
     return this.request('POST', url, {
       ...options,
       data: body,
+      _retry: false,
     });
   }
 
@@ -163,6 +179,7 @@ class NetworkRequest {
     const finalUrl = `${url}${queryParams}`;
     return this.request('GET', finalUrl, {
       ...options,
+      _retry: false,
     });
   }
 
@@ -170,6 +187,7 @@ class NetworkRequest {
     return this.request('PUT', url, {
       ...options,
       data: body,
+      _retry: false,
     });
   }
 
@@ -192,7 +210,13 @@ class NetworkRequest {
       options: options,
     });
     process.env.NODE_ENV !== 'production' &&
-      console.log('Making', method, 'request to', url);
+      console.log(
+        'Making',
+        method,
+        'request to',
+        url,
+        `${method === 'POST' && `with payload ${JSON.stringify(options.data)}`}`
+      );
     return axios
       .request({
         url: url,

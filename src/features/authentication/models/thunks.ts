@@ -1,16 +1,13 @@
-import {
-  getNewToken,
-  login,
-  register,
-  updateAccount,
-} from '@authentication/services';
-import StoreConstants from '@constants/store';
-import { AccountInterface } from '@authentication/models/interfaces/Account.interface';
+import { AuthContext } from '@@@/App';
 import UpdateAccountFormInterface from '@authentication/models/interfaces/requests/requests/UpdateAccountRequest.interface';
+import { getNewToken, login, updateAccount } from '@authentication/services';
+import StoreConstants from '@constants/store';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '@store/store';
 import Storage from '@utils/async-storage';
+import { navigate } from '@utils/navigation';
 import { sanitizeResponse } from '@utils/store';
+import { useContext } from 'react';
 import LoginRequest from './interfaces/requests/LoginRequest.interface';
 import {
   RegisterFormStep1,
@@ -34,13 +31,14 @@ export const refreshTokenThunk = createAsyncThunk(
     try {
       const { CustomerID } =
         (getState() as RootState).authentication.account || {};
-      const refreshToken = await Storage.getItem(
+      const refreshToken: string = await Storage.getItem(
         StoreConstants.REFRESH_TOKEN,
         ''
       );
       if (CustomerID && refreshToken) {
-        return sanitizeResponse(await getNewToken(CustomerID, refreshToken))
-          .Token;
+        return sanitizeResponse(
+          await getNewToken(CustomerID, encodeURI(refreshToken))
+        ).Token;
       }
       return;
     } catch (err) {
@@ -55,6 +53,7 @@ export const logoutThunk = createAsyncThunk(
     dispatch({
       type: 'authentication/reset',
     });
+    navigate('Logout');
     return;
   }
 );
