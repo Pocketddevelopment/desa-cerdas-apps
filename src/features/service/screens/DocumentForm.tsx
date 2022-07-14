@@ -62,10 +62,6 @@ const DocumentFormScreen: React.FC<
     name: 'DocumentForm',
   });
 
-  useEffect(() => {
-    console.log(JSON.stringify(errors));
-  }, [errors]);
-
   const selectedDocumentType = useWatch({
     control,
     name: 'AdministrationFormatID',
@@ -106,7 +102,6 @@ const DocumentFormScreen: React.FC<
     await dispatch(requestDocumentThunk(payload))
       .unwrap()
       .then((response) => {
-        console.log('response', response);
         Toast.show({
           type: 'standard',
           text1: response.ResponseMessage,
