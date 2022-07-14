@@ -81,5 +81,16 @@ export default class APIConstants {
         },
       },
     },
+
+    DOCUMENT_REQUEST: {
+      FORMAT: {
+        METHOD: 'GET',
+        URL: '/api/administrationformat',
+      },
+      REQUEST: {
+        METHOD: 'POST',
+        URL: '/api/AdministrationRequest',
+      },
+    },
   };
 }

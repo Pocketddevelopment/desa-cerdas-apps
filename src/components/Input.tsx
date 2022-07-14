@@ -24,6 +24,7 @@ type AdditionalTextInputProps = {
   counterColor: 'error' | 'info';
   errorMessage: string;
   errorColor: string;
+  loading: boolean;
 };
 
 export default function TextInput(
@@ -39,6 +40,7 @@ export default function TextInput(
     onPressSuffix,
     errorMessage,
     errorColor,
+    loading,
   } = props;
   const isShadowPresent = props.shadow === undefined ? true : props.shadow;
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -59,7 +61,7 @@ export default function TextInput(
       <PaperTextInput.Icon
         icon={props.suffixIcon}
         color={theme.colors.primary}
-        onPress={() => onPressSuffix && onPressSuffix()}
+        onPress={() => !loading && onPressSuffix && onPressSuffix()}
       />
     ) : null;
     if (type === 'password') {
@@ -100,7 +102,8 @@ export default function TextInput(
         dense
         type
         mode='flat'
-        editable={onPressSuffix ? false : true}
+        disabled={loading}
+        editable={!loading && onPressSuffix ? false : true}
         // error={!!errorMessage}
         {...props}
         onChangeText={(value: string) => (

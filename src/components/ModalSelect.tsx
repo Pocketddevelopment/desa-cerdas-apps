@@ -2,15 +2,11 @@ import { RootStackParamList } from '@@@/App';
 import DeviceContants from '@constants/device';
 import onPressInterface from '@interfaces/Press.interface';
 import SelectItemInterface from '@interfaces/SelectItem.interface';
-import { RouteProp, useNavigation } from '@react-navigation/native';
-import {
-  NativeStackNavigationProp,
-  NativeStackScreenProps,
-} from '@react-navigation/native-stack';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 import Modal from 'react-native-modal';
-import { IconButton, useTheme } from 'react-native-paper';
+import { ActivityIndicator, IconButton, useTheme } from 'react-native-paper';
 import Row from './Row';
 import { Text, Title } from './typography';
 
@@ -20,13 +16,20 @@ export type ModalSelectorScreenProps = {
   initialSelectedIndex: number;
   onSelectItem: any;
   onCloseModal?: onPressInterface;
+  loading?: boolean;
 };
 
 const ModalSelectorScreen: React.FC<
   NativeStackScreenProps<RootStackParamList, 'ModalSelector'>
 > = ({ navigation, route }) => {
-  const { title, data, initialSelectedIndex, onSelectItem, onCloseModal } =
-    route.params;
+  const {
+    title,
+    data,
+    initialSelectedIndex,
+    onSelectItem,
+    onCloseModal,
+    loading,
+  } = route.params;
   const theme = useTheme();
 
   const closeModal = () => {
@@ -52,6 +55,7 @@ const ModalSelectorScreen: React.FC<
             </View>
           </Row>
           <ScrollView showsVerticalScrollIndicator={false}>
+            {loading && <ActivityIndicator />}
             {data.map((e: SelectItemInterface, i: number) => {
               return (
                 <TouchableOpacity

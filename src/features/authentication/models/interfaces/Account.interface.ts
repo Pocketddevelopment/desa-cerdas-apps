@@ -6,7 +6,7 @@ export interface AccountInterface {
   MobileNo: string;
   Email: string;
   Gender: string;
-  DateOfBirth: Date;
+  DateOfBirth: Date | string;
   DistrictName: string;
   DistrictDescription: string;
   DistrictIcon: string;

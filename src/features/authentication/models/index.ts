@@ -9,7 +9,7 @@ import { loginThunk, refreshTokenThunk, updateAccountThunk } from './thunks';
 const defaultInitialState: AuthenticationRedux = {
   account: {
     CustomerID: '',
-    DateOfBirth: new Date(),
+    DateOfBirth: new Date().toISOString(),
     DistrictDescription: '',
     DistrictIcon: '',
     DistrictID: '',

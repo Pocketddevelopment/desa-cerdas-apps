@@ -1,133 +1,241 @@
 import Button from '@components/Button';
 import Container from '@components/Container';
-import TextInput from '@components/Input';
-import Row from '@components/Row';
-import { Text, Title } from '@components/typography';
+import { default as Input } from '@components/Input';
 import SectionTitle from '@components/typography/SectionTitle';
 import DeviceContants from '@constants/device';
-import React, { useState } from 'react';
+import { DashboardStackParamList } from '@dashboard/index';
+import SelectItemInterface from '@interfaces/SelectItem.interface';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import DocumentFormInputEnum from '@service/models/interfaces/enums/DocumentFormInput.enums';
+import {
+  getDocumentFormFormatThunk,
+  requestDocumentThunk,
+} from '@service/models/thunks';
+import { getDocumentFormList } from '@service/utils/formatter';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { RootState } from '@store/store';
+import React, { useEffect, useState } from 'react';
+import { Controller, useFieldArray, useForm, useWatch } from 'react-hook-form';
 import {
   KeyboardAvoidingView,
   ScrollView,
   StyleSheet,
-  TouchableOpacity,
   View,
 } from 'react-native';
-import Modal from 'react-native-modal';
-import { IconButton, useTheme } from 'react-native-paper';
+import { useTheme } from 'react-native-paper';
+import Toast from 'react-native-toast-message';
 
-const DocumentFormScreen: React.FC = ({ navigation }: any) => {
+const DocumentFormScreen: React.FC<
+  NativeStackScreenProps<DashboardStackParamList, 'DocumentForm'>
+> = ({ navigation }: any) => {
   const theme = useTheme();
-  const [documentTypeListVisible, setDocumentTypeListVisible] =
-    useState<boolean>(false);
-  const [documentTypes, setDocumentTypes] = useState([
-    {
-      selected: false,
-      label: 'Surat Keterangan Domisili',
-    },
-    {
-      selected: false,
-      label: 'Surat Ijin Mengadakan Acara',
-    },
-    {
-      selected: false,
-      label: 'Surat Keterangan Pindah Datang',
-    },
-  ]);
-  const [selectedDocumentTypes, setSelectedDocumentTypes] = useState<string>();
+  const dispatch = useAppDispatch();
+  const { loading, documentFormat } = useAppSelector(
+    (state: RootState) => state.service
+  );
 
-  const onPressRequest = () => {
-    navigation.goBack();
+  const [documentTypes, setDocumentTypes] = useState<
+    (SelectItemInterface & { data: string })[]
+  >([]);
+  const [documentBody, setDocumentBody] = useState<string>();
+  const [documentBodyForm, setDocumentBodyForm] = useState<any>([]);
+
+  useEffect(() => {
+    if (documentFormat.length <= 0) {
+      dispatch(getDocumentFormFormatThunk());
+    } else {
+      setDocumentTypes(getDocumentFormList(documentFormat));
+    }
+  }, [documentFormat]);
+
+  // Form controls
+  /** Step 1 Form control */
+  const {
+    handleSubmit,
+    control,
+    setError,
+    formState: { errors },
+  } = useForm();
+
+  const { fields, append, replace } = useFieldArray({
+    control,
+    name: 'DocumentForm',
+  });
+
+  useEffect(() => {
+    console.log(JSON.stringify(errors));
+  }, [errors]);
+
+  const selectedDocumentType = useWatch({
+    control,
+    name: 'AdministrationFormatID',
+  });
+
+  useEffect(() => {
+    replace([]);
+    setError('DocumentForm', []);
+    const newDocumentBodyForm: any[] = [];
+    if (selectedDocumentType) {
+      const formString = documentBody?.split('|');
+      formString?.map((e, i) => {
+        const parts = e.split('#');
+        const name = parts[0];
+        const inputType = parts[1];
+        append({
+          name,
+          inputType,
+        });
+      });
+      setDocumentBodyForm(newDocumentBodyForm);
+    }
+  }, [selectedDocumentType]);
+
+  const onPressRequest = async (data: any) => {
+    const { AdministrationFormatID, ...rest } = data;
+    const restLength = Object.keys(rest).length;
+    const payloadValue = Object.keys(rest)
+      .map(
+        (e: string, i: number) =>
+          `${e}#${rest[e]}${i !== restLength - 1 ? '|' : ''}`
+      )
+      .join('');
+    const payload = {
+      AdministrationFormatID,
+      Value: payloadValue,
+    };
+    await dispatch(requestDocumentThunk(payload))
+      .unwrap()
+      .then((response) => {
+        console.log('response', response);
+        Toast.show({
+          type: 'standard',
+          text1: response.ResponseMessage,
+        });
+        setTimeout(() => {
+          navigation.goBack();
+        }, 1000);
+      })
+      .catch((err) =>
+        Toast.show({
+          type: 'standard',
+          text1: err.ResponseMessage,
+        })
+      );
   };
 
-  const onPressDocumentTypeList = () => {
-    setDocumentTypeListVisible(true);
-  };
-
-  const onSelectDocument = (index: number) => {
-    documentTypes.forEach((e, i, a) => {
-      a[i].selected = false;
+  const renderFormBody = () => {
+    return fields.map((e: Record<string, string>, index) => {
+      return (
+        <Controller
+          key={e.id}
+          control={control}
+          name={`DocumentForm[${index}].${e.name}`}
+          rules={{
+            required: {
+              value: true,
+              message: `${e.name} harus diisi`,
+            },
+          }}
+          render={({ field: { onChange, value } }) => {
+            switch (e.inputType) {
+              case DocumentFormInputEnum.TEXTBOX:
+                return (
+                  <Input
+                    placeholder={e.name}
+                    onChangeText={onChange}
+                    value={value}
+                    errorMessage={
+                      errors?.DocumentForm?.[index]?.[e.name]
+                        ?.message as unknown as string
+                    }
+                  />
+                );
+              case DocumentFormInputEnum.TEXTAREA:
+                return (
+                  <Input
+                    placeholder={e.name}
+                    onChangeText={onChange}
+                    value={value}
+                    multiline={true}
+                    numberOfLines={5}
+                    textAlignVertical='top'
+                    style={{ minHeight: 150 }}
+                    errorMessage={
+                      errors?.DocumentForm?.[index]?.[e.name]
+                        ?.message as unknown as string
+                    }
+                  />
+                );
+              default:
+                return <></>;
+            }
+          }}
+        />
+      );
     });
-    documentTypes[index].selected = true;
-    setSelectedDocumentTypes(documentTypes[index].label);
-    setDocumentTypes([...documentTypes]);
-    setDocumentTypeListVisible(false);
   };
 
   return (
-    <>
-      <ScrollView>
-        <KeyboardAvoidingView style={{ flex: 1 }} behavior={'padding'}>
-          <Container>
-            <TextInput
-              placeholder='Jenis Dokumen'
-              value={selectedDocumentTypes}
-              suffixIcon='chevron-down'
-              onPressSuffix={onPressDocumentTypeList}
-            />
-            <View style={{ width: '100%', marginTop: 5, marginBottom: 10 }}>
-              <View style={{ marginBottom: 5 }}>
-                <SectionTitle>Data-data yang diperlukan</SectionTitle>
+    <ScrollView>
+      <KeyboardAvoidingView style={{ flex: 1 }} behavior={'padding'}>
+        <Container>
+          <Controller
+            name='AdministrationFormatID'
+            control={control}
+            rules={{
+              required: {
+                value: true,
+                message: 'Jenis dokumen harus diisi',
+              },
+            }}
+            render={({ field: { onChange, value } }) => (
+              <Input
+                placeholder='Jenis Dokumen'
+                editable={false}
+                suffixIcon={'chevron-down'}
+                value={
+                  documentTypes.find((e) => e.value === value)?.label as string
+                }
+                onPressSuffix={() =>
+                  navigation.navigate('ModalSelector', {
+                    loading: documentTypes.length === 0,
+                    title: 'Jenis Dokumen',
+                    data: documentTypes,
+                    initialSelectedIndex: documentTypes.findIndex(
+                      (e) => e.value === value
+                    ),
+                    onSelectItem: (selectedItem: SelectItemInterface) => {
+                      onChange(selectedItem.value);
+                      setDocumentBody(
+                        documentTypes.find(
+                          (e) => e.value === selectedItem.value
+                        )!.data
+                      );
+                    },
+                  })
+                }
+              />
+            )}
+          />
+          {documentTypes && documentBody && documentBodyForm && (
+            <>
+              <View style={{ width: '100%', marginTop: 5, marginBottom: 10 }}>
+                <View style={{ marginBottom: 5 }}>
+                  <SectionTitle>Data-data yang diperlukan</SectionTitle>
+                </View>
+                {renderFormBody()}
               </View>
-              <TextInput placeholder='NIK' />
-              <TextInput placeholder='Nama Depan' />
-              <TextInput placeholder='Nama Belakang' />
-              {/* <TextInput
-                placeholder='Deskripsi...'
-                multiline={true}
-                numberOfLines={5}
-                textAlignVertical='top'
-                style={{ minHeight: 150 }}
-              /> */}
-            </View>
-            <Button onPress={onPressRequest} btnStyle={{ width: '100%' }}>
-              Cetak dan Unduh Dokumen
-            </Button>
-          </Container>
-        </KeyboardAvoidingView>
-      </ScrollView>
-      <Modal
-        isVisible={documentTypeListVisible}
-        style={{ margin: 0, borderTopEndRadius: 10 }}
-        onDismiss={() => {
-          setDocumentTypeListVisible(!documentTypeListVisible);
-        }}>
-        <View style={styles.modalContainer}>
-          <View style={styles.modal}>
-            <Row style={styles.header}>
-              <View style={{ flex: 9 }}>
-                <Title size={16}>Jenis Dokumen</Title>
-              </View>
-              <View style={{ flex: 1 }}>
-                <IconButton
-                  icon={'close'}
-                  onPress={() => setDocumentTypeListVisible(false)}
-                />
-              </View>
-            </Row>
-
-            {documentTypes.map((e, i) => {
-              return (
-                <TouchableOpacity
-                  delayPressIn={80}
-                  key={e.label}
-                  onPress={() => onSelectDocument(i)}>
-                  <Row style={styles.selectItem}>
-                    <IconButton
-                      color={theme.colors.primary}
-                      icon={e.selected ? 'check-circle' : 'circle-outline'}
-                      style={styles.selectionIcon}
-                    />
-                    <Text>{e.label}</Text>
-                  </Row>
-                </TouchableOpacity>
-              );
-            })}
-          </View>
-        </View>
-        <View style={styles.modal} />
-      </Modal>
-    </>
+              <Button
+                loading={loading.requestForm}
+                onPress={handleSubmit(onPressRequest)}
+                btnStyle={{ width: '100%' }}>
+                Cetak dan Unduh Dokumen
+              </Button>
+            </>
+          )}
+        </Container>
+      </KeyboardAvoidingView>
+    </ScrollView>
   );
 };
 
