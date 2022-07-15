@@ -1,13 +1,11 @@
 import Dot from '@authentication/components/PaginationDot';
-import { updateDeviceThunk } from '@authentication/models/thunks';
 import Button from '@components/Button';
 import { Text } from '@components/typography';
 import DeviceContants from '@constants/device';
 import StoreConstants from '@constants/store';
 import { CommonActions, useNavigation } from '@react-navigation/native';
-import { useAppDispatch } from '@store/hooks';
 import Storage from '@utils/async-storage';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   Dimensions,
   Image,
@@ -49,13 +47,8 @@ export const SLIDER_WIDTH = Dimensions.get('window').width;
 const OnboardingScreen: React.FC = () => {
   const theme = useTheme();
   const navigation = useNavigation();
-  const dispatch = useAppDispatch();
   const carouselRef = useRef<any>(null);
   const [activeIndex, setActiveIndex] = useState<number>(0);
-
-  useEffect(() => {
-    dispatch(updateDeviceThunk());
-  });
 
   const onPressNextButton = () => {
     if (carouselRef) {

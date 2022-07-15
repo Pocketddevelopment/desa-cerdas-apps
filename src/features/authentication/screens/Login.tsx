@@ -1,6 +1,6 @@
 import { AuthContext } from '@@@/App';
 import { LoginInputForm } from '@authentication/models/interfaces/requests/LoginRequest.interface';
-import { loginThunk, updateDeviceThunk } from '@authentication/models/thunks';
+import { loginThunk } from '@authentication/models/thunks';
 import Button from '@components/Button';
 import Input from '@components/Input';
 import Row from '@components/Row';
@@ -13,7 +13,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { RootState } from '@store/store';
 import Storage from '@utils/async-storage';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Image, ImageBackground, StyleSheet, View } from 'react-native';
 import { Checkbox, Text, useTheme } from 'react-native-paper';
@@ -33,10 +33,6 @@ const LoginScreen: React.FC = () => {
   const [rememberMe, setRememberMe] = useState<CheckBoxStatus>(
     CheckBoxStatus.UNCHECKED
   );
-
-  useEffect(() => {
-    dispatch(updateDeviceThunk());
-  }, []);
 
   // Form control
   const {
