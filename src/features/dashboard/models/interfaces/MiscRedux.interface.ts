@@ -9,7 +9,7 @@ export default interface MiscRedux {
   destination: GetDestinationListResponseInterface | null;
   creative: GetCreativeListResponseInterface | null;
   sme: GetSMEListResponseInterface | null;
-  news: GetNewsResponse | null;
+  news: GetNewsResponse;
   notification: any[];
   report: {
     apbd: GetReportAPBDListResponseInterface | null;

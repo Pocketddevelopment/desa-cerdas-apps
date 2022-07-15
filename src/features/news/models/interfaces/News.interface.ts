@@ -3,5 +3,5 @@ export default interface News {
   Title: string;
   ImageUrl: string;
   Description: string;
-  Created: Date;
+  Created: string;
 }

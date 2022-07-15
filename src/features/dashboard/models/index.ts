@@ -19,7 +19,11 @@ const defaultInitialState: MiscRedux = {
   creative: null,
   destination: null,
   sme: null,
-  news: null,
+  news: {
+    ListNews: [],
+    TotalPage: 1,
+    TotalRow: 0,
+  },
   notification: [],
   report: {
     apbd: null,

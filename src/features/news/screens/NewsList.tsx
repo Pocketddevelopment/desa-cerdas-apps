@@ -33,31 +33,30 @@ const NewsList: React.FC = () => {
     }
   }, [page, getNews]);
 
-  const renderItem = ({ item, index }: { item: News; index: number }) => {
+  const renderItem = ({ item }: { item: News }) => {
     return (
-      <>
-        <NewsItem
-          key={item.ID}
-          id={item.ID}
-          thumbnailUri={item.ImageUrl}
-          date={moment(item.Created).format('dddd, DD MMM YYYY')}
-          title={item.Title}
-          description={item.Description}
-        />
-        {index !== news?.ListNews.length && <Separator width={'90%'} />}
-      </>
+      <NewsItem
+        key={item.ID}
+        id={item.ID}
+        thumbnailUri={item.ImageUrl}
+        date={item.Created}
+        title={item.Title}
+        description={item.Description}
+      />
     );
   };
 
   const EmptyComponent = () => {
-    return <Text style={styles.emptyContainer}>Tidak ada berita</Text>;
+    return !loading.news ? (
+      <Text style={styles.emptyContainer}>Tidak ada berita</Text>
+    ) : null;
   };
 
   const FooterComponent = () => {
     return (
       <>
         {loading.news && <ActivityIndicator style={styles.loading} />}
-        {page === news?.TotalPage && (
+        {page >= news.TotalPage && (
           <Caption style={styles.listEnd}>
             Semua berita telah ditampilkan
           </Caption>
@@ -72,6 +71,7 @@ const NewsList: React.FC = () => {
       renderItem={renderItem}
       ListEmptyComponent={EmptyComponent}
       ListFooterComponent={FooterComponent}
+      ItemSeparatorComponent={() => <Separator width={'90%'} />}
       onEndReachedThreshold={0.4}
       onEndReached={() => {
         setPage(page + 1);
@@ -91,6 +91,7 @@ const styles = StyleSheet.create({
     marginVertical: 5,
   },
   listEnd: {
+    textAlign: 'center',
     marginVertical: 10,
   },
 });
