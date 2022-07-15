@@ -18,6 +18,10 @@ export default class APIConstants {
       METHOD: 'PUT',
       URL: '/api/customer',
     },
+    DEVICE: {
+      METHOD: 'POST',
+      URL: '/api/Device',
+    },
   };
 
   static PROFILE = {

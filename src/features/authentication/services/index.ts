@@ -6,6 +6,7 @@ import {
 import APIConstants from '@constants/api';
 import UpdateAccountFormInterface from '@authentication/models/interfaces/requests/requests/UpdateAccountRequest.interface';
 import GlobalNetworking from '@services/request';
+import UpdateDeviceRequestInterface from '@authentication/models/interfaces/requests/UpdateDeviceRequest.interface';
 
 export const login = (body: LoginRequest) => {
   return GlobalNetworking.post(APIConstants.AUTHENTICATION.LOGIN, body);
@@ -27,4 +28,8 @@ export const updateAccount = (body: UpdateAccountFormInterface) => {
     APIConstants.AUTHENTICATION.UPDATE_ACCOUNT.URL,
     body
   );
+};
+
+export const updateDevice = (body: UpdateDeviceRequestInterface) => {
+  return GlobalNetworking.post(APIConstants.AUTHENTICATION.DEVICE.URL, body);
 };

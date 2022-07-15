@@ -1,7 +1,6 @@
 import { AuthContext } from '@@@/App';
-import AuthenticationRedux from '@authentication/models/interfaces/AuthenticationRedux.interface';
 import { LoginInputForm } from '@authentication/models/interfaces/requests/LoginRequest.interface';
-import { loginThunk } from '@authentication/models/thunks';
+import { loginThunk, updateDeviceThunk } from '@authentication/models/thunks';
 import Button from '@components/Button';
 import Input from '@components/Input';
 import Row from '@components/Row';
@@ -35,7 +34,9 @@ const LoginScreen: React.FC = () => {
     CheckBoxStatus.UNCHECKED
   );
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    dispatch(updateDeviceThunk());
+  }, []);
 
   // Form control
   const {

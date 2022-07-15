@@ -1,4 +1,5 @@
 import AuthenticationScreens from '@authentication/index';
+import Logout from '@components/Logout';
 import ModalSelectorScreen, {
   ModalSelectorScreenProps,
 } from '@components/ModalSelect';
@@ -10,26 +11,24 @@ import {
 import toastConfig from '@config/toast';
 import StoreConstants from '@constants/store';
 import DashboardScreens from '@dashboard/index';
+import { firebase } from '@react-native-firebase/messaging';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { persistor, store } from '@store/store';
 import Storage from '@utils/async-storage';
+import { navigationRef } from '@utils/navigation';
+import moment from 'moment';
 import React, {
   createContext,
   useCallback,
   useEffect,
   useMemo,
-  useRef,
   useState,
 } from 'react';
 import { Provider as PaperProvider } from 'react-native-paper';
 import Toast from 'react-native-toast-message';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import moment from 'moment';
-import { firebase } from '@react-native-firebase/messaging';
-import Logout from '@components/Logout';
-import { navigationRef } from '@utils/navigation';
 moment.locale('id');
 
 export const Stack = createNativeStackNavigator();

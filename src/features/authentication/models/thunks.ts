@@ -1,7 +1,14 @@
 import { AuthContext } from '@@@/App';
 import UpdateAccountFormInterface from '@authentication/models/interfaces/requests/requests/UpdateAccountRequest.interface';
-import { getNewToken, login, updateAccount } from '@authentication/services';
+import {
+  getNewToken,
+  login,
+  updateAccount,
+  updateDevice,
+} from '@authentication/services';
+import DeviceContants from '@constants/device';
 import StoreConstants from '@constants/store';
+import { firebase } from '@react-native-firebase/messaging';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '@store/store';
 import Storage from '@utils/async-storage';
@@ -74,6 +81,27 @@ export const updateAccountThunk = createAsyncThunk(
   async (body: UpdateAccountFormInterface, { rejectWithValue }) => {
     try {
       return await updateAccount(body);
+    } catch (err) {
+      throw rejectWithValue(err);
+    }
+  }
+);
+
+export const updateDeviceThunk = createAsyncThunk(
+  `${StoreConstants.AUTH}/updateDevice`,
+  async (_, { getState, rejectWithValue }) => {
+    try {
+      const { DistrictDescription, DistrictIcon, DateOfBirth, ...rest } = (
+        getState() as RootState
+      ).authentication.account;
+      return await updateDevice({
+        ...rest,
+        DateOfBirth: DateOfBirth.toString(),
+        FCMToken: await firebase.messaging().getToken(),
+        DeviceID: DeviceContants.DEVICE_ID,
+        DeviceModel: DeviceContants.DEVICE_MODEL,
+        Version: DeviceContants.APP_VERSION,
+      });
     } catch (err) {
       throw rejectWithValue(err);
     }

@@ -1,5 +1,6 @@
 import { isIphoneXorAbove } from '@utils/device-helper';
 import { Dimensions, Platform } from 'react-native';
+import DeviceInfo from 'react-native-device-info';
 
 export default class DeviceContants {
   /**
@@ -7,6 +8,9 @@ export default class DeviceContants {
    */
   static screenWidth: number = Dimensions.get('screen').width;
   static screenHeight: number = Dimensions.get('screen').height;
+  static DEVICE_ID: string = DeviceInfo.getUniqueId();
+  static DEVICE_MODEL: string = `${DeviceInfo.getModel()} ${DeviceInfo.getSystemVersion()}`;
+  static APP_VERSION: string = DeviceInfo.getReadableVersion();
 
   /**
    * Boolean Constants

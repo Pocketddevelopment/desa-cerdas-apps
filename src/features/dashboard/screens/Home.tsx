@@ -1,3 +1,4 @@
+import { updateDeviceThunk } from '@authentication/models/thunks';
 import Row from '@components/Row';
 import SpaceBetween from '@components/SpaceBetween';
 import { Text, Title } from '@components/typography';
@@ -7,22 +8,27 @@ import DistrictCard from '@dashboard/components/DistrictCard';
 import WeatherCard from '@dashboard/components/WeatherCard';
 import NewsList from '@news/screens/NewsList';
 import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { useAppSelector } from '@store/hooks';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { RootState } from '@store/store';
 import { getInitialName } from '@utils/transformer';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { Avatar, IconButton, useTheme } from 'react-native-paper';
 import { DashboardStackParamList } from '..';
 
 const HomeScreen: React.FC = () => {
   const navigation =
-    useNavigation<NativeStackNavigationProp<DashboardStackParamList>>();
+    useNavigation<NativeStackScreenProps<DashboardStackParamList>>();
+  const dispatch = useAppDispatch();
 
   const { account } = useAppSelector(
     (state: RootState) => state.authentication
   );
+
+  useEffect(() => {
+    dispatch(updateDeviceThunk());
+  }, []);
 
   const theme = useTheme();
   return (
