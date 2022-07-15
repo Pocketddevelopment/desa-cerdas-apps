@@ -3,13 +3,13 @@ import Dot from '@components/pagination/PaginationDot';
 import { Caption, Title } from '@components/typography';
 import DeviceContants from '@constants/device';
 import { DashboardStackParamList } from '@dashboard/index';
-import NewsDetailInterface from '@news/models/interfaces/NewsDetail.interface';
 import { getNewsDetailThunk } from '@dashboard/models/thunks';
+import NewsDetailInterface from '@news/models/interfaces/NewsDetail.interface';
+import { getEventDetailThunk } from '@profile/models/thunks';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { RootState } from '@store/store';
-import moment from 'moment';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Image, ScrollView, StyleSheet, View } from 'react-native';
 import { ActivityIndicator, useTheme } from 'react-native-paper';
 import RenderHTML from 'react-native-render-html';
@@ -17,6 +17,7 @@ import Carousel, { Pagination } from 'react-native-snap-carousel';
 import Toast from 'react-native-toast-message';
 
 export type NewsDetailProps = {
+  type: 'news' | 'event';
   id: string;
   title: string;
 };
@@ -24,16 +25,21 @@ export type NewsDetailProps = {
 const NewsDetailScreen: React.FC<
   NativeStackScreenProps<DashboardStackParamList, 'NewsDetail'>
 > = ({ navigation, route }) => {
-  const { id: newsId, title: placeholderTitle } = route.params;
-  const { loading } = useAppSelector((state: RootState) => state.misc);
+  const { type, id: itemId, title: placeholderTitle } = route.params;
+  const { loading: loadingMisc } = useAppSelector(
+    (state: RootState) => state.misc
+  );
+  const { loading: loadingProfile } = useAppSelector(
+    (state: RootState) => state.profile
+  );
   const dispatch = useAppDispatch();
 
   const theme = useTheme();
   const [data, setData] = useState<NewsDetailInterface>();
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
-  function getDetail() {
-    dispatch(getNewsDetailThunk(newsId))
+  const getNewsDetail = useCallback((id: string) => {
+    dispatch(getNewsDetailThunk(id))
       .unwrap()
       .then((response) => {
         setData(response as NewsDetailInterface);
@@ -44,14 +50,28 @@ const NewsDetailScreen: React.FC<
           text1: err.ResponseMessage,
         })
       );
-  }
+  }, []);
+
+  const getEventDetail = useCallback((id: string) => {
+    dispatch(getEventDetailThunk(id))
+      .unwrap()
+      .then((response) => {
+        setData(response as NewsDetailInterface);
+      })
+      .catch((err) =>
+        Toast.show({
+          type: 'standard',
+          text1: err.ResponseMessage,
+        })
+      );
+  }, []);
 
   useEffect(() => {
-    getDetail();
+    onFailedRetryPress();
     navigation.setOptions({
       title: placeholderTitle,
     });
-  }, []);
+  }, [type]);
 
   useEffect(() => {
     data &&
@@ -64,9 +84,22 @@ const NewsDetailScreen: React.FC<
     setActiveIndex(index);
   };
 
+  const onFailedRetryPress = () => {
+    switch (type) {
+      case 'event':
+        getEventDetail(itemId);
+        break;
+      case 'news':
+        getNewsDetail(itemId);
+        break;
+      default:
+        break;
+    }
+  };
+
   const renderCarouselItem = ({ item, index }: any) => {
     return (
-      <View style={styles.carouselContainer}>
+      <View key={index} style={styles.carouselContainer}>
         <Image source={{ uri: item.ImageUrl }} style={styles.image} />
         <Pagination
           activeDotIndex={activeIndex}
@@ -90,7 +123,7 @@ const NewsDetailScreen: React.FC<
   };
   return (
     <ScrollView style={styles.container}>
-      {loading.news ? (
+      {loadingMisc.news || loadingProfile.getEventDetail ? (
         <ActivityIndicator size={'large'} style={styles.loading} />
       ) : data ? (
         <>
@@ -105,9 +138,7 @@ const NewsDetailScreen: React.FC<
             snapToAlignment={'center'}
           />
           <View style={styles.contentContainer}>
-            <Caption>
-              {moment(data.Created).format('dddd, DD MMMM YYYY')}
-            </Caption>
+            <Caption>{data.Created}</Caption>
             <Title
               style={{ marginVertical: 10 }}
               size={20}
@@ -121,7 +152,7 @@ const NewsDetailScreen: React.FC<
           </View>
         </>
       ) : (
-        <Failed onBtnPress={() => getDetail()} />
+        <Failed onBtnPress={onFailedRetryPress} />
       )}
     </ScrollView>
   );

@@ -6,6 +6,8 @@ import ProfileRedux from './interfaces/ProfileRedux.interface';
 import {
   getDistrictOrganizationStructureThunk,
   getDistrictProfileThunk,
+  getEventDetailThunk,
+  getEventListThunk,
 } from './thunks';
 
 const defaultInitialState: ProfileRedux = {
@@ -19,6 +21,11 @@ const defaultInitialState: ProfileRedux = {
     StructureOrganizationURL: '',
   },
   structure: [],
+  events: {
+    ListEvent: [],
+    TotalPage: 1,
+    TotalRow: 0,
+  },
   loading: {},
 };
 
@@ -104,6 +111,65 @@ const Model = createSlice({
         };
       }
     );
+
+    //Get event list handlers
+    builder.addCase(getEventListThunk.pending, (state: ProfileRedux) => {
+      return {
+        ...state,
+        loading: {
+          getEventList: true,
+        },
+      };
+    });
+    builder.addCase(
+      getEventListThunk.fulfilled,
+      (state: ProfileRedux, action: any) => {
+        return {
+          ...state,
+          events: action.payload,
+          loading: {
+            getEventList: false,
+          },
+        };
+      }
+    );
+    builder.addCase(getEventListThunk.rejected, (state: ProfileRedux) => {
+      return {
+        ...state,
+        loading: {
+          getEventList: false,
+        },
+      };
+    });
+
+    //Get event detail handlers
+    builder.addCase(getEventDetailThunk.pending, (state: ProfileRedux) => {
+      return {
+        ...state,
+        loading: {
+          getEventDetail: true,
+        },
+      };
+    });
+    builder.addCase(
+      getEventDetailThunk.fulfilled,
+      (state: ProfileRedux, _: any) => {
+        return {
+          ...state,
+          loading: {
+            getEventDetail: false,
+          },
+        };
+      }
+    );
+    builder.addCase(getEventDetailThunk.rejected, (state: ProfileRedux) => {
+      return {
+        ...state,
+        loading: {
+          getEventDetail: false,
+        },
+      };
+    });
   },
 });
 

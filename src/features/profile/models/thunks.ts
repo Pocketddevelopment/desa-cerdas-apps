@@ -2,6 +2,8 @@ import StoreConstants from '@constants/store';
 import {
   getDistrictOrganizationStructure,
   getDistrictProfile,
+  getEventDetail,
+  getEventList,
 } from '@profile/services';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '@store/store';
@@ -29,6 +31,34 @@ export const getDistrictOrganizationStructureThunk = createAsyncThunk(
       return sanitizeResponse(
         await getDistrictOrganizationStructure(districtId)
       ).ListStructure;
+    } catch (err) {
+      throw rejectWithValue(err);
+    }
+  }
+);
+
+export const getEventListThunk = createAsyncThunk(
+  `${StoreConstants.PROFILE}/getEventList`,
+  async (page: number, { getState, rejectWithValue }) => {
+    const { DistrictID } = (getState() as RootState).authentication.account;
+    try {
+      return sanitizeResponse(
+        await getEventList({
+          page,
+          districtId: DistrictID,
+        })
+      );
+    } catch (err) {
+      throw rejectWithValue(err);
+    }
+  }
+);
+
+export const getEventDetailThunk = createAsyncThunk(
+  `${StoreConstants.PROFILE}/getEventDetail`,
+  async (id: string, { rejectWithValue }) => {
+    try {
+      return sanitizeResponse(await getEventDetail(id));
     } catch (err) {
       throw rejectWithValue(err);
     }

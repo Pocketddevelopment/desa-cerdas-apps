@@ -1,13 +1,16 @@
 import Row from '@components/Row';
 import { Caption, Title, Text } from '@components/typography';
+import DeviceContants from '@constants/device';
 import { DashboardStackParamList } from '@dashboard/index';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
+import RenderHTML from 'react-native-render-html';
 
 type EventItemProps = {
+  id: string;
   thumbnailUri: string;
   date: string;
   title: string;
@@ -15,6 +18,7 @@ type EventItemProps = {
 };
 
 const EventItem = ({
+  id,
   thumbnailUri,
   date,
   title,
@@ -28,10 +32,9 @@ const EventItem = ({
       delayPressIn={80}
       onPress={() =>
         navigation.navigate('NewsDetail', {
-          image: thumbnailUri,
-          date: date,
+          id: id,
           title: title,
-          description: description,
+          type: 'event',
         })
       }>
       <Row style={styles.container}>
@@ -46,7 +49,11 @@ const EventItem = ({
           <Title numberOfLines={1} size={16} color={theme.colors.primary}>
             {title}
           </Title>
-          <Text numberOfLines={1}>{description}</Text>
+          <RenderHTML
+            source={{ html: description }}
+            baseStyle={{ maxHeight: 38 }}
+            contentWidth={DeviceContants.screenWidth}
+          />
         </View>
       </Row>
     </TouchableOpacity>

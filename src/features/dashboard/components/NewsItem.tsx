@@ -32,6 +32,7 @@ const NewsItem = ({
     navigation.navigate('NewsDetail', {
       id: id,
       title: title,
+      type: 'news',
     });
   };
 

@@ -30,6 +30,21 @@ export default class APIConstants {
       METHOD: 'GET',
       URL: '/api/OrganizationalStructure',
     },
+
+    EVENT: {
+      LIST: {
+        METHOD: 'GET',
+        URL: '/api/Event',
+        ADDITIONAL_PARAMS: {
+          pageSize: this.GLOBAL_PAGE_SIZE,
+        },
+      },
+
+      DETAIL: {
+        METHOD: 'GET',
+        URL: '/api/Event/Detail',
+      },
+    },
   };
 
   static NEWS = {
@@ -75,6 +90,15 @@ export default class APIConstants {
       LIST: {
         METHOD: 'GET',
         URL: '/api/report/apbd',
+        ADDITIONAL_PARAMS: {
+          pageSize: 10,
+        },
+      },
+    },
+    BUMDES: {
+      LIST: {
+        METHOD: 'GET',
+        URL: '/api/report/bumdes',
         ADDITIONAL_PARAMS: {
           pageSize: 10,
         },

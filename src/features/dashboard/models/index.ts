@@ -8,7 +8,10 @@ import StoreConstants from '@constants/store';
 import { createSlice } from '@reduxjs/toolkit';
 import GlobalNetworking from '@services/request';
 import { mapLoadingStates } from '@utils/store';
-import { getReportAPBDListThunk } from '../../report/models/interfaces/thunks';
+import {
+  getReportAPBDListThunk,
+  getReportBUMDesListThunk,
+} from '../../report/models/interfaces/thunks';
 import MiscRedux from './interfaces/MiscRedux.interface';
 import { getNewsDetailThunk, getNewsListThunk } from './thunks';
 
@@ -20,7 +23,11 @@ const defaultInitialState: MiscRedux = {
   notification: [],
   report: {
     apbd: null,
-    bumdes: [],
+    bumdes: {
+      ListReportBumdes: [],
+      TotalPage: 1,
+      TotalRow: 0,
+    },
   },
   loading: {},
 };
@@ -264,6 +271,39 @@ const Model = createSlice({
         ...state,
         loading: {
           report: false,
+        },
+      };
+    });
+
+    // Report BUMDes List Detail handlers
+    builder.addCase(getReportBUMDesListThunk.pending, (state: MiscRedux, _) => {
+      return {
+        ...state,
+        loading: {
+          bumdes: true,
+        },
+      };
+    });
+    builder.addCase(
+      getReportBUMDesListThunk.fulfilled,
+      (state: MiscRedux, action: any) => {
+        return {
+          ...state,
+          report: {
+            ...state.report,
+            bumdes: action.payload,
+          },
+          loading: {
+            bumdes: false,
+          },
+        };
+      }
+    );
+    builder.addCase(getReportBUMDesListThunk.rejected, (state: MiscRedux) => {
+      return {
+        ...state,
+        loading: {
+          bumdes: false,
         },
       };
     });
