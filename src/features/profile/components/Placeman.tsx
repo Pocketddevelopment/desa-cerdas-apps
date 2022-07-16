@@ -33,9 +33,10 @@ const Placeman = () => {
           .slice(0, 4)
           .map((e) => (
             <PlacemanCard
+              key={e.NIK}
               thumbnailUri={e.ImageURL}
               name={e.FullName.toUpperCase()}
-              position={e.NIK}
+              position={e.Title}
               phone={e.MobileNo}
               idNumber={e.NIK}
             />
