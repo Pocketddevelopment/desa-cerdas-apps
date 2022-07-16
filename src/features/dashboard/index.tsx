@@ -23,7 +23,7 @@ import ComplaintDetail, {
 import ComplaintFormScreen from '@service/screens/ComplaintForm';
 import DocumentHistoryScreen from '@service/screens/DocumentHistory';
 import React from 'react';
-import { ImageSourcePropType, StyleSheet, View } from 'react-native';
+import { ImageSourcePropType, Platform, StyleSheet, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import NewsDetailScreen, { NewsDetailProps } from '../news/screens/NewsDetail';
 import NotificationListScreen from '../notification/screens/NotificationList';
@@ -225,6 +225,8 @@ export default function DashboardScreens(): JSX.Element[] {
           component={ProfileScreen}
           options={{
             title: 'Profil Desa',
+            animation:
+              Platform.OS === 'android' ? 'slide_from_right' : 'default',
           }}
         />
         <Stack.Screen

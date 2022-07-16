@@ -3,6 +3,7 @@ import SpaceBetween from '@components/SpaceBetween';
 import { Text } from '@components/typography';
 import SectionTitle from '@components/typography/SectionTitle';
 import { DashboardStackParamList } from '@dashboard/index';
+import Education from '@profile/components/Education';
 import Population from '@profile/components/Population';
 import { getDistrictProfileThunk } from '@profile/models/thunks';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -127,8 +128,9 @@ const ProfileScreen: React.FC<
       </View>
       <View style={styles.section}>
         <SectionTitle>Statistik Penduduk</SectionTitle>
-        <View style={styles.sectionContent}>
+        <View style={[styles.sectionContent, styles.card]}>
           <Population />
+          <Education />
         </View>
       </View>
     </ScrollView>
@@ -164,5 +166,17 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontWeight: 'bold',
+  },
+  card: {
+    backgroundColor: 'white',
+    elevation: 5,
+    shadowOffset: {
+      height: 5,
+      width: 5,
+    },
+    borderRadius: 10,
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
+    padding: 20,
   },
 });
