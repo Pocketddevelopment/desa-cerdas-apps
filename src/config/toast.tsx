@@ -8,9 +8,7 @@ const toastConfig = {
       {...props}
       style={{
         borderLeftWidth: 0,
-        // borderLeftColor: {
-        //   color: props.theme ? props.theme.colors.text : 'rgba(0, 0, 0, .9)',
-        // },
+        borderRadius: 10,
       }}
       contentContainerStyle={{
         paddingHorizontal: 15,

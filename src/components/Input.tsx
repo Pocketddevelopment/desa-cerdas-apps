@@ -57,7 +57,7 @@ export default function TextInput(
     return 'default';
   };
 
-  const getRightIcon = (): JSX.Element => {
+  const getRightIcon = (): JSX.Element | undefined => {
     const rightIcon = props.suffixIcon ? (
       <PaperTextInput.Icon
         icon={props.suffixIcon}
@@ -76,7 +76,7 @@ export default function TextInput(
     } else if (rightIcon) {
       return rightIcon;
     } else {
-      return <></>;
+      return undefined;
     }
   };
   const newStyles: ViewStyle[] = [styles.inputContainer];

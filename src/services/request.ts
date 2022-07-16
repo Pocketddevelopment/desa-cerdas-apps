@@ -63,6 +63,7 @@ const errorHandler = (error: {
   errorData: any;
 }): APIResponse & Record<string, string> => {
   const { response, errorData } = error;
+  process.env.NODE_ENV !== 'production' && console.log('Error Handler', error);
   // handle ResponseCode from API
   if (errorData) {
     throw errorData.data;
