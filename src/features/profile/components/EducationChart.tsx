@@ -56,7 +56,6 @@ const EducationChart: React.FC = () => {
       showsVerticalScrollIndicator={false}
       scrollEnabled={false}
       scalesPageToFit={true}
-      ontap
     />
   );
 };
