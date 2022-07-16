@@ -6,6 +6,7 @@ import ProfileRedux from './interfaces/ProfileRedux.interface';
 import {
   getDistrictOrganizationStructureThunk,
   getDistrictProfileThunk,
+  getEducationStatisticThunk,
   getEventDetailThunk,
   getEventListThunk,
 } from './thunks';
@@ -25,6 +26,10 @@ const defaultInitialState: ProfileRedux = {
     ListEvent: [],
     TotalPage: 1,
     TotalRow: 0,
+  },
+  statistic: {
+    population: [],
+    education: [],
   },
   loading: {},
 };
@@ -170,6 +175,45 @@ const Model = createSlice({
         },
       };
     });
+
+    //Get education statistic handlers
+    builder.addCase(
+      getEducationStatisticThunk.pending,
+      (state: ProfileRedux) => {
+        return {
+          ...state,
+          loading: {
+            education: true,
+          },
+        };
+      }
+    );
+    builder.addCase(
+      getEducationStatisticThunk.fulfilled,
+      (state: ProfileRedux, action: any) => {
+        return {
+          ...state,
+          statistic: {
+            ...state.statistic,
+            education: action.payload,
+          },
+          loading: {
+            education: false,
+          },
+        };
+      }
+    );
+    builder.addCase(
+      getEducationStatisticThunk.rejected,
+      (state: ProfileRedux) => {
+        return {
+          ...state,
+          loading: {
+            education: false,
+          },
+        };
+      }
+    );
   },
 });
 

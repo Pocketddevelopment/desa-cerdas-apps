@@ -64,6 +64,13 @@ export default class APIConstants {
         URL: '/api/Event/Detail',
       },
     },
+
+    STATISTIC: {
+      EDUCATION: {
+        METHOD: 'GET',
+        URL: '/api/Education',
+      },
+    },
   };
 
   static NOTIFICATION = {

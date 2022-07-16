@@ -1,172 +1,112 @@
 import Row from '@components/Row';
+import SpaceBetween from '@components/SpaceBetween';
 import { Caption, Text } from '@components/typography';
-import React from 'react';
+import { getEducationStatisticThunk } from '@profile/models/thunks';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { RootState } from '@store/store';
+import React, { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
+import { ActivityIndicator } from 'react-native-paper';
 import EducationChart from './EducationChart';
 
 const Education = () => {
-  return (
+  const dispatch = useAppDispatch();
+  const {
+    loading,
+    statistic: { education },
+  } = useAppSelector((state: RootState) => state.profile);
+
+  useEffect(() => {
+    if (education.length <= 0) {
+      dispatch(getEducationStatisticThunk());
+    }
+  }, []);
+
+  return loading.education ? (
+    <ActivityIndicator />
+  ) : (
     <>
       <View pointerEvents='none'>
         <EducationChart />
       </View>
       <View style={styles.section}>
-        <Row style={{ width: '100%' }}>
-          <Row style={{ flex: 1, justifyContent: 'flex-end' }}>
-            <Text style={[styles.flex, styles.right]} size={11}>
-              Tidak Sekolah
-            </Text>
-            <Caption style={[{ flex: 0.7 }, styles.right]}>11.00%</Caption>
-          </Row>
-          <Row
-            style={{
-              flex: 0.5,
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
-            <View
-              style={{
-                backgroundColor: '#3366CC',
-                borderRadius: 100,
-                width: 10,
-                height: 10,
-                marginRight: 5,
-              }}
-            />
-            <View
-              style={{
-                backgroundColor: '#DC3912',
-                borderRadius: 100,
-                width: 10,
-                height: 10,
-                marginLeft: 5,
-              }}
-            />
-          </Row>
-          <Row style={{ flex: 1, justifyContent: 'flex-start' }}>
-            <Caption style={[{ flex: 0.7 }, styles.left]}>13.09%</Caption>
-            <Text style={[styles.flex, styles.left]} size={11}>
-              Putus SD
-            </Text>
-          </Row>
-        </Row>
-        <Row style={{ width: '100%' }}>
-          <Row style={{ flex: 1, justifyContent: 'flex-end' }}>
-            <Text style={[styles.flex, styles.right]} size={11}>
-              SD
-            </Text>
-            <Caption style={[{ flex: 0.7 }, styles.right]}>40.29%</Caption>
-          </Row>
-          <Row
-            style={{
-              flex: 0.5,
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
-            <View
-              style={{
-                backgroundColor: '#FF9900',
-                borderRadius: 100,
-                width: 10,
-                height: 10,
-                marginRight: 5,
-              }}
-            />
-            <View
-              style={{
-                backgroundColor: '#109618',
-                borderRadius: 100,
-                width: 10,
-                height: 10,
-                marginLeft: 5,
-              }}
-            />
-          </Row>
-          <Row style={{ flex: 1, justifyContent: 'flex-start' }}>
-            <Caption style={[{ flex: 0.7 }, styles.left]}>22.67%</Caption>
-            <Text style={[styles.flex, styles.left]} size={11}>
-              SLTP
-            </Text>
-          </Row>
-        </Row>
-        <Row style={{ width: '100%' }}>
-          <Row style={{ flex: 1, justifyContent: 'flex-end' }}>
-            <Text style={[styles.flex, styles.right]} size={11}>
-              SLTA
-            </Text>
-            <Caption style={[{ flex: 0.7 }, styles.right]}>12.27%</Caption>
-          </Row>
-          <Row
-            style={{
-              flex: 0.5,
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
-            <View
-              style={{
-                backgroundColor: '#990099',
-                borderRadius: 100,
-                width: 10,
-                height: 10,
-                marginRight: 5,
-              }}
-            />
-            <View
-              style={{
-                backgroundColor: '#313131',
-                borderRadius: 100,
-                width: 10,
-                height: 10,
-                marginLeft: 5,
-              }}
-            />
-          </Row>
-          <Row style={{ flex: 1, justifyContent: 'flex-start' }}>
-            <Caption style={[{ flex: 0.7 }, styles.left]}>0.00%</Caption>
-            <Text style={[styles.flex, styles.left]} size={11}>
-              D1/D2
-            </Text>
-          </Row>
-        </Row>
-        <Row style={{ width: '100%' }}>
-          <Row style={{ flex: 1, justifyContent: 'flex-end' }}>
-            <Text style={[styles.flex, styles.right]} size={11}>
-              D3
-            </Text>
-            <Caption style={[{ flex: 0.7 }, styles.right]}>0.30%</Caption>
-          </Row>
-          <Row
-            style={{
-              flex: 0.5,
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
-            <View
-              style={{
-                backgroundColor: '#DD4477',
-                borderRadius: 100,
-                width: 10,
-                height: 10,
-                marginRight: 5,
-              }}
-            />
-            <View
-              style={{
-                backgroundColor: '#66AA00',
-                borderRadius: 100,
-                width: 10,
-                height: 10,
-                marginLeft: 5,
-              }}
-            />
-          </Row>
-          <Row style={{ flex: 1, justifyContent: 'flex-start' }}>
-            <Caption style={[{ flex: 0.7 }, styles.left]}>0.35%</Caption>
-            <Text style={[styles.flex, styles.left]} size={11}>
-              Strata1/2/3
-            </Text>
-          </Row>
-        </Row>
+        {education.map((e, i) => {
+          return (
+            <Row style={{ width: '100%' }}>
+              {e.map((el, j) => {
+                if (j % 2 === 0) {
+                  return (
+                    <Row style={{ flex: 1 }} key={el.Description}>
+                      <Row style={{ flex: 1, justifyContent: 'flex-end' }}>
+                        <Text
+                          style={[
+                            styles.flex,
+                            j % 2 === 0 ? styles.right : styles.left,
+                          ]}
+                          size={11}>
+                          {el.Description}
+                        </Text>
+                        <Caption
+                          style={[
+                            { flex: 0.7 },
+                            j % 2 === 0 ? styles.right : styles.left,
+                          ]}>
+                          {el.Total}
+                        </Caption>
+                      </Row>
+                      <Row
+                        style={{
+                          flex: 0.2,
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          marginLeft: 10,
+                        }}>
+                        <View
+                          style={{
+                            backgroundColor: '#FF9900',
+                            borderRadius: 100,
+                            width: 10,
+                            height: 10,
+                          }}
+                        />
+                      </Row>
+                      {e.length < 2 && <View style={{ flex: 1.2 }} />}
+                    </Row>
+                  );
+                } else {
+                  return (
+                    <Row style={{ flex: 1 }} key={el.Description}>
+                      <Row style={{ flex: 1, justifyContent: 'flex-start' }}>
+                        <Row
+                          style={{
+                            flex: 0.2,
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            marginRight: 10,
+                          }}>
+                          <View
+                            style={{
+                              backgroundColor: '#FF9900',
+                              borderRadius: 100,
+                              width: 10,
+                              height: 10,
+                            }}
+                          />
+                        </Row>
+                        <Caption style={[{ flex: 0.7 }, styles.left]}>
+                          {el.Total}
+                        </Caption>
+                        <Text style={[styles.flex, styles.left]} size={11}>
+                          {el.Description}
+                        </Text>
+                      </Row>
+                    </Row>
+                  );
+                }
+              })}
+            </Row>
+          );
+        })}
       </View>
     </>
   );

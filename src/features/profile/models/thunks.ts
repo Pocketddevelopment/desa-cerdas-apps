@@ -2,6 +2,7 @@ import StoreConstants from '@constants/store';
 import {
   getDistrictOrganizationStructure,
   getDistrictProfile,
+  getEducationStatistic,
   getEventDetail,
   getEventList,
 } from '@profile/services';
@@ -59,6 +60,29 @@ export const getEventDetailThunk = createAsyncThunk(
   async (id: string, { rejectWithValue }) => {
     try {
       return sanitizeResponse(await getEventDetail(id));
+    } catch (err) {
+      throw rejectWithValue(err);
+    }
+  }
+);
+
+export const getEducationStatisticThunk = createAsyncThunk(
+  `${StoreConstants.PROFILE}/getEducationStatistic`,
+  async (_, { getState, rejectWithValue }) => {
+    const { DistrictID } = (getState() as RootState).authentication.account;
+    try {
+      const data = sanitizeResponse(
+        await getEducationStatistic(DistrictID)
+      ).ListEducation;
+
+      const newData = [];
+      // Chunk array to 2 for rendering
+      const chunkSize = 2;
+      for (let i = 0; i < data.length; i += chunkSize) {
+        const chunk = data.slice(i, i + chunkSize);
+        newData.push(chunk);
+      }
+      return newData;
     } catch (err) {
       throw rejectWithValue(err);
     }

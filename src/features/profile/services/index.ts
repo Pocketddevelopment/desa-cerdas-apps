@@ -26,3 +26,9 @@ export const getEventDetail = (id: string) => {
     eventId: id,
   });
 };
+
+export const getEducationStatistic = (id: string) => {
+  return GlobalNetworking.get(APIConstants.PROFILE.STATISTIC.EDUCATION.URL, {
+    districtId: id,
+  });
+};
