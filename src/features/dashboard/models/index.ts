@@ -5,6 +5,7 @@ import {
   getSMEListThunk,
 } from '@attraction/models/thunks';
 import StoreConstants from '@constants/store';
+import { getNotificationListThunk } from '@notification/models/thunks';
 import { createSlice } from '@reduxjs/toolkit';
 import GlobalNetworking from '@services/request';
 import { mapLoadingStates } from '@utils/store';
@@ -24,7 +25,11 @@ const defaultInitialState: MiscRedux = {
     TotalPage: 1,
     TotalRow: 0,
   },
-  notification: [],
+  notification: {
+    ListInbox: [],
+    TotalPage: 1,
+    TotalRow: 0,
+  },
   report: {
     apbd: null,
     bumdes: {
@@ -50,6 +55,14 @@ const Model = createSlice({
       return {
         ...initialState,
       };
+    },
+    readNotification: (state, payload) => {
+      const readIndex = state.notification.ListInbox.findIndex(
+        (e) => e.ID === payload.payload
+      );
+      if (readIndex > -1) {
+        state.notification.ListInbox[readIndex].IsRead = true;
+      }
     },
   },
   extraReducers: (builder) => {
@@ -308,6 +321,42 @@ const Model = createSlice({
         ...state,
         loading: {
           bumdes: false,
+        },
+      };
+    });
+
+    // Get notification list handlers
+    builder.addCase(getNotificationListThunk.pending, (state: MiscRedux, _) => {
+      return {
+        ...state,
+        loading: {
+          notification: true,
+        },
+      };
+    });
+    builder.addCase(
+      getNotificationListThunk.fulfilled,
+      (state: MiscRedux, action: any) => {
+        return {
+          ...state,
+          notification: {
+            ...state.notification,
+            ListInbox: [
+              ...state.notification.ListInbox,
+              ...action.payload.ListInbox,
+            ],
+          },
+          loading: {
+            notification: false,
+          },
+        };
+      }
+    );
+    builder.addCase(getNotificationListThunk.rejected, (state: MiscRedux) => {
+      return {
+        ...state,
+        loading: {
+          notification: false,
         },
       };
     });

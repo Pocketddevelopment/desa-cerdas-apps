@@ -8,7 +8,7 @@ import { logoutThunk, refreshTokenThunk } from '@authentication/models/thunks';
 
 declare module 'axios' {
   export interface AxiosRequestConfig {
-    _retry: boolean;
+    _retry?: boolean;
   }
 }
 
@@ -216,10 +216,9 @@ class NetworkRequest {
         method,
         'request to',
         url,
-        `${
-          method === 'POST' ||
-          (method === 'PUT' && `with payload ${JSON.stringify(options.data)}`)
-        }`
+        method === 'POST' || method === 'PUT'
+          ? `with payload ${JSON.stringify(options.data)}`
+          : ''
       );
     return axios
       .request({

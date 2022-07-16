@@ -1,10 +1,13 @@
 import { Caption, Text } from '@components/typography';
 import Title from '@components/typography/Text';
+import { readNotificationThunk } from '@notification/models/thunks';
+import { useAppDispatch } from '@store/hooks';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
 interface NotificationItemProps {
+  id: string;
   date: string;
   title: string;
   description: string;
@@ -12,14 +15,24 @@ interface NotificationItemProps {
 }
 
 const NotificationItem = ({
+  id,
   date,
   title,
   description,
   read = true,
 }: NotificationItemProps) => {
   const theme = useTheme();
+  const dispatch = useAppDispatch();
+  const onPress = () => {
+    dispatch(readNotificationThunk(id));
+    dispatch({
+      type: 'misc/readNotification',
+      payload: id,
+    });
+  };
   return (
-    <View
+    <TouchableOpacity
+      onPress={onPress}
       style={[
         styles.container,
         { backgroundColor: read ? 'white' : '#FFEBEB' },
@@ -33,7 +46,7 @@ const NotificationItem = ({
         {title}
       </Title>
       <Text numberOfLines={1}>{description}</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 

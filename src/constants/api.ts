@@ -58,6 +58,20 @@ export default class APIConstants {
     },
   };
 
+  static NOTIFICATION = {
+    LIST: {
+      METHOD: 'GET',
+      URL: '/api/Inbox',
+      ADDITIONAL_PARAMS: {
+        pageSize: this.GLOBAL_PAGE_SIZE,
+      },
+    },
+    READ: {
+      METHOD: 'GET',
+      URL: '/api/Inbox/Read',
+    },
+  };
+
   static NEWS = {
     LIST: {
       METHOD: 'GET',
