@@ -44,6 +44,7 @@ const injectedHtml = `<script type="text/javascript" src="https://www.gstatic.co
 const EducationChart: React.FC = () => {
   return (
     <WebView
+      androidLayerType='software'
       style={styles.statisticWebview}
       source={{
         html: injectedHtml,
