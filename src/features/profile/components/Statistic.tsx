@@ -4,7 +4,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import StatisticChart from './StatisticChart';
 
-const Population = () => {
+const Statistic = () => {
   return (
     <>
       <View style={styles.populationOverview}>
@@ -30,7 +30,9 @@ const Population = () => {
         </View>
       </Row>
 
-      <StatisticChart />
+      <View pointerEvents='none'>
+        <StatisticChart />
+      </View>
 
       <View style={styles.section}>
         <Row style={{ width: '100%' }}>
@@ -122,7 +124,7 @@ const Population = () => {
   );
 };
 
-export default Population;
+export default Statistic;
 
 const styles = StyleSheet.create({
   statisticWebview: {
@@ -146,7 +148,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   section: {
-    marginVertical: 10,
     marginBottom: 20,
   },
   flex: {

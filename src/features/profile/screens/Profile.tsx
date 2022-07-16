@@ -4,7 +4,7 @@ import { Text } from '@components/typography';
 import SectionTitle from '@components/typography/SectionTitle';
 import { DashboardStackParamList } from '@dashboard/index';
 import Education from '@profile/components/Education';
-import Population from '@profile/components/Population';
+import Statistic from '@profile/components/Statistic';
 import { getDistrictProfileThunk } from '@profile/models/thunks';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
@@ -129,7 +129,7 @@ const ProfileScreen: React.FC<
       <View style={styles.section}>
         <SectionTitle>Statistik Penduduk</SectionTitle>
         <View style={[styles.sectionContent, styles.card]}>
-          <Population />
+          <Statistic />
           <Education />
         </View>
       </View>
