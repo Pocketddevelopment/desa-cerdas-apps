@@ -3,7 +3,11 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import WebView from 'react-native-webview';
 
-const injectedHtml = `<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+const injectedHtml = `
+<head>
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0">
+</head>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <div id="piechart" style={{width: '100vh' height: '100vh'}}><div/>
 <script>
     // Load google charts
@@ -50,6 +54,7 @@ const EducationChart: React.FC = () => {
         html: injectedHtml,
       }}
       showsVerticalScrollIndicator={false}
+      zo
       scrollEnabled={false}
       scalesPageToFit={true}
     />
