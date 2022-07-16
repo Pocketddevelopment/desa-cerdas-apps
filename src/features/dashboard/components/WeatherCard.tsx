@@ -118,11 +118,11 @@ const WeatherCard = () => {
                 color={weather.PM25HexColor}
                 size={24}
                 style={{ marginRight: 10 }}>
-                {weather.PMDesc}
+                {weather.PM25}
               </Title>
               <Text> </Text>
               <Title color={weather.PM25HexColor} size={18}>
-                {weather.PM25HexColor}
+                {weather.PMDesc}
               </Title>
             </Row>
             <Row style={{ flex: 4 }}>
