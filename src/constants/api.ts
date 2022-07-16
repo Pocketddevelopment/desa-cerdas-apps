@@ -1,4 +1,4 @@
-import { Dimensions } from 'react-native';
+import { Dimensions, Platform } from 'react-native';
 
 export default class APIConstants {
   static MOCK = 'https://69cdeb98-4881-4abc-953a-ef0e54d2a829.mock.pstmn.io';
@@ -21,6 +21,13 @@ export default class APIConstants {
     DEVICE: {
       METHOD: 'POST',
       URL: '/api/Device',
+    },
+    FORGOT_PASSWORD: {
+      METHOD: 'POST',
+      URL: '/api/Customer/ForgotPassword',
+      ADDITIONAL_BODY: {
+        Source: Platform.OS,
+      },
     },
   };
 

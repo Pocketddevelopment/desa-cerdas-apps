@@ -1,6 +1,7 @@
 import { AuthContext } from '@@@/App';
 import UpdateAccountFormInterface from '@authentication/models/interfaces/requests/requests/UpdateAccountRequest.interface';
 import {
+  forgotPassword,
   getNewToken,
   login,
   updateAccount,
@@ -70,6 +71,17 @@ export const registerThunk = createAsyncThunk(
   async (body: RegisterFormStep1 & RegisterFormStep2, { rejectWithValue }) => {
     try {
       return sanitizeResponse(await login(body));
+    } catch (err) {
+      throw rejectWithValue(err);
+    }
+  }
+);
+
+export const forgotPasswordThunk = createAsyncThunk(
+  `${StoreConstants.AUTH}/forgotPassword`,
+  async (nik: string, { rejectWithValue }) => {
+    try {
+      return await forgotPassword(nik);
     } catch (err) {
       throw rejectWithValue(err);
     }

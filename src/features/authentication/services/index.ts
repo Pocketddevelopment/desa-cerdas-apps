@@ -23,6 +23,17 @@ export const register = (body: RegisterFormStep1 & RegisterFormStep2) => {
   return GlobalNetworking.post(APIConstants.AUTHENTICATION.REGISTER, body);
 };
 
+export const forgotPassword = (nik: string) => {
+  const body = {
+    NIK: nik,
+    ...APIConstants.AUTHENTICATION.FORGOT_PASSWORD.ADDITIONAL_BODY,
+  };
+  return GlobalNetworking.post(
+    APIConstants.AUTHENTICATION.FORGOT_PASSWORD.URL,
+    body
+  );
+};
+
 export const updateAccount = (body: UpdateAccountFormInterface) => {
   return GlobalNetworking.put(
     APIConstants.AUTHENTICATION.UPDATE_ACCOUNT.URL,

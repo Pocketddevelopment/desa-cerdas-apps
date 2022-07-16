@@ -1,3 +1,4 @@
+import { forgotPasswordThunk } from '@authentication/models/thunks';
 import Button from '@components/Button';
 import Input from '@components/Input';
 import { Text } from '@components/typography';
@@ -5,10 +6,12 @@ import DeviceContants from '@constants/device';
 import { DashboardStackParamList } from '@dashboard/index';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useAppDispatch } from '@store/hooks';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { ImageBackground, StyleSheet, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
+import Toast from 'react-native-toast-message';
 
 interface ForgetPasswordForm {
   NIK: string;
@@ -18,6 +21,7 @@ const ForgetPasswordScreen: React.FC = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<DashboardStackParamList>>();
   const theme = useTheme();
+  const dispatch = useAppDispatch();
 
   const {
     handleSubmit,
@@ -25,8 +29,24 @@ const ForgetPasswordScreen: React.FC = () => {
     formState: { errors },
   } = useForm<ForgetPasswordForm>();
 
-  const onPressSend = () => {
-    navigation.goBack();
+  const onPressSend = async (values: ForgetPasswordForm) => {
+    await dispatch(forgotPasswordThunk(values.NIK))
+      .unwrap()
+      .then((response) => {
+        Toast.show({
+          type: 'standard',
+          text1: response.ResponseMessage,
+        });
+        setTimeout(() => {
+          navigation.goBack();
+        }, 2000);
+      })
+      .catch((err) => {
+        Toast.show({
+          type: 'standard',
+          text1: err.ResponseMessage,
+        });
+      });
   };
 
   return (
@@ -46,18 +66,24 @@ const ForgetPasswordScreen: React.FC = () => {
             rules={{
               required: {
                 value: true,
-                message: 'Email / NIK harus diisi',
+                message: 'NIK harus diisi',
               },
+              pattern: {
+                value: /^\d{16}$/,
+                message: 'Pastikan NIK Anda sesuai',
+              },
+              maxLength: 16,
             }}
             render={({ field: { onChange, value } }) => (
               <Input
                 containerStyle={styles.input}
-                placeholder={'Email / NIK'}
+                style={{ textAlign: 'center' }}
+                placeholder={'NIK'}
                 shadow={false}
                 onChangeText={onChange}
                 value={value}
                 maxLength={16}
-                keyboardType={'email-address'}
+                keyboardType={'numeric'}
                 errorMessage={errors?.NIK?.message}
                 errorColor={theme.colors['error-secondary']}
               />
