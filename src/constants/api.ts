@@ -1,6 +1,7 @@
 import { Dimensions, Platform } from 'react-native';
 
 export default class APIConstants {
+  static SERVER = 'http://13.250.44.36:8002';
   static MOCK = 'https://69cdeb98-4881-4abc-953a-ef0e54d2a829.mock.pstmn.io';
   static STAGING = 'http://13.250.44.36';
 
