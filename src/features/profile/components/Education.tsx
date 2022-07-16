@@ -1,13 +1,15 @@
 import Row from '@components/Row';
 import { Caption, Text } from '@components/typography';
 import React from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import EducationChart from './EducationChart';
 
 const Education = () => {
   return (
     <>
-      <EducationChart />
+      <View pointerEvents='none'>
+        <EducationChart />
+      </View>
       <View style={styles.section}>
         <Row style={{ width: '100%' }}>
           <Row style={{ flex: 1, justifyContent: 'flex-end' }}>

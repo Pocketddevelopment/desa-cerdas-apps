@@ -5,10 +5,10 @@ import WebView from 'react-native-webview';
 
 const injectedHtml = `
 <head>
-<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0">
+<meta content='name='viewport' width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0'  />
 </head>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<div id="piechart" style={{width: '100vh' height: '100vh'}}><div/>
+<div id="piechart"><div/>
 <script>
     // Load google charts
     google.charts.load('current', {'packages':['corechart']});
@@ -54,9 +54,9 @@ const EducationChart: React.FC = () => {
         html: injectedHtml,
       }}
       showsVerticalScrollIndicator={false}
-      zo
       scrollEnabled={false}
       scalesPageToFit={true}
+      ontap
     />
   );
 };
