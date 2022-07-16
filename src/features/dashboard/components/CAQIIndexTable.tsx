@@ -1,9 +1,12 @@
 import Row from '@components/Row';
 import { Text, Title } from '@components/typography';
+import { useAppSelector } from '@store/hooks';
+import { RootState } from '@store/store';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
 const CAQIIndexTable = () => {
+  const { weather } = useAppSelector((state: RootState) => state.misc);
   return (
     <View style={styles.container}>
       <Title size={16} style={{ textAlign: 'center' }}>
@@ -57,123 +60,28 @@ const CAQIIndexTable = () => {
           </View>
         </Row>
 
-        <Row style={[styles.row]}>
-          <View style={{ flex: 1.5 }}>
-            <Text
-              thickness='900'
-              color='#00850C'
-              size={15}
-              style={styles.indicator}>
-              Baik
-            </Text>
-          </View>
-          <View style={styles.contentCell}>
-            <Text>{'<50'}</Text>
-          </View>
-          <View style={styles.contentCell}>
-            <Text>{'<60'}</Text>
-          </View>
-          <View style={styles.contentCell}>
-            <Text>{'<25'}</Text>
-          </View>
-          <View style={styles.contentCell}>
-            <Text>{'<15'}</Text>
-          </View>
-        </Row>
-
-        <Row style={[styles.row, { backgroundColor: '#FFEBEB' }]}>
-          <View style={{ flex: 1.5 }}>
-            <Text
-              thickness='900'
-              color='#53E060'
-              size={15}
-              style={styles.indicator}>
-              Wajar
-            </Text>
-          </View>
-          <View style={styles.contentCell}>
-            <Text>{'50-100'}</Text>
-          </View>
-          <View style={styles.contentCell}>
-            <Text>{'60-120'}</Text>
-          </View>
-          <View style={styles.contentCell}>
-            <Text>{'25-50'}</Text>
-          </View>
-          <View style={styles.contentCell}>
-            <Text>{'15-30'}</Text>
-          </View>
-        </Row>
-
-        <Row style={[styles.row]}>
-          <View style={{ flex: 1.5 }}>
-            <Text
-              thickness='900'
-              color='#F9C828'
-              size={15}
-              style={styles.indicator}>
-              Sedang
-            </Text>
-          </View>
-          <View style={styles.contentCell}>
-            <Text>{'100-200'}</Text>
-          </View>
-          <View style={styles.contentCell}>
-            <Text>{'120-180'}</Text>
-          </View>
-          <View style={styles.contentCell}>
-            <Text>{'50-90'}</Text>
-          </View>
-          <View style={styles.contentCell}>
-            <Text>{'30-55'}</Text>
-          </View>
-        </Row>
-        <Row style={[styles.row, { backgroundColor: '#FFEBEB' }]}>
-          <View style={{ flex: 1.5 }}>
-            <Text
-              thickness='900'
-              color='#FF3E3E'
-              size={15}
-              style={styles.indicator}>
-              Buruk
-            </Text>
-          </View>
-          <View style={styles.contentCell}>
-            <Text>{'200-400'}</Text>
-          </View>
-          <View style={styles.contentCell}>
-            <Text>{'180-240'}</Text>
-          </View>
-          <View style={styles.contentCell}>
-            <Text>{'80-180'}</Text>
-          </View>
-          <View style={styles.contentCell}>
-            <Text>{'55-110'}</Text>
-          </View>
-        </Row>
-        <Row style={[styles.row]}>
-          <View style={{ flex: 1.5 }}>
-            <Text
-              thickness='900'
-              color='#CC3333'
-              size={15}
-              style={styles.indicator}>
-              Parah
-            </Text>
-          </View>
-          <View style={styles.contentCell}>
-            <Text>{'>400'}</Text>
-          </View>
-          <View style={styles.contentCell}>
-            <Text>{'>240'}</Text>
-          </View>
-          <View style={styles.contentCell}>
-            <Text>{'>180'}</Text>
-          </View>
-          <View style={styles.contentCell}>
-            <Text>{'>110'}</Text>
-          </View>
-        </Row>
+        {weather?.TableDescription.map((e, i) => {
+          return (
+            <Row key={i} style={[styles.row]}>
+              <View style={{ flex: 1.5 }}>
+                <Text
+                  thickness='900'
+                  color={e.Hex}
+                  size={15}
+                  style={styles.indicator}>
+                  {e.Description}
+                </Text>
+              </View>
+              {e.List.map((el) => {
+                return (
+                  <View key={el.Value} style={styles.contentCell}>
+                    <Text>{el.Value}</Text>
+                  </View>
+                );
+              })}
+            </Row>
+          );
+        })}
       </View>
     </View>
   );

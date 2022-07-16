@@ -5,6 +5,7 @@ import GetSMEListResponseInterface from '@attraction/models/interfaces/responses
 import GetNotificationListResponseInterface from '@notification/models/interfaces/responses/GetNotificationListResponse.interface';
 import GetReportBUMDesListResponseInterface from '@report/models/interfaces/responses/GetReportBUMDesListResponse.interface';
 import GetNewsResponse from './responses/GetNewsResponse.interface';
+import WeatherInterface from './Weather.interface';
 
 export default interface MiscRedux {
   destination: GetDestinationListResponseInterface | null;
@@ -16,5 +17,6 @@ export default interface MiscRedux {
     apbd: GetReportAPBDListResponseInterface | null;
     bumdes: GetReportBUMDesListResponseInterface;
   };
+  weather: WeatherInterface | null;
   loading: Record<string, boolean>;
 }

@@ -14,9 +14,14 @@ import {
   getReportBUMDesListThunk,
 } from '../../report/models/interfaces/thunks';
 import MiscRedux from './interfaces/MiscRedux.interface';
-import { getNewsDetailThunk, getNewsListThunk } from './thunks';
+import {
+  getAirPollutionThunk,
+  getNewsDetailThunk,
+  getNewsListThunk,
+} from './thunks';
 
 const defaultInitialState: MiscRedux = {
+  weather: null,
   creative: null,
   destination: null,
   sme: null,
@@ -357,6 +362,36 @@ const Model = createSlice({
         ...state,
         loading: {
           notification: false,
+        },
+      };
+    });
+
+    // Get air pollution handlers
+    builder.addCase(getAirPollutionThunk.pending, (state: MiscRedux, _) => {
+      return {
+        ...state,
+        loading: {
+          weather: true,
+        },
+      };
+    });
+    builder.addCase(
+      getAirPollutionThunk.fulfilled,
+      (state: MiscRedux, action: any) => {
+        return {
+          ...state,
+          weather: action.payload,
+          loading: {
+            weather: false,
+          },
+        };
+      }
+    );
+    builder.addCase(getAirPollutionThunk.rejected, (state: MiscRedux) => {
+      return {
+        ...state,
+        loading: {
+          weather: false,
         },
       };
     });

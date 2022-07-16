@@ -1,20 +1,35 @@
-import React from 'react';
+import Failed from '@components/Failed';
 import Row from '@components/Row';
-import { Image, StyleSheet, View } from 'react-native';
-import DeviceContants from '@constants/device';
 import Separator from '@components/Separator';
-import ButtonShortcut from './ButtonShortcut';
-import { DashboardStackParamList } from '..';
+import SpaceBetween from '@components/SpaceBetween';
+import { Caption, Text, Title } from '@components/typography';
+import DeviceContants from '@constants/device';
+import { getAirPollutionThunk } from '@dashboard/models/thunks';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { Caption, Text, Title } from '@components/typography';
-import SpaceBetween from '@components/SpaceBetween';
-import { useTheme } from 'react-native-paper';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { RootState } from '@store/store';
+import React, { useCallback, useEffect, useMemo } from 'react';
+import { Image, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, useTheme } from 'react-native-paper';
+import { DashboardStackParamList } from '..';
 
 const WeatherCard = () => {
   const theme = useTheme();
   const navigation =
     useNavigation<NativeStackNavigationProp<DashboardStackParamList>>();
+  const dispatch = useAppDispatch();
+  const { loading, weather } = useAppSelector((state: RootState) => state.misc);
+
+  const getAirPollution = useCallback(() => {
+    dispatch(getAirPollutionThunk());
+  }, []);
+
+  useEffect(() => {
+    if (!weather) {
+      getAirPollution();
+    }
+  }, []);
 
   return (
     <View style={styles.card}>
@@ -29,99 +44,110 @@ const WeatherCard = () => {
           Lihat selengkapnya
         </Text>
       </SpaceBetween>
-      <Row>
-        <View>
-          <Image
-            source={{
-              uri: 'http://openweathermap.org/img/wn/10d@2x.png',
-            }}
-            style={styles.image}
-          />
-          <Caption>13:00 WIB</Caption>
-        </View>
-        <View style={{ flex: 1, flexWrap: 'wrap' }}>
-          <Row align='center'>
-            <Title size={24}>29°/ </Title>
-            <Title
-              size={14}
-              style={{ marginTop: 7 }}
-              color={theme.colors.caption}>
-              22°C
-            </Title>
-          </Row>
-          <Text size={16} style={{ marginTop: -5 }}>
-            Hujan Sedang
-          </Text>
+      {loading.weather ? (
+        <ActivityIndicator />
+      ) : weather ? (
+        <>
           <Row>
-            <Row align='top' style={{ flex: 1, flexWrap: 'wrap' }}>
+            <View>
+              <Image
+                source={{
+                  uri: weather.WeatherIcon,
+                }}
+                style={styles.image}
+              />
+              <Caption>{weather.Hour}</Caption>
+            </View>
+            <View style={{ flex: 1, flexWrap: 'wrap' }}>
               <Row align='center'>
-                <Image
-                  source={require('@assets/weather/wind.png')}
-                  style={styles.weatherIcon}
-                />
-                <Text size={13}>Angin : </Text>
+                <Title size={24}>{weather.TempMax}°/ </Title>
+                <Title
+                  size={14}
+                  style={{ marginTop: 7 }}
+                  color={theme.colors.caption}>
+                  {weather.TempMin}°C
+                </Title>
               </Row>
-              <View style={{ flex: 1 }}>
-                <Text size={13}>4,8m/detik - Utara</Text>
-              </View>
-            </Row>
+              <Text size={16} style={{ marginTop: -5 }}>
+                {weather.WeatherDescription}
+              </Text>
+              <Row>
+                <Row align='top' style={{ flex: 1, flexWrap: 'wrap' }}>
+                  <Row align='center'>
+                    <Image
+                      source={{ uri: weather.WindIcon }}
+                      style={styles.weatherIcon}
+                    />
+                    <Text size={13}>Angin : </Text>
+                  </Row>
+                  <View style={{ flex: 1 }}>
+                    <Text size={13}>{weather.Wind}</Text>
+                  </View>
+                </Row>
+              </Row>
+              <Row align='top' style={{ flex: 1, flexWrap: 'wrap' }}>
+                <Row style={{ marginRight: 10 }}>
+                  <Image
+                    source={require('@assets/weather/humid.png')}
+                    style={styles.weatherIcon}
+                  />
+                  <Text size={13}>Kelembaban Udara: {weather.Humidity}</Text>
+                </Row>
+                <Row>
+                  <Image
+                    source={require('@assets/weather/uv.png')}
+                    style={styles.weatherIcon}
+                  />
+                  <Text size={13}>
+                    Indeks UV :{' '}
+                    <Text color={weather.UviIndexColor} size={13}>
+                      {weather.UviIndex}
+                    </Text>
+                  </Text>
+                </Row>
+              </Row>
+            </View>
           </Row>
-          <Row align='top' style={{ flex: 1, flexWrap: 'wrap' }}>
-            <Row style={{ marginRight: 10 }}>
-              <Image
-                source={require('@assets/weather/humid.png')}
-                style={styles.weatherIcon}
-              />
-              <Text size={13}>Kelembaban Udara: 35%</Text>
+          <Separator style={{ marginVertical: 5 }} height={2} />
+          <Caption style={[styles.captionTitle, { marginBottom: 5 }]} size={12}>
+            Kualitas Udara
+          </Caption>
+          <Row align='center'>
+            <Row style={{ flex: 3, marginRight: 40 }}>
+              <Title
+                color={weather.PM25HexColor}
+                size={24}
+                style={{ marginRight: 10 }}>
+                {weather.PMDesc}
+              </Title>
+              <Text> </Text>
+              <Title color={weather.PM25HexColor} size={18}>
+                {weather.PM25HexColor}
+              </Title>
             </Row>
-            <Row>
-              <Image
-                source={require('@assets/weather/uv.png')}
-                style={styles.weatherIcon}
-              />
-              <Text size={13}>
-                Indeks UV :{' '}
-                <Text color='#FF3E3E' size={13}>
-                  8
-                </Text>
+            <Row style={{ flex: 4 }}>
+              <Text size={12}>
+                Berdasarkan Skala Indeks{' '}
+                <Row align='bottom'>
+                  <Text thickness='bold' size={12}>
+                    PM
+                  </Text>
+                  <Text thickness='bold' size={8} style={{ lineHeight: 8 }}>
+                    2.5
+                  </Text>
+                  <Text thickness='bold' size={12}>
+                    {' '}
+                    CAQI
+                  </Text>
+                </Row>
               </Text>
             </Row>
+            <View style={{ flex: 2.5 }} />
           </Row>
-        </View>
-      </Row>
-      <Separator style={{ marginVertical: 5 }} height={2} />
-      <Caption style={[styles.captionTitle, { marginBottom: 5 }]} size={12}>
-        Kualitas Udara
-      </Caption>
-      <Row align='center'>
-        <Row style={{ flex: 3, marginRight: 40 }}>
-          <Title color={'#F9C828'} size={24} style={{ marginRight: 10 }}>
-            31
-          </Title>
-          <Text> </Text>
-          <Title color={'#F9C828'} size={18}>
-            Sedang
-          </Title>
-        </Row>
-        <Row style={{ flex: 4 }}>
-          <Text size={12}>
-            Berdasarkan Skala Indeks{' '}
-            <Row align='bottom'>
-              <Text thickness='bold' size={12}>
-                PM
-              </Text>
-              <Text thickness='bold' size={8} style={{ lineHeight: 8 }}>
-                2.5
-              </Text>
-              <Text thickness='bold' size={12}>
-                {' '}
-                CAQI
-              </Text>
-            </Row>
-          </Text>
-        </Row>
-        <View style={{ flex: 2.5 }} />
-      </Row>
+        </>
+      ) : (
+        <Failed onBtnPress={() => getAirPollution()} />
+      )}
     </View>
   );
 };

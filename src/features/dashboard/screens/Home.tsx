@@ -17,9 +17,9 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import { Avatar, IconButton, useTheme } from 'react-native-paper';
 import { DashboardStackParamList } from '..';
 
-const HomeScreen: React.FC = () => {
-  const navigation =
-    useNavigation<NativeStackScreenProps<DashboardStackParamList>>();
+const HomeScreen: React.FC<NativeStackScreenProps<DashboardStackParamList>> = ({
+  navigation,
+}) => {
   const dispatch = useAppDispatch();
 
   const { account } = useAppSelector(

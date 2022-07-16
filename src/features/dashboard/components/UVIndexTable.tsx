@@ -1,12 +1,14 @@
 import Row from '@components/Row';
 import { Text, Title } from '@components/typography';
+import { useAppSelector } from '@store/hooks';
+import { RootState } from '@store/store';
 import React from 'react';
 import { Linking, StyleSheet, View } from 'react-native';
 import { Colors, useTheme } from 'react-native-paper';
 
 const UVIndexTable = () => {
   const theme = useTheme();
-  const titleSize = 14;
+  const { weather } = useAppSelector((state: RootState) => state.misc);
   return (
     <View style={styles.container}>
       <Title size={16} style={{ textAlign: 'center' }}>
@@ -27,105 +29,33 @@ const UVIndexTable = () => {
           </View>
         </Row>
 
-        <Row style={[styles.row]}>
-          <View style={styles.titleCell}>
-            <Text
-              thickness='900'
-              color='#00850C'
-              size={14}
-              style={styles.indicator}>
-              Rendah
-            </Text>
-          </View>
-          <View style={styles.contentCell}>
-            <Text>{'<2'}</Text>
-          </View>
-          <View style={[styles.contentCell, styles.contentCellNote]}>
-            <Text size={12}>
-              {
-                'Gunakan cairan pelembab tabir surya SPF 30+ bagi kulit sensitif'
-              }
-            </Text>
-          </View>
-        </Row>
-
-        <Row style={[styles.row, { backgroundColor: '#FFEBEB' }]}>
-          <View style={styles.titleCell}>
-            <Text
-              thickness='900'
-              color='#53E060'
-              size={14}
-              style={styles.indicator}>
-              Sedang
-            </Text>
-          </View>
-          <View style={styles.contentCell}>
-            <Text>{'3-5'}</Text>
-          </View>
-          <View style={[styles.contentCell, styles.contentCellNote]}>
-            <Text size={12}>
-              {'Gunakan cairan pelembab tabir surya SPF 30+ setiap 2 jam'}
-            </Text>
-          </View>
-        </Row>
-
-        <Row style={[styles.row]}>
-          <View style={styles.titleCell}>
-            <Text
-              thickness='900'
-              color='#F9C828'
-              size={14}
-              style={styles.indicator}>
-              Tinggi
-            </Text>
-          </View>
-          <View style={styles.contentCell}>
-            <Text>{'6-7'}</Text>
-          </View>
-          <View style={[styles.contentCell, styles.contentCellNote]}>
-            <Text size={12}>
-              {'Kurangi waktu di bawah paparan matahari antara pukul 10-4 sore'}
-            </Text>
-          </View>
-        </Row>
-        <Row style={[styles.row, { backgroundColor: '#FFEBEB' }]}>
-          <View style={styles.titleCell}>
-            <Text
-              thickness='900'
-              color='#FF3E3E'
-              size={14}
-              style={styles.indicator}>
-              Berbahaya
-            </Text>
-          </View>
-          <View style={styles.contentCell}>
-            <Text>{'8-10'}</Text>
-          </View>
-          <View style={[styles.contentCell, styles.contentCellNote]}>
-            <Text size={12}>
-              {'Tindakan pencegahan ekstra, kulit & mata dapat cepat terbakar'}
-            </Text>
-          </View>
-        </Row>
-        <Row style={[styles.row]}>
-          <View style={styles.titleCell}>
-            <Text
-              thickness='900'
-              color='#CC3333'
-              size={14}
-              style={styles.indicator}>
-              Ekstrim
-            </Text>
-          </View>
-          <View style={styles.contentCell}>
-            <Text>{'>11'}</Text>
-          </View>
-          <View style={[styles.contentCell, styles.contentCellNote]}>
-            <Text size={12}>
-              {'Kulit & mata dapat rusak dan terbakar dalam hitungan menit'}
-            </Text>
-          </View>
-        </Row>
+        {weather?.TableUviDescription.map((e) => {
+          return (
+            <Row key={e.Description} style={[styles.row]}>
+              <View style={styles.titleCell}>
+                <Text
+                  thickness='900'
+                  color={e.Hex}
+                  size={14}
+                  style={styles.indicator}>
+                  {e.Description}
+                </Text>
+              </View>
+              {e.List.map((el, j) => {
+                return (
+                  <View
+                    key={el.Value}
+                    style={[
+                      styles.contentCell,
+                      j === e.List.length - 1 ? styles.contentCellNote : null,
+                    ]}>
+                    <Text>{el.Value}</Text>
+                  </View>
+                );
+              })}
+            </Row>
+          );
+        })}
       </View>
       <Text
         size={12}

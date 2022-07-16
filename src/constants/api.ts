@@ -31,6 +31,13 @@ export default class APIConstants {
     },
   };
 
+  static DASHBOARD = {
+    WEATHER: {
+      METHOD: 'GET',
+      URL: '/AirPollution',
+    },
+  };
+
   static PROFILE = {
     PROFILE: {
       METHOD: 'GET',

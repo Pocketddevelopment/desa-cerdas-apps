@@ -12,6 +12,10 @@ export const sanitizeResponse = (
   response: APIResponse & Record<string, any>
 ) => {
   //Destructure to exclude response payload
-  const { ResponseCode, ResponseMessage, ...rest } = response;
-  return rest;
+  try {
+    const { ResponseCode, ResponseMessage, ...rest } = response;
+    return rest;
+  } catch (err) {
+    return {};
+  }
 };

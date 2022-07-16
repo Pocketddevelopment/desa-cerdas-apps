@@ -10,7 +10,6 @@ import SMEScreen from '@attraction/screens/SME';
 import SMEDetailScreen, { SMEDetailProps } from '@attraction/screens/SMEDetail';
 import ImagePreviewModal from '@components/ImagePreview';
 import NavigationTabItem from '@components/NavigationTabItem';
-import { Text } from '@components/typography';
 import WebView from '@components/WebView';
 import DeviceContants from '@constants/device';
 import DistrictHighlightScreen from '@profile/screens/DistrictHighlight';

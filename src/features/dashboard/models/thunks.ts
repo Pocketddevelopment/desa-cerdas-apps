@@ -1,4 +1,5 @@
 import StoreConstants from '@constants/store';
+import { getAirPollution } from '@dashboard/services';
 import { getNewsDetail, getNewsList } from '@news/services';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '@store/store';
@@ -28,6 +29,18 @@ export const getNewsDetailThunk = createAsyncThunk(
     };
     try {
       return sanitizeResponse(await getNewsDetail(params));
+    } catch (err) {
+      throw rejectWithValue(err);
+    }
+  }
+);
+
+export const getAirPollutionThunk = createAsyncThunk(
+  `${StoreConstants.MISC}/getAirPollution`,
+  async (_, { getState, rejectWithValue }) => {
+    const { DistrictID } = (getState() as RootState).authentication.account;
+    try {
+      return sanitizeResponse(await getAirPollution(DistrictID));
     } catch (err) {
       throw rejectWithValue(err);
     }
