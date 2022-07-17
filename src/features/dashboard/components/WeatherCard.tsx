@@ -9,7 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { RootState } from '@store/store';
-import React, { useCallback, useEffect, useMemo } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import { ActivityIndicator, useTheme } from 'react-native-paper';
 import { DashboardStackParamList } from '..';
@@ -91,7 +91,7 @@ const WeatherCard = () => {
                     source={require('@assets/weather/humid.png')}
                     style={styles.weatherIcon}
                   />
-                  <Text size={13}>Kelembaban Udara: {weather.Humidity}</Text>
+                  <Text size={13}>Kelembaban : {weather.Humidity}</Text>
                 </Row>
                 <Row>
                   <Image

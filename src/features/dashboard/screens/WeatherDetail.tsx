@@ -50,19 +50,19 @@ const WeatherDetailScreen: React.FC = () => {
               </View>
               <View style={{ flex: 1, flexWrap: 'wrap' }}>
                 <Row align='center'>
-                  <Title size={24}>29°/ </Title>
+                  <Title size={24}>{weather.TempMax}°/ </Title>
                   <Title
                     size={14}
                     style={{ marginTop: 7 }}
                     color={theme.colors.caption}>
-                    {weather?.TempMax}°C
+                    {weather?.TempMin}°C
                   </Title>
                 </Row>
                 <Text size={16}>{weather?.WeatherDescription}</Text>
                 <Row>
                   <Image
                     source={{
-                      uri: weather?.WeatherIcon,
+                      uri: weather?.WindIcon,
                     }}
                     style={styles.weatherIcon}
                   />
@@ -74,7 +74,7 @@ const WeatherDetailScreen: React.FC = () => {
                       source={require('@assets/weather/humid.png')}
                       style={styles.weatherIcon}
                     />
-                    <Text size={13}>Kelembaban Udara: {weather?.Humidity}</Text>
+                    <Text size={13}>Kelembaban : {weather?.Humidity}</Text>
                   </Row>
                   <Row>
                     <Image

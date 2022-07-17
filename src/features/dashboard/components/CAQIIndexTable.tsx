@@ -62,7 +62,12 @@ const CAQIIndexTable = () => {
 
         {weather?.TableDescription.map((e, i) => {
           return (
-            <Row key={i} style={[styles.row]}>
+            <Row
+              key={i}
+              style={[
+                styles.row,
+                { backgroundColor: i % 2 !== 0 ? '#FFEBEB' : 'white' },
+              ]}>
               <View style={{ flex: 1.5 }}>
                 <Text
                   thickness='900'

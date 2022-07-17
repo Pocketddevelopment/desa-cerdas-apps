@@ -29,9 +29,14 @@ const UVIndexTable = () => {
           </View>
         </Row>
 
-        {weather?.TableUviDescription.map((e) => {
+        {weather?.TableUviDescription.map((e, i) => {
           return (
-            <Row key={e.Description} style={[styles.row]}>
+            <Row
+              key={e.Description}
+              style={[
+                styles.row,
+                { backgroundColor: i % 2 !== 0 ? '#FFEBEB' : 'white' },
+              ]}>
               <View style={styles.titleCell}>
                 <Text
                   thickness='900'
