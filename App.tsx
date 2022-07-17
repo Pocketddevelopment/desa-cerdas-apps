@@ -25,6 +25,7 @@ import React, {
   useMemo,
   useState,
 } from 'react';
+import { BackHandler } from 'react-native';
 import { Provider as PaperProvider } from 'react-native-paper';
 import Toast from 'react-native-toast-message';
 import { Provider } from 'react-redux';
@@ -39,6 +40,25 @@ const App: React.FC = () => {
   const [isThemeDark, setIsThemeDark] = React.useState(false);
   const [isReady, setReady] = useState<boolean>(false);
   const [initialRouteName, setInitialRouteName] = useState<string>();
+  const [exitApp, setExitApp] = useState(0);
+
+  const backAction = () => {
+    setTimeout(() => {
+      setExitApp(0);
+    }, 2000); // 2 seconds to tap second-time
+
+    if (exitApp === 0) {
+      setExitApp(exitApp + 1);
+
+      Toast.show({
+        type: 'standard',
+        text1: 'Tekan sekali lagi untuk keluar dari aplikasi',
+      });
+    } else if (exitApp === 1) {
+      BackHandler.exitApp();
+    }
+    return true;
+  };
 
   useEffect(() => {
     async function getToken() {
@@ -47,6 +67,14 @@ const App: React.FC = () => {
     }
     getToken();
   }, []);
+
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction
+    );
+    return () => backHandler.remove();
+  });
 
   const getInitialRouteName = useCallback(async () => {
     if (!isLoggedIn && !initialRouteName) {
