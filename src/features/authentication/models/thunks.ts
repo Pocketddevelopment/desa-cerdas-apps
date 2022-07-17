@@ -1,11 +1,12 @@
 import { AuthContext } from '@@@/App';
-import UpdateAccountFormInterface from '@authentication/models/interfaces/requests/requests/UpdateAccountRequest.interface';
+import UpdateAccountFormInterface from '@authentication/models/interfaces/requests/UpdateAccountRequest.interface';
 import {
   forgotPassword,
   getNewToken,
   login,
   updateAccount,
   updateDevice,
+  updatePassword,
 } from '@authentication/services';
 import DeviceContants from '@constants/device';
 import StoreConstants from '@constants/store';
@@ -21,6 +22,7 @@ import {
   RegisterFormStep1,
   RegisterFormStep2,
 } from './interfaces/requests/RegisterRequest.interface';
+import UpdatePasswordThunkPayloadInterface from './interfaces/requests/UpdatePasswordThunkPayload.interface';
 
 export const loginThunk = createAsyncThunk(
   `${StoreConstants.AUTH}/login`,
@@ -93,6 +95,24 @@ export const updateAccountThunk = createAsyncThunk(
   async (body: UpdateAccountFormInterface, { rejectWithValue }) => {
     try {
       return await updateAccount(body);
+    } catch (err) {
+      throw rejectWithValue(err);
+    }
+  }
+);
+
+export const updatePasswordThunk = createAsyncThunk(
+  `${StoreConstants.AUTH}/updatePassword`,
+  async (
+    body: UpdatePasswordThunkPayloadInterface,
+    { getState, rejectWithValue }
+  ) => {
+    try {
+      const { CustomerID } = (getState() as RootState).authentication.account;
+      return await updatePassword({
+        customerID: CustomerID,
+        ...body,
+      });
     } catch (err) {
       throw rejectWithValue(err);
     }

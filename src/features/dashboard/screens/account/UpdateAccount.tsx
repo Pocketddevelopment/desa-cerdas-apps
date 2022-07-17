@@ -1,7 +1,7 @@
 import { updateAccountThunk } from '@authentication/models/thunks';
 import Button from '@components/Button';
 import Input from '@components/Input';
-import UpdateAccountFormInterface from '@authentication/models/interfaces/requests/requests/UpdateAccountRequest.interface';
+import UpdateAccountFormInterface from '@authentication/models/interfaces/requests/UpdateAccountRequest.interface';
 import { useNavigation } from '@react-navigation/native';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { RootState } from '@store/store';

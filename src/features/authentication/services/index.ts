@@ -4,9 +4,10 @@ import {
   RegisterFormStep2,
 } from '@authentication/models/interfaces/requests/RegisterRequest.interface';
 import APIConstants from '@constants/api';
-import UpdateAccountFormInterface from '@authentication/models/interfaces/requests/requests/UpdateAccountRequest.interface';
+import UpdateAccountFormInterface from '@authentication/models/interfaces/requests/UpdateAccountRequest.interface';
 import GlobalNetworking from '@services/request';
 import UpdateDeviceRequestInterface from '@authentication/models/interfaces/requests/UpdateDeviceRequest.interface';
+import UpdatePasswordRequestInterface from '@authentication/models/interfaces/requests/UpdatePasswordRequest.interface';
 
 export const login = (body: LoginRequest) => {
   return GlobalNetworking.post(APIConstants.AUTHENTICATION.LOGIN, body);
@@ -37,6 +38,13 @@ export const forgotPassword = (nik: string) => {
 export const updateAccount = (body: UpdateAccountFormInterface) => {
   return GlobalNetworking.put(
     APIConstants.AUTHENTICATION.UPDATE_ACCOUNT.URL,
+    body
+  );
+};
+
+export const updatePassword = (body: UpdatePasswordRequestInterface) => {
+  return GlobalNetworking.post(
+    APIConstants.AUTHENTICATION.UPDATE_PASSWORD.URL,
     body
   );
 };

@@ -4,11 +4,17 @@ import GlobalNetworking from '@services/request';
 import Storage from '@utils/async-storage';
 import { mapLoadingStates } from '@utils/store';
 import AuthenticationRedux from './interfaces/AuthenticationRedux.interface';
-import { loginThunk, refreshTokenThunk, updateAccountThunk } from './thunks';
+import {
+  loginThunk,
+  refreshTokenThunk,
+  updateAccountThunk,
+  updatePasswordThunk,
+} from './thunks';
 
 const defaultInitialState: AuthenticationRedux = {
   account: {
     CustomerID: '',
+    NIK: '',
     DateOfBirth: new Date().toISOString(),
     DistrictDescription: '',
     DistrictIcon: '',
@@ -146,6 +152,41 @@ const Model = createSlice({
           ...state,
           loading: {
             account: false,
+          },
+        };
+      }
+    );
+
+    //Change password handlers
+    builder.addCase(
+      updatePasswordThunk.pending,
+      (state: AuthenticationRedux) => {
+        return {
+          ...state,
+          loading: {
+            password: true,
+          },
+        };
+      }
+    );
+    builder.addCase(
+      updatePasswordThunk.fulfilled,
+      (state: AuthenticationRedux) => {
+        return {
+          ...state,
+          loading: {
+            password: false,
+          },
+        };
+      }
+    );
+    builder.addCase(
+      updatePasswordThunk.rejected,
+      (state: AuthenticationRedux) => {
+        return {
+          ...state,
+          loading: {
+            password: false,
           },
         };
       }

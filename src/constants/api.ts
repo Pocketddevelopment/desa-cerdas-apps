@@ -19,6 +19,10 @@ export default class APIConstants {
       METHOD: 'PUT',
       URL: '/api/customer',
     },
+    UPDATE_PASSWORD: {
+      METHOD: 'POST',
+      URL: '/api/Customer/Password',
+    },
     DEVICE: {
       METHOD: 'POST',
       URL: '/api/Device',
