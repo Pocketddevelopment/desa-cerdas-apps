@@ -1,5 +1,9 @@
 import StoreConstants from '@constants/store';
-import { getAirPollution } from '@dashboard/services';
+import {
+  getAirPollution,
+  getPrivacyPolicy,
+  getTermsCondition,
+} from '@dashboard/services';
 import { getNewsDetail, getNewsList } from '@news/services';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '@store/store';
@@ -41,6 +45,28 @@ export const getAirPollutionThunk = createAsyncThunk(
     const { DistrictID } = (getState() as RootState).authentication.account;
     try {
       return sanitizeResponse(await getAirPollution(DistrictID));
+    } catch (err) {
+      throw rejectWithValue(err);
+    }
+  }
+);
+
+export const getPrivacyPolicyThunk = createAsyncThunk(
+  `${StoreConstants.MISC}/getPrivacyPolicy`,
+  async (_, { rejectWithValue }) => {
+    try {
+      return sanitizeResponse(await getPrivacyPolicy());
+    } catch (err) {
+      throw rejectWithValue(err);
+    }
+  }
+);
+
+export const getTermsConditionThunk = createAsyncThunk(
+  `${StoreConstants.MISC}/getTermsCondition`,
+  async (_, { rejectWithValue }) => {
+    try {
+      return sanitizeResponse(await getTermsCondition());
     } catch (err) {
       throw rejectWithValue(err);
     }

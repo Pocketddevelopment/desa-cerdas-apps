@@ -41,6 +41,20 @@ export default class APIConstants {
       METHOD: 'GET',
       URL: '/AirPollution',
     },
+    PRIVACY_POLICY: {
+      METHOD: 'GET',
+      URL: '/api/Content',
+      ADDITIONAL_PARAMS: {
+        contentId: '74894A56-3F15-4D87-B139-26BDEC54C507',
+      },
+    },
+    TERMS_CONDITION: {
+      METHOD: 'GET',
+      URL: '/api/Content',
+      ADDITIONAL_PARAMS: {
+        contentId: '5FD5C62F-C492-4690-A714-AC6EF4F32D52',
+      },
+    },
   };
 
   static PROFILE = {

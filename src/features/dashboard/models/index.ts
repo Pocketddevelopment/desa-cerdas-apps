@@ -18,6 +18,8 @@ import {
   getAirPollutionThunk,
   getNewsDetailThunk,
   getNewsListThunk,
+  getPrivacyPolicyThunk,
+  getTermsConditionThunk,
 } from './thunks';
 
 const defaultInitialState: MiscRedux = {
@@ -392,6 +394,62 @@ const Model = createSlice({
         ...state,
         loading: {
           weather: false,
+        },
+      };
+    });
+
+    // Get privacy policy handlers
+    builder.addCase(getPrivacyPolicyThunk.pending, (state: MiscRedux, _) => {
+      return {
+        ...state,
+        loading: {
+          pp: true,
+        },
+      };
+    });
+    builder.addCase(
+      getPrivacyPolicyThunk.fulfilled,
+      (state: MiscRedux, action: any) => {
+        return {
+          ...state,
+          weather: action.payload,
+          loading: {
+            pp: false,
+          },
+        };
+      }
+    );
+    builder.addCase(getPrivacyPolicyThunk.rejected, (state: MiscRedux) => {
+      return {
+        ...state,
+        loading: {
+          pp: false,
+        },
+      };
+    });
+
+    // Get terms condition handlers
+    builder.addCase(getTermsConditionThunk.pending, (state: MiscRedux) => {
+      return {
+        ...state,
+        loading: {
+          tnc: true,
+        },
+      };
+    });
+    builder.addCase(getTermsConditionThunk.fulfilled, (state: MiscRedux) => {
+      return {
+        ...state,
+        loading: {
+          tnc: false,
+        },
+      };
+    });
+    builder.addCase(getTermsConditionThunk.rejected, (state: MiscRedux) => {
+      return {
+        ...state,
+        loading: {
+          tnc: false,
         },
       };
     });
