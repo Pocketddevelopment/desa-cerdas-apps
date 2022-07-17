@@ -22,13 +22,11 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import { useTheme } from 'react-native-paper';
 import Toast from 'react-native-toast-message';
 
 const DocumentFormScreen: React.FC<
   NativeStackScreenProps<DashboardStackParamList, 'DocumentForm'>
 > = ({ navigation }: any) => {
-  const theme = useTheme();
   const dispatch = useAppDispatch();
   const { loading, documentFormat } = useAppSelector(
     (state: RootState) => state.service
@@ -38,7 +36,6 @@ const DocumentFormScreen: React.FC<
     (SelectItemInterface & { data: string })[]
   >([]);
   const [documentBody, setDocumentBody] = useState<string>();
-  const [documentBodyForm, setDocumentBodyForm] = useState<any>([]);
 
   useEffect(() => {
     if (documentFormat.length <= 0) {
@@ -69,8 +66,6 @@ const DocumentFormScreen: React.FC<
 
   useEffect(() => {
     replace([]);
-    setError('DocumentForm', {});
-    const newDocumentBodyForm: any[] = [];
     if (selectedDocumentType) {
       const formString = documentBody?.split('|');
       formString?.map((e, i) => {
@@ -82,19 +77,16 @@ const DocumentFormScreen: React.FC<
           inputType,
         });
       });
-      setDocumentBodyForm(newDocumentBodyForm);
     }
   }, [selectedDocumentType]);
 
   const onPressRequest = async (data: any) => {
-    const { AdministrationFormatID, ...rest } = data;
-    const restLength = Object.keys(rest).length;
-    const payloadValue = Object.keys(rest)
-      .map(
-        (e: string, i: number) =>
-          `${e}#${rest[e]}${i !== restLength - 1 ? '|' : ''}`
-      )
-      .join('');
+    const { AdministrationFormatID, DocumentForm } = data;
+    const restLength = Object.keys(DocumentForm).length;
+    const payloadValue = DocumentForm.map(
+      (obj: any, i: number) =>
+        `${obj.name}#${obj[obj.name]}${i !== restLength - 1 ? '|' : ''}`
+    ).join('');
     const payload = {
       AdministrationFormatID,
       Value: payloadValue,
@@ -212,7 +204,7 @@ const DocumentFormScreen: React.FC<
               />
             )}
           />
-          {documentTypes && documentBody && documentBodyForm && (
+          {documentTypes && documentBody && (
             <>
               <View style={{ width: '100%', marginTop: 5, marginBottom: 10 }}>
                 <View style={{ marginBottom: 5 }}>
@@ -221,7 +213,7 @@ const DocumentFormScreen: React.FC<
                 {renderFormBody()}
               </View>
               <Button
-                loading={loading.requestForm}
+                loading={loading.requestDocument}
                 onPress={handleSubmit(onPressRequest)}
                 btnStyle={{ width: '100%' }}>
                 Cetak dan Unduh Dokumen
