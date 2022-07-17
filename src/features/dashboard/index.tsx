@@ -252,7 +252,7 @@ export default function DashboardScreens(): JSX.Element[] {
           name='WeatherDetail'
           component={WeatherDetailScreen}
           options={{
-            title: 'Cuaca Desa Pasir Ampo',
+            title: 'Cuaca Desa',
           }}
         />
         <Stack.Screen name='WebView' component={WebView} />

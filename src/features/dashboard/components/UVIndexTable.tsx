@@ -54,7 +54,9 @@ const UVIndexTable = () => {
                       styles.contentCell,
                       j === e.List.length - 1 ? styles.contentCellNote : null,
                     ]}>
-                    <Text>{el.Value}</Text>
+                    <Text adjustsFontSizeToFit size={13}>
+                      {el.Value}
+                    </Text>
                   </View>
                 );
               })}

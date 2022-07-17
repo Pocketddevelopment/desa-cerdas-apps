@@ -9,12 +9,20 @@ const CAQIIndexTable = () => {
   const { weather } = useAppSelector((state: RootState) => state.misc);
   return (
     <View style={styles.container}>
-      <Title size={16} style={{ textAlign: 'center' }}>
-        Tabel Indeks CAQI{' '}
-        <Title thickness='normal' size={15}>
-          (dalam μg/m3)
+      <Row align='center' style={{ justifyContent: 'center' }}>
+        <Title size={16} style={{ textAlign: 'center' }}>
+          Tabel Indeks CAQI{' '}
         </Title>
-      </Title>
+        <Title thickness='normal' size={15}>
+          (dalam μg/m
+        </Title>
+        <Text thickness='bold' size={10} style={{ marginBottom: 6 }}>
+          3
+        </Text>
+        <Title thickness='normal' size={15}>
+          )
+        </Title>
+      </Row>
       <View style={styles.card}>
         <Row style={[styles.row, { backgroundColor: '#FFEBEB' }]}>
           <View style={{ flex: 1.5 }} />
@@ -80,7 +88,9 @@ const CAQIIndexTable = () => {
               {e.List.map((el) => {
                 return (
                   <View key={el.Value} style={styles.contentCell}>
-                    <Text>{el.Value}</Text>
+                    <Text adjustsFontSizeToFit size={13}>
+                      {el.Value}
+                    </Text>
                   </View>
                 );
               })}

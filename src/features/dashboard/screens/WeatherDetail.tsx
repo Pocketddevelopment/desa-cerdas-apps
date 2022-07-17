@@ -6,17 +6,24 @@ import SectionTitle from '@components/typography/SectionTitle';
 import CAQIIndexTable from '@dashboard/components/CAQIIndexTable';
 import UVIndexTable from '@dashboard/components/UVIndexTable';
 import { getAirPollutionThunk } from '@dashboard/models/thunks';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { RootState } from '@store/store';
 import React, { useEffect, useMemo } from 'react';
 import { Image, ScrollView, StyleSheet, View } from 'react-native';
 import { ActivityIndicator, useTheme } from 'react-native-paper';
+import { DashboardStackParamList } from '..';
 
-const WeatherDetailScreen: React.FC = () => {
+const WeatherDetailScreen: React.FC<
+  NativeStackScreenProps<DashboardStackParamList>
+> = ({ navigation }) => {
   const theme = useTheme();
   const dispatch = useAppDispatch();
   const { loading, error, weather } = useAppSelector(
     (state: RootState) => state.misc
+  );
+  const { account } = useAppSelector(
+    (state: RootState) => state.authentication
   );
 
   const getAirPollution = useMemo(() => {
@@ -28,6 +35,12 @@ const WeatherDetailScreen: React.FC = () => {
       getAirPollution;
     }
   }, []);
+
+  useEffect(() => {
+    navigation.setOptions({
+      title: 'Cuaca Desa ' + account.DistrictName,
+    });
+  }, [account]);
 
   return (
     <ScrollView
@@ -156,13 +169,13 @@ const WeatherDetailScreen: React.FC = () => {
                   </View>
                 </Row>
               </View>
+              <CAQIIndexTable />
+              <UVIndexTable />
             </>
           )
         )}
         {error.weather && <Failed onBtnPress={() => getAirPollution} />}
       </View>
-      <CAQIIndexTable />
-      <UVIndexTable />
     </ScrollView>
   );
 };
