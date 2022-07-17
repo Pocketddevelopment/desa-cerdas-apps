@@ -1,52 +1,35 @@
 import DeviceContants from '@constants/device';
-import React from 'react';
+import { data, formatter, header } from '@profile/utils/educationChart';
+import { useAppSelector } from '@store/hooks';
+import { RootState } from '@store/rootReducers';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { StyleSheet } from 'react-native';
+import { ActivityIndicator } from 'react-native-paper';
 import WebView from 'react-native-webview';
 
-const injectedHtml = `
-<head>
-<meta content='name='viewport' width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0'  />
-</head>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<div id="piechart"><div/>
-<script>
-    // Load google charts
-    google.charts.load('current', {'packages':['corechart']});
-    google.charts.setOnLoadCallback(drawChart);
-
-    // Draw the chart and set the chart values
-    function drawChart() {
-      var data = google.visualization.arrayToDataTable([
-      ['pendidikan', 'kelulusan','color'],
-      ['Tidak Sekolah', 70,'#109618'],
-      ['Putus SD', 90,'#DC3912'],
-      ['SD', 100,'#FF9900'],
-      ['SLTP', 200,'#5293C7'],
-      ['SLTA', 300,'#FFB3B3'],
-      ['D3', 100,'#FFFF00'],
-      ['Strata 1/2/3', 65,'#808000']
-    ]);
-      
-
-      // Optional; add a title and set the width and height of the chart
-      var options = {
-        legend:{position: 'none'},
-         width: ${DeviceContants.screenWidth * 2.5},
-         height: ${DeviceContants.screenHeight * 1.5},
-         pieSliceTextStyle: {fontSize: 42},
-         tooltip: {
-          trigger: 'none'
-         }
-       };
-
-      // Display the chart inside the <div> element with id="piechart"
-      var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-      chart.draw(data, options);
-    }
-</script>`;
-
 const EducationChart: React.FC = () => {
-  return (
+  const {
+    loading,
+    statistic: { education },
+  } = useAppSelector((state: RootState) => state.profile);
+
+  const [educationData, setEducationData] = useState<any>([]);
+
+  const injectedHtml = useMemo(() => {
+    return `
+    ${header()}
+    ${data(educationData)}
+  `;
+  }, [educationData]);
+
+  useEffect(() => {
+    const newDataFormat = formatter(education);
+    setEducationData([newDataFormat]);
+  }, []);
+
+  return loading.education || educationData.length <= 0 ? (
+    <ActivityIndicator />
+  ) : (
     <WebView
       androidLayerType='software'
       style={styles.statisticWebview}

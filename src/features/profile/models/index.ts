@@ -29,7 +29,7 @@ const defaultInitialState: ProfileRedux = {
   },
   statistic: {
     population: [],
-    education: [],
+    education: [[]],
   },
   loading: {},
 };

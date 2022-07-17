@@ -225,8 +225,6 @@ export default function DashboardScreens(): JSX.Element[] {
           component={ProfileScreen}
           options={{
             title: 'Profil Desa',
-            animation:
-              Platform.OS === 'android' ? 'slide_from_right' : 'default',
           }}
         />
         <Stack.Screen

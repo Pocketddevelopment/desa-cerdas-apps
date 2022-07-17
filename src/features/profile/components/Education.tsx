@@ -17,9 +17,7 @@ const Education = () => {
   } = useAppSelector((state: RootState) => state.profile);
 
   useEffect(() => {
-    if (education.length <= 0) {
-      dispatch(getEducationStatisticThunk());
-    }
+    dispatch(getEducationStatisticThunk());
   }, []);
 
   return loading.education ? (
@@ -32,7 +30,7 @@ const Education = () => {
       <View style={styles.section}>
         {education.map((e, i) => {
           return (
-            <Row style={{ width: '100%' }}>
+            <Row key={i} style={{ width: '100%' }}>
               {e.map((el, j) => {
                 if (j % 2 === 0) {
                   return (
@@ -63,7 +61,7 @@ const Education = () => {
                         }}>
                         <View
                           style={{
-                            backgroundColor: '#FF9900',
+                            backgroundColor: el.HexColor,
                             borderRadius: 100,
                             width: 10,
                             height: 10,
@@ -86,7 +84,7 @@ const Education = () => {
                           }}>
                           <View
                             style={{
-                              backgroundColor: '#FF9900',
+                              backgroundColor: el.HexColor,
                               borderRadius: 100,
                               width: 10,
                               height: 10,
