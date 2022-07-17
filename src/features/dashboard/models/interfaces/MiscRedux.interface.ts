@@ -19,4 +19,5 @@ export default interface MiscRedux {
   };
   weather: WeatherInterface | null;
   loading: Record<string, boolean>;
+  error: Record<string, boolean>;
 }

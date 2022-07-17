@@ -8,7 +8,7 @@ import StoreConstants from '@constants/store';
 import { getNotificationListThunk } from '@notification/models/thunks';
 import { createSlice } from '@reduxjs/toolkit';
 import GlobalNetworking from '@services/request';
-import { mapLoadingStates } from '@utils/store';
+import { mapKeyStates, mapLoadingStates } from '@utils/store';
 import {
   getReportAPBDListThunk,
   getReportBUMDesListThunk,
@@ -46,11 +46,13 @@ const defaultInitialState: MiscRedux = {
     },
   },
   loading: {},
+  error: {},
 };
 
 const initialState: MiscRedux = {
   ...defaultInitialState,
   loading: mapLoadingStates(defaultInitialState),
+  error: mapKeyStates(defaultInitialState),
 };
 
 const Model = createSlice({
@@ -375,6 +377,9 @@ const Model = createSlice({
         loading: {
           weather: true,
         },
+        error: {
+          weather: false,
+        },
       };
     });
     builder.addCase(
@@ -386,6 +391,9 @@ const Model = createSlice({
           loading: {
             weather: false,
           },
+          error: {
+            weather: false,
+          },
         };
       }
     );
@@ -394,6 +402,9 @@ const Model = createSlice({
         ...state,
         loading: {
           weather: false,
+        },
+        error: {
+          weather: true,
         },
       };
     });

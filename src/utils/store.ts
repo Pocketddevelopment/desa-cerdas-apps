@@ -8,6 +8,14 @@ export const mapLoadingStates = (states: Object): Record<string, boolean> => {
   return loading;
 };
 
+export const mapKeyStates = (states: Object): Record<string, boolean> => {
+  const obj: Record<string, boolean> = {};
+  Object.keys(states).map((e) => {
+    return (obj[e] = false);
+  });
+  return obj;
+};
+
 export const sanitizeResponse = (
   response: APIResponse & Record<string, any>
 ) => {
