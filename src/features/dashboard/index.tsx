@@ -12,6 +12,9 @@ import ImagePreviewModal from '@components/ImagePreview';
 import NavigationTabItem from '@components/NavigationTabItem';
 import WebView from '@components/WebView';
 import DeviceContants from '@constants/device';
+import NotificationDetailScreen, {
+  NotificationDetailScreenProps,
+} from '@notification/screens/NotificationDetail';
 import DistrictHighlightScreen from '@profile/screens/DistrictHighlight';
 import EventListScreen from '@profile/screens/EventList';
 import PlacemanListScreen from '@profile/screens/PlacemanList';
@@ -66,8 +69,8 @@ const TabBar = ({ state, descriptors, navigation, colors }: any) => {
           }
         };
 
-        const getIcon = (label: string): ImageSourcePropType => {
-          switch (label) {
+        const getIcon = (iconLabel: string): ImageSourcePropType => {
+          switch (iconLabel) {
             case 'Beranda':
               return require('@assets/navigation/home.webp');
             case 'Beranda':
@@ -125,6 +128,13 @@ export default function DashboardScreens(): JSX.Element[] {
         <Stack.Screen
           name='NotificationList'
           component={NotificationListScreen}
+          options={{
+            title: 'Notifikasi',
+          }}
+        />
+        <Stack.Screen
+          name='NotificationDetail'
+          component={NotificationDetailScreen}
           options={{
             title: 'Notifikasi',
           }}
@@ -283,6 +293,7 @@ export type DashboardStackParamList = {
   ForgetPassword: Object | undefined;
   NewsDetail: NewsDetailProps;
   NotificationList: Object | undefined;
+  NotificationDetail: NotificationDetailScreenProps;
   UpdateAccount: Object | undefined;
   UpdatePassword: Object | undefined;
   Report: Object | undefined;

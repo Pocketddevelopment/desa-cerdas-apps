@@ -1,6 +1,12 @@
 import { Caption, Text } from '@components/typography';
 import Title from '@components/typography/Text';
+import { DashboardStackParamList } from '@dashboard/index';
 import { readNotificationThunk } from '@notification/models/thunks';
+import { useNavigation } from '@react-navigation/native';
+import {
+  NativeStackNavigationProp,
+  NativeStackScreenProps,
+} from '@react-navigation/native-stack';
 import { useAppDispatch } from '@store/hooks';
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
@@ -21,6 +27,8 @@ const NotificationItem = ({
   description,
   read = true,
 }: NotificationItemProps) => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<DashboardStackParamList>>();
   const theme = useTheme();
   const dispatch = useAppDispatch();
   const onPress = () => {
@@ -28,6 +36,12 @@ const NotificationItem = ({
     dispatch({
       type: 'misc/readNotification',
       payload: id,
+    });
+    navigation.navigate('NotificationDetail', {
+      id,
+      title,
+      date: date,
+      description,
     });
   };
   return (
