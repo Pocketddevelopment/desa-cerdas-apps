@@ -47,8 +47,10 @@ const AccountCard = () => {
       <Separator style={{ marginVertical: 10 }} />
       <SpaceBetween>
         <View style={{ flex: 1 }}>
-          <Text size={16}>NIK: {account?.CustomerID}</Text>
-          <Text size={16}>
+          <Text size={16} numberOfLines={1}>
+            NIK: {account?.NIK}
+          </Text>
+          <Text size={16} numberOfLines={1}>
             Tgl. Lahir: {moment(account?.DateOfBirth).format('DD-MM-YYYY')}
           </Text>
         </View>
