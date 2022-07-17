@@ -10,7 +10,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '@store/rootReducers';
 import { sanitizeResponse } from '@utils/store';
 import GetCreativeListRequestInterface from './interfaces/requests/GetCreativeListRequest.interface';
-import GetDestinationDetailInterface from './interfaces/requests/GetDestinationDetail.interface';
 import GetDestinationListRequestInterface from './interfaces/requests/GetDestinationListRequest.interface';
 
 export const getAttractionDestinationListThunk = createAsyncThunk(

@@ -7,7 +7,6 @@ import {
 import Button from '@components/Button';
 import Failed from '@components/Failed';
 import Dot from '@components/pagination/PaginationDot';
-import { Text } from '@components/typography';
 import DeviceContants from '@constants/device';
 import { DashboardStackParamList } from '@dashboard/index';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -27,12 +26,6 @@ import RenderHTML from 'react-native-render-html';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import Toast from 'react-native-toast-message';
 
-const data: string[] = [
-  'https://img.freepik.com/free-photo/big-hamburger-with-double-beef-french-fries_252907-8.jpg?w=2000',
-  'https://img.freepik.com/free-photo/big-hamburger-with-double-beef-french-fries_252907-8.jpg?w=2000',
-  'https://img.freepik.com/free-photo/big-hamburger-with-double-beef-french-fries_252907-8.jpg?w=2000',
-];
-
 export type AttractionDetailProps = {
   type: 'destination' | 'creative';
   id: string;
@@ -47,7 +40,7 @@ const AttractionDetailScreen: React.FC<
     title: placeholderTitle,
     type: attractionType,
   } = route.params;
-  const { loading } = useAppSelector((state: RootState) => state.misc);
+  const { loading, error } = useAppSelector((state: RootState) => state.misc);
   const dispatch = useAppDispatch();
   const theme = useTheme();
   const [data, setData] = useState<
@@ -148,41 +141,44 @@ const AttractionDetailScreen: React.FC<
     <ScrollView style={styles.container}>
       {loading.creative || loading.destination ? (
         <ActivityIndicator size={'large'} style={styles.loading} />
-      ) : data ? (
-        <>
-          <Carousel
-            layout='default'
-            initialScrollIndex={activeIndex}
-            data={data.ListImage}
-            onSnapToItem={onSnapItem}
-            renderItem={renderCarouselItem}
-            sliderWidth={DeviceContants.screenWidth}
-            itemWidth={DeviceContants.screenWidth}
-            snapToAlignment={'center'}
-          />
-          <View style={styles.contentContainer}>
-            <Button
-              mode='outlined'
-              primary
-              style={{ height: 50 }}
-              onPress={openMaps}>
-              <Image
-                source={{
-                  uri: 'http://13.250.44.36:8001/assets/images/icon/icon-maps.png',
-                }}
-                style={styles.icon}
-              />{' '}
-              Lihat Lokasi di Google Maps
-            </Button>
-            <View style={styles.section}>
-              <RenderHTML
-                source={{ html: data.Description }}
-                contentWidth={DeviceContants.screenWidth}
-              />
-            </View>
-          </View>
-        </>
       ) : (
+        data && (
+          <>
+            <Carousel
+              layout='default'
+              initialScrollIndex={activeIndex}
+              data={data.ListImage}
+              onSnapToItem={onSnapItem}
+              renderItem={renderCarouselItem}
+              sliderWidth={DeviceContants.screenWidth}
+              itemWidth={DeviceContants.screenWidth}
+              snapToAlignment={'center'}
+            />
+            <View style={styles.contentContainer}>
+              <Button
+                mode='outlined'
+                primary
+                style={{ height: 50 }}
+                onPress={openMaps}>
+                <Image
+                  source={{
+                    uri: 'http://13.250.44.36:8001/assets/images/icon/icon-maps.png',
+                  }}
+                  style={styles.icon}
+                />{' '}
+                Lihat Lokasi di Google Maps
+              </Button>
+              <View style={styles.section}>
+                <RenderHTML
+                  source={{ html: data.Description }}
+                  contentWidth={DeviceContants.screenWidth}
+                />
+              </View>
+            </View>
+          </>
+        )
+      )}
+      {(error.creative || error.destination) && (
         <Failed onBtnPress={() => getDetail()} />
       )}
     </ScrollView>

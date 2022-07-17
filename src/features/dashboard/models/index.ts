@@ -1,5 +1,7 @@
 import {
+  getAttractionCreativeDetailThunk,
   getAttractionCreativeListThunk,
+  getAttractionDestinationDetailThunk,
   getAttractionDestinationListThunk,
   getSMEDetailThunk,
   getSMEListThunk,
@@ -170,6 +172,50 @@ const Model = createSlice({
       }
     );
 
+    // Tourist destination detail handlers
+    builder.addCase(
+      getAttractionDestinationDetailThunk.pending,
+      (state: MiscRedux) => {
+        return {
+          ...state,
+          loading: {
+            destination: true,
+          },
+          error: {
+            destination: false,
+          },
+        };
+      }
+    );
+    builder.addCase(
+      getAttractionDestinationDetailThunk.fulfilled,
+      (state: MiscRedux) => {
+        return {
+          ...state,
+          loading: {
+            destination: false,
+          },
+          error: {
+            destination: false,
+          },
+        };
+      }
+    );
+    builder.addCase(
+      getAttractionDestinationDetailThunk.rejected,
+      (state: MiscRedux) => {
+        return {
+          ...state,
+          loading: {
+            destination: false,
+          },
+          error: {
+            destination: true,
+          },
+        };
+      }
+    );
+
     // Creative destination handlers
     builder.addCase(
       getAttractionCreativeListThunk.pending,
@@ -201,6 +247,50 @@ const Model = createSlice({
           ...state,
           loading: {
             creative: false,
+          },
+        };
+      }
+    );
+
+    // Tourist destination detail handlers
+    builder.addCase(
+      getAttractionCreativeDetailThunk.pending,
+      (state: MiscRedux) => {
+        return {
+          ...state,
+          loading: {
+            creative: true,
+          },
+          error: {
+            creative: false,
+          },
+        };
+      }
+    );
+    builder.addCase(
+      getAttractionCreativeDetailThunk.fulfilled,
+      (state: MiscRedux) => {
+        return {
+          ...state,
+          loading: {
+            creative: false,
+          },
+          error: {
+            creative: false,
+          },
+        };
+      }
+    );
+    builder.addCase(
+      getAttractionCreativeDetailThunk.rejected,
+      (state: MiscRedux) => {
+        return {
+          ...state,
+          loading: {
+            creative: false,
+          },
+          error: {
+            creative: true,
           },
         };
       }
