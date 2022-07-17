@@ -79,11 +79,16 @@ const WeatherDetailScreen: React.FC = () => {
                   <Row>
                     <Image
                       source={{
-                        uri: weather?.UviIndexColor,
+                        uri: weather?.UviIndexImage,
                       }}
                       style={styles.weatherIcon}
                     />
-                    <Text size={13}>Indeks UV : {weather?.UviIndex}</Text>
+                    <Text size={13}>
+                      Indeks UV :{' '}
+                      <Text color={weather.UviIndexColor} size={13}>
+                        {weather.UviIndex}
+                      </Text>
+                    </Text>
                   </Row>
                 </Row>
               </View>

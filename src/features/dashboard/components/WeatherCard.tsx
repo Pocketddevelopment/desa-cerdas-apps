@@ -95,7 +95,9 @@ const WeatherCard = () => {
                 </Row>
                 <Row>
                   <Image
-                    source={require('@assets/weather/uv.png')}
+                    source={{
+                      uri: weather?.UviIndexImage,
+                    }}
                     style={styles.weatherIcon}
                   />
                   <Text size={13}>

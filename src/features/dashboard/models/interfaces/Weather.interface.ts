@@ -19,6 +19,7 @@ export default interface WeatherInterface {
   Hour: string;
   UviIndex: string;
   UviIndexColor: string;
+  UviIndexImage: string;
   TableDescription: TableDescription[];
   TableUviDescription: TableDescription[];
 }
