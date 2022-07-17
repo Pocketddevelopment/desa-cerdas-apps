@@ -157,9 +157,15 @@ const Model = createSlice({
     builder.addCase(
       getComplaintListThunk.fulfilled,
       (state: ServiceRedux, action: any) => {
+        let newComplaintList = [];
+        if (action.payload.page === 1) {
+          newComplaintList = action.payload;
+        } else {
+          newComplaintList = [state.complaintList, ...action.payload];
+        }
         return {
           ...state,
-          complaintList: action.payload,
+          complaintList: newComplaintList,
           loading: {
             complaintList: false,
           },

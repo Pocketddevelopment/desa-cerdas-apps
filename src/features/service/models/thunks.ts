@@ -73,13 +73,15 @@ export const getComplaintListThunk = createAsyncThunk(
     try {
       const { CustomerID, DistrictID } = (getState() as RootState)
         .authentication.account;
-      return sanitizeResponse(
+      const response = sanitizeResponse(
         await getComplaintList({
           customerId: CustomerID,
           districtId: DistrictID,
           page,
         })
       );
+      response.page = page;
+      return response;
     } catch (err) {
       throw rejectWithValue(err);
     }

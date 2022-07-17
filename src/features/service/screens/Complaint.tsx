@@ -2,6 +2,7 @@ import Container from '@components/Container';
 import Separator from '@components/Separator';
 import { Caption, Text } from '@components/typography';
 import SectionTitle from '@components/typography/SectionTitle';
+import { useIsFocused } from '@react-navigation/native';
 import ComplaintCard from '@service/components/ComplaintCard';
 import ComplaintItem from '@service/components/ComplaintItem';
 import ComplaintInterface from '@service/models/interfaces/Complaint.interface';
@@ -14,14 +15,18 @@ import { ActivityIndicator } from 'react-native-paper';
 
 const ComplaintScreen: React.FC = () => {
   const dispatch = useAppDispatch();
+  const isFocused = useIsFocused();
   const [page, setPage] = useState<number>(1);
   const { loading, complaintList } = useAppSelector(
     (state: RootState) => state.service
   );
 
   useEffect(() => {
-    dispatch(getComplaintListThunk(page));
-  }, []);
+    if (isFocused) {
+      dispatch(getComplaintListThunk(page));
+    }
+    return () => setPage(1);
+  }, [isFocused]);
 
   const renderItem = ({ item }: { item: ComplaintInterface }) => {
     return (
