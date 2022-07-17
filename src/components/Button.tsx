@@ -19,7 +19,7 @@ type ButtonProps = React.ComponentProps<typeof Props> & ButtonAdditionalProps;
 export default function Button(props: Partial<ButtonProps>) {
   const theme = useTheme();
 
-  const { mode, primary } = props;
+  const { mode, primary, loading } = props;
   let mainColor = theme.colors.accent;
 
   const getLabelStyle = React.useMemo(() => {
@@ -46,6 +46,7 @@ export default function Button(props: Partial<ButtonProps>) {
     }
     return {
       borderColor: borderColor,
+      borderWidth: loading ? 0 : 1,
     };
   }, []);
 
@@ -59,7 +60,7 @@ export default function Button(props: Partial<ButtonProps>) {
       labelStyle={getLabelStyle}
       disabled={props.loading}
       {...props}
-      style={props.btnStyle}
+      style={[props.btnStyle]}
       contentStyle={[styles.container, getAdditionalStyle, props.style]}
     />
   );
