@@ -132,14 +132,15 @@ const WeatherCard = () => {
                   {weather?.PMDesc}
                 </Title>
               </Row>
-              <Row style={{ flex: 4 }}>
-                <Text size={12}>
-                  Berdasarkan Skala Indeks{' '}
-                  <Row align='bottom'>
+              <View style={{ flex: 7 }}>
+                <Text size={12}>Berdasarkan Skala</Text>
+                <Row align='top'>
+                  <Text size={12}>Indeks </Text>
+                  <Row align='center'>
                     <Text thickness='bold' size={12}>
                       PM
                     </Text>
-                    <Text thickness='bold' size={8} style={{ lineHeight: 8 }}>
+                    <Text thickness='bold' size={8} style={{ marginTop: 8 }}>
                       2.5
                     </Text>
                     <Text thickness='bold' size={12}>
@@ -147,10 +148,10 @@ const WeatherCard = () => {
                       CAQI
                     </Text>
                   </Row>
-                </Text>
-              </Row>
-              <View style={{ flex: 2.5 }} />
+                </Row>
+              </View>
             </Row>
+            <View style={{ flex: 2.5 }} />
           </>
         )
       )}
