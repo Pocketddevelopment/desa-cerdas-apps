@@ -43,21 +43,23 @@ const App: React.FC = () => {
   const [exitApp, setExitApp] = useState(0);
 
   const backAction = () => {
-    setTimeout(() => {
-      setExitApp(0);
-    }, 2000); // 2 seconds to tap second-time
+    if (!navigationRef.canGoBack()) {
+      setTimeout(() => {
+        setExitApp(0);
+      }, 2000); // 2 seconds to tap second-time
 
-    if (exitApp === 0) {
-      setExitApp(exitApp + 1);
+      if (exitApp === 0) {
+        setExitApp(exitApp + 1);
 
-      Toast.show({
-        type: 'standard',
-        text1: 'Tekan sekali lagi untuk keluar dari aplikasi',
-      });
-    } else if (exitApp === 1) {
-      BackHandler.exitApp();
+        Toast.show({
+          type: 'standard',
+          text1: 'Tekan sekali lagi untuk keluar dari aplikasi',
+        });
+      } else if (exitApp === 1) {
+        BackHandler.exitApp();
+      }
+      return true;
     }
-    return true;
   };
 
   useEffect(() => {
