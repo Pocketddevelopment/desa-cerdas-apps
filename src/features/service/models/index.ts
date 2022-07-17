@@ -20,6 +20,7 @@ const defaultInitialState: ServiceRedux = {
   },
   documentFormat: [],
   complaintList: {
+    ListSelfComplaint: [],
     ListComplaint: [],
     TotalPage: 1,
     TotalRow: 0,
