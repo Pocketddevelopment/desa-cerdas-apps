@@ -199,7 +199,7 @@ const MoreListScreen: React.FC<
     return (
       <>
         {loading[target] && <ActivityIndicator style={styles.loading} />}
-        {page >= getSource()!.TotalPage && (
+        {page >= getSource()!.TotalPage && !loading[target] && (
           <Caption style={styles.listEnd}>
             Semua {getTargetName()} telah ditampilkan
           </Caption>

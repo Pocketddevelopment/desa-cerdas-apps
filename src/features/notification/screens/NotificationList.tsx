@@ -56,7 +56,7 @@ const NotificationListScreen: React.FC = () => {
     return (
       <>
         {loading.notification && <ActivityIndicator style={styles.loading} />}
-        {page >= notification.TotalPage && (
+        {page >= notification.TotalPage && !loading.notification && (
           <Caption style={styles.listEnd}>
             Semua notifikasi telah ditampilkan
           </Caption>

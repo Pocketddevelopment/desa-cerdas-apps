@@ -54,6 +54,7 @@ const ComplaintScreen: React.FC = () => {
       <>
         {loading.complaintList && <ActivityIndicator style={styles.loading} />}
         {page >= complaintList.TotalPage &&
+          !loading.complaintList &&
           complaintList.ListComplaint.length > 0 && (
             <Caption style={styles.listEnd}>
               Semua keluhan telah ditampilkan

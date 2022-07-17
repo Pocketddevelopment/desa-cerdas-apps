@@ -69,7 +69,7 @@ const SMEScreen: React.FC = () => {
     return (
       <>
         {loading.sme && <ActivityIndicator style={styles.loading} />}
-        {page >= ((sme && sme.TotalPage) || 1) && (
+        {page >= ((sme && sme.TotalPage) || 1) && !loading.sme && (
           <Caption style={styles.listEnd}>Semua UMKM telah ditampilkan</Caption>
         )}
       </>

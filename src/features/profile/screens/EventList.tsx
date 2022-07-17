@@ -60,7 +60,7 @@ const EventListScreen: React.FC = () => {
     return (
       <>
         {loading.getEventList && <ActivityIndicator style={styles.loading} />}
-        {page >= events.TotalPage && (
+        {page >= events.TotalPage && !loading.getEventList && (
           <Caption style={styles.listEnd}>
             Semua event kegiatan telah ditampilkan
           </Caption>

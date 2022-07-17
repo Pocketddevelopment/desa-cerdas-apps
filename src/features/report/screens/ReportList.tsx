@@ -94,11 +94,12 @@ const ReportListScreen: React.FC = () => {
     return (
       <>
         {loading.report && <ActivityIndicator style={styles.loading} />}
-        {page >= ((report.apbd && report.apbd.TotalPage) || 1) && (
-          <Caption style={styles.listEnd}>
-            Semua Laporan APBD telah ditampilkan
-          </Caption>
-        )}
+        {page >= ((report.apbd && report.apbd.TotalPage) || 1) &&
+          !loading.report && (
+            <Caption style={styles.listEnd}>
+              Semua Laporan APBD telah ditampilkan
+            </Caption>
+          )}
       </>
     );
   };

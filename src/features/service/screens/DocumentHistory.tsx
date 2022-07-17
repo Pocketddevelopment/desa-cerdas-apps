@@ -103,7 +103,8 @@ const DocumentHistoryScreen: React.FC = () => {
           <ActivityIndicator style={styles.loading} />
         )}
         {page >= documentHistory.TotalPage &&
-          documentHistory.ListAdministrationHistory.length > 0 && (
+          documentHistory.ListAdministrationHistory.length > 0 &&
+          !loading.documentHistory && (
             <Caption style={styles.listEnd}>
               Semua Laporan APBD telah ditampilkan
             </Caption>

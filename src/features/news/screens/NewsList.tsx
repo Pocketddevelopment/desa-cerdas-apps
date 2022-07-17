@@ -56,7 +56,7 @@ const NewsList: React.FC = () => {
     return (
       <>
         {loading.news && <ActivityIndicator style={styles.loading} />}
-        {page >= news.TotalPage && (
+        {page >= news.TotalPage && !loading.news && (
           <Caption style={styles.listEnd}>
             Semua berita telah ditampilkan
           </Caption>

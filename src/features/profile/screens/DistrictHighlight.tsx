@@ -107,7 +107,7 @@ const DistrictHighlightScreen: React.FC = () => {
     return (
       <>
         {loadingMisc.bumdes && <ActivityIndicator style={styles.loading} />}
-        {page >= report.bumdes.TotalPage && (
+        {page >= report.bumdes.TotalPage && !loadingMisc.bumdes && (
           <Caption style={styles.listEnd}>
             Semua laporan BUMDes telah ditampilkan
           </Caption>
