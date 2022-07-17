@@ -94,7 +94,13 @@ export const updateAccountThunk = createAsyncThunk(
   `${StoreConstants.AUTH}/update`,
   async (body: UpdateAccountFormInterface, { rejectWithValue }) => {
     try {
-      return await updateAccount(body);
+      let response = await updateAccount(body);
+      const { CustomerID, ...rest } = body;
+      response = {
+        ...response,
+        ...rest,
+      };
+      return response;
     } catch (err) {
       throw rejectWithValue(err);
     }

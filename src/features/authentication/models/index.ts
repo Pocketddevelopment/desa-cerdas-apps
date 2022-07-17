@@ -4,6 +4,7 @@ import GlobalNetworking from '@services/request';
 import Storage from '@utils/async-storage';
 import { mapLoadingStates } from '@utils/store';
 import AuthenticationRedux from './interfaces/AuthenticationRedux.interface';
+import UpdateAccountFormInterface from './interfaces/requests/UpdateAccountRequest.interface';
 import {
   loginThunk,
   refreshTokenThunk,
@@ -137,8 +138,14 @@ const Model = createSlice({
     builder.addCase(
       updateAccountThunk.fulfilled,
       (state: AuthenticationRedux, action: any) => {
+        const { payload }: { payload: UpdateAccountFormInterface } = action;
         return {
           ...state,
+          account: {
+            ...state.account,
+            Email: payload.Email,
+            MobileNo: payload.MobileNo,
+          },
           loading: {
             account: false,
           },

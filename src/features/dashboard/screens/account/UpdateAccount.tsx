@@ -38,6 +38,9 @@ const UpdateAccountScreen: React.FC = () => {
           type: 'standard',
           text1: response.ResponseMessage,
         });
+        setTimeout(() => {
+          navigation.goBack();
+        }, 2000);
       })
       .catch((err) =>
         Toast.show({
