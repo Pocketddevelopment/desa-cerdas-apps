@@ -154,7 +154,7 @@ const ComplaintDetailScreen: React.FC<
               <Text size={16}>{data?.Description}</Text>
               <View style={styles.commentMetaDetail}>
                 <Caption size={14} color={theme.colors.primary}>
-                  {data?.ID}
+                  {data?.Name}
                 </Caption>
                 <Caption>
                   {data?.Created || date} via {data?.Source || 'Aplikasi'}

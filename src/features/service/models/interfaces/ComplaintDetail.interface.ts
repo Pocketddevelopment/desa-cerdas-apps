@@ -1,6 +1,7 @@
 export interface ComplaintDetailInterface {
   ID: string;
   Subject: string;
+  Name: string;
   ListImage: ListImage[];
   Description: string;
   StatusType: string;

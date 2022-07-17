@@ -1,6 +1,7 @@
 import Row from '@components/Row';
 import SpaceBetween from '@components/SpaceBetween';
 import { Caption, Text } from '@components/typography';
+import { getInitialName } from '@utils/transformer';
 import React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import { Avatar, useTheme } from 'react-native-paper';
@@ -45,7 +46,7 @@ const CommentCard = ({
   const AvatarElement = (
     <Avatar.Text
       size={36}
-      label='B'
+      label={getInitialName(name)}
       color={theme.colors.text}
       labelStyle={{ fontWeight: '700', fontSize: 20 }}
       style={{ backgroundColor: '#FFEBEB' }}

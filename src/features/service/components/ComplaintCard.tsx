@@ -29,7 +29,7 @@ const ComplaintCard = () => {
       <Caption>Keluhan Anda</Caption>
       <ScrollView>
         {loading.complaintList ? (
-          <ActivityIndicator />
+          <ActivityIndicator style={styles.loading} />
         ) : complaintList.ListSelfComplaint.length > 0 ? (
           <>
             {complaintList.ListSelfComplaint.map((item, i) => {
@@ -83,5 +83,8 @@ const styles = StyleSheet.create({
     height: 50,
     width: 50,
     marginRight: 10,
+  },
+  loading: {
+    marginVertical: 10,
   },
 });
