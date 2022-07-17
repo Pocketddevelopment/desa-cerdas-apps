@@ -48,7 +48,7 @@ export default function Button(props: Partial<ButtonProps>) {
       borderColor: borderColor,
       borderWidth: loading ? 0 : 1,
     };
-  }, []);
+  }, [loading]);
 
   return (
     // @ts-nocheck
