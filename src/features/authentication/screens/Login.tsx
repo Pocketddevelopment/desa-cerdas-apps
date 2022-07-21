@@ -89,7 +89,6 @@ const LoginScreen: React.FC = () => {
                 shadow={false}
                 onChangeText={onChange}
                 value={value}
-                maxLength={16}
                 keyboardType={'email-address'}
                 errorMessage={errors?.NIK?.message}
                 errorColor={theme.colors['error-secondary']}
