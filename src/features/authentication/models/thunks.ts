@@ -4,6 +4,7 @@ import {
   forgotPassword,
   getNewToken,
   login,
+  register,
   updateAccount,
   updateDevice,
   updatePassword,
@@ -72,7 +73,7 @@ export const registerThunk = createAsyncThunk(
   `${StoreConstants.AUTH}/register`,
   async (body: RegisterFormStep1 & RegisterFormStep2, { rejectWithValue }) => {
     try {
-      return sanitizeResponse(await login(body));
+      return await register(body);
     } catch (err) {
       throw rejectWithValue(err);
     }

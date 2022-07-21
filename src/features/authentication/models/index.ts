@@ -8,6 +8,7 @@ import UpdateAccountFormInterface from './interfaces/requests/UpdateAccountReque
 import {
   loginThunk,
   refreshTokenThunk,
+  registerThunk,
   updateAccountThunk,
   updatePasswordThunk,
 } from './thunks';
@@ -79,6 +80,32 @@ const Model = createSlice({
       }
     );
     builder.addCase(loginThunk.rejected, (state: AuthenticationRedux) => {
+      return {
+        ...state,
+        loading: {
+          account: false,
+        },
+      };
+    });
+
+    //Register handlers
+    builder.addCase(registerThunk.pending, (state: AuthenticationRedux) => {
+      return {
+        ...state,
+        loading: {
+          account: true,
+        },
+      };
+    });
+    builder.addCase(registerThunk.fulfilled, (state: AuthenticationRedux) => {
+      return {
+        ...state,
+        loading: {
+          account: false,
+        },
+      };
+    });
+    builder.addCase(registerThunk.rejected, (state: AuthenticationRedux) => {
       return {
         ...state,
         loading: {

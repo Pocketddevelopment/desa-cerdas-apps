@@ -11,7 +11,8 @@ import Row from '@components/Row';
 import SelectItemInterface from '@interfaces/SelectItem.interface';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { useAppDispatch } from '@store/hooks';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { RootState } from '@store/store';
 import moment from 'moment';
 import 'moment/locale/id';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
@@ -24,6 +25,9 @@ const RegisterScreen: React.FC = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const dispatch = useAppDispatch();
+  const { loading } = useAppSelector(
+    (state: RootState) => state.authentication
+  );
   const [dateList, setDateList] = useState<SelectItemInterface[]>([]);
   const [monthList, setMonthList] = useState<SelectItemInterface[]>([]);
   const [yearList, setYearList] = useState<SelectItemInterface[]>([]);
@@ -122,12 +126,26 @@ const RegisterScreen: React.FC = () => {
         .format('MM')}-${
         dateList[Number.parseInt(step1Form.DateOfBirth)].label
       }`;
-      delete step2Form.ConfirmPassword;
       step2Form.RegisterType = 'AndroidInput';
+      let FirstName = '';
+      let LastName = '';
+      const names = step1Form.Name?.split(' ');
+      if (names && names.length) {
+        FirstName = names[0];
+        LastName = names.slice(1, names.length).join(' ');
+      }
+      delete step1Form.Name;
+      // @ts-expect-error
+      delete step1Form.MonthOfBirth;
+      // @ts-expect-error
+      delete step1Form.YearOfBirth;
+      delete step2Form.ConfirmPassword;
       const data = {
         ...step1Form,
         ...step2Form,
-        DateOfBirth: DateOfBirth,
+        FirstName,
+        LastName,
+        DateOfBirth: new Date(DateOfBirth).toISOString(),
       };
       await dispatch(registerThunk(data))
         .unwrap()
@@ -136,7 +154,9 @@ const RegisterScreen: React.FC = () => {
             type: 'standard',
             text1: response.ResponseMessage,
           });
-          navigation.goBack();
+          setTimeout(() => {
+            navigation.goBack();
+          }, 2000);
         })
         .catch((err) =>
           Toast.show({
@@ -436,6 +456,7 @@ const RegisterScreen: React.FC = () => {
       )}
       <Button
         btnStyle={{ width: '100%' }}
+        loading={loading.account}
         onPress={
           step === 0 ? handleSubmit(onPressNext) : handleSubmit2(onPressNext)
         }>
