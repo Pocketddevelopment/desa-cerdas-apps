@@ -82,10 +82,10 @@ const AttractionDetailScreen: React.FC<
   }
 
   useEffect(() => {
-    getDetail();
     navigation.setOptions({
       title: placeholderTitle,
     });
+    getDetail();
   }, []);
 
   const onSnapItem = (index: number) => {

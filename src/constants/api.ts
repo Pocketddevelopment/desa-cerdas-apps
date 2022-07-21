@@ -131,7 +131,7 @@ export default class APIConstants {
     },
     CREATIVE_DETAIL: {
       METHOD: 'GET',
-      URL: '/api/touristdestination/detail',
+      URL: '/api/creativedestination/detail',
     },
     SME: {
       METHOD: 'GET',

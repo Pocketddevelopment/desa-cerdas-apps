@@ -229,6 +229,9 @@ export default function DashboardScreens(): JSX.Element[] {
         <Stack.Screen
           name='AttractionDetail'
           component={AttractionDetailScreen}
+          options={{
+            title: '',
+          }}
         />
         <Stack.Screen
           name='Profile'
