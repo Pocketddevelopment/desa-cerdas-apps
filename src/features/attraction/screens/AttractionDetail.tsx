@@ -98,7 +98,7 @@ const AttractionDetailScreen: React.FC<
       android: 'geo:0,0?q=',
     });
     const latLng = `${data?.Latitude},${data?.Longitude}`;
-    const label = data?.Title;
+    const label = latLng;
     const url: string = Platform.select({
       ios: `${scheme}${label}@${latLng}`,
       android: `${scheme}${latLng}(${label})`,
