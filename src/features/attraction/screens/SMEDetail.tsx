@@ -70,7 +70,7 @@ const SMEDetailScreen: React.FC<
       title: `Hubungi ${data?.Title} melalui Whatsapp`,
       message: `Halo ${data?.Title} dengan Bapak/Ibu ${data?.ContactName}, saya mau bertanya. `,
       social: Share.Social.WHATSAPP,
-      whatsAppNumber: data?.ContactPhone,
+      whatsAppNumber: data?.ContactPhone.replace('0', '62'),
     };
     try {
       await Share.shareSingle(shareOptions);

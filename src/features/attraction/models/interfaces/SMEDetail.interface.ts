@@ -4,7 +4,7 @@ export interface SMEDetailInterface {
   ListImage: ListImage[];
   Description: string;
   ContactName: number;
-  ContactPhone: number;
+  ContactPhone: string;
   Created: Date;
 }
 
