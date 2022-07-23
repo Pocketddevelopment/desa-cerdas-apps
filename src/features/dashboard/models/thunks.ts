@@ -15,7 +15,11 @@ export const getNewsListThunk = createAsyncThunk(
     const districtId = (getState() as RootState).authentication.account
       ?.DistrictID;
     try {
-      return sanitizeResponse(await getNewsList(districtId as string, page));
+      const response = sanitizeResponse(
+        await getNewsList(districtId as string, page)
+      );
+      response.page = page;
+      return response;
     } catch (err) {
       throw rejectWithValue(err);
     }

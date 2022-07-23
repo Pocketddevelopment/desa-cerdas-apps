@@ -93,9 +93,19 @@ const Model = createSlice({
     builder.addCase(
       getNewsListThunk.fulfilled,
       (state: MiscRedux, action: any) => {
+        let newNewsList = [];
+        if (action.payload.page === 1) {
+          newNewsList = action.payload.ListNews;
+        } else {
+          newNewsList = [...state.news.ListNews, ...action.payload.ListNews];
+        }
         return {
           ...state,
-          news: action.payload,
+          news: {
+            ...state.news,
+            ...action.payload,
+            ListNews: newNewsList,
+          },
           loading: {
             [StoreConstants.NEWS]: false,
           },

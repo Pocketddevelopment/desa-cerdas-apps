@@ -1,17 +1,18 @@
 import Separator from '@components/Separator';
 import { Caption, Text } from '@components/typography';
 import NewsItem from '@dashboard/components/NewsItem';
-import News from '@news/models/interfaces/News.interface';
 import { getNewsListThunk } from '@dashboard/models/thunks';
+import News from '@news/models/interfaces/News.interface';
+import { useIsFocused } from '@react-navigation/native';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { RootState } from '@store/store';
-import moment from 'moment';
 import React, { useCallback, useEffect, useState } from 'react';
 import { FlatList, StyleSheet } from 'react-native';
 import { ActivityIndicator } from 'react-native-paper';
 
 const NewsList: React.FC = () => {
   const dispatch = useAppDispatch();
+  const isFocused = useIsFocused();
   const [page, setPage] = useState<number>(1);
 
   const { loading, news } = useAppSelector((state: RootState) => state.misc);
@@ -22,6 +23,12 @@ const NewsList: React.FC = () => {
     },
     [dispatch]
   );
+
+  useEffect(() => {
+    if (!isFocused) {
+      setPage(1);
+    }
+  }, [isFocused]);
 
   useEffect(() => {
     if (news) {
@@ -56,7 +63,7 @@ const NewsList: React.FC = () => {
     return (
       <>
         {loading.news && <ActivityIndicator style={styles.loading} />}
-        {page >= news.TotalPage && !loading.news && (
+        {page > news.TotalPage && !loading.news && (
           <Caption style={styles.listEnd}>
             Semua berita telah ditampilkan
           </Caption>
