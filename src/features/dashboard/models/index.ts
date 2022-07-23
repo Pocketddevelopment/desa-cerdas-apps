@@ -28,7 +28,11 @@ const defaultInitialState: MiscRedux = {
   weather: null,
   creative: null,
   destination: null,
-  sme: null,
+  sme: {
+    ListUMKM: [],
+    TotalPage: 1,
+    TotalRow: 0,
+  },
   news: {
     ListNews: [],
     TotalPage: 1,
@@ -308,14 +312,17 @@ const Model = createSlice({
     builder.addCase(
       getSMEListThunk.fulfilled,
       (state: MiscRedux, action: any) => {
+        let newSMEList = [];
+        if (action.payload.page === 1) {
+          newSMEList = action.payload.ListUMKM;
+        } else {
+          newSMEList = [...state.sme.ListUMKM, ...action.payload.ListUMKM];
+        }
         return {
           ...state,
           sme: {
-            ...state.sme!,
-            ListUMKM: [
-              ...(state.sme?.ListUMKM || []),
-              ...action.payload.ListUMKM,
-            ],
+            ...action.payload,
+            ListUMKM: newSMEList,
           },
           loading: {
             sme: false,

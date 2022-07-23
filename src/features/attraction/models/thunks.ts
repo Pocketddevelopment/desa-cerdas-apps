@@ -85,13 +85,15 @@ export const getSMEListThunk = createAsyncThunk(
   async (page: number, { getState, rejectWithValue }) => {
     try {
       const { DistrictID } = (getState() as RootState).authentication.account;
-      return sanitizeResponse(
+      const response = sanitizeResponse(
         await getSMEList({
           districtId: DistrictID,
           page: page,
           pageSize: 10,
         })
       );
+      response.page = page;
+      return response;
     } catch (err) {
       throw rejectWithValue(err);
     }

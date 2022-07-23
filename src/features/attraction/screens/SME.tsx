@@ -20,6 +20,7 @@ const SMEScreen: React.FC = () => {
 
   const getList = useCallback(
     (page: number) => {
+      console.log('callback');
       dispatch(getSMEListThunk(page));
     },
     [dispatch]
@@ -27,7 +28,9 @@ const SMEScreen: React.FC = () => {
 
   useEffect(() => {
     if (sme) {
+      console.log('sme total page', sme);
       if (page <= sme.TotalPage) {
+        console.log('pagesme', page);
         getList(page);
       }
     } else {
@@ -62,7 +65,11 @@ const SMEScreen: React.FC = () => {
   };
 
   const EmptyComponent = () => {
-    return <Text style={styles.emptyContainer}>Tidak ada UMKM</Text>;
+    return loading.sme ? (
+      <></>
+    ) : (
+      <Text style={styles.emptyContainer}>Tidak ada UMKM</Text>
+    );
   };
 
   const FooterComponent = () => {
