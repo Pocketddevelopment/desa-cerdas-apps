@@ -134,7 +134,7 @@ const ComplaintDetailScreen: React.FC<
           paddingBottom:
             !data?.IsEnableComment && data?.StatusType !== 'Closed'
               ? 0
-              : CHAT_BOX_HEIGHT - 30 + inputHeight,
+              : CHAT_BOX_HEIGHT - 25 + inputHeight,
         }}>
         <Carousel
           layout='default'
@@ -165,7 +165,7 @@ const ComplaintDetailScreen: React.FC<
                   <>
                     <SectionTitle>{`Balasan Keluhan (${data?.Detail.length})`}</SectionTitle>
                     <View style={styles.commentCards}>
-                      {data?.Detail.map((e, i) => {
+                      {data?.Detail.map((e) => {
                         return (
                           <CommentCard
                             key={e.ID}
@@ -188,8 +188,9 @@ const ComplaintDetailScreen: React.FC<
           )}
         </View>
       </ScrollView>
-      <Row style={styles.chatBox}>
-        {data?.StatusType === 'Closed' ? (
+
+      {data?.StatusType === 'Closed' ? (
+        <Row style={styles.chatBox}>
           <View
             style={[
               styles.successContainer,
@@ -201,35 +202,35 @@ const ComplaintDetailScreen: React.FC<
             />
             <Text color={theme.colors.success}>Selesai</Text>
           </View>
-        ) : data?.IsEnableComment ? (
-          <>
-            <View style={styles.inputBox}>
-              <TextInput
-                placeholder='Balas Keluhan...'
-                multiline
-                style={{ paddingTop: 5 }}
-                onContentSizeChange={(event) => {
-                  setInputHeight(
-                    event.nativeEvent.contentSize.height > 150
-                      ? 100
-                      : event.nativeEvent.contentSize.height - 10
-                  );
-                }}
-                value={comment}
-                disabled={loading.updateComment}
-                onChangeText={(value: string) => setComment(value)}
-                onFocus={() => commentScrollRef?.current?.scrollToEnd()}
-              />
-            </View>
-            <IconButton
-              icon={'send'}
-              color={theme.colors.primary}
-              disabled={comment.length <= 0 || loading.updateComment}
-              onPress={() => sendComment()}
+        </Row>
+      ) : data?.IsEnableComment ? (
+        <Row style={styles.chatBox}>
+          <View style={styles.inputBox}>
+            <TextInput
+              placeholder='Balas Keluhan...'
+              multiline
+              style={{ paddingTop: 5 }}
+              onContentSizeChange={(event) => {
+                setInputHeight(
+                  event.nativeEvent.contentSize.height > 150
+                    ? 100
+                    : event.nativeEvent.contentSize.height - 10
+                );
+              }}
+              value={comment}
+              disabled={loading.updateComment}
+              onChangeText={(value: string) => setComment(value)}
+              onFocus={() => commentScrollRef?.current?.scrollToEnd()}
             />
-          </>
-        ) : null}
-      </Row>
+          </View>
+          <IconButton
+            icon={'send'}
+            color={theme.colors.primary}
+            disabled={comment.length <= 0 || loading.updateComment}
+            onPress={() => sendComment()}
+          />
+        </Row>
+      ) : null}
     </View>
   );
 };
