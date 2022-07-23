@@ -40,7 +40,10 @@ const AttractionItem = React.memo(function AttractionItem({
           </Title>
           <RenderHTML
             source={{ html: description }}
-            baseStyle={{ maxHeight: 38 }}
+            baseStyle={styles.htmlText}
+            defaultTextProps={{
+              numberOfLines: 2,
+            }}
             contentWidth={DeviceContants.screenWidth}
           />
         </View>
@@ -65,5 +68,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  htmlText: {
+    maxHeight: 38,
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    fontSize: 13,
+    lineHeight: 20,
+    textAlign: 'left',
   },
 });

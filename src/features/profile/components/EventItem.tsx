@@ -51,7 +51,10 @@ const EventItem = ({
           </Title>
           <RenderHTML
             source={{ html: description }}
-            baseStyle={{ maxHeight: 38 }}
+            baseStyle={styles.htmlText}
+            defaultTextProps={{
+              numberOfLines: 2,
+            }}
             contentWidth={DeviceContants.screenWidth}
           />
         </View>
@@ -72,5 +75,13 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     resizeMode: 'cover',
     marginRight: 10,
+  },
+  htmlText: {
+    maxHeight: 28,
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    fontSize: 13,
+    lineHeight: 28,
+    textAlign: 'left',
   },
 });

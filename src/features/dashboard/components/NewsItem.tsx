@@ -53,6 +53,9 @@ const NewsItem = ({
           <RenderHTML
             source={{ html: description }}
             baseStyle={styles.htmlText}
+            defaultTextProps={{
+              numberOfLines: 2,
+            }}
             contentWidth={DeviceContants.screenWidth}
           />
         </View>
@@ -75,11 +78,11 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   htmlText: {
-    maxHeight: 32,
+    maxHeight: 28,
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
     fontSize: 13,
-    lineHeight: 30,
+    lineHeight: 28,
     textAlign: 'left',
   },
 });
