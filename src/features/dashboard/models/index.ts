@@ -420,11 +420,23 @@ const Model = createSlice({
     builder.addCase(
       getReportBUMDesListThunk.fulfilled,
       (state: MiscRedux, action: any) => {
+        let newReportBumdesList = [];
+        if (action.payload.page === 1) {
+          newReportBumdesList = action.payload.ListReportBumdes;
+        } else {
+          newReportBumdesList = [
+            ...state.report.bumdes.ListReportBumdes,
+            ...action.payload.ListReportBumdes,
+          ];
+        }
         return {
           ...state,
           report: {
             ...state.report,
-            bumdes: action.payload,
+            bumdes: {
+              ...action.payload,
+              ListReportBumdes: newReportBumdesList,
+            },
           },
           loading: {
             bumdes: false,

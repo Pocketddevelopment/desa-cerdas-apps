@@ -26,12 +26,14 @@ export const getReportBUMDesListThunk = createAsyncThunk(
   async (page: number, { getState, rejectWithValue }) => {
     const { DistrictID } = (getState() as RootState).authentication.account;
     try {
-      return sanitizeResponse(
+      const response = sanitizeResponse(
         await getReportBUMDesList({
           page,
           districtId: DistrictID,
         })
       );
+      response.page = page;
+      return response;
     } catch (err) {
       throw rejectWithValue(err);
     }
