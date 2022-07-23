@@ -44,7 +44,11 @@ const defaultInitialState: MiscRedux = {
     TotalRow: 0,
   },
   report: {
-    apbd: null,
+    apbd: {
+      ListReportAPBD: [],
+      TotalPage: 1,
+      TotalRow: 0,
+    },
     bumdes: {
       ListReportBumdes: [],
       TotalPage: 1,
@@ -387,11 +391,23 @@ const Model = createSlice({
     builder.addCase(
       getReportAPBDListThunk.fulfilled,
       (state: MiscRedux, action: any) => {
+        let newReportAPBDList = [];
+        if (action.payload.page === 1) {
+          newReportAPBDList = action.payload.ListReportAPBD;
+        } else {
+          newReportAPBDList = [
+            ...state.report.apbd.ListReportAPBD,
+            ...action.payload.ListReportAPBD,
+          ];
+        }
         return {
           ...state,
           report: {
             ...state.report,
-            apbd: action.payload,
+            apbd: {
+              ...action.payload,
+              ListReportAPBD: newReportAPBDList,
+            },
           },
           loading: {
             report: false,

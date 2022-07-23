@@ -14,7 +14,7 @@ export default interface MiscRedux {
   news: GetNewsResponse;
   notification: GetNotificationListResponseInterface;
   report: {
-    apbd: GetReportAPBDListResponseInterface | null;
+    apbd: GetReportAPBDListResponseInterface;
     bumdes: GetReportBUMDesListResponseInterface;
   };
   weather: WeatherInterface | null;
