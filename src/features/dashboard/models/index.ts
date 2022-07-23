@@ -26,8 +26,16 @@ import {
 
 const defaultInitialState: MiscRedux = {
   weather: null,
-  creative: null,
-  destination: null,
+  creative: {
+    ListCreativeDestination: [],
+    TotalPage: 1,
+    TotalRow: 0,
+  },
+  destination: {
+    ListTouristDestination: [],
+    TotalPage: 1,
+    TotalRow: 0,
+  },
   sme: {
     ListUMKM: [],
     TotalPage: 1,
@@ -169,9 +177,21 @@ const Model = createSlice({
     builder.addCase(
       getAttractionDestinationListThunk.fulfilled,
       (state: MiscRedux, action: any) => {
+        let newAttractionList = [];
+        if (action.payload.page === 1) {
+          newAttractionList = action.payload.ListTouristDestination;
+        } else {
+          newAttractionList = [
+            ...state.destination.ListTouristDestination,
+            ...action.payload.ListTouristDestination,
+          ];
+        }
         return {
           ...state,
-          destination: action.payload,
+          destination: {
+            ...action.payload,
+            ListTouristDestination: newAttractionList,
+          },
           loading: {
             destination: false,
           },
@@ -249,9 +269,21 @@ const Model = createSlice({
     builder.addCase(
       getAttractionCreativeListThunk.fulfilled,
       (state: MiscRedux, action: any) => {
+        let newCreativeList = [];
+        if (action.payload.page === 1) {
+          newCreativeList = action.payload.ListCreativeDestination;
+        } else {
+          newCreativeList = [
+            ...state.creative?.ListCreativeDestination,
+            ...action.payload.ListCreativeDestination,
+          ];
+        }
         return {
           ...state,
-          creative: action.payload,
+          creative: {
+            ...state.creative,
+            ListCreativeDestination: newCreativeList,
+          },
           loading: {
             creative: false,
           },

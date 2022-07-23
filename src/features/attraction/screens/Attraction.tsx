@@ -86,7 +86,7 @@ const AttractionScreen: React.FC = () => {
             Lihat selengkapnya
           </Text>
         </SpaceBetween>
-        {destination?.ListTouristDestination.map((e, i) => (
+        {destination?.ListTouristDestination.slice(0, 5).map((e, i) => (
           <View key={e.ID}>
             <AttractionItem
               thumbnailUri={e.ImageUrl}
@@ -110,7 +110,7 @@ const AttractionScreen: React.FC = () => {
             Lihat selengkapnya
           </Text>
         </SpaceBetween>
-        {creative?.ListCreativeDestination.map((e, i) => (
+        {creative?.ListCreativeDestination.slice(0, 5).map((e, i) => (
           <View key={e.ID}>
             <AttractionItem
               thumbnailUri={e.ImageUrl}

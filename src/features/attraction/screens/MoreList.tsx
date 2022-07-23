@@ -78,7 +78,7 @@ const MoreListScreen: React.FC<
       default:
         return [];
     }
-  }, [target]);
+  }, [target, destination, creative]);
 
   const getItemRenderer = useCallback(() => {
     switch (target) {

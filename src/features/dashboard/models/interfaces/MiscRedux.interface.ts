@@ -8,9 +8,9 @@ import GetNewsResponse from './responses/GetNewsResponse.interface';
 import WeatherInterface from './Weather.interface';
 
 export default interface MiscRedux {
-  destination: GetDestinationListResponseInterface | null;
-  creative: GetCreativeListResponseInterface | null;
-  sme: GetSMEListResponseInterface | null;
+  destination: GetDestinationListResponseInterface;
+  creative: GetCreativeListResponseInterface;
+  sme: GetSMEListResponseInterface;
   news: GetNewsResponse;
   notification: GetNotificationListResponseInterface;
   report: {

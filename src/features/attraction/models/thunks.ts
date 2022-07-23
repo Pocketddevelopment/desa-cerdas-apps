@@ -20,9 +20,11 @@ export const getAttractionDestinationListThunk = createAsyncThunk(
   ) => {
     try {
       const { DistrictID } = (getState() as RootState).authentication.account;
-      return sanitizeResponse(
+      const response = sanitizeResponse(
         await getDestinationList(DistrictID, page, pageSize)
       );
+      response.page = page;
+      return response;
     } catch (err) {
       throw rejectWithValue(err);
     }
