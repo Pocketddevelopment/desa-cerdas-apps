@@ -129,8 +129,8 @@ export default function TextInput(
             </HelperText>
           )}
         </View>
-        <View style={{ flex: 2 }}>
-          {counter && props.maxLength && (
+        {counter && props.maxLength && (
+          <View style={{ flex: 2 }}>
             <HelperText
               type={
                 counterColor
@@ -144,8 +144,8 @@ export default function TextInput(
               {props.value ? props.value.length : text.length} /{' '}
               {props.maxLength}
             </HelperText>
-          )}
-        </View>
+          </View>
+        )}
       </Row>
     </ContainerTag>
   );
