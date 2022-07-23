@@ -7,6 +7,7 @@ import { RootState } from '@store/store';
 import { requestStorageAndroid } from '@utils/permissions';
 import React, { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
+import FileViewer from 'react-native-file-viewer';
 import RNFS from 'react-native-fs';
 import { ActivityIndicator } from 'react-native-paper';
 import Toast from 'react-native-toast-message';
@@ -30,16 +31,14 @@ const DistrictHighlight = () => {
 
   const onPressItem = async (url: string, fileName: string) => {
     const isGranted = await requestStorageAndroid();
+    const filePath = `${RNFS.DownloadDirectoryPath}/${fileName}`;
     if (isGranted) {
       RNFS.downloadFile({
         fromUrl: url,
-        toFile: `${RNFS.DownloadDirectoryPath}/${fileName}`,
+        toFile: filePath,
       })
         .promise.then((r) => {
-          Toast.show({
-            type: 'standard',
-            text1: `Berhasil mengunduh ${fileName}`,
-          });
+          FileViewer.open(filePath);
         })
         .catch((err) => {
           Toast.show({

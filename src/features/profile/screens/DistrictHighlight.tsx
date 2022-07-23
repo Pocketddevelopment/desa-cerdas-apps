@@ -15,10 +15,11 @@ import { RootState } from '@store/store';
 import { requestStorageAndroid } from '@utils/permissions';
 import React, { useCallback, useEffect, useState } from 'react';
 import { FlatList, ScrollView, StyleSheet, View } from 'react-native';
+import FileViewer from 'react-native-file-viewer';
 import RNFS from 'react-native-fs';
 import { ActivityIndicator, Caption, useTheme } from 'react-native-paper';
 import Toast from 'react-native-toast-message';
-import ReportItem from '../../report/components/ReportItem';
+import ReportItem from '@report/components/ReportItem';
 
 const DistrictHighlightScreen: React.FC = () => {
   const theme = useTheme();
@@ -61,16 +62,14 @@ const DistrictHighlightScreen: React.FC = () => {
 
   const onPressItem = async (url: string, fileName: string) => {
     const isGranted = await requestStorageAndroid();
+    const filePath = `${RNFS.DownloadDirectoryPath}/${fileName}`;
     if (isGranted) {
       RNFS.downloadFile({
         fromUrl: url,
-        toFile: `${RNFS.DownloadDirectoryPath}/${fileName}`,
+        toFile: filePath,
       })
         .promise.then((r) => {
-          Toast.show({
-            type: 'standard',
-            text1: `Berhasil mengunduh ${fileName}`,
-          });
+          FileViewer.open(filePath);
         })
         .catch((err) => {
           Toast.show({

@@ -1,13 +1,11 @@
 import Separator from '@components/Separator';
 import { Text } from '@components/typography';
-import { DashboardStackParamList } from '@dashboard/index';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { RootState } from '@store/store';
 import { requestStorageAndroid } from '@utils/permissions';
 import React, { useCallback, useEffect, useState } from 'react';
-import { FlatList, ScrollView, StyleSheet } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
+import FileViewer from 'react-native-file-viewer';
 import RNFS from 'react-native-fs';
 import { ActivityIndicator, Caption } from 'react-native-paper';
 import Toast from 'react-native-toast-message';
@@ -41,16 +39,14 @@ const ReportListScreen: React.FC = () => {
 
   const onPressItem = async (url: string, fileName: string) => {
     const isGranted = await requestStorageAndroid();
+    const filePath = `${RNFS.DownloadDirectoryPath}/${fileName}`;
     if (isGranted) {
       RNFS.downloadFile({
         fromUrl: url,
-        toFile: `${RNFS.DownloadDirectoryPath}/${fileName}`,
+        toFile: filePath,
       })
         .promise.then((r) => {
-          Toast.show({
-            type: 'standard',
-            text1: `Berhasil mengunduh ${fileName}`,
-          });
+          FileViewer.open(filePath);
         })
         .catch((err) => {
           Toast.show({
