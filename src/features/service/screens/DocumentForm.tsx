@@ -216,7 +216,7 @@ const DocumentFormScreen: React.FC<
                 loading={loading.requestDocument}
                 onPress={handleSubmit(onPressRequest)}
                 btnStyle={{ width: '100%' }}>
-                Cetak dan Unduh Dokumen
+                Ajukan Permohonan Dokumen
               </Button>
             </>
           )}
