@@ -142,7 +142,7 @@ export const createComplaintThunk = createAsyncThunk(
           districtId: DistrictID,
           ...params,
         })
-      );
+      ).ComplainID;
     } catch (err) {
       throw rejectWithValue(err);
     }

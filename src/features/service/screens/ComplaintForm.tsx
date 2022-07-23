@@ -96,19 +96,21 @@ const ComplaintFormScreen: React.FC = () => {
       })
     )
       .unwrap()
-      .then(() => {
+      .then((complaintId: string) => {
         Toast.show({
           type: 'standard',
           text1: 'Laporan Anda berhasil tersimpan',
           onHide: () => {
-            navigation.goBack();
+            const data = {
+              id: complaintId,
+            };
+            navigation.replace('ComplaintDetail', {
+              ...data,
+            });
           },
           visibilityTime: 2000,
         });
         dispatch(getComplaintListThunk(1));
-        setTimeout(() => {
-          navigation.goBack();
-        }, 2000);
       });
   };
 

@@ -24,10 +24,10 @@ const CHAT_BOX_HEIGHT = 50;
 
 export type ComplaintDetailScreenProps = {
   id: string;
-  date: string;
-  title: string;
-  description: string;
-  images: { ImageUrl: string }[];
+  date?: string;
+  title?: string;
+  description?: string;
+  images?: { ImageUrl: string }[];
 };
 
 const ComplaintDetailScreen: React.FC<
@@ -139,7 +139,7 @@ const ComplaintDetailScreen: React.FC<
         <Carousel
           layout='default'
           initialScrollIndex={activeIndex}
-          data={data?.ListImage || images}
+          data={data?.ListImage || images || []}
           onSnapToItem={onSnapItem}
           renderItem={renderCarouselItem}
           sliderWidth={DeviceContants.screenWidth}

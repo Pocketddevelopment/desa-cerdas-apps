@@ -34,7 +34,9 @@ const ComplaintScreen: React.FC = () => {
         key={item.ID}
         id={item.ID}
         date={item.Created}
-        thumbnailUri={item.ListImage[0].ImageUrl}
+        thumbnailUri={
+          item.ListImage.length > 0 ? item.ListImage[0].ImageUrl : ''
+        }
         title={item.Subject}
         description={item.Description}
         count={item.Detail.length}
