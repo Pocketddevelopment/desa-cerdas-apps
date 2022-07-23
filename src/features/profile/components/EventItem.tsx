@@ -54,6 +54,7 @@ const EventItem = ({
             baseStyle={styles.htmlText}
             defaultTextProps={{
               numberOfLines: 2,
+              style: [styles.defaultText, { color: theme.colors.text }],
             }}
             contentWidth={DeviceContants.screenWidth}
           />
@@ -75,6 +76,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     resizeMode: 'cover',
     marginRight: 10,
+  },
+  defaultText: {
+    fontSize: 14,
   },
   htmlText: {
     maxHeight: 28,

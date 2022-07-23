@@ -8,11 +8,12 @@ import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { RootState } from '@store/store';
 import React, { useEffect, useMemo, useState } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
-import { ActivityIndicator } from 'react-native-paper';
+import { ActivityIndicator, useTheme } from 'react-native-paper';
 import RenderHTML from 'react-native-render-html';
 import Toast from 'react-native-toast-message';
 
 const PrivacyPolicyScreen: React.FC<any> = () => {
+  const theme = useTheme();
   const dispatch = useAppDispatch();
   const { loading } = useAppSelector((state: RootState) => state.misc);
   const [data, setData] = useState<ContentInterface>();
@@ -47,6 +48,10 @@ const PrivacyPolicyScreen: React.FC<any> = () => {
             </Title>
             <RenderHTML
               source={{ html: data.Description }}
+              baseStyle={styles.htmlText}
+              defaultTextProps={{
+                style: [styles.defaultText, { color: theme.colors.text }],
+              }}
               contentWidth={DeviceContants.screenWidth}
             />
           </>
@@ -63,5 +68,15 @@ export default PrivacyPolicyScreen;
 const styles = StyleSheet.create({
   loading: {
     marginVertical: 50,
+  },
+  defaultText: {
+    fontSize: 16,
+  },
+  htmlText: {
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    fontSize: 13,
+    lineHeight: 18,
+    textAlign: 'left',
   },
 });

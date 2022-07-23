@@ -138,7 +138,8 @@ const SMEDetailScreen: React.FC<
                   Deskripsi
                 </Title>
                 <RenderHTML
-                  baseStyle={{ fontSize: 16, color: theme.colors.text }}
+                  baseStyle={styles.htmlText}
+                  defaultTextProps={{ style: styles.defaultText }}
                   source={{ html: data.Description }}
                   contentWidth={DeviceContants.screenWidth}
                 />
@@ -209,5 +210,13 @@ const styles = StyleSheet.create({
   },
   title: {
     marginBottom: 8,
+  },
+  defaultText: {
+    fontSize: 16,
+  },
+  htmlText: {
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    textAlign: 'left',
   },
 });

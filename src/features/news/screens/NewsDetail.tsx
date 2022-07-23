@@ -147,6 +147,10 @@ const NewsDetailScreen: React.FC<
             </Title>
             <RenderHTML
               source={{ html: data.Description }}
+              baseStyle={styles.htmlText}
+              defaultTextProps={{
+                style: [styles.defaultText, { color: theme.colors.text }],
+              }}
               contentWidth={DeviceContants.screenWidth}
             />
           </View>
@@ -187,5 +191,15 @@ const styles = StyleSheet.create({
   itemContainer: {
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  defaultText: {
+    fontSize: 16,
+  },
+  htmlText: {
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    fontSize: 16,
+    lineHeight: 18,
+    textAlign: 'left',
   },
 });

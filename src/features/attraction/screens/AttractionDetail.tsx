@@ -171,6 +171,8 @@ const AttractionDetailScreen: React.FC<
               <View style={styles.section}>
                 <RenderHTML
                   source={{ html: data.Description }}
+                  baseStyle={styles.htmlText}
+                  defaultTextProps={{ style: styles.defaultText }}
                   contentWidth={DeviceContants.screenWidth}
                 />
               </View>
@@ -223,5 +225,13 @@ const styles = StyleSheet.create({
   },
   section: {
     marginVertical: 10,
+  },
+  defaultText: {
+    fontSize: 16,
+  },
+  htmlText: {
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    textAlign: 'left',
   },
 });
