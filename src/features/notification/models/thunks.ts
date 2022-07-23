@@ -9,7 +9,11 @@ export const getNotificationListThunk = createAsyncThunk(
   async (page: number, { getState, rejectWithValue }) => {
     try {
       const { CustomerID } = (getState() as RootState).authentication.account;
-      return sanitizeResponse(await getNotificationList(CustomerID, page));
+      const response = sanitizeResponse(
+        await getNotificationList(CustomerID, page)
+      );
+      response.page = page;
+      return response;
     } catch (err) {
       throw rejectWithValue(err);
     }

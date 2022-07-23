@@ -443,6 +443,15 @@ const Model = createSlice({
     builder.addCase(
       getNotificationListThunk.fulfilled,
       (state: MiscRedux, action: any) => {
+        let newNotificationList = [];
+        if (action.payload.page === 1) {
+          newNotificationList = action.payload.ListInbox;
+        } else {
+          newNotificationList = [
+            ...state.notification.ListInbox,
+            ...action.payload.ListInbox,
+          ];
+        }
         return {
           ...state,
           notification: {
